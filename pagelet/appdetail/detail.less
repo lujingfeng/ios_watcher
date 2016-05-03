@@ -1,0 +1,121 @@
+@import (reference) "/static/common.less";
+
+.c-app-base-info{
+  margin: 15px;
+  .app-icon{
+    width: 54px;
+    height: 54px;
+    margin-right: 10px;
+  }
+
+  table{
+    width: 100%;
+  }
+
+  table td{
+    vertical-align: middle;
+  }
+
+  .vs, 
+  .fav{
+    width: 50px;
+    text-align: center;
+  }
+
+  .vs,.fav{
+
+    p{
+      transform: scale(0.7);
+    }
+  }
+
+  .icon-vs{
+    width: 31px;
+    height: 17px;
+    display: inline-block;
+  }
+
+  .icon-vs{
+    margin-top: 6px;
+    background: url(/static/image/vs.png) no-repeat;
+    background-size: contain;
+  }
+
+  .icon-fav{
+    width: 26px;
+    height: 25px;
+    display: inline-block;
+  }
+
+  .fav-un{
+    background: url(/static/image/fav_un.png) no-repeat;
+    background-size: contain;
+  }
+  .fav-added{
+    background: url(/static/image/fav_added.png) no-repeat;
+    background-size: contain;
+  }
+}
+
+.c-category{
+  margin: 0 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #d9d9d9;
+
+  .tabs{
+    div{
+      width:33.333333333%;
+      display:inline-block;
+      margin-right: -1px;
+      margin-bottom: -1px;
+      line-height: 40px;
+      text-align: center;
+      border: 1px solid #d9d9d9;
+      &.cur{
+        border: 1px solid #1970e3;
+        color: #1970e3;
+        position:relative;
+        z-index:1;
+      }
+    }
+  }
+}
+
+.category-detail{
+  padding: 15px;
+}
+
+.c-app-detail{
+  .app-info{
+    table{
+      width:100%;
+      tr td:first-child{
+        font-weight: bold;
+      }
+    }
+  }
+
+  .real-rank{
+    table{
+      width:100%;
+      margin-bottom: 15px;
+      td, th{
+        vertical-align: middle;
+        width:33.333333%;
+        text-align: center;
+        border: 1px solid @ce9e;
+      }
+    }
+  }
+
+  .version-log,
+  .keywords-overide{
+    table{
+      th,td{
+        text-align: center;
+        border: 1px solid @ce9e;
+        vertical-align: middle;
+      }
+    }
+  }
+}

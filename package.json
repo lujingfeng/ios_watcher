@@ -9,7 +9,7 @@
   },
   "scripts": {
     "prod": "fis3 release prod -c",
-    "debug":"fis3 release debug -cw"
+    "debug": "fis3 release debug -cw"
   },
   "author": "jingfeng.lu",
   "license": "ISC",
@@ -18,18 +18,14 @@
     "fis-postprocessor-autoprefixer": "0.0.5",
     "fis-postprocessor-jswrapper": "0.0.14",
     "fis-postprocessor-require-async": "0.0.9",
-    "fis3": "^3.0.0",
     "fis3-deploy-local-deliver": "^1.0.0",
     "fis3-hook-commonjs": "^0.1.5",
     "fis3-parser-babel": "^1.1.2",
     "fis3-parser-reactjs": "^1.0.0",
     "fis3-postpackager-loader": "^1.3.12"
   },
+  "keywords": [],
   "dependencies": {
-    "history": "^1.17.0",
-    "react": "^0.14.6",
-    "react-router": "^1.0.3",
-    "reflux": "^0.3.0"
-  },
-  "keywords": []
+    "react": "^15.0.2"
+  }
 }

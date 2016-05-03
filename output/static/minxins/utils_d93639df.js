@@ -1,0 +1,1 @@
+define("static/minxins/utils",function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i={getParameters:function(){var e=location.search||"",t={};if(e){e=e.slice(1);var a=e.split("&");a.forEach(function(e){var a=e.match(/(\w+)=(\w+)/);a&&(t[a[1]]=a[2])})}return t}};t["default"]={URL:i},a.exports=t["default"]});

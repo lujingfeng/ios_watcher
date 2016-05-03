@@ -1,0 +1,35 @@
+.side-nav{
+  width: 240px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  transition: transform .3s ease;
+  transform: translate(-240px);
+
+  .profile{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+  }
+  
+  ul{
+    border-top: 1px solid #dedede;
+    li{
+      line-height: 36px;
+      padding-left: 20px;
+    }
+  }
+}
+
+.side-page{
+  position: absolute;
+  top: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 1;
+}
+
+.side-page.visible .side-nav{
+  transform: translate(0px);
+}
