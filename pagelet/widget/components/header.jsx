@@ -13,21 +13,25 @@ var Header = React.createClass({
   getInitialState: function(){
     return {
       type: this.props.type || "normal",
-      searchKey: this.props.searchValue||""
+      searchKey: this.props.searchValue||"",
+
+      filterEnabled: !!this.props.filterEnabled
     }
   },
 
   componentWillReceiveProps: function(nextProps){
+    var state = {};
+
     if(nextProps.searchValue != this.props.searchValue){
-      this.setState({
-        searchKey: nextProps.searchValue
-      });
+      state.searchKey = nextProps.searchValue;
     }
     if(nextProps.type != this.props.type){
-      this.setState({
-        type: nextProps.type
-      });
+      state.type = nextProps.type;
     }
+    if(nextProps.filterEnabled != this.props.filterEnabled){
+      state.filterEnabled = nextProps.filterEnabled;
+    }
+    this.setState(state);
   },
 
   componentDidMount: function(){
@@ -35,6 +39,7 @@ var Header = React.createClass({
   },
 
   componentWillUnmount: function(){
+
   },
 
   onStateChange: function(state){
@@ -54,8 +59,24 @@ var Header = React.createClass({
     this.history.pushState(null, "/search/input");
   },
 
+  toFilter: function(){
+    const {toFilter} = this.props;
+    const {filterEnabled} = this.state;
+
+    if(filterEnabled && toFilter){
+      toFilter();
+    }
+    var pathname = location.hash.slice(2, location.hash.indexOf("?"));
+    this.history.pushState(null, pathname, {filter:true});
+  },
+
   render: function(){
     let type = this.state.type;
+    let filterStyle = {};
+
+    if(!this.state.filterEnabled){
+      filterStyle.opacity = 0.5;
+    }
 
     return (
       <div className="c-header">
@@ -84,7 +105,10 @@ var Header = React.createClass({
 
               <div className="right">
                 <i className="icon-query" onClick={this.toSearch}></i>
-                <i className="icon-filter"></i>
+                <i 
+                 style={filterStyle}
+                 className="icon-filter" 
+                 onClick={this.toFilter}></i>
               </div>
             </div>
           ) : null

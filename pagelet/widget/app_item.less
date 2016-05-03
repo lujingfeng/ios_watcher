@@ -1,0 +1,41 @@
+@import (reference) "/static/common.less";
+
+.app-item{
+  padding: 10px 15px;
+  border-bottom: 1px solid @ce9e;
+
+  .app-icon{
+    width: 54px;
+    height: 54px;
+    margin-right: 10px;
+  }
+
+  td{
+    vertical-align: middle;
+  }
+
+  td:first-child{
+    width: 64px;
+  }
+
+  &:first-child{
+    border-top: 1px solid @ce9e;
+  }
+
+  .up, down{
+    width: 9px;
+    height: 11px;
+    display: inline-block;
+    background-repeat: no-releat;
+    background-size: 9px 11px;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+
+  .up{
+    background-image: url(/static/image/up.png);
+  }
+  .down{
+    background-image: url(/static/image/down.png);
+  }
+}

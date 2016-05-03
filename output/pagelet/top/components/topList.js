@@ -1,7 +1,7 @@
 define('pagelet/top/components/topList.jsx', function(require, exports, module) {
 
   /**
-    * @require ../top.less
+    * @require pagelet/top/top.less
     */
   
   "use strict";
@@ -30,6 +30,18 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
   var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
   
+  var _pageletWidgetComponentsTabs = require("pagelet/widget/components/tabs.jsx");
+  
+  var _pageletWidgetComponentsTabs2 = _interopRequireDefault(_pageletWidgetComponentsTabs);
+  
+  var _pageletWidgetComponentsAppItem = require("pagelet/widget/components/appItem.jsx");
+  
+  var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
+  
+  var _pageletWidgetComponentsFilter = require("pagelet/widget/components/filter.jsx");
+  
+  var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
+  
   var TopList = _react2["default"].createClass({
     displayName: "TopList",
   
@@ -37,8 +49,11 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
     getInitialState: function getInitialState() {
       return {
+        tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
+  
         topList: [],
   
+        curTypeId: "", //免费、付费和畅销三大榜单的排名数据
         page: 1,
         total: 0
       };
@@ -73,43 +88,63 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       SearchAction.search(this.state.searchKey, page);
     },
   
+    onItemClick: function onItemClick(data) {
+      var query = Object.assign({}, data);
+      this.history.pushState("", "detail/1", query);
+    },
+  
     render: function render() {
+      var query = this.props.location.query;
+  
+      if (query.filter) {
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], null);
+      } else {
+        return this.renderTop();
+      }
+    },
+  
+    renderTop: function renderTop() {
       return _react2["default"].createElement(
         "div",
         { className: "c-page top-list" },
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
-          { showSideNav: this.props.showSideNav },
+          {
+            filterEnabled: true,
+            showSideNav: this.props.showSideNav },
           "iOS榜单排名"
         ),
         _react2["default"].createElement(
           "div",
           { className: "c-body" },
-          _react2["default"].createElement(
-            "ul",
-            { className: "top-nav" },
-            _react2["default"].createElement(
-              "li",
-              null,
-              "免费榜"
-            ),
-            _react2["default"].createElement(
-              "li",
-              null,
-              "付费榜"
-            ),
-            _react2["default"].createElement(
-              "li",
-              null,
-              "畅销榜"
-            )
-          ),
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
-            { className: "f12" },
+            { className: "f12 center mb15" },
             "所有分类，中国，iPhone, 2016-04-29"
           ),
-          _react2["default"].createElement("div", { className: "list" })
+          _react2["default"].createElement(
+            "ul",
+            { className: "list" },
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+              type: 2,
+              onItemClick: this.onItemClick,
+              index: 1,
+              data: {} }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2, onItemClick: this.onItemClick, index: 1 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
+            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 })
+          )
         )
       );
     }

@@ -69,25 +69,6 @@
   margin-bottom: 10px;
   color: #666;
 }
-.input-search .search-result .device-type {
-  margin: 15px;
-  border: 1px solid #e9e9e9;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.input-search .search-result .device-type li {
-  text-align: center;
-  width: 50%;
-  line-height: 27px;
-  color: #999999;
-}
-.input-search .search-result .device-type li:first-child {
-  border-right: 1px solid #e9e9e9;
-}
-.input-search .search-result .device-type li.cur {
-  background: #215bc7;
-  color: #fff;
-}
 .input-search .search-result .keyword-desc {
   margin: 15px;
 }
@@ -103,22 +84,4 @@
 }
 .input-search .search-result .keyword-desc table td {
   font-size: 12px;
-}
-.input-search .search-result .app-item {
-  padding: 10px 15px;
-  border-bottom: 1px solid #e9e9e9;
-}
-.input-search .search-result .app-item .title {
-  width: 200px;
-}
-.input-search .search-result .app-item .app-icon {
-  width: 54px;
-  height: 54px;
-  margin-right: 10px;
-}
-.input-search .search-result .app-item td {
-  vertical-align: middle;
-}
-.input-search .search-result .app-item:first-child {
-  border-top: 1px solid #e9e9e9;
 }

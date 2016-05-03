@@ -22,13 +22,17 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
   
-  var _pageletWidgetComponentsRank = require("pagelet/widget/components/rank.jsx");
-  
-  var _pageletWidgetComponentsRank2 = _interopRequireDefault(_pageletWidgetComponentsRank);
-  
   var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
   
   var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
+  
+  var _pageletWidgetComponentsTabs = require("pagelet/widget/components/tabs.jsx");
+  
+  var _pageletWidgetComponentsTabs2 = _interopRequireDefault(_pageletWidgetComponentsTabs);
+  
+  var _pageletWidgetComponentsAppItem = require("pagelet/widget/components/appItem.jsx");
+  
+  var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
   var _pageletSearchActionAction = require("pagelet/search/action/action");
   
@@ -38,73 +42,6 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
   var _pageletSearchStoreStore2 = _interopRequireDefault(_pageletSearchStoreStore);
   
-  var SearchItem = _react2["default"].createClass({
-    displayName: "SearchItem",
-  
-    mixins: [_staticLibReactRouter.History],
-  
-    toDetail: function toDetail() {
-      var query = Object.assign({}, this.props.data);
-      this.history.pushState("", "detail/1", query);
-    },
-  
-    render: function render() {
-      var score = parseFloat(this.props.data.score || 0);
-  
-      return _react2["default"].createElement(
-        "li",
-        { className: "app-item", onClick: this.toDetail },
-        _react2["default"].createElement(
-          "table",
-          null,
-          _react2["default"].createElement(
-            "tr",
-            null,
-            _react2["default"].createElement(
-              "td",
-              null,
-              _react2["default"].createElement("img", {
-                className: "app-icon",
-                src: this.props.data.icon })
-            ),
-            _react2["default"].createElement(
-              "td",
-              null,
-              _react2["default"].createElement(
-                "p",
-                {
-                  className: "title ellipsis" },
-                this.props.index + 1,
-                "、",
-                this.props.data.title
-              ),
-              _react2["default"].createElement(
-                "p",
-                { className: "f12 c666 m5 mb5" },
-                this.props.data.developer
-              ),
-              _react2["default"].createElement(
-                "div",
-                null,
-                _react2["default"].createElement(
-                  "span",
-                  { className: "t-vt c666 f12 mr5" },
-                  "应用"
-                ),
-                _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: score, width: 14 }),
-                _react2["default"].createElement(
-                  "span",
-                  { className: "c666 f12 ml5 t-vt" },
-                  this.props.data.score
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  });
-  
   var Search = _react2["default"].createClass({
     displayName: "Search",
   
@@ -112,6 +49,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     getInitialState: function getInitialState() {
       return {
+        tabs: [{ name: "iPhone", value: "" }, { name: "iPad", value: "" }],
+  
         searchKey: null,
         deviceType: "iphone",
         searchResultList: [],
@@ -173,6 +112,11 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       });
   
       _pageletSearchActionAction2["default"].search(this.state.searchKey, page);
+    },
+  
+    onClickSearchItem: function onClickSearchItem(item) {
+      var query = Object.assign({}, item);
+      this.history.pushState("", "detail/1", query);
     },
   
     render: function render() {
@@ -241,28 +185,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             onScroll: this.handleScroll.bind(this),
             className: "search-result c-body",
             style: { display: this.state.searchKey ? "block" : "none" } },
-          _react2["default"].createElement(
-            "ul",
-            { className: "device-type clearfix" },
-            _react2["default"].createElement(
-              "li",
-              {
-                onClick: function (e) {
-                  return _this.onChooseDevice("iphone");
-                },
-                className: "fl " + (deviceType == "iphone" ? "cur" : "") },
-              "iPhone"
-            ),
-            _react2["default"].createElement(
-              "li",
-              {
-                onClick: function (e) {
-                  return _this.onChooseDevice("ipad");
-                },
-                className: "fl " + (deviceType == "ipad" ? "cur" : "") },
-              "iPad"
-            )
-          ),
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
             { className: "center c999 f12" },
@@ -322,7 +245,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             "ul",
             null,
             searchResultList.map(function (item, idx) {
-              return _react2["default"].createElement(SearchItem, { key: idx, data: item, index: idx });
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                key: idx,
+                type: 1,
+                onItemClick: _this.onClickSearchItem,
+                data: item,
+                index: idx });
             }),
             this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
           )

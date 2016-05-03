@@ -6,56 +6,24 @@ import React from "react";
 import {History} from "/static/lib/reactRouter";
 
 import Header from "/pagelet/widget/components/header";
-import Rank from "/pagelet/widget/components/rank";
 import Loading from "/pagelet/widget/components/loading";
+import Tabs from "/pagelet/widget/components/tabs";
+import AppItem from "/pagelet/widget/components/appItem";
 
 import SearchAction from "/pagelet/search/action/action";
 import SearchStore from "/pagelet/search/store/store";
 
-var SearchItem = React.createClass({ 
-  mixins: [History],
-
-  toDetail: function(){
-    var query = Object.assign({}, this.props.data);
-    this.history.pushState("", "detail/1", query);
-  },
-
-  render: function(){
-    var score = parseFloat(this.props.data.score || 0);
-
-    return (
-      <li className="app-item" onClick={this.toDetail}>
-        <table>
-          <tr>
-            <td>
-              <img
-                className="app-icon" 
-                src={this.props.data.icon}></img>
-            </td>
-            <td>
-              <p 
-                className="title ellipsis">
-                {this.props.index+1}、{this.props.data.title}
-              </p>
-              <p className="f12 c666 m5 mb5">{this.props.data.developer}</p>
-              <div>
-                <span className="t-vt c666 f12 mr5">应用</span>
-                <Rank value={score} width={14}/>
-                <span className="c666 f12 ml5 t-vt">{this.props.data.score}</span>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </li> 
-    );
-  }
-});
 
 var Search = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      tabs: [
+        {name: "iPhone", value: ""},
+        {name: "iPad", value: ""}
+      ],
+
       searchKey: null,
       deviceType: "iphone",
       searchResultList: [],
@@ -122,6 +90,11 @@ var Search = React.createClass({
     SearchAction.search(this.state.searchKey, page);
   },
 
+  onClickSearchItem:function(item){
+    var query = Object.assign({}, item);
+    this.history.pushState("", "detail/1", query);
+  },
+
   render: function(){
     var hotApps = ["微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集", "微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集"];
     var historySearch = hotApps;
@@ -163,14 +136,8 @@ var Search = React.createClass({
           className="search-result c-body" 
           style={{display:this.state.searchKey?"block":"none"}}>
 
-          <ul className="device-type clearfix">
-            <li 
-              onClick={e=>this.onChooseDevice("iphone")}
-              className={"fl "+(deviceType=="iphone"?"cur":"")}>iPhone</li>
-            <li 
-              onClick={e=>this.onChooseDevice("ipad")}
-              className={"fl "+(deviceType=="ipad"?"cur":"")}>iPad</li>
-          </ul>
+          <Tabs tabs={this.state.tabs}/>
+
           <p className="center c999 f12">
             {this.state.searchKey}, {this.state.total}条结果 {new Date().format("yyyy-MM-dd hh:mm:ss")}
           </p>
@@ -193,7 +160,13 @@ var Search = React.createClass({
           <ul>
             {
               searchResultList.map((item, idx)=>{
-                return <SearchItem key={idx} data={item} index={idx}/>;
+                return (
+                  <AppItem 
+                    key={idx}
+                    type={1} 
+                    onItemClick={this.onClickSearchItem}
+                    data={item} 
+                    index={idx}/>)
               })
             }
             {

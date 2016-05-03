@@ -30,21 +30,25 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
     getInitialState: function getInitialState() {
       return {
         type: this.props.type || "normal",
-        searchKey: this.props.searchValue || ""
+        searchKey: this.props.searchValue || "",
+  
+        filterEnabled: !!this.props.filterEnabled
       };
     },
   
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+      var state = {};
+  
       if (nextProps.searchValue != this.props.searchValue) {
-        this.setState({
-          searchKey: nextProps.searchValue
-        });
+        state.searchKey = nextProps.searchValue;
       }
       if (nextProps.type != this.props.type) {
-        this.setState({
-          type: nextProps.type
-        });
+        state.type = nextProps.type;
       }
+      if (nextProps.filterEnabled != this.props.filterEnabled) {
+        state.filterEnabled = nextProps.filterEnabled;
+      }
+      this.setState(state);
     },
   
     componentDidMount: function componentDidMount() {},
@@ -66,10 +70,26 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       this.history.pushState(null, "/search/input");
     },
   
+    toFilter: function toFilter() {
+      var toFilter = this.props.toFilter;
+      var filterEnabled = this.state.filterEnabled;
+  
+      if (filterEnabled && toFilter) {
+        toFilter();
+      }
+      var pathname = location.hash.slice(2, location.hash.indexOf("?"));
+      this.history.pushState(null, pathname, { filter: true });
+    },
+  
     render: function render() {
       var _this = this;
   
       var type = this.state.type;
+      var filterStyle = {};
+  
+      if (!this.state.filterEnabled) {
+        filterStyle.opacity = 0.5;
+      }
   
       return _react2["default"].createElement(
         "div",
@@ -109,7 +129,10 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
             "div",
             { className: "right" },
             _react2["default"].createElement("i", { className: "icon-query", onClick: this.toSearch }),
-            _react2["default"].createElement("i", { className: "icon-filter" })
+            _react2["default"].createElement("i", {
+              style: filterStyle,
+              className: "icon-filter",
+              onClick: this.toFilter })
           )
         ) : null
       );

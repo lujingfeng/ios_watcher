@@ -8,15 +8,24 @@ import {History} from "/static/lib/reactRouter";
 import Header from "/pagelet/widget/components/header";
 import Rank from "/pagelet/widget/components/rank";
 import Loading from "/pagelet/widget/components/loading";
-
+import Tabs from "/pagelet/widget/components/tabs";
+import AppItem from "/pagelet/widget/components/appItem";
+import Filter from "/pagelet/widget/components/filter";
 
 var TopList = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      tabs: [
+        {name:"免费榜",typeid:"" }, 
+        {name:"付费榜",typeid:"" },
+        {name:"畅销榜",typeid:"" }
+      ],
+
       topList: [],
 
+      curTypeId: "",//免费、付费和畅销三大榜单的排名数据
       page: 1,
       total: 0
     }
@@ -54,20 +63,56 @@ var TopList = React.createClass({
     SearchAction.search(this.state.searchKey, page);
   },
 
+  onItemClick: function(data){
+    var query = Object.assign({}, data);
+    this.history.pushState("", "detail/1", query);
+  },
+
   render: function(){
+    var query = this.props.location.query;
+
+    if(query.filter){
+      return <Filter/>;
+    }else{
+      return this.renderTop();
+    }
+  },
+
+  renderTop: function(){
     return (
       <div className="c-page top-list">
-        <Header showSideNav={this.props.showSideNav}>iOS榜单排名</Header>
+        <Header 
+          filterEnabled={true}
+          showSideNav={this.props.showSideNav}>
+          iOS榜单排名
+        </Header>
         <div className="c-body">
-          <ul className="top-nav">
-            <li>免费榜</li>
-            <li>付费榜</li>
-            <li>畅销榜</li>
-          </ul>
-          <p className="f12">所有分类，中国，iPhone, 2016-04-29</p>
-          <div className="list">
+          <Tabs tabs={this.state.tabs}/>
 
-          </div>
+          <p className="f12 center mb15">
+            所有分类，中国，iPhone, 2016-04-29
+          </p>
+
+          <ul className="list">
+            <AppItem 
+              type={2} 
+              onItemClick={this.onItemClick} 
+              index={1}
+              data={{}}/>
+            <AppItem type={2} onItemClick={this.onItemClick} index={1}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+            <AppItem type={2} />
+            <AppItem type={2}/>
+          </ul>
         </div>
       </div>
     );
