@@ -13,8 +13,7 @@ import KeyWords from "./keywords";
 
 var AppDetail = React.createClass({
   getInitialState: function(){
-    return {
-    }
+    return {}
   },
 
   render: function(){

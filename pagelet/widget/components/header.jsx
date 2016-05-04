@@ -47,8 +47,9 @@ var Header = React.createClass({
   },
 
   onSearch: function(){
-    console.log(this.state.searchKey);
-    this.props.onSearch && this.props.onSearch(this.state.searchKey);
+    if(this.state.searchKey && this.props.onSearch){
+      this.props.onSearch(this.state.searchKey);
+    }
   },
 
   onCancelSearch: function(){
@@ -88,7 +89,7 @@ var Header = React.createClass({
                   value={this.state.searchKey}
                   onChange={e=>this.setState({searchKey:e.target.value})}
                   type="text"/>
-                <i className="icon-query" onClick={this.onSearch}></i>
+                <i className="icon-q" onClick={this.onSearch}></i>
               </div>
               <i className="cl" onClick={this.onCancelSearch}>取消</i>
             </div>
@@ -104,7 +105,7 @@ var Header = React.createClass({
               </div>
 
               <div className="right">
-                <i className="icon-query" onClick={this.toSearch}></i>
+                <i className="icon-q" onClick={this.toSearch}></i>
                 <i 
                  style={filterStyle}
                  className="icon-filter" 

@@ -90,7 +90,10 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     onSearch: function onSearch(searchWord) {
       this.setState({
-        searchKey: searchWord
+        searchKey: searchWord,
+        searchResultList: [],
+        page: 1,
+        total: 0
       });
       _pageletSearchActionAction2["default"].search(searchWord, 1);
     },
@@ -115,8 +118,17 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
     },
   
     onClickSearchItem: function onClickSearchItem(item) {
-      var query = Object.assign({}, item);
-      this.history.pushState("", "detail/1", query);
+      var query = this.props.location.query || {};
+      var params = Object.assign({}, item);
+      var pathName = "/detail/";
+  
+      if (query.overlay) {
+        pathName = pathName + "4";
+      } else {
+        pathName = pathName + "1";
+      }
+  
+      this.history.pushState("", pathName, params);
     },
   
     render: function render() {
@@ -128,6 +140,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       var _state = this.state;
       var deviceType = _state.deviceType;
       var searchResultList = _state.searchResultList;
+  
+      var query = this.props.location.query || {};
   
       return _react2["default"].createElement(
         "div",
@@ -186,7 +200,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             className: "search-result c-body",
             style: { display: this.state.searchKey ? "block" : "none" } },
           _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
-          _react2["default"].createElement(
+          query && !query.overlay ? _react2["default"].createElement(
             "p",
             { className: "center c999 f12" },
             this.state.searchKey,
@@ -194,8 +208,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             this.state.total,
             "条结果 ",
             new Date().format("yyyy-MM-dd hh:mm:ss")
-          ),
-          _react2["default"].createElement(
+          ) : null,
+          query && !query.overlay ? _react2["default"].createElement(
             "div",
             { className: "keyword-desc" },
             _react2["default"].createElement(
@@ -240,14 +254,14 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 )
               )
             )
-          ),
+          ) : null,
           _react2["default"].createElement(
             "ul",
             null,
             searchResultList.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 key: idx,
-                type: 1,
+                type: query.overlay ? 3 : 1,
                 onItemClick: _this.onClickSearchItem,
                 data: item,
                 index: idx });

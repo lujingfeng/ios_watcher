@@ -47,11 +47,12 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
       var column2, column3;
   
-      //搜索Item
-      if (type == 1) {
+      //搜索Item app关键字覆盖item
+      if (type == 1 || type == 3) {
   
         //返回的是字符串
         var score = parseFloat(data.score || 0);
+  
         column2 = _react2["default"].createElement(
           "td",
           null,
@@ -85,6 +86,19 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             )
           )
         );
+  
+        if (type == 3) {
+          column3 = _react2["default"].createElement(
+            "td",
+            null,
+            _react2["default"].createElement(
+              "div",
+              { className: "f10 center" },
+              _react2["default"].createElement("i", { className: "icon-q" }),
+              "查看"
+            )
+          );
+        }
         //排名item
       } else if (type == 2) {
           column2 = _react2["default"].createElement(

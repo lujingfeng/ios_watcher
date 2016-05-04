@@ -63,7 +63,10 @@ var Search = React.createClass({
 
   onSearch: function(searchWord){
     this.setState({
-      searchKey: searchWord
+      searchKey: searchWord,
+      searchResultList: [],
+      page:1,
+      total: 0
     });
     SearchAction.search(searchWord, 1);
   },
@@ -91,8 +94,17 @@ var Search = React.createClass({
   },
 
   onClickSearchItem:function(item){
-    var query = Object.assign({}, item);
-    this.history.pushState("", "detail/1", query);
+    var query = this.props.location.query || {};
+    var params = Object.assign({}, item);
+    var pathName = "/detail/";
+
+    if(query.overlay){
+      pathName = pathName + "4"
+    }else{
+      pathName = pathName + "1"
+    }
+
+    this.history.pushState("", pathName, params);
   },
 
   render: function(){
@@ -103,6 +115,8 @@ var Search = React.createClass({
       deviceType,
       searchResultList
     } = this.state;
+
+    let query = this.props.location.query || {};
 
     return (
       <div className="c-page input-search">
@@ -138,24 +152,31 @@ var Search = React.createClass({
 
           <Tabs tabs={this.state.tabs}/>
 
-          <p className="center c999 f12">
-            {this.state.searchKey}, {this.state.total}条结果 {new Date().format("yyyy-MM-dd hh:mm:ss")}
-          </p>
+          {
+            query && !query.overlay ?(
+              <p className="center c999 f12">
+                {this.state.searchKey}, {this.state.total}条结果 {new Date().format("yyyy-MM-dd hh:mm:ss")}
+              </p>): null
+          }
 
-          <div className="keyword-desc" >
-            <table border="1" cellSpacing="0">
-              <tr>
-                <th>关键字</th>
-                <th>搜索热度</th>
-                <th>搜索结果数</th>
-              </tr>
-              <tr>
-                <td>{this.state.searchKey}</td>
-                <td>123213</td>
-                <td>{this.state.total}</td>
-              </tr>
-            </table>
-          </div>
+          {
+            query && !query.overlay ? (
+              <div className="keyword-desc" >
+                <table border="1" cellSpacing="0">
+                  <tr>
+                    <th>关键字</th>
+                    <th>搜索热度</th>
+                    <th>搜索结果数</th>
+                  </tr>
+                  <tr>
+                    <td>{this.state.searchKey}</td>
+                    <td>123213</td>
+                    <td>{this.state.total}</td>
+                  </tr>
+                </table>
+              </div>
+              ): null
+          }
 
           <ul>
             {
@@ -163,7 +184,7 @@ var Search = React.createClass({
                 return (
                   <AppItem 
                     key={idx}
-                    type={1} 
+                    type={query.overlay?3:1} 
                     onItemClick={this.onClickSearchItem}
                     data={item} 
                     index={idx}/>)

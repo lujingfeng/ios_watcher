@@ -12,31 +12,46 @@ import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
 
+import TopAction from "../action/action";
+import TopStore from "../store/store";
+
 var TopList = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
-    return {
-      tabs: [
-        {name:"免费榜",typeid:"" }, 
-        {name:"付费榜",typeid:"" },
-        {name:"畅销榜",typeid:"" }
-      ],
+    var tabs = [
+                  {name:"免费榜",type:1 }, 
+                  {name:"付费榜",type:2 },
+                  {name:"畅销榜",type:3 }
+               ];
 
+    return {
+      tabs: tabs,
       topList: [],
 
-      curTypeId: "",//免费、付费和畅销三大榜单的排名数据
+      curTypeId: 3401,
       page: 1,
       total: 0
     }
   },
 
   componentDidMount: function(){
-    //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    this.unSubscribe = TopStore.listen(this.onStateChange.bind(this));
+
+    var now = new Date();
+
+    TopAction.fetchList({
+      timetype: 1,
+      date: now.format("yyyy-MM-dd"),
+      hour: now.getHours(),
+      country: 1,
+      device: 0,
+      typeid: this.state.curTypeId
+    });
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
@@ -89,7 +104,7 @@ var TopList = React.createClass({
         <div className="c-body">
           <Tabs tabs={this.state.tabs}/>
 
-          <p className="f12 center mb15">
+          <p className="f12 center f-txt">
             所有分类，中国，iPhone, 2016-04-29
           </p>
 

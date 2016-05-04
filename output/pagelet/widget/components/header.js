@@ -58,8 +58,9 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
     onStateChange: function onStateChange(state) {},
   
     onSearch: function onSearch() {
-      console.log(this.state.searchKey);
-      this.props.onSearch && this.props.onSearch(this.state.searchKey);
+      if (this.state.searchKey && this.props.onSearch) {
+        this.props.onSearch(this.state.searchKey);
+      }
     },
   
     onCancelSearch: function onCancelSearch() {
@@ -106,7 +107,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
                 return _this.setState({ searchKey: e.target.value });
               },
               type: "text" }),
-            _react2["default"].createElement("i", { className: "icon-query", onClick: this.onSearch })
+            _react2["default"].createElement("i", { className: "icon-q", onClick: this.onSearch })
           ),
           _react2["default"].createElement(
             "i",
@@ -128,7 +129,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
           _react2["default"].createElement(
             "div",
             { className: "right" },
-            _react2["default"].createElement("i", { className: "icon-query", onClick: this.toSearch }),
+            _react2["default"].createElement("i", { className: "icon-q", onClick: this.toSearch }),
             _react2["default"].createElement("i", {
               style: filterStyle,
               className: "icon-filter",

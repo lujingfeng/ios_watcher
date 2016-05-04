@@ -38,7 +38,7 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
         ),
         _react2["default"].createElement(
           "table",
-          null,
+          { className: "border" },
           _react2["default"].createElement(
             "tr",
             null,

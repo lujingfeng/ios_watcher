@@ -34,6 +34,22 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var _pageletTopComponentsTopList2 = _interopRequireDefault(_pageletTopComponentsTopList);
   
+  var _pageletTopComponentsTop7UpList = require("pagelet/top/components/top7UpList.jsx");
+  
+  var _pageletTopComponentsTop7UpList2 = _interopRequireDefault(_pageletTopComponentsTop7UpList);
+  
+  var _pageletTopComponentsTop7DownList = require("pagelet/top/components/top7DownList.jsx");
+  
+  var _pageletTopComponentsTop7DownList2 = _interopRequireDefault(_pageletTopComponentsTop7DownList);
+  
+  var _pageletUnderappComponentsUnderapp = require("pagelet/underapp/components/underapp.jsx");
+  
+  var _pageletUnderappComponentsUnderapp2 = _interopRequireDefault(_pageletUnderappComponentsUnderapp);
+  
+  var _pageletHotkeywordComponentsHotkeyword = require("pagelet/hotkeyword/components/hotkeyword.jsx");
+  
+  var _pageletHotkeywordComponentsHotkeyword2 = _interopRequireDefault(_pageletHotkeywordComponentsHotkeyword);
+  
   _staticLibJquery2["default"].ajaxSetup({
     cache: false //关闭AJAX缓存
   });
@@ -48,8 +64,12 @@ define('static/entry.jsx', function(require, exports, module) {
       { path: "/", component: _pageletMainComponentsMain2["default"] },
       _react2["default"].createElement(_staticLibReactRouter.Route, { name: "defaultSearch", path: "/search", component: _pageletSearchComponentsIndex2["default"] }),
       _react2["default"].createElement(_staticLibReactRouter.Route, { name: "inputSearch", path: "/search/input", component: _pageletSearchComponentsSearch_input2["default"] }),
-      _react2["default"].createElement(_staticLibReactRouter.Route, { name: "appDetail", path: "/detail/:module", component: _pageletAppdetailComponentsDetail2["default"] }),
-      _react2["default"].createElement(_staticLibReactRouter.Route, { name: "topList", path: "/toplist", component: _pageletTopComponentsTopList2["default"] })
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/detail/:module", component: _pageletAppdetailComponentsDetail2["default"] }),
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/toplist", component: _pageletTopComponentsTopList2["default"] }),
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/top7uplist", component: _pageletTopComponentsTop7UpList2["default"] }),
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/top7Downlist", component: _pageletTopComponentsTop7DownList2["default"] }),
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/under_app_monitor", component: _pageletUnderappComponentsUnderapp2["default"] }),
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/hotkeywords", component: _pageletHotkeywordComponentsHotkeyword2["default"] })
     )
   ), document.body);
 

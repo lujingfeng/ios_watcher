@@ -55,9 +55,9 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
       }
     },
   
-    onNav: function onNav(path) {
+    onNav: function onNav(path, query) {
       this.hide();
-      this.history.pushState(null, path);
+      this.history.pushState(null, path, query);
     },
   
     render: function render() {
@@ -91,25 +91,41 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/top7uplist");
+                } },
               _react2["default"].createElement("i", { className: "icon" }),
               "七日排名上升榜"
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/top7downlist");
+                } },
               _react2["default"].createElement("i", { className: "icon" }),
               "七日排名下降榜"
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/under_app_monitor");
+                } },
+              _react2["default"].createElement("i", { className: "icon" }),
+              "下架应用监控"
+            ),
+            _react2["default"].createElement(
+              "li",
+              { onClick: function (e) {
+                  return _this2.onNav("/hotkeywords");
+                }, style: { display: "none" } },
               _react2["default"].createElement("i", { className: "icon" }),
               "关键词热度排行榜"
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/search/input", { overlay: true });
+                } },
               _react2["default"].createElement("i", { className: "icon" }),
               "App关键词覆盖数"
             ),

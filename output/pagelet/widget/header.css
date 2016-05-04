@@ -10,17 +10,6 @@
   background-position: center;
   margin-top: 8px;
 }
-.c-header .icon-query,
-.c-header .icon-filter {
-  width: 40px;
-  height: 52px;
-}
-.c-header .icon-query {
-  background: url(/static/image/search-icon.png) no-repeat;
-  -webkit-background-size: 18px 18px;
-          background-size: 18px;
-  background-position: center;
-}
 .c-header .icon-filter {
   background: url(/static/image/setting.png) no-repeat;
   -webkit-background-size: 18px 18px;
@@ -38,7 +27,7 @@
   width: 100%;
   padding-right: 32px;
 }
-.c-header .search .icon-query {
+.c-header .search .icon-q {
   position: absolute;
   top: 0;
   right: 58px;

@@ -42,29 +42,49 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _actionAction = require("pagelet/top/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/top/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var TopList = _react2["default"].createClass({
     displayName: "TopList",
   
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
-      return {
-        tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
+      var tabs = [{ name: "免费榜", type: 1 }, { name: "付费榜", type: 2 }, { name: "畅销榜", type: 3 }];
   
+      return {
+        tabs: tabs,
         topList: [],
   
-        curTypeId: "", //免费、付费和畅销三大榜单的排名数据
+        curTypeId: 3401,
         page: 1,
         total: 0
       };
     },
   
     componentDidMount: function componentDidMount() {
-      //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+  
+      var now = new Date();
+  
+      _actionAction2["default"].fetchList({
+        timetype: 1,
+        date: now.format("yyyy-MM-dd"),
+        hour: now.getHours(),
+        country: 1,
+        device: 0,
+        typeid: this.state.curTypeId
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
@@ -120,7 +140,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
           _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
-            { className: "f12 center mb15" },
+            { className: "f12 center f-txt" },
             "所有分类，中国，iPhone, 2016-04-29"
           ),
           _react2["default"].createElement(

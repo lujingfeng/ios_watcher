@@ -23,7 +23,7 @@ TopAction.fetchList.preEmit = function(params) {
   var params = {
     type: 'GET',
     url: SEARCH_HOST + '/ranklist',
-    data: JSON.stringify(params),
+    data: params,
     dataType: 'json'
   }
 

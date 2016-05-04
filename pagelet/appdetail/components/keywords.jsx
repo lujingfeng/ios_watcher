@@ -14,8 +14,8 @@ var Keywords = React.createClass({
           <i></i>
           关键词覆盖数（共覆盖<a>1286</a>个词）
         </h5>
-        
-        <table>
+
+        <table className="border">
           <tr>
             <th>关键词</th>
             <th style={{width:50}}>排名</th>

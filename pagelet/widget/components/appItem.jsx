@@ -10,7 +10,7 @@ var AppItem = React.createClass({
 
   getInitialState: function(){
     return {
-      type: this.props.type||1//1: 搜索Item 2: 
+      type: this.props.type || 1//1: 搜索Item 2: 
     }
   },
 
@@ -32,11 +32,12 @@ var AppItem = React.createClass({
 
     var column2, column3;
 
-    //搜索Item
-    if(type == 1){
+    //搜索Item app关键字覆盖item
+    if(type == 1 || type == 3){
 
       //返回的是字符串
       var score = parseFloat(data.score || 0);
+
       column2 = (
         <td>
           <p 
@@ -52,6 +53,17 @@ var AppItem = React.createClass({
           </div>
         </td>
       );
+
+      if(type == 3){
+        column3 = (
+          <td>
+            <div className="f10 center">
+              <i className="icon-q"></i>
+              查看
+            </div>
+          </td>
+        );
+      }
     //排名item
     }else if(type == 2){
       column2 = (

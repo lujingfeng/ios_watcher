@@ -54,7 +54,13 @@
 <script type="text/javascript" src="/pagelet/appdetail/components/keywords.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/filter.js"></script>
+<script type="text/javascript" src="/pagelet/top/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/top/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/top/components/topList.js"></script>
+<script type="text/javascript" src="/pagelet/top/components/top7UpList.js"></script>
+<script type="text/javascript" src="/pagelet/top/components/top7DownList.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/components/underapp.js"></script>
+<script type="text/javascript" src="/pagelet/hotkeyword/components/hotkeyword.js"></script>
 <script type="text/javascript" src="/static/entry.js"></script>
 <script>
   /**
@@ -171,33 +177,11 @@
                 "react"
             ]
         },
-        "pagelet/main/components/main.jsx": {
-            "uri": "/pagelet/main/components/main.js",
-            "type": "js",
-            "deps": [
-                "pagelet/main/main.less",
-                "react",
-                "reactRouter",
-                "pagelet/main/components/side_nav.jsx"
-            ]
-        },
-        "pagelet/main/main.less": {
-            "uri": "/pagelet/main/main.css",
-            "type": "css"
-        },
-        "pagelet/main/components/side_nav.jsx": {
-            "uri": "/pagelet/main/components/side_nav.js",
-            "type": "js",
-            "deps": [
-                "react",
-                "reactRouter"
-            ]
-        },
-        "pagelet/search/action/action.js": {
-            "uri": "/pagelet/search/action/action.js",
+        "pagelet/hotkeyword/action/action.js": {
+            "uri": "/pagelet/hotkeyword/action/action.js",
             "type": "js",
             "extras": {
-                "moduleId": "pagelet/search/action/action"
+                "moduleId": "pagelet/hotkeyword/action/action"
             },
             "deps": [
                 "reflux",
@@ -208,34 +192,32 @@
             "uri": "/static/lib/jquery.js",
             "type": "js"
         },
-        "pagelet/search/components/index.jsx": {
-            "uri": "/pagelet/search/components/index.js",
+        "pagelet/hotkeyword/components/hotkeyword.jsx": {
+            "uri": "/pagelet/hotkeyword/components/hotkeyword.js",
             "type": "js",
             "deps": [
-                "pagelet/search/search.less",
-                "react",
-                "reactRouter",
-                "pagelet/widget/components/header.jsx"
-            ]
-        },
-        "pagelet/search/search.less": {
-            "uri": "/pagelet/search/search.css",
-            "type": "css"
-        },
-        "pagelet/search/components/search_input.jsx": {
-            "uri": "/pagelet/search/components/search_input.js",
-            "type": "js",
-            "deps": [
-                "pagelet/search/search.less",
+                "../top.less",
                 "react",
                 "reactRouter",
                 "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/rank.jsx",
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/search/action/action.js",
-                "pagelet/search/store/store.js"
+                "pagelet/widget/components/filter.jsx"
             ]
+        },
+        "pagelet/widget/components/rank.jsx": {
+            "uri": "/pagelet/widget/components/rank.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/rank.less",
+                "react"
+            ]
+        },
+        "pagelet/widget/rank.less": {
+            "uri": "/pagelet/widget/rank.css",
+            "type": "css"
         },
         "pagelet/widget/components/loading.jsx": {
             "uri": "/pagelet/widget/components/loading.js",
@@ -269,17 +251,84 @@
             "uri": "/pagelet/widget/app_item.css",
             "type": "css"
         },
-        "pagelet/widget/components/rank.jsx": {
-            "uri": "/pagelet/widget/components/rank.js",
+        "pagelet/widget/components/filter.jsx": {
+            "uri": "/pagelet/widget/components/filter.js",
             "type": "js",
             "deps": [
-                "pagelet/widget/rank.less",
-                "react"
+                "pagelet/widget/filter.less",
+                "react",
+                "reactRouter"
             ]
         },
-        "pagelet/widget/rank.less": {
-            "uri": "/pagelet/widget/rank.css",
+        "pagelet/widget/filter.less": {
+            "uri": "/pagelet/widget/filter.css",
             "type": "css"
+        },
+        "pagelet/hotkeyword/hotkeyword.less": {
+            "uri": "/pagelet/hotkeyword/hotkeyword.css",
+            "type": "css"
+        },
+        "pagelet/main/components/main.jsx": {
+            "uri": "/pagelet/main/components/main.js",
+            "type": "js",
+            "deps": [
+                "pagelet/main/main.less",
+                "react",
+                "reactRouter",
+                "pagelet/main/components/side_nav.jsx"
+            ]
+        },
+        "pagelet/main/main.less": {
+            "uri": "/pagelet/main/main.css",
+            "type": "css"
+        },
+        "pagelet/main/components/side_nav.jsx": {
+            "uri": "/pagelet/main/components/side_nav.js",
+            "type": "js",
+            "deps": [
+                "react",
+                "reactRouter"
+            ]
+        },
+        "pagelet/search/action/action.js": {
+            "uri": "/pagelet/search/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/search/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/search/components/index.jsx": {
+            "uri": "/pagelet/search/components/index.js",
+            "type": "js",
+            "deps": [
+                "pagelet/search/search.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx"
+            ]
+        },
+        "pagelet/search/search.less": {
+            "uri": "/pagelet/search/search.css",
+            "type": "css"
+        },
+        "pagelet/search/components/search_input.jsx": {
+            "uri": "/pagelet/search/components/search_input.js",
+            "type": "js",
+            "deps": [
+                "pagelet/search/search.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/search/action/action.js",
+                "pagelet/search/store/store.js"
+            ]
         },
         "pagelet/search/store/store.js": {
             "uri": "/pagelet/search/store/store.js",
@@ -303,8 +352,8 @@
                 "jquery"
             ]
         },
-        "pagelet/top/components/topList.jsx": {
-            "uri": "/pagelet/top/components/topList.js",
+        "pagelet/top/components/top7DownList.jsx": {
+            "uri": "/pagelet/top/components/top7DownList.js",
             "type": "js",
             "deps": [
                 "pagelet/top/top.less",
@@ -322,18 +371,63 @@
             "uri": "/pagelet/top/top.css",
             "type": "css"
         },
-        "pagelet/widget/components/filter.jsx": {
-            "uri": "/pagelet/widget/components/filter.js",
+        "pagelet/top/components/top7UpList.jsx": {
+            "uri": "/pagelet/top/components/top7UpList.js",
             "type": "js",
             "deps": [
-                "pagelet/widget/filter.less",
+                "pagelet/top/top.less",
                 "react",
-                "reactRouter"
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/widget/components/filter.jsx"
             ]
         },
-        "pagelet/widget/filter.less": {
-            "uri": "/pagelet/widget/filter.css",
-            "type": "css"
+        "pagelet/top/components/topList.jsx": {
+            "uri": "/pagelet/top/components/topList.js",
+            "type": "js",
+            "deps": [
+                "pagelet/top/top.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/widget/components/filter.jsx",
+                "pagelet/top/action/action.js",
+                "pagelet/top/store/store.js"
+            ]
+        },
+        "pagelet/top/store/store.js": {
+            "uri": "/pagelet/top/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/top/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/top/action/action.js"
+            ]
+        },
+        "pagelet/underapp/components/underapp.jsx": {
+            "uri": "/pagelet/underapp/components/underapp.js",
+            "type": "js",
+            "deps": [
+                "../top.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/widget/components/filter.jsx"
+            ]
         },
         "static/lib/mod.js": {
             "uri": "/static/lib/mod.js",
@@ -361,7 +455,11 @@
                 "pagelet/search/components/index.jsx",
                 "pagelet/search/components/search_input.jsx",
                 "pagelet/appdetail/components/detail.jsx",
-                "pagelet/top/components/topList.jsx"
+                "pagelet/top/components/topList.jsx",
+                "pagelet/top/components/top7UpList.jsx",
+                "pagelet/top/components/top7DownList.jsx",
+                "pagelet/underapp/components/underapp.jsx",
+                "pagelet/hotkeyword/components/hotkeyword.jsx"
             ]
         },
         "static/font.less": {
@@ -385,6 +483,28 @@
             "extras": {
                 "moduleId": "static/minxins/utils"
             }
+        },
+        "pagelet/appdetail/action/action.js": {
+            "uri": "/pagelet/appdetail/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/appdetail/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/appdetail/store/store.js": {
+            "uri": "/pagelet/appdetail/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/appdetail/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/appdetail/action/action.js"
+            ]
         }
     },
     "pkg": {}

@@ -44,9 +44,9 @@ var SideNav = React.createClass({
     }
   },
 
-  onNav: function(path){
+  onNav: function(path, query){
     this.hide();
-    this.history.pushState(null, path);
+    this.history.pushState(null, path, query);
   },
 
   render: function(){
@@ -65,19 +65,25 @@ var SideNav = React.createClass({
               <i className="icon"></i>
               iOS榜单排名
             </li>
-            <li>
+            <li onClick={e=>this.onNav("/top7uplist")}>
               <i className="icon"></i>
               七日排名上升榜
             </li>
-            <li>
+            <li onClick={e=>this.onNav("/top7downlist")}>
               <i className="icon"></i>
               七日排名下降榜
             </li>
-            <li>
+
+            <li onClick={e=>this.onNav("/under_app_monitor")}>
+              <i className="icon"></i>
+              下架应用监控
+            </li>
+
+            <li onClick={e=>this.onNav("/hotkeywords")} style={{display:"none"}}>
               <i className="icon"></i>
               关键词热度排行榜
             </li>
-            <li>
+            <li onClick={e=>this.onNav("/search/input", {overlay: true})}>
               <i className="icon"></i>
               App关键词覆盖数
             </li>
