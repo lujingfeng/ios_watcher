@@ -74,8 +74,6 @@ var Search = React.createClass({
   handleScroll: function(e) {
     const _target = e.target;
 
-    console.log(123213);
-
     if (((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) 
       && !this.state.loading &&
       this.state.searchResultList.length < this.state.total

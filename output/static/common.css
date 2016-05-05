@@ -280,6 +280,15 @@ f20 {
 .fr {
   float: right;
 }
+.mt6 {
+  margin-top: 6px;
+}
+.ml6 {
+  margin-left: 6px;
+}
+.mr6 {
+  margin-right: 6px;
+}
 .mt12 {
   margin-top: 12px;
 }

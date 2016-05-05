@@ -79,14 +79,16 @@ define('pagelet/widget/components/rank.jsx', function(require, exports, module) 
             'div',
             {
               className: 'already',
-              style: { width: this.state.value * this.props.width } },
+              style: { width: this.state.value * this.props.width, height: this.props.width } },
             val ? Array(val).join(',').split(',').map(function (v, k) {
               return _react2['default'].createElement('img', { key: k, style: _this.style.star, onClick: _this.onClickable.bind(_this, k), src: "/static/image/star.png" });
             }) : ''
           ),
           _react2['default'].createElement(
             'div',
-            { className: 'notYet' },
+            {
+              style: { height: this.props.width },
+              className: 'notYet' },
             val ? Array(val).join(',').split(',').map(function (v, k) {
               return _react2['default'].createElement('img', { key: k, style: _this.style.star, onClick: _this.onClickable.bind(_this, k), src: "/static/image/star_o.png" });
             }) : ''

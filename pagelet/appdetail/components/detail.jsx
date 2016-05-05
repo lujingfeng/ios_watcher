@@ -10,10 +10,22 @@ import AppInfo from "./appinfo";
 import RealRank from "./realrank";
 import VersionLog from "./version_log";
 import KeyWords from "./keywords";
+import Comment from "./comment";
 
 var AppDetail = React.createClass({
   getInitialState: function(){
     return {}
+  },
+
+  handleScroll: function(e) {
+    const _target = e.target;
+
+    if (((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) 
+      && !this.state.loading &&
+      this.state.searchResultList.length < this.state.total
+      ) {
+      this.loadMore();
+    }
   },
 
   render: function(){
@@ -29,17 +41,21 @@ var AppDetail = React.createClass({
       bottomView = <VersionLog/>
     }else if(params.module == 4){
       bottomView = <KeyWords/>
+    }else if(params.module == 5){
+      bottomView = <Comment/>
     }
 
     return (
       <div className="c-page c-app-detail">
         <Header showSideNav={this.props.showSideNav}>应用详情</Header>
-        <div className="c-body">
+        <div className="c-body" >
           <BaseInfo query={query}/>
           <Categofy 
             query={query} 
             ctyValue={params.module}/>
-          <div className="category-detail">
+          <div 
+            onScroll={this.handleScroll.bind(this)}
+            className="category-detail">
             {bottomView}
           </div>
         </div>

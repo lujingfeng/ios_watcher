@@ -46,11 +46,23 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
   var _keywords2 = _interopRequireDefault(_keywords);
   
+  var _comment = require("pagelet/appdetail/components/comment.jsx");
+  
+  var _comment2 = _interopRequireDefault(_comment);
+  
   var AppDetail = _react2["default"].createClass({
     displayName: "AppDetail",
   
     getInitialState: function getInitialState() {
       return {};
+    },
+  
+    handleScroll: function handleScroll(e) {
+      var _target = e.target;
+  
+      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
+        this.loadMore();
+      }
     },
   
     render: function render() {
@@ -66,6 +78,8 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         bottomView = _react2["default"].createElement(_version_log2["default"], null);
       } else if (params.module == 4) {
         bottomView = _react2["default"].createElement(_keywords2["default"], null);
+      } else if (params.module == 5) {
+        bottomView = _react2["default"].createElement(_comment2["default"], null);
       }
   
       return _react2["default"].createElement(
@@ -85,7 +99,9 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
             ctyValue: params.module }),
           _react2["default"].createElement(
             "div",
-            { className: "category-detail" },
+            {
+              onScroll: this.handleScroll.bind(this),
+              className: "category-detail" },
             bottomView
           )
         )

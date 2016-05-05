@@ -24,7 +24,7 @@ var Keywords = React.createClass({
           </tr>
 
           <tr>
-            <td>
+            <td className="cmain">
               微信
             </td>
             <td>

@@ -47,9 +47,9 @@ var AppItem = React.createClass({
           </p>
           <p className="f12 c666 m5 mb5">{data.developer}</p>
           <div>
-            <span className="t-vt c666 f12 mr5">应用</span>
+            <span className="t-vt c666 f12 mr6">应用</span>
             <Rank value={score} width={14}/>
-            <span className="c666 f12 ml5 t-vt">{data.score}</span>
+            <span className="c666 f12 ml6 t-vt">{data.score}</span>
           </div>
         </td>
       );
@@ -75,8 +75,8 @@ var AppItem = React.createClass({
           </p>
           <p className="f12 c666 m5 mb5">{data.developer}</p>
           <div>
-            <span className="c666 f12 mr5">游戏</span>
-            <span className="c666 f12 ml5 t-vt">第{3}名</span>
+            <span className="c666 f12 mr6">游戏</span>
+            <span className="c666 f12 ml6 t-vt">第{3}名</span>
           </div>
         </td>);
       column3 = (

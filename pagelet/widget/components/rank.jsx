@@ -48,10 +48,12 @@ class Rank extends React.Component{
       <div className="rank" style={this.style.rank}>
         <div 
           className='already' 
-          style={{width: this.state.value * this.props.width}}>
+          style={{width: this.state.value * this.props.width, height: this.props.width}}>
           {val ? (Array(val).join(',').split(',').map((v,k) => <img key={k} style={this.style.star} onClick={this.onClickable.bind(this,k)} src={__uri("/static/image/star.png")} />)) : ''}
         </div>
-        <div className='notYet'>
+        <div 
+          style={{height: this.props.width}}
+          className='notYet'>
           {val ? (Array(val).join(',').split(',').map((v,k) => <img key={k} style={this.style.star} onClick={this.onClickable.bind(this,k)} src={__uri("/static/image/star_o.png")} />)) : ''}
         </div>
       </div>

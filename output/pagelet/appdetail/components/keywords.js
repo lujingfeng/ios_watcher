@@ -68,7 +68,7 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
             null,
             _react2["default"].createElement(
               "td",
-              null,
+              { className: "cmain" },
               "微信"
             ),
             _react2["default"].createElement(

@@ -75,13 +75,13 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             null,
             _react2["default"].createElement(
               "span",
-              { className: "t-vt c666 f12 mr5" },
+              { className: "t-vt c666 f12 mr6" },
               "应用"
             ),
             _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: score, width: 14 }),
             _react2["default"].createElement(
               "span",
-              { className: "c666 f12 ml5 t-vt" },
+              { className: "c666 f12 ml6 t-vt" },
               data.score
             )
           )
@@ -123,12 +123,12 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               null,
               _react2["default"].createElement(
                 "span",
-                { className: "c666 f12 mr5" },
+                { className: "c666 f12 mr6" },
                 "游戏"
               ),
               _react2["default"].createElement(
                 "span",
-                { className: "c666 f12 ml5 t-vt" },
+                { className: "c666 f12 ml6 t-vt" },
                 "第",
                 3,
                 "名"

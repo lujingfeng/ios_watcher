@@ -101,8 +101,6 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
     handleScroll: function handleScroll(e) {
       var _target = e.target;
   
-      console.log(123213);
-  
       if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
         this.loadMore();
       }
