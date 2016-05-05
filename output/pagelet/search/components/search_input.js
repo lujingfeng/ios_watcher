@@ -49,10 +49,10 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     getInitialState: function getInitialState() {
       return {
-        tabs: [{ name: "iPhone", value: "" }, { name: "iPad", value: "" }],
+        tabs: [{ name: "iPhone", value: 0 }, { name: "iPad", value: 1 }],
   
         searchKey: null,
-        deviceType: "iphone",
+        equipment: 0,
         searchResultList: [],
   
         page: 1,
@@ -82,9 +82,9 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       _pageletSearchActionAction2["default"].search(key, 1);
     },
   
-    onChooseDevice: function onChooseDevice(deviceType) {
+    onChooseDevice: function onChooseDevice(tab) {
       this.setState({
-        deviceType: deviceType
+        equipment: tab.value
       });
     },
   
@@ -125,6 +125,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       } else {
         pathName = pathName + "1";
       }
+      params.equipment = this.state.equipment;
   
       this.history.pushState("", pathName, params);
     },
@@ -197,7 +198,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             onScroll: this.handleScroll.bind(this),
             className: "search-result c-body",
             style: { display: this.state.searchKey ? "block" : "none" } },
-          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs, onSelect: this.onChooseDevice }),
           query && !query.overlay ? _react2["default"].createElement(
             "p",
             { className: "center c999 f12" },

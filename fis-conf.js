@@ -34,6 +34,7 @@ fis.match("/static/lib/(reflux).js", {id: "$1",moduleId: "$1"});
 fis.match("/static/lib/(reactRouter).js", {id: "$1",moduleId: "$1"});
 fis.match("/static/lib/(lodash).js", {id: "$1",moduleId: "$1"});
 fis.match("/static/lib/(jquery).js", {id: "$1",moduleId: "$1"});
+fis.match("/static/(constants).js", {id: "$1",moduleId: "$1"});
 
 //全局规则匹配
 fis.match('*.less', {

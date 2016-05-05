@@ -62,7 +62,8 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
         tabs: tabs,
         topList: [],
   
-        curTypeId: 3401,
+        curTypeId: "3394",
+  
         page: 1,
         total: 0
       };

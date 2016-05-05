@@ -11,6 +11,7 @@ import RealRank from "./realrank";
 import VersionLog from "./version_log";
 import KeyWords from "./keywords";
 import Comment from "./comment";
+import AppLevel from "./applevel";
 
 var AppDetail = React.createClass({
   getInitialState: function(){
@@ -36,13 +37,15 @@ var AppDetail = React.createClass({
     if(params.module == 1){
       bottomView = <AppInfo query={query}/>
     }else if(params.module == 2){
-      bottomView = <RealRank/>
+      bottomView = <RealRank query={query}/>
     }else if(params.module == 3){
       bottomView = <VersionLog/>
     }else if(params.module == 4){
-      bottomView = <KeyWords/>
+      bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
-      bottomView = <Comment/>
+      bottomView = <Comment query={query}/>
+    }else if(params.module == 6){
+      bottomView = <AppLevel query={query}/>
     }
 
     return (

@@ -1,11 +1,11 @@
 import Reflux from "reflux";
-import SearchAction from "../action/action.js";
+import DetailAction from "../action/action.js";
 
-var SearchStore = Reflux.createStore({
+var DetailStore = Reflux.createStore({
 
     init: function(){
-      this.listenTo(SearchAction.search, this.loading);
-      this.listenTo(SearchAction.searchCmp, this.searchCmp);
+      this.listenTo(DetailAction.appInfo, this.loading);
+      this.listenTo(DetailAction.appInfoCmp, this.appInfoCmp);
     },
     
     loading: function() {
@@ -14,19 +14,14 @@ var SearchStore = Reflux.createStore({
       });
     },
 
-    searchCmp: function(list){
-      var total = 0;
-      var searchResultList = list && list.length ? list.splice(0, list.length - 1) : [];
+    appInfoCmp: function(info){
+      var params = {loading: false};
 
-      if(list && list.length){
-        total = parseInt(list[list.length - 1].hitscount);
+      if(info){
+        params.detailInfo = info;
       }
-      this.trigger({
-        loading: false,
-        searchResultList: searchResultList,
-        total: total
-      });
+      this.trigger(params);
     }
 });
 
-export default SearchStore;
+export default DetailStore;

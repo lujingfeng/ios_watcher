@@ -76,7 +76,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             _react2["default"].createElement(
               "span",
               { className: "t-vt c666 f12 mr6" },
-              "应用"
+              data.genres
             ),
             _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: score, width: 14 }),
             _react2["default"].createElement(

@@ -76,6 +76,7 @@
 }
 .c-app-detail .app-info table tr td:first-child {
   font-weight: bold;
+  line-height: 24px;
 }
 .c-app-detail .real-rank table {
   width: 100%;
@@ -95,4 +96,37 @@
   text-align: left;
   padding: 12px;
   line-height: 20px;
+}
+.c-app-detail .app-detail-level table {
+  margin-bottom: 10px;
+}
+.c-app-detail .app-detail-level table th {
+  line-height: 30px;
+  color: #d9d9d9;
+}
+.c-app-detail .app-detail-level .left {
+  text-align: left;
+  margin-left: 12px;
+  line-height: normal;
+}
+.c-app-detail .app-detail-level .left .score {
+  font-weight: bold;
+  margin: 29px 0 16px;
+}
+.c-app-detail .app-detail-level .right {
+  margin-left: 6px;
+}
+.c-app-detail .app-detail-level .right li {
+  font-size: 12px;
+  text-align: left;
+  min-width: 150px;
+  line-height: 24px;
+}
+.c-app-detail .app-detail-level .right li i {
+  height: 10px;
+  display: inline-block;
+  width: 100px;
+  background: #1871e2;
+  vertical-align: middle;
+  margin-left: 6px;
 }

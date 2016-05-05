@@ -20,12 +20,12 @@ var Search = React.createClass({
   getInitialState: function(){
     return {
       tabs: [
-        {name: "iPhone", value: ""},
-        {name: "iPad", value: ""}
+        {name: "iPhone", value: 0},
+        {name: "iPad", value: 1}
       ],
 
       searchKey: null,
-      deviceType: "iphone",
+      equipment: 0,
       searchResultList: [],
 
       page: 1,
@@ -55,9 +55,9 @@ var Search = React.createClass({
     SearchAction.search(key, 1);
   },
 
-  onChooseDevice: function(deviceType){
+  onChooseDevice: function(tab){
     this.setState({
-      deviceType: deviceType
+      equipment: tab.value
     });
   },
 
@@ -101,6 +101,7 @@ var Search = React.createClass({
     }else{
       pathName = pathName + "1"
     }
+    params.equipment = this.state.equipment;
 
     this.history.pushState("", pathName, params);
   },
@@ -148,7 +149,7 @@ var Search = React.createClass({
           className="search-result c-body" 
           style={{display:this.state.searchKey?"block":"none"}}>
 
-          <Tabs tabs={this.state.tabs}/>
+          <Tabs tabs={this.state.tabs} onSelect={this.onChooseDevice}/>
 
           {
             query && !query.overlay ?(

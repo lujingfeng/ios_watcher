@@ -50,6 +50,10 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
   var _comment2 = _interopRequireDefault(_comment);
   
+  var _applevel = require("pagelet/appdetail/components/applevel.jsx");
+  
+  var _applevel2 = _interopRequireDefault(_applevel);
+  
   var AppDetail = _react2["default"].createClass({
     displayName: "AppDetail",
   
@@ -73,13 +77,15 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       if (params.module == 1) {
         bottomView = _react2["default"].createElement(_appinfo2["default"], { query: query });
       } else if (params.module == 2) {
-        bottomView = _react2["default"].createElement(_realrank2["default"], null);
+        bottomView = _react2["default"].createElement(_realrank2["default"], { query: query });
       } else if (params.module == 3) {
         bottomView = _react2["default"].createElement(_version_log2["default"], null);
       } else if (params.module == 4) {
-        bottomView = _react2["default"].createElement(_keywords2["default"], null);
+        bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
-        bottomView = _react2["default"].createElement(_comment2["default"], null);
+        bottomView = _react2["default"].createElement(_comment2["default"], { query: query });
+      } else if (params.module == 6) {
+        bottomView = _react2["default"].createElement(_applevel2["default"], { query: query });
       }
   
       return _react2["default"].createElement(

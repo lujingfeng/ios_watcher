@@ -16,11 +16,54 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _constants = require("constants");
+  
+  var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
+  
+  var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
+  
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var AppInfo = _react2["default"].createClass({
     displayName: "AppInfo",
   
+    getInitialState: function getInitialState() {
+      return {
+        loading: true,
+        detailInfo: {}
+      };
+    },
+  
+    componentDidMount: function componentDidMount() {
+      var query = this.props.query;
+  
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      _actionAction2["default"].appInfo(query.appId, query.equipment);
+    },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {
+      if (state.detailInfo) {
+        this.setState(state);
+      }
+    },
+  
     render: function render() {
       var query = this.props.query;
+      var detail = this.state.detailInfo;
+  
+      if (this.state.loading) {
+        return _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null);
+      }
   
       return _react2["default"].createElement(
         "div",
@@ -39,7 +82,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              "游戏"
+              detail.genres
             )
           ),
           _react2["default"].createElement(
@@ -53,7 +96,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              "iPhone"
+              _constants.deviceTypes[detail.equipment]
             )
           ),
           _react2["default"].createElement(
@@ -67,7 +110,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              query.appId
+              detail.app_id
             )
           ),
           _react2["default"].createElement(
@@ -81,7 +124,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              query.packageName
+              detail.packageName
             )
           ),
           _react2["default"].createElement(
@@ -95,7 +138,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              query.versionname
+              detail.versionname
             )
           ),
           _react2["default"].createElement(
@@ -109,7 +152,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              "2M"
+              detail.filesize
             )
           ),
           _react2["default"].createElement(
@@ -123,7 +166,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              "2014.01.12"
+              "后端暂没定这个字段"
             )
           ),
           _react2["default"].createElement(
@@ -140,28 +183,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
         _react2["default"].createElement(
           "div",
           { className: "app-description" },
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null),
-          "XXXFSDFSAFSDF",
-          _react2["default"].createElement("br", null)
+          "后端暂没定这个字段"
         )
       );
     }

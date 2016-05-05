@@ -117,7 +117,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            "所有分类，中国，iPhone, 2016-04-29"
+            "中国, 2016-04-29"
           ),
           _react2["default"].createElement(
             "ul",

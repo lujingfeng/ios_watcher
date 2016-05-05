@@ -16,11 +16,11 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
   
   var _actionActionJs2 = _interopRequireDefault(_actionActionJs);
   
-  var SearchStore = _reflux2["default"].createStore({
+  var DetailStore = _reflux2["default"].createStore({
   
     init: function init() {
-      this.listenTo(_actionActionJs2["default"].search, this.loading);
-      this.listenTo(_actionActionJs2["default"].searchCmp, this.searchCmp);
+      this.listenTo(_actionActionJs2["default"].appInfo, this.loading);
+      this.listenTo(_actionActionJs2["default"].appInfoCmp, this.appInfoCmp);
     },
   
     loading: function loading() {
@@ -29,22 +29,17 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       });
     },
   
-    searchCmp: function searchCmp(list) {
-      var total = 0;
-      var searchResultList = list && list.length ? list.splice(0, list.length - 1) : [];
+    appInfoCmp: function appInfoCmp(info) {
+      var params = { loading: false };
   
-      if (list && list.length) {
-        total = parseInt(list[list.length - 1].hitscount);
+      if (info) {
+        params.detailInfo = info;
       }
-      this.trigger({
-        loading: false,
-        searchResultList: searchResultList,
-        total: total
-      });
+      this.trigger(params);
     }
   });
   
-  exports["default"] = SearchStore;
+  exports["default"] = DetailStore;
   module.exports = exports["default"];
 
 });

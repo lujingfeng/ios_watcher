@@ -47,7 +47,7 @@ var AppItem = React.createClass({
           </p>
           <p className="f12 c666 m5 mb5">{data.developer}</p>
           <div>
-            <span className="t-vt c666 f12 mr6">应用</span>
+            <span className="t-vt c666 f12 mr6">{data.genres}</span>
             <Rank value={score} width={14}/>
             <span className="c666 f12 ml6 t-vt">{data.score}</span>
           </div>

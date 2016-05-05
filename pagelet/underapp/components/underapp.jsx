@@ -82,7 +82,7 @@ var UnderAppList = React.createClass({
         <div className="c-body">
 
           <p className="f12 center f-txt">
-            所有分类，中国，iPhone, 2016-04-29
+            中国, 2016-04-29
           </p>
 
           <ul className="list">
