@@ -60,6 +60,10 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
       this.history.pushState(null, path, query);
     },
   
+    onClose: function onClose() {
+      this.hide();
+    },
+  
     render: function render() {
       var _this2 = this;
   
@@ -76,7 +80,13 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
           _react2["default"].createElement(
             "div",
             { className: "profile" },
-            "123@gmail.com"
+            _react2["default"].createElement("i", { className: "awatar" }),
+            _react2["default"].createElement(
+              "span",
+              null,
+              "123@gmail.com"
+            ),
+            _react2["default"].createElement("div", { className: "close", onClick: this.onClose })
           ),
           _react2["default"].createElement(
             "ul",
@@ -142,7 +152,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             _react2["default"].createElement(
               "li",
               null,
-              _react2["default"].createElement("i", { className: "icon" }),
+              _react2["default"].createElement("i", { className: "icon fav" }),
               "我的关注"
             )
           ),
@@ -152,12 +162,13 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             _react2["default"].createElement(
               "li",
               null,
-              _react2["default"].createElement("i", { className: "icon" }),
+              _react2["default"].createElement("i", { className: "icon about" }),
               "关于我们"
             ),
             _react2["default"].createElement(
               "li",
               null,
+              _react2["default"].createElement("i", { className: "icon callin" }),
               _react2["default"].createElement(
                 "a",
                 { href: "tel:4006343800" },
@@ -167,8 +178,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             ),
             _react2["default"].createElement(
               "li",
-              { style: { color: "red" } },
-              _react2["default"].createElement("i", { className: "icon" }),
+              { style: { color: "red", paddingLeft: 50 } },
               "退出"
             )
           )

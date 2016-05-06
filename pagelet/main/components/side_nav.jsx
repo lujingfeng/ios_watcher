@@ -49,6 +49,10 @@ var SideNav = React.createClass({
     this.history.pushState(null, path, query);
   },
 
+  onClose: function(){
+    this.hide();
+  },
+
   render: function(){
     if(!this.state.visible){
       return null;
@@ -58,7 +62,9 @@ var SideNav = React.createClass({
       <div className="c-page side-page" ref="root" onClick={this.onMask}>
         <div className="side-nav">
           <div className="profile">
-            123@gmail.com
+            <i className="awatar"></i>
+            <span>123@gmail.com</span>
+            <div className="close" onClick={this.onClose}></div>
           </div>
           <ul>
             <li onClick={e=>this.onNav("/toplist")}>
@@ -94,24 +100,24 @@ var SideNav = React.createClass({
           </ul>
           <ul>
             <li>
-              <i className="icon"></i>
+              <i className="icon fav"></i>
               我的关注
             </li>
           </ul>
 
           <ul>
             <li>
-              <i className="icon"></i>
+              <i className="icon about"></i>
               关于我们
             </li>
             <li>
+              <i className="icon callin"></i>
               <a href="tel:4006343800">
                 <i className="icon"></i>
                 400-6343-800
               </a>
             </li>
-            <li style={{color:"red"}}>
-              <i className="icon"></i>
+            <li style={{color:"red",paddingLeft: 50}}>
               退出
             </li>
           </ul>
