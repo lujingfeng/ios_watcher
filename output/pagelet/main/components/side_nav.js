@@ -141,7 +141,9 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/aso_service");
+                } },
               _react2["default"].createElement("i", { className: "icon" }),
               "ASO优化服务"
             )
@@ -151,7 +153,9 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             null,
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/myfavlist");
+                } },
               _react2["default"].createElement("i", { className: "icon fav" }),
               "我的关注"
             )

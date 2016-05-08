@@ -22,17 +22,6 @@
   -webkit-transform: scale(0.7);
           transform: scale(0.7);
 }
-.c-app-base-info .icon-vs {
-  width: 31px;
-  height: 17px;
-  display: inline-block;
-}
-.c-app-base-info .icon-vs {
-  margin-top: 6px;
-  background: url(/static/image/vs.png) no-repeat;
-  -webkit-background-size: contain;
-          background-size: contain;
-}
 .c-app-base-info .icon-fav {
   width: 26px;
   height: 25px;

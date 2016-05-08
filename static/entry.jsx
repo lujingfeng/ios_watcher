@@ -12,6 +12,11 @@ import Top7UpList from "/pagelet/top/components/top7UpList";
 import Top7DownList from "/pagelet/top/components/top7DownList"
 import UnderAppMonitor from "/pagelet/underapp/components/underapp";
 import HotKeyword from "/pagelet/hotkeyword/components/hotkeyword";
+import CompAnalysis from "/pagelet/compproduct/components/index";
+import AppCompare from "/pagelet/compproduct/components/compare";
+import MyFavList from "/pagelet/myfav/components/my_fav_list";
+import ASOService from "/pagelet/widget/components/aso_service";
+
 
 $.ajaxSetup ({
   cache: false //关闭AJAX缓存
@@ -30,7 +35,18 @@ React.render((
       <Route path="/top7uplist" component={Top7UpList} />
       <Route path="/top7Downlist" component={Top7DownList} />
       <Route path="/under_app_monitor" component={UnderAppMonitor}/>
+
+      //关键词热度排行榜
       <Route path="/hotkeywords" component={HotKeyword}/>
+
+      //竞品分析
+       <Route path="/comp_analysis" component={CompAnalysis}/>
+       //竞品对比
+       <Route path="/appcompare" component={AppCompare}/>
+       //我的关注
+       <Route path="/myfavlist" component={MyFavList}/>
+       //ASO优化服务
+       <Route path="/aso_service" component={ASOService}/>
     </Route>
   </Router>
 ), document.body);

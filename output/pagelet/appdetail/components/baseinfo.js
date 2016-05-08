@@ -16,8 +16,16 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _staticLibReactRouter = require("reactRouter");
+  
   var BaseInfo = _react2["default"].createClass({
     displayName: "BaseInfo",
+  
+    mixins: [_staticLibReactRouter.History],
+  
+    toCompare: function toCompare() {
+      this.history.pushState(null, "/comp_analysis", this.props.query);
+    },
   
     render: function render() {
       var query = this.props.query;
@@ -58,7 +66,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "div",
-                { className: "vs" },
+                { className: "vs", onClick: this.toCompare },
                 _react2["default"].createElement("div", { className: "icon-vs" }),
                 _react2["default"].createElement(
                   "p",

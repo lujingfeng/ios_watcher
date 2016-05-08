@@ -3,7 +3,7 @@
   */
 
 import React from "react";
-import {deviceTypes} from "constants";
+import {deviceTypeStr} from "constants";
 import Loading from "/pagelet/widget/components/loading";
 
 import DetailAction from "../action/action";
@@ -46,7 +46,7 @@ var AppInfo = React.createClass({
       <div className="app-info">
         <table>
           <tr><td>分类：</td><td>{detail.genres}</td></tr>
-          <tr><td>设备：</td><td>{deviceTypes[detail.equipment]}</td></tr>
+          <tr><td>设备：</td><td>{detail.device}</td></tr>
           <tr><td>AppID:</td><td>{detail.app_id}</td></tr>
           <tr><td>包名：</td><td>{detail.packageName}</td></tr>
           <tr><td>当前版本：</td><td>{detail.versionname}</td></tr>

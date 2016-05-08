@@ -93,13 +93,13 @@ var SideNav = React.createClass({
               <i className="icon"></i>
               App关键词覆盖数
             </li>
-            <li>
+            <li onClick={e=>this.onNav("/aso_service")}>
               <i className="icon"></i>
               ASO优化服务
             </li>
           </ul>
           <ul>
-            <li>
+            <li onClick={e=>this.onNav("/myfavlist")}>
               <i className="icon fav"></i>
               我的关注
             </li>

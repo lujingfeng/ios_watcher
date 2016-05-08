@@ -42,6 +42,14 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _actionAction = require("pagelet/underapp/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/underapp/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var UnderAppList = _react2["default"].createClass({
     displayName: "UnderAppList",
   
@@ -51,27 +59,37 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
       return {
         underAppList: [],
   
+        //filter params
         page: 1,
-        total: 0
+        country: "cn",
+        date: "20160409"
       };
     },
   
     componentDidMount: function componentDidMount() {
-      //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      _actionAction2["default"].fetchUnderAppList({
+        country: this.state.country,
+        date: this.state.date,
+        page: this.state.page
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
+      if (state.underAppList) {
+        state.underAppList = this.state.underAppList.concat(state.underAppList);
+      }
       this.setState(state);
     },
   
     handleScroll: function handleScroll(e) {
       var _target = e.target;
   
-      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
+      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading) {
         this.loadMore();
       }
     },
@@ -82,7 +100,11 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
         page: page
       });
   
-      SearchAction.search(this.state.searchKey, page);
+      _actionAction2["default"].fetchUnderAppList({
+        country: this.state.country,
+        date: this.state.date,
+        page: this.state.page + 1
+      });
     },
   
     onItemClick: function onItemClick(data) {
@@ -101,6 +123,10 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     },
   
     renderTop: function renderTop() {
+      var _this = this;
+  
+      var state = this.state;
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-page under-app-list" },
@@ -113,7 +139,9 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
         ),
         _react2["default"].createElement(
           "div",
-          { className: "c-body" },
+          {
+            onScroll: this.handleScroll.bind(this),
+            className: "c-body" },
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
@@ -122,25 +150,15 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "ul",
             { className: "list" },
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
-              type: 2,
-              onItemClick: this.onItemClick,
-              index: 1,
-              data: {} }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 })
-          )
+            state.underAppList.map(function (item, idx) {
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                type: 7,
+                onItemClick: _this.onItemClick,
+                index: idx,
+                data: item });
+            })
+          ),
+          state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
         )
       );
     }

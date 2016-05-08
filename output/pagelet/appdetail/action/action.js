@@ -18,13 +18,13 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
   var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp"]);
   
-  DetailAction.appInfo.preEmit = function (appId, equipment) {
+  DetailAction.appInfo.preEmit = function (appId, device) {
       var params = {
           type: 'GET',
           url: SEARCH_HOST + '/iosdetail',
           data: {
-              appid: appId,
-              equipment: equipment
+              appId: appId,
+              device: device
           },
           dataType: 'json'
       };

@@ -87,7 +87,7 @@ video {
   font-weight: inherit;
   font-style: inherit;
   font-size: inherit;
-  color: #333;
+  color: #444;
   list-style: none;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -99,6 +99,11 @@ video {
 *{
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+body{
+  font-family:'Microsoft YaHei','微软雅黑','PingFang SC', 'Lantinghei SC', 'Helvetica Neue';
+  font-size: 14px;
+}
+
 table{
   width: 100%;
   border-collapse: collapse;
@@ -160,11 +165,6 @@ html, body{
   width: 100%;
   height: 100%;
   overflow: auto;
-}
-
-body{
-  font-family: 'PingFang SC', 'Lantinghei SC', 'Helvetica Neue', 'Microsoft YaHei,SimSun';
-  font-size: 14px;
 }
 
 i{
@@ -288,7 +288,7 @@ h3{
 
 .btn{
   display: inline-block;
-  line-height: 42px;
+  line-height: 32px;
   -webkit-appearance: none;
   border-radius: 3px;
   cursor: pointer;
@@ -307,31 +307,15 @@ h3{
   background: #faf8f8;
 }
 
-.normal-btn:active{
-  background: #e8e6e6;
-}
-
 .main-btn{
-  background: #1087E3;
+  background: @cmain;
   color: #fff;
-}
-
-.main-btn:hover{
-  background: #0f7cd1;
-}
-
-.main-btn:active{
-  background: #0d72c0;
 }
 
 .second-btn{
   line-height: 40px;
   border: 1px solid #9ACDF4;
   color: #69B8F6;
-}
-
-.second-btn:hover{
-  background:#e2eff9;
 }
 
 .second-btn:active{
@@ -383,3 +367,28 @@ h5.title{
   background-size: 18px;
   background-position: center;
 }
+
+
+ .icon-vs{
+    width: 31px;
+    height: 17px;
+    display: inline-block;
+  }
+
+  .icon-vs{
+    margin-top: 6px;
+    background: url(/static/image/vs.png) no-repeat;
+    background-size: contain;
+  }
+
+  .aso-service{
+    .main-btn{
+      font-weight: bold;
+    }
+    .top{
+      position: absolute;
+      left: 50%;
+      top: 90px;
+      margin-left: -75px;
+    }
+  }

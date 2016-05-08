@@ -16,9 +16,9 @@ define('pagelet/top/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var TopAction = _reflux2["default"].createActions(["fetchList", "fetchListCmp"]);
+  var TopAction = _reflux2["default"].createActions(["fetchList", "fetchListCmp", "fetUpTopList", "fetUpTopListCmp", "fetDownTopList", "fetDownTopListCmp"]);
   
-  TopAction.fetchList.preEmit = function (params) {
+  TopAction.fetchList.preEmit = function (query) {
     //timetype - 查询时间类型（0 - 查询每天榜单 / 1 - 查询小时榜单， 可以不设置，此时默认按小时查询）
   
     //date - 查询榜单的时间日期 (格式为:yyyy-MM-dd)
@@ -34,12 +34,44 @@ define('pagelet/top/action/action', function(require, exports, module) {
     var params = {
       type: 'GET',
       url: SEARCH_HOST + '/ranklist',
-      data: params,
+      data: query,
       dataType: 'json'
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
       TopAction.fetchListCmp(res);
+    });
+  };
+  
+  TopAction.fetUpTopList = function (query) {
+    query.flag = 1;
+  
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/iosupdown',
+      data: query,
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      TopAction.fetUpTopListCmp(res);
+    });
+  };
+  
+  TopAction.fetDownTopList = function () {
+    var query = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  
+    query.flag = 2;
+  
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/iosupdown',
+      data: query,
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      TopAction.fetDownTopListCmp(res);
     });
   };
   

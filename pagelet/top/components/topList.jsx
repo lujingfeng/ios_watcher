@@ -11,6 +11,7 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
+import {countryCode, deviceType} from "constants";
 
 import TopAction from "../action/action";
 import TopStore from "../store/store";
@@ -30,7 +31,7 @@ var TopList = React.createClass({
       topList: [],
 
       curTypeId: "3394",
-      
+
       page: 1,
       total: 0
     }
@@ -42,11 +43,10 @@ var TopList = React.createClass({
     var now = new Date();
 
     TopAction.fetchList({
-      timetype: 1,
       date: now.format("yyyy-MM-dd"),
       hour: now.getHours(),
-      country: 1,
-      device: 0,
+      country: countryCode.CHINA,
+      device: deviceType.IPHONE,
       typeid: this.state.curTypeId
     });
   },

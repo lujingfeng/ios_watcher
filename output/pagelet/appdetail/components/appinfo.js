@@ -96,7 +96,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              _constants.deviceTypes[detail.equipment]
+              detail.device
             )
           ),
           _react2["default"].createElement(

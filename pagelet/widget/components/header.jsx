@@ -11,11 +11,20 @@ var Header = React.createClass({
   mixins: [History],
 
   getInitialState: function(){
+    let filterVisible;
+
+    if(typeof this.props.filterVisible == "undefined"){
+      filterVisible = true;
+    }else{
+      filterVisible = !!this.props.filterVisible;
+    }
+
     return {
       type: this.props.type || "normal",
       searchKey: this.props.searchValue||"",
 
-      filterEnabled: !!this.props.filterEnabled
+      filterEnabled: !!this.props.filterEnabled,
+      filterVisible: filterVisible
     }
   },
 
@@ -30,6 +39,9 @@ var Header = React.createClass({
     }
     if(nextProps.filterEnabled != this.props.filterEnabled){
       state.filterEnabled = nextProps.filterEnabled;
+    }
+    if(nextProps.filterVisible != this.props.filterVisible){
+      state.filterVisible = nextProps.filterVisible;
     }
     this.setState(state);
   },
@@ -67,16 +79,23 @@ var Header = React.createClass({
     if(filterEnabled && toFilter){
       toFilter();
     }
-    var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-    this.history.pushState(null, pathname, {filter:true});
+
+    if(filterEnabled){
+      var pathname = location.hash.slice(2, location.hash.indexOf("?"));
+      this.history.pushState(null, pathname, {filter:true});
+    }
   },
 
   render: function(){
     let type = this.state.type;
     let filterStyle = {};
+    const state = this.state;
 
-    if(!this.state.filterEnabled){
+    if(!state.filterEnabled){
       filterStyle.opacity = 0.5;
+    }
+    if(!state.filterVisible){
+      filterStyle.display = "none";
     }
 
     return (
@@ -100,7 +119,9 @@ var Header = React.createClass({
           type == "normal" ? (
             <div className="normal">
               <div className="icon-menu" onClick={e=>this.props.showSideNav()}></div>
-              <div className="middle">
+              <div 
+                style={!state.filterVisible?{right:40}: null}
+                className="middle">
                 {this.props.children}
               </div>
 

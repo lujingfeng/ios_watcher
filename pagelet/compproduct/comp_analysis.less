@@ -1,0 +1,68 @@
+@import (reference) "/static/common.less";
+
+.comp-analysis{
+  .search-result{
+    top: 130px;
+  }
+}
+
+.my-fav-list{
+  table{
+    td{
+      width:50%;
+    }
+  }
+}
+
+.app-compare{
+  .content{
+    padding: 12px;
+    .title{
+      line-height: 30px;
+    }
+  }
+  .icon-vs{
+    position: absolute;
+    width: 45px;
+    height: 23px;
+    left: 50%;
+    top: 50%;
+    margin-left: -22px;
+    margin-top: -12px;
+    background: url(/static/image/icon_vs.png) no-repeat;
+    background-size: 100%;
+  }
+}
+
+.my-fav-item{
+  position: relative;
+  float: left;
+  width: 50%;
+  overflow: hidden;
+  padding: 12px;
+  text-align: center;
+  border-right: 1px solid @ce9e;
+  border-bottom: 1px solid @ce9e;
+
+  img{
+    width:52px;
+    height:52px;
+    margin-top: 20px;
+  }
+  .icon-myfav{
+    position: absolute;
+    top: -27px;
+    right: -27px;
+    width:55px;
+    height:55px;
+    transform: rotate(45deg);
+    background: @cmain;
+
+    p{
+      line-height: 92px;
+      color:#fff;
+      font-size:12px;
+      transform: scale(0.8);
+    }
+  }
+}

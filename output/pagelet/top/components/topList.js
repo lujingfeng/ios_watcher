@@ -42,6 +42,8 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _constants = require("constants");
+  
   var _actionAction = require("pagelet/top/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -75,11 +77,10 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       var now = new Date();
   
       _actionAction2["default"].fetchList({
-        timetype: 1,
         date: now.format("yyyy-MM-dd"),
         hour: now.getHours(),
-        country: 1,
-        device: 0,
+        country: _constants.countryCode.CHINA,
+        device: _constants.deviceType.IPHONE,
         typeid: this.state.curTypeId
       });
     },

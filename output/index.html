@@ -24,6 +24,8 @@
     <link rel="stylesheet" type="text/css" href="/pagelet/appdetail/detail.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/filter.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/compproduct/comp_analysis.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/myfav/my_fav.css" />
 </head>
 <body>
   
@@ -64,8 +66,15 @@
 <script type="text/javascript" src="/pagelet/top/components/topList.js"></script>
 <script type="text/javascript" src="/pagelet/top/components/top7UpList.js"></script>
 <script type="text/javascript" src="/pagelet/top/components/top7DownList.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/underapp/components/underapp.js"></script>
 <script type="text/javascript" src="/pagelet/hotkeyword/components/hotkeyword.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/my_fav_item.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/index.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/compare.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/components/my_fav_list.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/aso_service.js"></script>
 <script type="text/javascript" src="/static/entry.js"></script>
 <script>
   /**
@@ -148,14 +157,6 @@
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
-                "react"
-            ]
-        },
-        "pagelet/appdetail/components/category.jsx": {
-            "uri": "/pagelet/appdetail/components/category.js",
-            "type": "js",
-            "deps": [
-                "pagelet/appdetail/detail.less",
                 "react",
                 "reactRouter"
             ]
@@ -170,6 +171,15 @@
         "react": {
             "uri": "/static/lib/react.js",
             "type": "js"
+        },
+        "pagelet/appdetail/components/category.jsx": {
+            "uri": "/pagelet/appdetail/components/category.js",
+            "type": "js",
+            "deps": [
+                "pagelet/appdetail/detail.less",
+                "react",
+                "reactRouter"
+            ]
         },
         "pagelet/appdetail/components/comment.jsx": {
             "uri": "/pagelet/appdetail/components/comment.js",
@@ -251,30 +261,27 @@
                 "react"
             ]
         },
-        "pagelet/hotkeyword/action/action.js": {
-            "uri": "/pagelet/hotkeyword/action/action.js",
+        "pagelet/compproduct/comp_analysis.less": {
+            "uri": "/pagelet/compproduct/comp_analysis.css",
+            "type": "css"
+        },
+        "pagelet/compproduct/components/compare.jsx": {
+            "uri": "/pagelet/compproduct/components/compare.js",
             "type": "js",
             "extras": {
-                "moduleId": "pagelet/hotkeyword/action/action"
+                "async": [
+                    "static/lib/echarts.min.js"
+                ]
             },
             "deps": [
-                "reflux",
-                "jquery"
-            ]
-        },
-        "pagelet/hotkeyword/components/hotkeyword.jsx": {
-            "uri": "/pagelet/hotkeyword/components/hotkeyword.js",
-            "type": "js",
-            "deps": [
-                "../top.less",
+                "pagelet/compproduct/comp_analysis.less",
                 "react",
                 "reactRouter",
                 "pagelet/widget/components/header.jsx",
-                "pagelet/widget/components/rank.jsx",
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/widget/components/filter.jsx"
+                "pagelet/compproduct/components/my_fav_item.jsx"
             ]
         },
         "pagelet/widget/components/tabs.jsx": {
@@ -301,6 +308,77 @@
         "pagelet/widget/app_item.less": {
             "uri": "/pagelet/widget/app_item.css",
             "type": "css"
+        },
+        "pagelet/compproduct/components/my_fav_item.jsx": {
+            "uri": "/pagelet/compproduct/components/my_fav_item.js",
+            "type": "js",
+            "deps": [
+                "react"
+            ]
+        },
+        "pagelet/compproduct/components/index.jsx": {
+            "uri": "/pagelet/compproduct/components/index.js",
+            "type": "js",
+            "deps": [
+                "pagelet/compproduct/comp_analysis.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/compproduct/components/my_fav_item.jsx",
+                "pagelet/search/action/action.js",
+                "pagelet/search/store/store.js"
+            ]
+        },
+        "pagelet/search/action/action.js": {
+            "uri": "/pagelet/search/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/search/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/search/store/store.js": {
+            "uri": "/pagelet/search/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/search/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/search/action/action.js"
+            ]
+        },
+        "pagelet/hotkeyword/action/action.js": {
+            "uri": "/pagelet/hotkeyword/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/hotkeyword/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/hotkeyword/components/hotkeyword.jsx": {
+            "uri": "/pagelet/hotkeyword/components/hotkeyword.js",
+            "type": "js",
+            "deps": [
+                "../top.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/widget/components/filter.jsx"
+            ]
         },
         "pagelet/widget/components/filter.jsx": {
             "uri": "/pagelet/widget/components/filter.js",
@@ -341,16 +419,22 @@
                 "reactRouter"
             ]
         },
-        "pagelet/search/action/action.js": {
-            "uri": "/pagelet/search/action/action.js",
+        "pagelet/myfav/components/my_fav_list.jsx": {
+            "uri": "/pagelet/myfav/components/my_fav_list.js",
             "type": "js",
-            "extras": {
-                "moduleId": "pagelet/search/action/action"
-            },
             "deps": [
-                "reflux",
-                "jquery"
+                "pagelet/myfav/my_fav.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/header.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "pagelet/widget/components/tabs.jsx",
+                "pagelet/widget/components/appItem.jsx"
             ]
+        },
+        "pagelet/myfav/my_fav.less": {
+            "uri": "/pagelet/myfav/my_fav.css",
+            "type": "css"
         },
         "pagelet/search/components/index.jsx": {
             "uri": "/pagelet/search/components/index.js",
@@ -379,17 +463,6 @@
                 "pagelet/widget/components/appItem.jsx",
                 "pagelet/search/action/action.js",
                 "pagelet/search/store/store.js"
-            ]
-        },
-        "pagelet/search/store/store.js": {
-            "uri": "/pagelet/search/store/store.js",
-            "type": "js",
-            "extras": {
-                "moduleId": "pagelet/search/store/store"
-            },
-            "deps": [
-                "reflux",
-                "pagelet/search/action/action.js"
             ]
         },
         "pagelet/top/action/action.js": {
@@ -450,6 +523,7 @@
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
                 "pagelet/widget/components/filter.jsx",
+                "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
             ]
@@ -465,6 +539,17 @@
                 "pagelet/top/action/action.js"
             ]
         },
+        "pagelet/underapp/action/action.js": {
+            "uri": "/pagelet/underapp/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/underapp/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
         "pagelet/underapp/components/underapp.jsx": {
             "uri": "/pagelet/underapp/components/underapp.js",
             "type": "js",
@@ -477,7 +562,31 @@
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/widget/components/filter.jsx"
+                "pagelet/widget/components/filter.jsx",
+                "pagelet/underapp/action/action.js",
+                "pagelet/underapp/store/store.js"
+            ]
+        },
+        "pagelet/underapp/store/store.js": {
+            "uri": "/pagelet/underapp/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/underapp/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/underapp/action/action.js"
+            ]
+        },
+        "pagelet/widget/components/aso_service.js": {
+            "uri": "/pagelet/widget/components/aso_service.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/widget/components/aso_service"
+            },
+            "deps": [
+                "react",
+                "pagelet/widget/components/header.jsx"
             ]
         },
         "static/lib/mod.js": {
@@ -510,7 +619,11 @@
                 "pagelet/top/components/top7UpList.jsx",
                 "pagelet/top/components/top7DownList.jsx",
                 "pagelet/underapp/components/underapp.jsx",
-                "pagelet/hotkeyword/components/hotkeyword.jsx"
+                "pagelet/hotkeyword/components/hotkeyword.jsx",
+                "pagelet/compproduct/components/index.jsx",
+                "pagelet/compproduct/components/compare.jsx",
+                "pagelet/myfav/components/my_fav_list.jsx",
+                "pagelet/widget/components/aso_service.js"
             ]
         },
         "constants": {

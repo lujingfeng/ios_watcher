@@ -50,6 +50,22 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var _pageletHotkeywordComponentsHotkeyword2 = _interopRequireDefault(_pageletHotkeywordComponentsHotkeyword);
   
+  var _pageletCompproductComponentsIndex = require("pagelet/compproduct/components/index.jsx");
+  
+  var _pageletCompproductComponentsIndex2 = _interopRequireDefault(_pageletCompproductComponentsIndex);
+  
+  var _pageletCompproductComponentsCompare = require("pagelet/compproduct/components/compare.jsx");
+  
+  var _pageletCompproductComponentsCompare2 = _interopRequireDefault(_pageletCompproductComponentsCompare);
+  
+  var _pageletMyfavComponentsMy_fav_list = require("pagelet/myfav/components/my_fav_list.jsx");
+  
+  var _pageletMyfavComponentsMy_fav_list2 = _interopRequireDefault(_pageletMyfavComponentsMy_fav_list);
+  
+  var _pageletWidgetComponentsAso_service = require("pagelet/widget/components/aso_service");
+  
+  var _pageletWidgetComponentsAso_service2 = _interopRequireDefault(_pageletWidgetComponentsAso_service);
+  
   _staticLibJquery2["default"].ajaxSetup({
     cache: false //关闭AJAX缓存
   });
@@ -69,7 +85,16 @@ define('static/entry.jsx', function(require, exports, module) {
       _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/top7uplist", component: _pageletTopComponentsTop7UpList2["default"] }),
       _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/top7Downlist", component: _pageletTopComponentsTop7DownList2["default"] }),
       _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/under_app_monitor", component: _pageletUnderappComponentsUnderapp2["default"] }),
-      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/hotkeywords", component: _pageletHotkeywordComponentsHotkeyword2["default"] })
+      "//关键词热度排行榜",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/hotkeywords", component: _pageletHotkeywordComponentsHotkeyword2["default"] }),
+      "//竞品分析",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/comp_analysis", component: _pageletCompproductComponentsIndex2["default"] }),
+      "//竞品对比",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/appcompare", component: _pageletCompproductComponentsCompare2["default"] }),
+      "//我的关注",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/myfavlist", component: _pageletMyfavComponentsMy_fav_list2["default"] }),
+      "//ASO优化服务",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/aso_service", component: _pageletWidgetComponentsAso_service2["default"] })
     )
   ), document.body);
 

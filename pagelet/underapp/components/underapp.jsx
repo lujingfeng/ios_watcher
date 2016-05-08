@@ -12,6 +12,9 @@ import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
 
+import UnderAppAction from "../action/action";
+import UnderAppStore from "../store/store";
+
 var UnderAppList = React.createClass({ 
   mixins: [History],
 
@@ -19,20 +22,30 @@ var UnderAppList = React.createClass({
     return {
       underAppList: [],
 
+      //filter params
       page: 1,
-      total: 0
+      country: "cn",
+      date: "20160409"
     }
   },
 
   componentDidMount: function(){
-    //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    this.unSubscribe = UnderAppStore.listen(this.onStateChange.bind(this));
+    UnderAppAction.fetchUnderAppList({
+      country: this.state.country,
+      date: this.state.date,
+      page: this.state.page
+    });
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
+    if(state.underAppList){
+      state.underAppList = this.state.underAppList.concat(state.underAppList);
+    }
     this.setState(state);
   },
 
@@ -40,8 +53,7 @@ var UnderAppList = React.createClass({
     const _target = e.target;
 
     if (((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) 
-      && !this.state.loading &&
-      this.state.searchResultList.length < this.state.total
+      && !this.state.loading
       ) {
       this.loadMore();
     }
@@ -53,7 +65,11 @@ var UnderAppList = React.createClass({
       page: page
     });
 
-    SearchAction.search(this.state.searchKey, page);
+    UnderAppAction.fetchUnderAppList({
+      country: this.state.country,
+      date: this.state.date,
+      page: this.state.page + 1
+    });
   },
 
   onItemClick: function(data){
@@ -72,6 +88,8 @@ var UnderAppList = React.createClass({
   },
 
   renderTop: function(){
+    const state = this.state;
+
     return (
       <div className="c-page under-app-list">
         <Header 
@@ -79,32 +97,30 @@ var UnderAppList = React.createClass({
           showSideNav={this.props.showSideNav}>
           下架应用监控
         </Header>
-        <div className="c-body">
+
+        <div 
+          onScroll={this.handleScroll.bind(this)}
+          className="c-body">
 
           <p className="f12 center f-txt">
             中国, 2016-04-29
           </p>
 
           <ul className="list">
-            <AppItem 
-              type={2} 
-              onItemClick={this.onItemClick} 
-              index={1}
-              data={{}}/>
-            <AppItem type={2}/>
-            <AppItem type={2}/>
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
+            {
+              state.underAppList.map((item, idx)=>{
+                return (
+                  <AppItem 
+                  type={7} 
+                  onItemClick={this.onItemClick} 
+                  index={idx}
+                  data={item}/>)
+              })
+            }
           </ul>
+          {
+            state.loading ? <Loading/>: null
+          }
         </div>
       </div>
     );

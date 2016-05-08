@@ -28,11 +28,20 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
     mixins: [_reactRouter.History],
   
     getInitialState: function getInitialState() {
+      var filterVisible = undefined;
+  
+      if (typeof this.props.filterVisible == "undefined") {
+        filterVisible = true;
+      } else {
+        filterVisible = !!this.props.filterVisible;
+      }
+  
       return {
         type: this.props.type || "normal",
         searchKey: this.props.searchValue || "",
   
-        filterEnabled: !!this.props.filterEnabled
+        filterEnabled: !!this.props.filterEnabled,
+        filterVisible: filterVisible
       };
     },
   
@@ -47,6 +56,9 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       }
       if (nextProps.filterEnabled != this.props.filterEnabled) {
         state.filterEnabled = nextProps.filterEnabled;
+      }
+      if (nextProps.filterVisible != this.props.filterVisible) {
+        state.filterVisible = nextProps.filterVisible;
       }
       this.setState(state);
     },
@@ -78,8 +90,11 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       if (filterEnabled && toFilter) {
         toFilter();
       }
-      var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-      this.history.pushState(null, pathname, { filter: true });
+  
+      if (filterEnabled) {
+        var pathname = location.hash.slice(2, location.hash.indexOf("?"));
+        this.history.pushState(null, pathname, { filter: true });
+      }
     },
   
     render: function render() {
@@ -87,9 +102,13 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
   
       var type = this.state.type;
       var filterStyle = {};
+      var state = this.state;
   
-      if (!this.state.filterEnabled) {
+      if (!state.filterEnabled) {
         filterStyle.opacity = 0.5;
+      }
+      if (!state.filterVisible) {
+        filterStyle.display = "none";
       }
   
       return _react2["default"].createElement(
@@ -123,7 +142,9 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
             } }),
           _react2["default"].createElement(
             "div",
-            { className: "middle" },
+            {
+              style: !state.filterVisible ? { right: 40 } : null,
+              className: "middle" },
             this.props.children
           ),
           _react2["default"].createElement(

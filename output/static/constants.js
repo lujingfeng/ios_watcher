@@ -6,11 +6,23 @@ define('constants', function(require, exports, module) {
     value: true
   });
   
-  var _deviceTypes;
+  var _deviceTypeStr;
   
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   
-  var deviceTypes = (_deviceTypes = {}, _defineProperty(_deviceTypes, 0, "iPhone"), _defineProperty(_deviceTypes, 1, "iPad"), _deviceTypes);
-  exports.deviceTypes = deviceTypes;
+  var deviceTypeStr = (_deviceTypeStr = {}, _defineProperty(_deviceTypeStr, 0, "iPhone"), _defineProperty(_deviceTypeStr, 1, "iPad"), _deviceTypeStr);
+  
+  exports.deviceTypeStr = deviceTypeStr;
+  var countryCode = {
+    CHINA: 1,
+    AMERICAN: 2
+  };
+  
+  exports.countryCode = countryCode;
+  var deviceType = {
+    IPHONE: 0,
+    IPAD: 1
+  };
+  exports.deviceType = deviceType;
 
 });

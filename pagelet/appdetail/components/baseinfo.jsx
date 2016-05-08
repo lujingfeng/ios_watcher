@@ -3,13 +3,19 @@
   */
 
 import React from "react";
+import {History} from "/static/lib/reactRouter";
 
 var BaseInfo = React.createClass({ 
+  mixins: [History], 
+   
+  toCompare: function(){
+    this.history.pushState(null, "/comp_analysis", this.props.query);
+  },
 
   render: function(){
     var query = this.props.query;
     var titleWidth = window.innerWidth - 180;
-    
+
     return (
       <div className="c-app-base-info">
         <table>
@@ -24,7 +30,7 @@ var BaseInfo = React.createClass({
               <p className="f12 c666">{query.developer}</p>
             </td>
             <td>
-              <div className="vs">
+              <div className="vs" onClick={this.toCompare}>
                 <div className="icon-vs"></div>
                 <p className="f12">排名对比</p>
               </div>

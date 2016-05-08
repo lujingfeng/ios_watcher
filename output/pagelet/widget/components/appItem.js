@@ -20,12 +20,17 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
   var _pageletWidgetComponentsRank2 = _interopRequireDefault(_pageletWidgetComponentsRank);
   
+  var getTouch = function getTouch(e) {
+    return e.touches.length ? e.touches[0] : e.targetTouches.length ? e.targetTouches[0] : e.changedTouches[0];
+  };
+  
   var AppItem = _react2["default"].createClass({
     displayName: "AppItem",
   
     getInitialState: function getInitialState() {
       return {
-        type: this.props.type || 1 //1: 搜索Item 2:
+        type: this.props.type || 1, //1: 搜索Item 2:
+        isShowDelete: false
       };
     },
   
@@ -41,17 +46,71 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
       this.props.onItemClick && this.props.onItemClick(this.props.data);
     },
   
+    onTouchStart: function onTouchStart(e) {
+      var touch = getTouch(e.nativeEvent);
+      this.startX = touch.pageX;
+    },
+  
+    onTouchEnd: function onTouchEnd(e) {
+      var touch = getTouch(e.nativeEvent);
+      if (touch.pageX - this.startX > 10) {
+        this.setState({
+          isShowDelete: true
+        });
+      } else if (touch.pageX - this.startX < -10) {
+        this.setState({
+          isShowDelete: false
+        });
+      }
+    },
+  
+    onDelete: function onDelete() {
+      this.props.onDelete && this.props.onDelete(this.props.data);
+    },
+  
     render: function render() {
       var data = this.props.data || {};
       var type = this.state.type;
+      var state = this.state;
   
       var column2, column3;
+      var trProps = {};
   
-      //搜索Item app关键字覆盖item
-      if (type == 1 || type == 3) {
+      //1:搜索Item  3:app关键字覆盖item 5: 对比搜索结果item
+      if (type == 1 || type == 3 || type == 5) {
   
         //返回的是字符串
         var score = parseFloat(data.score || 0);
+        var width = 200;
+  
+        if (type == 3) {
+          column3 = _react2["default"].createElement(
+            "td",
+            null,
+            _react2["default"].createElement(
+              "div",
+              { className: "f10 center" },
+              _react2["default"].createElement("i", { className: "icon-q" }),
+              "查看"
+            )
+          );
+        } else if (type == 5) {
+          column3 = _react2["default"].createElement(
+            "td",
+            null,
+            _react2["default"].createElement(
+              "div",
+              { className: "f10 center" },
+              _react2["default"].createElement("i", { className: "icon-vs" }),
+              _react2["default"].createElement(
+                "p",
+                null,
+                "排名对比"
+              )
+            )
+          );
+          width = 160;
+        }
   
         column2 = _react2["default"].createElement(
           "td",
@@ -59,7 +118,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           _react2["default"].createElement(
             "p",
             {
-              style: { width: 200 },
+              style: { width: width },
               className: "title ellipsis" },
             this.props.index + 1,
             "、",
@@ -87,18 +146,6 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           )
         );
   
-        if (type == 3) {
-          column3 = _react2["default"].createElement(
-            "td",
-            null,
-            _react2["default"].createElement(
-              "div",
-              { className: "f10 center" },
-              _react2["default"].createElement("i", { className: "icon-q" }),
-              "查看"
-            )
-          );
-        }
         //排名item
       } else if (type == 2) {
           column2 = _react2["default"].createElement(
@@ -145,7 +192,105 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               "01"
             )
           );
-        }
+          //竞品对比参考Item
+        } else if (type == 4) {
+            column2 = _react2["default"].createElement(
+              "td",
+              null,
+              _react2["default"].createElement(
+                "p",
+                {
+                  style: { width: 170 },
+                  className: "title ellipsis" },
+                data.title
+              ),
+              _react2["default"].createElement(
+                "p",
+                { className: "f12 c666 m5 mb5" },
+                data.developer
+              )
+            );
+            column3 = _react2["default"].createElement(
+              "td",
+              null,
+              _react2["default"].createElement(
+                "a",
+                { className: "f12 c-main" },
+                "已选中"
+              )
+            );
+            //我的关注Item
+          } else if (type == 6) {
+              //返回的是字符串
+              var score = parseFloat(data.score || 0);
+  
+              column2 = _react2["default"].createElement(
+                "td",
+                null,
+                _react2["default"].createElement(
+                  "p",
+                  {
+                    style: { width: 200 },
+                    className: "title ellipsis" },
+                  data.title
+                ),
+                _react2["default"].createElement(
+                  "p",
+                  { className: "f12 c666 m5 mb5" },
+                  data.developer
+                ),
+                _react2["default"].createElement(
+                  "div",
+                  null,
+                  _react2["default"].createElement(
+                    "span",
+                    { className: "t-vt c666 f12 mr6" },
+                    data.genres
+                  ),
+                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: score, width: 14 }),
+                  _react2["default"].createElement(
+                    "span",
+                    { className: "c666 f12 ml6 t-vt" },
+                    data.score
+                  )
+                )
+              );
+  
+              trProps.onTouchStart = this.onTouchStart.bind(this);
+              trProps.onTouchEnd = this.onTouchEnd.bind(this);
+              //app下架列表item
+            } else if (type == 7) {
+                column2 = _react2["default"].createElement(
+                  "td",
+                  null,
+                  _react2["default"].createElement(
+                    "p",
+                    {
+                      style: { width: 200 },
+                      className: "title ellipsis" },
+                    data.title
+                  ),
+                  _react2["default"].createElement(
+                    "p",
+                    { className: "f12 c666 m5 mb5" },
+                    data.developer
+                  ),
+                  _react2["default"].createElement(
+                    "div",
+                    null,
+                    _react2["default"].createElement(
+                      "span",
+                      { className: "t-vt c666 f12 mr6" },
+                      data.genres
+                    ),
+                    _react2["default"].createElement(
+                      "span",
+                      { className: "c666 f12 ml6 t-vt" },
+                      data.score
+                    )
+                  )
+                );
+              }
   
       return _react2["default"].createElement(
         "li",
@@ -155,7 +300,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           null,
           _react2["default"].createElement(
             "tr",
-            null,
+            trProps,
             _react2["default"].createElement(
               "td",
               null,
@@ -166,7 +311,12 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             column2,
             column3
           )
-        )
+        ),
+        state.isShowDelete ? _react2["default"].createElement(
+          "div",
+          { className: "del", onClick: this.onDelete },
+          "删除"
+        ) : null
       );
     }
   });
