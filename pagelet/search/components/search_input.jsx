@@ -153,7 +153,7 @@ var Search = React.createClass({
 
           {
             query && !query.overlay ?(
-              <p className="center c999 f12">
+              <p className="center c999 f10">
                 {this.state.searchKey}, {this.state.total}条结果 {new Date().format("yyyy-MM-dd hh:mm:ss")}
               </p>): null
           }
