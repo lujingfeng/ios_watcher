@@ -15,13 +15,14 @@ var DetailAction = Reflux.createActions([
   "appLevelCmp"
 ]);
 
-DetailAction.appInfo.preEmit = function(appId, device) {
+DetailAction.appInfo.preEmit = function(id, device, country) {
   var params = {
     type: 'GET',
     url: SEARCH_HOST + '/iosdetail',
     data:{
-      appId: appId,
-      device: device
+      appId: id,
+      device: device,
+      country: country
     },
     dataType: 'json'
   };

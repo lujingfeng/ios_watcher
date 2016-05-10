@@ -22,13 +22,14 @@ var Top7UpList = React.createClass({
 
   getInitialState: function(){
     return {
+      loading: false,
       tabs: [
         {name:"免费榜",payType: payType.FREE }, 
         {name:"付费榜",payType: payType.FEE },
         {name:"畅销榜",payType: payType.HOT }
       ],
 
-      topList: [],
+      list: [],
 
       genres: "",
       payType: payType.FREE,
@@ -42,11 +43,13 @@ var Top7UpList = React.createClass({
 
   componentDidMount: function(){
     this.unSubscribe = TopStore.listen(this.onStateChange.bind(this));
+
     TopAction.fetUpTopList({
       genres: "",
-      payType: this.state.payType,
+      type: this.state.payType,
       device: this.state.device,
-      country: this.state.country
+      country: this.state.country,
+      test: true
     });
   },
 
@@ -100,6 +103,8 @@ var Top7UpList = React.createClass({
   },
 
   renderTop: function(){
+    var list = this.state.list || [];
+
     return (
       <div className="c-page top7-up-list">
         <Header 
@@ -117,25 +122,21 @@ var Top7UpList = React.createClass({
           </p>
 
           <ul className="list">
-            <AppItem 
-              type={2} 
-              onItemClick={this.onItemClick} 
-              index={1}
-              data={{}}/>
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
+            {
+              list.map((item, idx)=>{
+                return (
+                  <AppItem 
+                    type={2} 
+                    onItemClick={this.onItemClick} 
+                    index={idx}
+                    data={item}/>
+                  )
+              })
+            }
           </ul>
+          {
+            this.state.loading?<Loading/>:null
+          }
         </div>
       </div>
     );

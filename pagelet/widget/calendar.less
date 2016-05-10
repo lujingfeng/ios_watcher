@@ -1,3 +1,5 @@
+@import (reference) "/static/common.less";
+
 .c-month{
   h5{
     text-align: center;
@@ -11,7 +13,14 @@
     td{
       text-align: center;
       height: 36px;
+      vertical-align: middle;
     }
+  }
+
+  .selected{
+    background: @cmain;
+    color:#fff;
+    border: 1px solid @cmain;
   }
 }
 

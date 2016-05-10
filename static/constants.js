@@ -13,6 +13,11 @@ export const deviceType = {
   IPAD: 1
 }
 
+export const deviceStrToint = {
+  "iphone": 0,
+  "ipad": 1
+}
+
 export const payType = {
   FREE: "free",
   FEE: "fee",

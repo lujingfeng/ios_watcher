@@ -21,6 +21,9 @@ define('pagelet/top/store/store', function(require, exports, module) {
     init: function init() {
       this.listenTo(_actionActionJs2["default"].fetchList, this.loading);
       this.listenTo(_actionActionJs2["default"].fetchListCmp, this.fetchListCmp);
+  
+      this.listenTo(_actionActionJs2["default"].fetUpTopList, this.loading);
+      this.listenTo(_actionActionJs2["default"].fetDownTopList, this.loading);
     },
   
     loading: function loading() {
@@ -33,7 +36,7 @@ define('pagelet/top/store/store', function(require, exports, module) {
       var params = { loading: false };
   
       if (res.fee) {
-        params.feeList = res.fee.rank ? res.fee.rank : [];
+        params.list = res.fee.rank ? res.fee.rank : [];
       }
   
       if (res.free) {

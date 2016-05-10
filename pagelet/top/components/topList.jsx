@@ -105,11 +105,21 @@ var TopList = React.createClass({
     });
   },  
 
+  onFilter: function(filterParams){
+    console.log(filterParams);
+  },
+
   render: function(){
     var query = this.props.location.query;
 
     if(query.filter){
-      return <Filter/>;
+      return <Filter
+               onOk={this.onFilter}
+               device={true}
+               country={true}
+               datetime={true}
+               days={true}
+               category={true}/>;
     }else{
       return this.renderTop();
     }
@@ -147,6 +157,9 @@ var TopList = React.createClass({
               })
             }
           </ul>
+          {
+            this.state.loading?<Loading/>:null
+          }
         </div>
       </div>
     );

@@ -33,8 +33,31 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   var Comment = _react2["default"].createClass({
     displayName: "Comment",
   
+    getInitialState: function getInitialState() {
+      var query = this.props.query;
+  
+      return {
+        id: query.id,
+        country: _constants.countryCode.CHINA,
+        duraTime: 1,
+        device: _constants.deviceType.IPHONE,
+        bIndex: 1,
+        count: 20,
+        score: 3
+      };
+    },
+  
     componentDidMount: function componentDidMount() {
-      _actionAction2["default"].commentDetail({});
+  
+      _actionAction2["default"].commentDetail({
+        id: this.state.id,
+        duraTime: this.state.duraTime,
+        country: this.state.country,
+        device: this.state.device,
+        bIndex: this.state.bIndex,
+        count: this.state.count,
+        score: this.state.score
+      });
     },
     render: function render() {
   

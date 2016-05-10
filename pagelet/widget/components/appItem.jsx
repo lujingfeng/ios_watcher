@@ -108,7 +108,16 @@ var AppItem = React.createClass({
 
     //排名item
     }else if(type == 2){
-      let width = window.innerWidth - 120;
+      let width = window.innerWidth - 150;
+      var topType;
+      var rank = data.rank;
+
+      if(data.other){
+        var other = data.other.split("|");
+        topType = other[0];
+        rank = other[1];
+      }
+
       column2 = (
         <td>
           <p 
@@ -120,14 +129,16 @@ var AppItem = React.createClass({
             style={{width: width}}
             className="f12 c666 m5 mb5">{data.developer}</p>
           <div>
-            <span className="c666 f12 mr6">游戏</span>
-            <span className="c666 f12 ml6 t-vt">第{3}名</span>
+            <span className="c666 f12 mr6">{topType||"当前"}</span>
+            <span className="c666 f12 ml6 t-vm">第{rank||"落榜"}名</span>
           </div>
         </td>);
+
+      var rankFloat = data.rankfloat;
       column3 = (
         <td className="center">
-          <i className="up down"></i>
-          <i className="f12">01</i>
+          <i className={(rankFloat>0?"up":"down")}></i>
+          <i className="f12 t-vm">{Math.abs(rankFloat)}</i>
         </td>
       );
     //竞品对比参考Item

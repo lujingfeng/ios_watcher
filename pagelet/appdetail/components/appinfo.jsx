@@ -3,7 +3,7 @@
   */
 
 import React from "react";
-import {deviceTypeStr} from "constants";
+import {deviceTypeStr, deviceStrToint} from "constants";
 import Loading from "/pagelet/widget/components/loading";
 
 import DetailAction from "../action/action";
@@ -21,7 +21,11 @@ var AppInfo = React.createClass({
     var query = this.props.query;
 
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
-    DetailAction.appInfo(query.appId, query.equipment);
+    DetailAction.appInfo(
+      query.id, 
+      deviceStrToint[query.device],
+      query.country
+    );
   },
 
   componentWillUnmount: function(){

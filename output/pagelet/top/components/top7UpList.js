@@ -59,9 +59,10 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
     getInitialState: function getInitialState() {
       return {
+        loading: false,
         tabs: [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }],
   
-        topList: [],
+        list: [],
   
         genres: "",
         payType: _constants.payType.FREE,
@@ -75,11 +76,13 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+  
       _actionAction2["default"].fetUpTopList({
         genres: "",
-        payType: this.state.payType,
+        type: this.state.payType,
         device: this.state.device,
-        country: this.state.country
+        country: this.state.country,
+        test: true
       });
     },
   
@@ -130,6 +133,10 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
     },
   
     renderTop: function renderTop() {
+      var _this = this;
+  
+      var list = this.state.list || [];
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-page top7-up-list" },
@@ -154,25 +161,15 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
           _react2["default"].createElement(
             "ul",
             { className: "list" },
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
-              type: 2,
-              onItemClick: this.onItemClick,
-              index: 1,
-              data: {} }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 })
-          )
+            list.map(function (item, idx) {
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                type: 2,
+                onItemClick: _this.onItemClick,
+                index: idx,
+                data: item });
+            })
+          ),
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
         )
       );
     }

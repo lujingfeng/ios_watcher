@@ -10,6 +10,8 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
     value: true
   });
   
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -61,6 +63,8 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
       var row4 = initialArray.slice(21, 28);
       var row5 = initialArray.slice(28, 35);
       var row6 = initialArray.slice(35, initialArray.length);
+  
+      var curDatetime = this.props.curDatetime;
   
       return _react2["default"].createElement(
         "div",
@@ -116,11 +120,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row1.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -129,11 +138,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row2.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -142,11 +156,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row3.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -155,11 +174,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row4.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -168,11 +192,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row5.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -181,11 +210,16 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
             "tr",
             null,
             row6.map(function (item, idx) {
+              var props = {};
+  
+              if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
+                props.className = "selected";
+              }
               return _react2["default"].createElement(
                 "td",
-                { onClick: function (e) {
+                _extends({}, props, { onClick: function (e) {
                     _this.onSelect(item);
-                  } },
+                  } }),
                 item.day || ""
               );
             })
@@ -232,6 +266,7 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
         months.push(_react2["default"].createElement(Month, {
           year: thisYear,
           month: i,
+          curDatetime: this.props.curDatetime,
           onSelected: this.props.onSelected }));
       }
   

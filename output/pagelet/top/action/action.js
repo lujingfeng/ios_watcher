@@ -43,7 +43,7 @@ define('pagelet/top/action/action', function(require, exports, module) {
     });
   };
   
-  TopAction.fetUpTopList = function (query) {
+  TopAction.fetUpTopList.preEmit = function (query) {
     query.flag = 1;
   
     var params = {
@@ -54,11 +54,11 @@ define('pagelet/top/action/action', function(require, exports, module) {
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
-      TopAction.fetUpTopListCmp(res);
+      TopAction.fetchListCmp(res);
     });
   };
   
-  TopAction.fetDownTopList = function () {
+  TopAction.fetDownTopList.preEmit = function () {
     var query = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   
     query.flag = 2;
@@ -71,7 +71,7 @@ define('pagelet/top/action/action', function(require, exports, module) {
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
-      TopAction.fetDownTopListCmp(res);
+      TopAction.fetchListCmp(res);
     });
   };
   

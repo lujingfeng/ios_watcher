@@ -20,8 +20,36 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
   
   var _pageletWidgetComponentsRank2 = _interopRequireDefault(_pageletWidgetComponentsRank);
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
+  var _constants = require("constants");
+  
   var AppLevel = _react2["default"].createClass({
     displayName: "AppLevel",
+  
+    getInitialState: function getInitialState() {
+      var query = this.props.query;
+  
+      return {
+        id: query.id,
+        country: _constants.countryCode.CHINA,
+        device: _constants.deviceType.IPHONE
+      };
+    },
+  
+    componentDidMount: function componentDidMount() {
+      _actionAction2["default"].appLevel({
+        id: this.state.id,
+        country: this.state.country,
+        device: this.state.device
+      });
+    },
   
     render: function render() {
   

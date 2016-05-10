@@ -52,3 +52,8 @@
   -webkit-background-size: contain;
           background-size: contain;
 }
+.c-filter li.selected span {
+  background: #1970e3;
+  color: #fff;
+  border: 1px solid #1970e3;
+}

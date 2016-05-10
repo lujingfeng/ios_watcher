@@ -5,7 +5,28 @@
 import React from "react";
 import Rank from "/pagelet/widget/components/rank";
 
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
+import {countryCode, deviceType} from "constants";
+
 var AppLevel = React.createClass({ 
+  getInitialState: function(){
+    var query = this.props.query;
+
+    return {
+      id: query.id,
+      country: countryCode.CHINA,
+      device: deviceType.IPHONE
+    }
+  },
+
+  componentDidMount: function(){
+    DetailAction.appLevel({
+      id: this.state.id,
+      country: this.state.country,
+      device: this.state.device
+    });
+  },
 
   render: function(){
     

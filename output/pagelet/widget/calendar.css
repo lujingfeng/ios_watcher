@@ -9,6 +9,12 @@
 .c-month table td {
   text-align: center;
   height: 36px;
+  vertical-align: middle;
+}
+.c-month .selected {
+  background: #1970e3;
+  color: #fff;
+  border: 1px solid #1970e3;
 }
 .c-calendar .hdr {
   width: 100%;

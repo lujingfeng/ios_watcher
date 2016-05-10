@@ -138,11 +138,21 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       });
     },
   
+    onFilter: function onFilter(filterParams) {
+      console.log(filterParams);
+    },
+  
     render: function render() {
       var query = this.props.location.query;
   
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], null);
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+          onOk: this.onFilter,
+          device: true,
+          country: true,
+          datetime: true,
+          days: true,
+          category: true });
       } else {
         return this.renderTop();
       }
@@ -184,7 +194,8 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
                 index: idx,
                 data: item });
             })
-          )
+          ),
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
         )
       );
     }

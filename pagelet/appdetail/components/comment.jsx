@@ -11,9 +11,32 @@ import DetailStore from "../store/store";
 import {countryCode, deviceType} from "constants";
 
 var Comment = React.createClass({ 
+
+  getInitialState: function(){
+    var query = this.props.query;
+
+    return {
+      id: query.id,
+      country: countryCode.CHINA,
+      duraTime: 1,
+      device: deviceType.IPHONE,
+      bIndex: 1,
+      count: 20,
+      score:3
+    }
+  },
+
   componentDidMount: function(){
+    
+
     DetailAction.commentDetail({
-      
+      id: this.state.id,
+      duraTime: this.state.duraTime,
+      country: this.state.country,
+      device: this.state.device,
+      bIndex: this.state.bIndex,
+      count: this.state.count,
+      score: this.state.score
     });
   },
   render: function(){

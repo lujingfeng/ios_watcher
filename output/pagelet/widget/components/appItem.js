@@ -148,7 +148,16 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
         //排名item
       } else if (type == 2) {
-          var width = window.innerWidth - 120;
+          var width = window.innerWidth - 150;
+          var topType;
+          var rank = data.rank;
+  
+          if (data.other) {
+            var other = data.other.split("|");
+            topType = other[0];
+            rank = other[1];
+          }
+  
           column2 = _react2["default"].createElement(
             "td",
             null,
@@ -174,25 +183,27 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               _react2["default"].createElement(
                 "span",
                 { className: "c666 f12 mr6" },
-                "游戏"
+                topType || "当前"
               ),
               _react2["default"].createElement(
                 "span",
-                { className: "c666 f12 ml6 t-vt" },
+                { className: "c666 f12 ml6 t-vm" },
                 "第",
-                3,
+                rank || "落榜",
                 "名"
               )
             )
           );
+  
+          var rankFloat = data.rankfloat;
           column3 = _react2["default"].createElement(
             "td",
             { className: "center" },
-            _react2["default"].createElement("i", { className: "up down" }),
+            _react2["default"].createElement("i", { className: rankFloat > 0 ? "up" : "down" }),
             _react2["default"].createElement(
               "i",
-              { className: "f12" },
-              "01"
+              { className: "f12 t-vm" },
+              Math.abs(rankFloat)
             )
           );
           //竞品对比参考Item

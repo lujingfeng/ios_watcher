@@ -73,6 +73,7 @@
   position: absolute;
   left: 50%;
   margin-left: -9px;
+  margin-top: 9px;
   font-size: 18px;
   -webkit-animation: rotate 1s linear infinite;
   animation: rotate 1s linear infinite;

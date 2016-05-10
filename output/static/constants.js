@@ -25,6 +25,12 @@ define('constants', function(require, exports, module) {
   };
   
   exports.deviceType = deviceType;
+  var deviceStrToint = {
+    "iphone": 0,
+    "ipad": 1
+  };
+  
+  exports.deviceStrToint = deviceStrToint;
   var payType = {
     FREE: "free",
     FEE: "fee",

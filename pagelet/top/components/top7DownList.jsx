@@ -12,31 +12,50 @@ import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
 
+import {countryCode, deviceType, payType} from "constants";
+
+import TopAction from "../action/action";
+import TopStore from "../store/store";
+
 var Top7DownList = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      loading: false,
+      
       tabs: [
         {name:"免费榜",typeid:"" }, 
         {name:"付费榜",typeid:"" },
         {name:"畅销榜",typeid:"" }
       ],
 
-      topList: [],
+      list: [],
 
-      curTypeId: "",//免费、付费和畅销三大榜单的排名数据
+      genres: "",
+      payType: payType.FREE,
+      device: deviceType.IPHONE,
+      country: countryCode.CHINA,
+
       page: 1,
       total: 0
     }
   },
 
   componentDidMount: function(){
-    //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    this.unSubscribe = TopStore.listen(this.onStateChange.bind(this));
+
+    TopAction.fetDownTopList({
+      genres: "",
+      type: this.state.payType,
+      device: this.state.device,
+      country: this.state.country,
+      test: true
+    });
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
@@ -55,12 +74,7 @@ var Top7DownList = React.createClass({
   },
 
   loadMore: function(){
-    var page = this.state.page + 1;
-    this.setState({
-      page: page
-    });
 
-    SearchAction.search(this.state.searchKey, page);
   },
 
   onItemClick: function(data){
@@ -79,6 +93,8 @@ var Top7DownList = React.createClass({
   },
 
   renderTop: function(){
+    var list = this.state.list || [];
+
     return (
       <div className="c-page top7-down-list">
         <Header 
@@ -94,25 +110,21 @@ var Top7DownList = React.createClass({
           </p>
 
           <ul className="list">
-            <AppItem 
-              type={2} 
-              onItemClick={this.onItemClick} 
-              index={1}
-              data={{}}/>
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
-            <AppItem type={2} />
+            {
+              list.map((item, idx)=>{
+                return (
+                  <AppItem 
+                    type={2} 
+                    onItemClick={this.onItemClick} 
+                    index={idx}
+                    data={item}/>
+                  )
+              })
+            }
           </ul>
+          {
+            this.state.loading?<Loading/>:null
+          }
         </div>
       </div>
     );

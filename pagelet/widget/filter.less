@@ -1,3 +1,5 @@
+@import (reference) "/static/common.less";
+
 .c-filter{
   padding-top: 45px;
 
@@ -54,5 +56,11 @@
         background-size: contain;
       }
     }
+  }
+
+  li.selected span{
+    background: @cmain;
+    color:#fff;
+    border: 1px solid @cmain;
   }
 }

@@ -45,6 +45,7 @@ var Month = React.createClass({
     var row5 = initialArray.slice(28, 35);
     var row6 = initialArray.slice(35, initialArray.length);
 
+    var curDatetime = this.props.curDatetime;
 
     return (
       <div className="c-month">
@@ -62,42 +63,90 @@ var Month = React.createClass({
           <tr>
           {
             row1.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
           <tr>
           {
             row2.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
           <tr>
           {
             row3.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
           <tr>
           {
             row4.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
           <tr>
           {
             row5.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
           <tr>
           {
             row6.map((item, idx)=>{
-              return <td onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+              var props = {};
+
+              if(curDatetime && typeof curDatetime.year!="undefined"&&
+                 curDatetime.year==item.year &&
+                 curDatetime.month == item.month &&
+                 curDatetime.day == item.day){
+                props.className = "selected";
+              }
+              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
             })
           }
           </tr>
@@ -146,6 +195,7 @@ var Calendar = React.createClass({
           <Month 
             year={thisYear} 
             month={i} 
+            curDatetime={this.props.curDatetime}
             onSelected={this.props.onSelected}/>
           );
     }

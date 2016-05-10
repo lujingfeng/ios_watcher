@@ -4,7 +4,7 @@ import $ from "/static/lib/jquery";
 var TopAction = Reflux.createActions([
   "fetchList",
   "fetchListCmp",
-  
+
   "fetUpTopList",
   "fetUpTopListCmp",
 
@@ -38,7 +38,7 @@ TopAction.fetchList.preEmit = (query) => {
   });
 };
 
-TopAction.fetUpTopList = (query)=>{
+TopAction.fetUpTopList.preEmit = (query)=>{
   query.flag = 1;
 
   var params = {
@@ -49,11 +49,11 @@ TopAction.fetUpTopList = (query)=>{
   }
 
   $.ajax(params).always(function( res ){
-    TopAction.fetUpTopListCmp(res);
+    TopAction.fetchListCmp(res);
   });
 };
 
-TopAction.fetDownTopList = (query={})=>{
+TopAction.fetDownTopList.preEmit = (query={})=>{
   query.flag = 2;
 
   var params = {
@@ -64,7 +64,7 @@ TopAction.fetDownTopList = (query={})=>{
   }
 
   $.ajax(params).always(function( res ){
-    TopAction.fetDownTopListCmp(res);
+    TopAction.fetchListCmp(res);
   });
 }
 

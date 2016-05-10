@@ -141,7 +141,10 @@
             "deps": [
                 "pagelet/appdetail/detail.less",
                 "react",
-                "pagelet/widget/components/rank.jsx"
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js",
+                "constants"
             ]
         },
         "pagelet/widget/components/rank.jsx": {
@@ -422,7 +425,10 @@
                 "pagelet/widget/filter.less",
                 "react",
                 "reactRouter",
-                "pagelet/widget/components/calendar.jsx"
+                "pagelet/widget/components/calendar.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "reflux",
+                "jquery"
             ]
         },
         "pagelet/widget/filter.less": {
@@ -537,12 +543,26 @@
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/widget/components/filter.jsx"
+                "pagelet/widget/components/filter.jsx",
+                "constants",
+                "pagelet/top/action/action.js",
+                "pagelet/top/store/store.js"
             ]
         },
         "pagelet/top/top.less": {
             "uri": "/pagelet/top/top.css",
             "type": "css"
+        },
+        "pagelet/top/store/store.js": {
+            "uri": "/pagelet/top/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/top/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/top/action/action.js"
+            ]
         },
         "pagelet/top/components/top7UpList.jsx": {
             "uri": "/pagelet/top/components/top7UpList.js",
@@ -560,17 +580,6 @@
                 "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
-            ]
-        },
-        "pagelet/top/store/store.js": {
-            "uri": "/pagelet/top/store/store.js",
-            "type": "js",
-            "extras": {
-                "moduleId": "pagelet/top/store/store"
-            },
-            "deps": [
-                "reflux",
-                "pagelet/top/action/action.js"
             ]
         },
         "pagelet/top/components/topList.jsx": {

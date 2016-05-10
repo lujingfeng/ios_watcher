@@ -42,6 +42,16 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _constants = require("constants");
+  
+  var _actionAction = require("pagelet/top/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/top/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var Top7DownList = _react2["default"].createClass({
     displayName: "Top7DownList",
   
@@ -49,22 +59,35 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
   
     getInitialState: function getInitialState() {
       return {
+        loading: false,
         tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
   
-        topList: [],
+        list: [],
   
-        curTypeId: "", //免费、付费和畅销三大榜单的排名数据
+        genres: "",
+        payType: _constants.payType.FREE,
+        device: _constants.deviceType.IPHONE,
+        country: _constants.countryCode.CHINA,
+  
         page: 1,
         total: 0
       };
     },
   
     componentDidMount: function componentDidMount() {
-      //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+  
+      _actionAction2["default"].fetDownTopList({
+        genres: "",
+        type: this.state.payType,
+        device: this.state.device,
+        country: this.state.country,
+        test: true
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
@@ -79,14 +102,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
       }
     },
   
-    loadMore: function loadMore() {
-      var page = this.state.page + 1;
-      this.setState({
-        page: page
-      });
-  
-      SearchAction.search(this.state.searchKey, page);
-    },
+    loadMore: function loadMore() {},
   
     onItemClick: function onItemClick(data) {
       var query = Object.assign({}, data);
@@ -104,6 +120,10 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     },
   
     renderTop: function renderTop() {
+      var _this = this;
+  
+      var list = this.state.list || [];
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-page top7-down-list" },
@@ -126,25 +146,15 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
           _react2["default"].createElement(
             "ul",
             { className: "list" },
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
-              type: 2,
-              onItemClick: this.onItemClick,
-              index: 1,
-              data: {} }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 })
-          )
+            list.map(function (item, idx) {
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                type: 2,
+                onItemClick: _this.onItemClick,
+                index: idx,
+                data: item });
+            })
+          ),
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
         )
       );
     }
