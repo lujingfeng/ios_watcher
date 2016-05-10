@@ -108,21 +108,24 @@ var AppItem = React.createClass({
 
     //排名item
     }else if(type == 2){
+      let width = window.innerWidth - 120;
       column2 = (
         <td>
           <p 
-            style={{width: 170}}
+            style={{width: width}}
             className="title ellipsis">
             {this.props.index+1}、{data.title}
           </p>
-          <p className="f12 c666 m5 mb5">{data.developer}</p>
+          <p 
+            style={{width: width}}
+            className="f12 c666 m5 mb5">{data.developer}</p>
           <div>
             <span className="c666 f12 mr6">游戏</span>
             <span className="c666 f12 ml6 t-vt">第{3}名</span>
           </div>
         </td>);
       column3 = (
-        <td>
+        <td className="center">
           <i className="up down"></i>
           <i className="f12">01</i>
         </td>

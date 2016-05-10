@@ -23,6 +23,13 @@ define('constants', function(require, exports, module) {
     IPHONE: 0,
     IPAD: 1
   };
+  
   exports.deviceType = deviceType;
+  var payType = {
+    FREE: "free",
+    FEE: "fee",
+    HOT: "hot"
+  };
+  exports.payType = payType;
 
 });

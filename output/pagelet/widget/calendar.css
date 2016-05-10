@@ -1,0 +1,30 @@
+.c-month h5 {
+  text-align: center;
+  margin-top: 6px;
+}
+.c-month table th {
+  background: none;
+  color: #666;
+}
+.c-month table td {
+  text-align: center;
+  height: 36px;
+}
+.c-calendar .hdr {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #e9e9e9;
+  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+.c-calendar .hdr i {
+  position: absolute;
+  left: 15px;
+  top: 0;
+}

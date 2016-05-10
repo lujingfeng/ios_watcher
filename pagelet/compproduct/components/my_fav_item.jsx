@@ -22,12 +22,12 @@ var MyFavItem = React.createClass({
 
     return (
       <li className="my-fav-item" onClick={this.props.onClick}>
-        <img src="http://a4.mzstatic.com/us/r30/Purple30/v4/ec/46/1f/ec461f34-a901-4c03-5ddd-7cd7ba291790/icon72x72.jpeg"/>
+        <img src={data.icon}/>
         <p className="ellipsis mt6">
-          TitleTitleTitleTitleTitleTitleTitleTitleTitle
+          {data.title}
         </p>
         <p className="ellipsis f12 c999">
-          descript描述开发商描述descript描述开发商描述
+          {data.developer}
         </p>
         {
           type=="fav" ? (

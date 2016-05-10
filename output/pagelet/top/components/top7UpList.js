@@ -42,6 +42,16 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _constants = require("constants");
+  
+  var _actionAction = require("pagelet/top/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/top/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var Top7UpList = _react2["default"].createClass({
     displayName: "Top7UpList",
   
@@ -49,22 +59,32 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
     getInitialState: function getInitialState() {
       return {
-        tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
+        tabs: [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }],
   
         topList: [],
   
-        curTypeId: "", //免费、付费和畅销三大榜单的排名数据
+        genres: "",
+        payType: _constants.payType.FREE,
+        device: _constants.deviceType.IPHONE,
+        country: _constants.countryCode.CHINA,
+  
         page: 1,
         total: 0
       };
     },
   
     componentDidMount: function componentDidMount() {
-      //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      _actionAction2["default"].fetUpTopList({
+        genres: "",
+        payType: this.state.payType,
+        device: this.state.device,
+        country: this.state.country
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
@@ -93,6 +113,12 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
       this.history.pushState("", "detail/1", query);
     },
   
+    onSelectTab: function onSelectTab(tab) {
+      this.setState({
+        payType: tab.payType
+      });
+    },
+  
     render: function render() {
       var query = this.props.location.query;
   
@@ -117,7 +143,9 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
         _react2["default"].createElement(
           "div",
           { className: "c-body" },
-          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], {
+            onSelect: this.onSelectTab,
+            tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },

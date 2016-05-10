@@ -12,3 +12,9 @@ export const deviceType = {
   IPHONE: 0,
   IPAD: 1
 }
+
+export const payType = {
+  FREE: "free",
+  FEE: "fee",
+  HOT: "hot"
+};

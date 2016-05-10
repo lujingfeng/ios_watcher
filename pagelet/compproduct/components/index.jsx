@@ -73,19 +73,17 @@ var AppCompare = React.createClass({
     SearchAction.search(this.state.searchKey, page);
   },
 
-  onClickSearchItem:function(item){
+  onClickItem:function(item){
+    var params = {};
+
     var query = this.props.location.query || {};
-    var params = Object.assign({}, item);
-    var pathName = "/detail/";
 
-    if(query.overlay){
-      pathName = pathName + "4"
-    }else{
-      pathName = pathName + "1"
-    }
-    params.equipment = this.state.equipment;
+    params.app_1 = query;
+    params.app_2 = item;
 
-    this.history.pushState("", pathName, params);
+    var pathName = "/appcompare";
+
+    this.history.pushState(null, pathName, params);
   },
 
   onClickFavItem: function(){
@@ -105,6 +103,7 @@ var AppCompare = React.createClass({
         <Header 
           searchValue={searchKey}
           onSearch={this.onSearch}
+          placeholder="搜索应用查看排名对比"
           onCancelSearch={e=>this.history.goBack()}
           type="search"/>
 
@@ -114,14 +113,16 @@ var AppCompare = React.createClass({
           onScroll={this.handleScroll.bind(this)}
           className="search-result c-body">
 
-          <ul style={{display:searchKey && searchResultList.length?"block":"none"}}>
+          <ul 
+            className="search-list"
+            style={{display:searchKey && searchResultList.length?"block":"none"}}>
             {
               searchResultList.map((item, idx)=>{
                 return (
                   <AppItem 
                     key={idx}
                     type={5} 
-                    onItemClick={this.onClickSearchItem}
+                    onItemClick={this.onClickItem}
                     data={item} 
                     index={idx}/>)
               })
@@ -131,7 +132,9 @@ var AppCompare = React.createClass({
             }
           </ul>
 
-          <ul className="my-fav-list clearfix">
+          <ul 
+            style={{display: searchKey && searchResultList.length?"none":"block"}}
+            className="my-fav-list clearfix">
             <MyFavItem onClick={this.onClickFavItem}/>
             <MyFavItem/>
             <MyFavItem/>

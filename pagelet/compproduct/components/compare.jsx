@@ -9,18 +9,27 @@ import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
+import {countryCode, deviceType, payType} from "constants";
 
 import MyFavItem from "./my_fav_item";
+
+import CompareAction from "../action/action";
+import CompareStore from "../store/store";
 
 var AppCompare = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
+    var query = this.props.location.query;
+
     return {
+      app_1: query.app_1,
+      app_2: query.app_2
     }
   },
 
   componentDidMount: function(){
+    this.unSubscribe = CompareStore.listen(this.onStateChange.bind(this));
     require.async("/static/lib/echarts.min", (echarts)=>{
       var chart = echarts.init(this.refs.chart);
       // 指定图表的配置项和数据
@@ -63,10 +72,18 @@ var AppCompare = React.createClass({
         // 使用刚指定的配置项和数据显示图表。
         chart.setOption(option);
     });
+
+    CompareAction.getCompare({
+      appId: "347" || this.state.app_1.appId,
+      interval: 7,
+      country: countryCode.CHINA,
+      device: deviceType.IPHONE,
+      type: payType.FREE
+    });
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
@@ -84,8 +101,8 @@ var AppCompare = React.createClass({
         
         <div className="c-body">
           <ul className="clearfix rel">
-            <MyFavItem type="comp"/>
-            <MyFavItem type="comp"/>
+            <MyFavItem type="comp" data={this.state.app_1}/>
+            <MyFavItem type="comp" data={this.state.app_2}/>
             <i className="icon-vs"></i>
           </ul>
 

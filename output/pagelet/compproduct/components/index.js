@@ -103,19 +103,17 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
       _pageletSearchActionAction2["default"].search(this.state.searchKey, page);
     },
   
-    onClickSearchItem: function onClickSearchItem(item) {
+    onClickItem: function onClickItem(item) {
+      var params = {};
+  
       var query = this.props.location.query || {};
-      var params = Object.assign({}, item);
-      var pathName = "/detail/";
   
-      if (query.overlay) {
-        pathName = pathName + "4";
-      } else {
-        pathName = pathName + "1";
-      }
-      params.equipment = this.state.equipment;
+      params.app_1 = query;
+      params.app_2 = item;
   
-      this.history.pushState("", pathName, params);
+      var pathName = "/appcompare";
+  
+      this.history.pushState(null, pathName, params);
     },
   
     onClickFavItem: function onClickFavItem() {
@@ -137,6 +135,7 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
         _react2["default"].createElement(_pageletWidgetComponentsHeader2["default"], {
           searchValue: searchKey,
           onSearch: this.onSearch,
+          placeholder: "搜索应用查看排名对比",
           onCancelSearch: function (e) {
             return _this.history.goBack();
           },
@@ -149,12 +148,14 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
             className: "search-result c-body" },
           _react2["default"].createElement(
             "ul",
-            { style: { display: searchKey && searchResultList.length ? "block" : "none" } },
+            {
+              className: "search-list",
+              style: { display: searchKey && searchResultList.length ? "block" : "none" } },
             searchResultList.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 key: idx,
                 type: 5,
-                onItemClick: _this.onClickSearchItem,
+                onItemClick: _this.onClickItem,
                 data: item,
                 index: idx });
             }),
@@ -162,7 +163,9 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
           ),
           _react2["default"].createElement(
             "ul",
-            { className: "my-fav-list clearfix" },
+            {
+              style: { display: searchKey && searchResultList.length ? "none" : "block" },
+              className: "my-fav-list clearfix" },
             _react2["default"].createElement(_my_fav_item2["default"], { onClick: this.onClickFavItem }),
             _react2["default"].createElement(_my_fav_item2["default"], null),
             _react2["default"].createElement(_my_fav_item2["default"], null),

@@ -14,18 +14,22 @@ var TopStore = Reflux.createStore({
       });
     },
 
-    fetchListCmp: function(list){
-      var total = 0;
-      var searchResultList = list && list.length ? list.splice(0, list.length - 1) : [];
+    fetchListCmp: function(res){
+      var params = {loading: false};
 
-      if(list && list.length){
-        total = parseInt(list[list.length - 1].hitscount);
+      if(res.fee){
+        params.feeList = res.fee.rank ? res.fee.rank : [];
       }
-      this.trigger({
-        loading: false,
-        searchResultList: searchResultList,
-        total: total
-      });
+
+      if(res.free){
+        params.list = res.free.rank ? res.free.rank : []
+      }
+
+      if(res.hot){
+        params.list = res.hot.rank ? res.hot.rank : []
+      }
+
+      this.trigger(params);
     }
 });
 

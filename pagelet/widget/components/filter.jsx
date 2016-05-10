@@ -4,12 +4,13 @@
 
 import React from "react";
 import {History} from "reactRouter";
+import Calendar from "./calendar";
 
 var Filter = React.createClass({
   mixins: [History],
   getInitialState: function(){
     return {
-      
+      showCalendar:false
     }
   },
 
@@ -17,8 +18,33 @@ var Filter = React.createClass({
     this.history.goBack();
   },
 
-  render: function(){
+  onOtherDate: function(){
+    this.setState({
+      showCalendar: true
+    });
+  },
 
+  onCanlendarCancel: function(){
+    this.setState({
+      showCalendar:false
+    });
+  },
+
+  onCalendarSelect: function(date){
+    this.setState({
+      showCalendar:false
+    });
+    console.log(date);
+  },
+
+  render: function(){
+    if(this.state.showCalendar){
+      return (
+        <Calendar 
+          onSelected={this.onCalendarSelect}
+          cancel={this.onCanlendarCancel}/>
+        )
+    }
     return (
       <div className="c-filter">
         <div className="hdr">
@@ -46,8 +72,20 @@ var Filter = React.createClass({
         <ul className="f-type clearfix">
           <li><span>今天</span></li>
           <li><span>昨天</span></li>
-          <li style={{width:"50%"}}><span>其他</span></li>
+          <li style={{width:"50%"}} onClick={this.onOtherDate}><span>其他</span></li>
         </ul>
+
+        <h5>时间</h5>
+        <ul className="f-type clearfix">
+          <li><span>今天</span></li>
+          <li><span>昨天</span></li>
+          <li><span>7日</span></li>
+          <li><span>15日</span></li>
+          <li><span>30日</span></li>
+          <li><span>60日</span></li>
+          <li><span>90日</span></li>
+        </ul>
+
 
         <h5>分类</h5>
         <ul className="f-type clearfix">
@@ -96,6 +134,12 @@ var Filter = React.createClass({
           <li><span>家居园艺</span></li>
           <li><span>户外自然</span></li> 
         </ul>
+
+        <div style={{padding:"0 12px"}}>
+          <button 
+            style={{width:"100%"}}
+            className="btn main-btn mt12 mb12">确定</button>
+        </div>
       </div>
     );
   }

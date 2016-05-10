@@ -11,6 +11,11 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
+import {countryCode, deviceType, payType} from "constants";
+
+
+import TopAction from "../action/action";
+import TopStore from "../store/store";
 
 var Top7UpList = React.createClass({ 
   mixins: [History],
@@ -18,25 +23,35 @@ var Top7UpList = React.createClass({
   getInitialState: function(){
     return {
       tabs: [
-        {name:"免费榜",typeid:"" }, 
-        {name:"付费榜",typeid:"" },
-        {name:"畅销榜",typeid:"" }
+        {name:"免费榜",payType: payType.FREE }, 
+        {name:"付费榜",payType: payType.FEE },
+        {name:"畅销榜",payType: payType.HOT }
       ],
 
       topList: [],
 
-      curTypeId: "",//免费、付费和畅销三大榜单的排名数据
+      genres: "",
+      payType: payType.FREE,
+      device: deviceType.IPHONE,
+      country: countryCode.CHINA,
+
       page: 1,
       total: 0
     }
   },
 
   componentDidMount: function(){
-    //this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    this.unSubscribe = TopStore.listen(this.onStateChange.bind(this));
+    TopAction.fetUpTopList({
+      genres: "",
+      payType: this.state.payType,
+      device: this.state.device,
+      country: this.state.country
+    });
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
@@ -68,6 +83,12 @@ var Top7UpList = React.createClass({
     this.history.pushState("", "detail/1", query);
   },
 
+  onSelectTab: function(tab){
+    this.setState({
+      payType: tab.payType
+    });
+  },
+
   render: function(){
     var query = this.props.location.query;
 
@@ -87,7 +108,9 @@ var Top7UpList = React.createClass({
           七日排名上升榜
         </Header>
         <div className="c-body">
-          <Tabs tabs={this.state.tabs}/>
+          <Tabs 
+            onSelect={this.onSelectTab}
+            tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
             所有分类，中国，iPhone, 2016-04-29

@@ -20,9 +20,22 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsRank2 = _interopRequireDefault(_pageletWidgetComponentsRank);
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
+  var _constants = require("constants");
+  
   var Comment = _react2["default"].createClass({
     displayName: "Comment",
   
+    componentDidMount: function componentDidMount() {
+      _actionAction2["default"].commentDetail({});
+    },
     render: function render() {
   
       return _react2["default"].createElement(

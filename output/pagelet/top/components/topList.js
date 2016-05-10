@@ -58,13 +58,19 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
-      var tabs = [{ name: "免费榜", type: 1 }, { name: "付费榜", type: 2 }, { name: "畅销榜", type: 3 }];
+      var tabs = [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }];
+  
+      var now = new Date();
   
       return {
         tabs: tabs,
-        topList: [],
+        list: [],
   
-        curTypeId: "3394",
+        genres: "",
+        payType: _constants.payType.FREE,
+        date: now.format("yyyy-MM-dd"),
+        country: _constants.countryCode.CHINA,
+        device: _constants.deviceType.IPHONE,
   
         page: 1,
         total: 0
@@ -77,11 +83,12 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       var now = new Date();
   
       _actionAction2["default"].fetchList({
-        date: now.format("yyyy-MM-dd"),
-        hour: now.getHours(),
-        country: _constants.countryCode.CHINA,
-        device: _constants.deviceType.IPHONE,
-        typeid: this.state.curTypeId
+        genres: this.state.genres,
+        date: this.state.date,
+        country: this.state.country,
+        device: this.state.device,
+        type: this.state.payType,
+        test: true
       });
     },
   
@@ -115,6 +122,22 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       this.history.pushState("", "detail/1", query);
     },
   
+    onSelectTab: function onSelectTab(tab) {
+      var _this = this;
+  
+      this.setState({
+        payType: tab.payType
+      }, function () {
+        _actionAction2["default"].fetchList({
+          date: _this.state.date,
+          country: _this.state.country,
+          device: _this.state.device,
+          type: _this.state.payType,
+          test: true
+        });
+      });
+    },
+  
     render: function render() {
       var query = this.props.location.query;
   
@@ -126,6 +149,10 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     },
   
     renderTop: function renderTop() {
+      var _this2 = this;
+  
+      var list = this.state.list || [];
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-page top-list" },
@@ -139,7 +166,9 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
         _react2["default"].createElement(
           "div",
           { className: "c-body" },
-          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], {
+            onSelect: this.onSelectTab,
+            tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
@@ -148,24 +177,13 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
           _react2["default"].createElement(
             "ul",
             { className: "list" },
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
-              type: 2,
-              onItemClick: this.onItemClick,
-              index: 1,
-              data: {} }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2, onItemClick: this.onItemClick, index: 1 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 }),
-            _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 2 })
+            list.map(function (item, idx) {
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                type: 2,
+                onItemClick: _this2.onItemClick,
+                index: idx,
+                data: item });
+            })
           )
         )
       );

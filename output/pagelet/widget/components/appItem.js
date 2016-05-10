@@ -148,13 +148,14 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
         //排名item
       } else if (type == 2) {
+          var width = window.innerWidth - 120;
           column2 = _react2["default"].createElement(
             "td",
             null,
             _react2["default"].createElement(
               "p",
               {
-                style: { width: 170 },
+                style: { width: width },
                 className: "title ellipsis" },
               this.props.index + 1,
               "、",
@@ -162,7 +163,9 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             ),
             _react2["default"].createElement(
               "p",
-              { className: "f12 c666 m5 mb5" },
+              {
+                style: { width: width },
+                className: "f12 c666 m5 mb5" },
               data.developer
             ),
             _react2["default"].createElement(
@@ -184,7 +187,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           );
           column3 = _react2["default"].createElement(
             "td",
-            null,
+            { className: "center" },
             _react2["default"].createElement("i", { className: "up down" }),
             _react2["default"].createElement(
               "i",

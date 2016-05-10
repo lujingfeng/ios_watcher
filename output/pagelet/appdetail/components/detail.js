@@ -61,14 +61,6 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       return {};
     },
   
-    handleScroll: function handleScroll(e) {
-      var _target = e.target;
-  
-      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
-        this.loadMore();
-      }
-    },
-  
     render: function render() {
       var query = this.props.location.query;
       var params = this.props.params;
@@ -106,7 +98,6 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
           _react2["default"].createElement(
             "div",
             {
-              onScroll: this.handleScroll.bind(this),
               className: "category-detail" },
             bottomView
           )

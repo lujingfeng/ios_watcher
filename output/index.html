@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/pagelet/appdetail/detail.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/filter.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/calendar.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/compproduct/comp_analysis.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/myfav/my_fav.css" />
 </head>
@@ -60,6 +61,7 @@
 <script type="text/javascript" src="/pagelet/appdetail/components/comment.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/applevel.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/calendar.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/filter.js"></script>
 <script type="text/javascript" src="/pagelet/top/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/top/store/store.js"></script>
@@ -72,6 +74,8 @@
 <script type="text/javascript" src="/pagelet/hotkeyword/components/hotkeyword.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/my_fav_item.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/index.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/compare.js"></script>
 <script type="text/javascript" src="/pagelet/myfav/components/my_fav_list.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/aso_service.js"></script>
@@ -187,7 +191,10 @@
             "deps": [
                 "pagelet/appdetail/detail.less",
                 "react",
-                "pagelet/widget/components/rank.jsx"
+                "pagelet/widget/components/rank.jsx",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js",
+                "constants"
             ]
         },
         "pagelet/appdetail/components/detail.jsx": {
@@ -232,7 +239,10 @@
             },
             "deps": [
                 "pagelet/appdetail/detail.less",
-                "react"
+                "react",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js",
+                "constants"
             ]
         },
         "static/lib/echarts.min.js": {
@@ -261,6 +271,17 @@
                 "react"
             ]
         },
+        "pagelet/compproduct/action/action.js": {
+            "uri": "/pagelet/compproduct/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/compproduct/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
         "pagelet/compproduct/comp_analysis.less": {
             "uri": "/pagelet/compproduct/comp_analysis.css",
             "type": "css"
@@ -281,7 +302,10 @@
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/compproduct/components/my_fav_item.jsx"
+                "constants",
+                "pagelet/compproduct/components/my_fav_item.jsx",
+                "pagelet/compproduct/action/action.js",
+                "pagelet/compproduct/store/store.js"
             ]
         },
         "pagelet/widget/components/tabs.jsx": {
@@ -314,6 +338,17 @@
             "type": "js",
             "deps": [
                 "react"
+            ]
+        },
+        "pagelet/compproduct/store/store.js": {
+            "uri": "/pagelet/compproduct/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/compproduct/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/compproduct/action/action.js"
             ]
         },
         "pagelet/compproduct/components/index.jsx": {
@@ -386,11 +421,25 @@
             "deps": [
                 "pagelet/widget/filter.less",
                 "react",
-                "reactRouter"
+                "reactRouter",
+                "pagelet/widget/components/calendar.jsx"
             ]
         },
         "pagelet/widget/filter.less": {
             "uri": "/pagelet/widget/filter.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/calendar.jsx": {
+            "uri": "/pagelet/widget/components/calendar.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/calendar.less",
+                "react",
+                "reactRouter"
+            ]
+        },
+        "pagelet/widget/calendar.less": {
+            "uri": "/pagelet/widget/calendar.css",
             "type": "css"
         },
         "pagelet/hotkeyword/hotkeyword.less": {
@@ -507,7 +556,21 @@
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
-                "pagelet/widget/components/filter.jsx"
+                "pagelet/widget/components/filter.jsx",
+                "constants",
+                "pagelet/top/action/action.js",
+                "pagelet/top/store/store.js"
+            ]
+        },
+        "pagelet/top/store/store.js": {
+            "uri": "/pagelet/top/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/top/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/top/action/action.js"
             ]
         },
         "pagelet/top/components/topList.jsx": {
@@ -526,17 +589,6 @@
                 "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
-            ]
-        },
-        "pagelet/top/store/store.js": {
-            "uri": "/pagelet/top/store/store.js",
-            "type": "js",
-            "extras": {
-                "moduleId": "pagelet/top/store/store"
-            },
-            "deps": [
-                "reflux",
-                "pagelet/top/action/action.js"
             ]
         },
         "pagelet/underapp/action/action.js": {

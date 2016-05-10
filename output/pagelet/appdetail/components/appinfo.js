@@ -60,6 +60,12 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
     render: function render() {
       var query = this.props.query;
       var detail = this.state.detailInfo;
+      var updateTime = detail.begintime;
+  
+      if (updateTime) {
+        var d = new Date(updateTime);
+        updateTime = d.format("yyyy-MM-dd");
+      }
   
       if (this.state.loading) {
         return _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null);
@@ -110,7 +116,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              detail.app_id
+              detail.appId
             )
           ),
           _react2["default"].createElement(
@@ -166,7 +172,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              "后端暂没定这个字段"
+              updateTime
             )
           ),
           _react2["default"].createElement(

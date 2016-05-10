@@ -18,17 +18,6 @@ var AppDetail = React.createClass({
     return {}
   },
 
-  handleScroll: function(e) {
-    const _target = e.target;
-
-    if (((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) 
-      && !this.state.loading &&
-      this.state.searchResultList.length < this.state.total
-      ) {
-      this.loadMore();
-    }
-  },
-
   render: function(){
     var query = this.props.location.query;
     var params = this.props.params;
@@ -56,8 +45,7 @@ var AppDetail = React.createClass({
           <Categofy 
             query={query} 
             ctyValue={params.module}/>
-          <div 
-            onScroll={this.handleScroll.bind(this)}
+          <div
             className="category-detail">
             {bottomView}
           </div>

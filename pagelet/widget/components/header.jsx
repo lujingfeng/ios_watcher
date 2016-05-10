@@ -105,6 +105,7 @@ var Header = React.createClass({
             <div className="search">
               <div className="input-con">
                 <input 
+                  placeholder={this.props.placeholder}
                   value={this.state.searchKey}
                   onChange={e=>this.setState({searchKey:e.target.value})}
                   type="text"/>

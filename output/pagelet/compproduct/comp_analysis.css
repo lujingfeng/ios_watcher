@@ -1,6 +1,9 @@
 .comp-analysis .search-result {
   top: 130px;
 }
+.comp-analysis .search-list li:first-child {
+  border-top: none;
+}
 .my-fav-list table td {
   width: 50%;
 }

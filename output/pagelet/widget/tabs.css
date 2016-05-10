@@ -1,21 +1,23 @@
 .c-tabs {
   margin: 14px 12px 12px;
-  border: 1px solid #e9e9e9;
   border-radius: 3px;
   overflow: hidden;
 }
 .c-tabs li {
   text-align: center;
+  border: 1px solid #e9e9e9;
   float: left;
   line-height: 27px;
   color: #999999;
-  border-right: 1px solid #e9e9e9;
+  font-size: 13px;
+  border-right: 1px solid transparent;
 }
 .c-tabs li.cur {
   background: #215bc7;
   color: #fff;
-  border-right: none;
+  border: 1px solid #215bc7!important;
+  z-index: 1;
 }
 .c-tabs li:last-child {
-  border-right: none;
+  border-right: 1px solid #e9e9e9;
 }

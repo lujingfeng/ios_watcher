@@ -11,7 +11,7 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
-import {countryCode, deviceType} from "constants";
+import {countryCode, deviceType, payType} from "constants";
 
 import TopAction from "../action/action";
 import TopStore from "../store/store";
@@ -21,16 +21,22 @@ var TopList = React.createClass({
 
   getInitialState: function(){
     var tabs = [
-                  {name:"免费榜",type:1 }, 
-                  {name:"付费榜",type:2 },
-                  {name:"畅销榜",type:3 }
+                  {name:"免费榜",payType: payType.FREE }, 
+                  {name:"付费榜",payType: payType.FEE },
+                  {name:"畅销榜",payType: payType.HOT }
                ];
+
+    var now = new Date();
 
     return {
       tabs: tabs,
-      topList: [],
+      list: [],
 
-      curTypeId: "3394",
+      genres: "",
+      payType: payType.FREE,
+      date: now.format("yyyy-MM-dd"),
+      country: countryCode.CHINA,
+      device: deviceType.IPHONE,
 
       page: 1,
       total: 0
@@ -43,11 +49,12 @@ var TopList = React.createClass({
     var now = new Date();
 
     TopAction.fetchList({
-      date: now.format("yyyy-MM-dd"),
-      hour: now.getHours(),
-      country: countryCode.CHINA,
-      device: deviceType.IPHONE,
-      typeid: this.state.curTypeId
+      genres: this.state.genres,
+      date: this.state.date,
+      country: this.state.country,
+      device: this.state.device,
+      type: this.state.payType,
+      test: true
     });
   },
 
@@ -84,6 +91,20 @@ var TopList = React.createClass({
     this.history.pushState("", "detail/1", query);
   },
 
+  onSelectTab: function(tab){
+    this.setState({
+      payType: tab.payType
+    }, ()=>{
+      TopAction.fetchList({
+        date: this.state.date,
+        country: this.state.country,
+        device: this.state.device,
+        type: this.state.payType,
+        test: true
+      });
+    });
+  },  
+
   render: function(){
     var query = this.props.location.query;
 
@@ -95,6 +116,8 @@ var TopList = React.createClass({
   },
 
   renderTop: function(){
+    var list = this.state.list || [];
+
     return (
       <div className="c-page top-list">
         <Header 
@@ -103,31 +126,26 @@ var TopList = React.createClass({
           iOS榜单排名
         </Header>
         <div className="c-body">
-          <Tabs tabs={this.state.tabs}/>
+          <Tabs 
+            onSelect={this.onSelectTab}
+            tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
             所有分类，中国，iPhone, 2016-04-29
           </p>
 
           <ul className="list">
-            <AppItem 
-              type={2} 
-              onItemClick={this.onItemClick} 
-              index={1}
-              data={{}}/>
-            <AppItem type={2} onItemClick={this.onItemClick} index={1}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
-            <AppItem type={2} />
-            <AppItem type={2}/>
+            {
+              list.map((item, idx)=>{
+                return (
+                  <AppItem 
+                    type={2} 
+                    onItemClick={this.onItemClick} 
+                    index={idx}
+                    data={item}/>
+                  )
+              })
+            }
           </ul>
         </div>
       </div>

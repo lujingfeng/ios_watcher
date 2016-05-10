@@ -34,9 +34,19 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _constants = require("constants");
+  
   var _my_fav_item = require("pagelet/compproduct/components/my_fav_item.jsx");
   
   var _my_fav_item2 = _interopRequireDefault(_my_fav_item);
+  
+  var _actionAction = require("pagelet/compproduct/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/compproduct/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
   
   var AppCompare = _react2["default"].createClass({
     displayName: "AppCompare",
@@ -44,12 +54,18 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
-      return {};
+      var query = this.props.location.query;
+  
+      return {
+        app_1: query.app_1,
+        app_2: query.app_2
+      };
     },
   
     componentDidMount: function componentDidMount() {
       var _this = this;
   
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       require.async(["static/lib/echarts.min"], function (echarts) {
         var chart = echarts.init(_this.refs.chart);
         // 指定图表的配置项和数据
@@ -91,10 +107,18 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         // 使用刚指定的配置项和数据显示图表。
         chart.setOption(option);
       });
+  
+      _actionAction2["default"].getCompare({
+        appId: "347" || this.state.app_1.appId,
+        interval: 7,
+        country: _constants.countryCode.CHINA,
+        device: _constants.deviceType.IPHONE,
+        type: _constants.payType.FREE
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
@@ -118,8 +142,8 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
           _react2["default"].createElement(
             "ul",
             { className: "clearfix rel" },
-            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp" }),
-            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp" }),
+            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp", data: this.state.app_1 }),
+            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp", data: this.state.app_2 }),
             _react2["default"].createElement("i", { className: "icon-vs" })
           ),
           _react2["default"].createElement(

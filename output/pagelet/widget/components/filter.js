@@ -18,20 +18,49 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
   
   var _reactRouter = require("reactRouter");
   
+  var _calendar = require("pagelet/widget/components/calendar.jsx");
+  
+  var _calendar2 = _interopRequireDefault(_calendar);
+  
   var Filter = _react2["default"].createClass({
     displayName: "Filter",
   
     mixins: [_reactRouter.History],
     getInitialState: function getInitialState() {
-      return {};
+      return {
+        showCalendar: false
+      };
     },
   
     onCancel: function onCancel() {
       this.history.goBack();
     },
   
-    render: function render() {
+    onOtherDate: function onOtherDate() {
+      this.setState({
+        showCalendar: true
+      });
+    },
   
+    onCanlendarCancel: function onCanlendarCancel() {
+      this.setState({
+        showCalendar: false
+      });
+    },
+  
+    onCalendarSelect: function onCalendarSelect(date) {
+      this.setState({
+        showCalendar: false
+      });
+      console.log(date);
+    },
+  
+    render: function render() {
+      if (this.state.showCalendar) {
+        return _react2["default"].createElement(_calendar2["default"], {
+          onSelected: this.onCalendarSelect,
+          cancel: this.onCanlendarCancel });
+      }
       return _react2["default"].createElement(
         "div",
         { className: "c-filter" },
@@ -163,11 +192,83 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           ),
           _react2["default"].createElement(
             "li",
-            { style: { width: "50%" } },
+            { style: { width: "50%" }, onClick: this.onOtherDate },
             _react2["default"].createElement(
               "span",
               null,
               "其他"
+            )
+          )
+        ),
+        _react2["default"].createElement(
+          "h5",
+          null,
+          "时间"
+        ),
+        _react2["default"].createElement(
+          "ul",
+          { className: "f-type clearfix" },
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "今天"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "昨天"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "7日"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "15日"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "30日"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "60日"
+            )
+          ),
+          _react2["default"].createElement(
+            "li",
+            null,
+            _react2["default"].createElement(
+              "span",
+              null,
+              "90日"
             )
           )
         ),
@@ -454,6 +555,17 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               null,
               "户外自然"
             )
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { style: { padding: "0 12px" } },
+          _react2["default"].createElement(
+            "button",
+            {
+              style: { width: "100%" },
+              className: "btn main-btn mt12 mb12" },
+            "确定"
           )
         )
       );

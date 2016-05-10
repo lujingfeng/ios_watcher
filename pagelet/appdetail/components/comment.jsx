@@ -5,8 +5,17 @@
 import React from "react";
 import Rank from "/pagelet/widget/components/rank";
 
-var Comment = React.createClass({ 
 
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
+import {countryCode, deviceType} from "constants";
+
+var Comment = React.createClass({ 
+  componentDidMount: function(){
+    DetailAction.commentDetail({
+      
+    });
+  },
   render: function(){
     
     return (
@@ -15,7 +24,6 @@ var Comment = React.createClass({
           <p className="fr f-txt f10 c999">所有评级, 所有版本, 7天</p>
           <i></i>
           评论详情
-
         </h5>
 
         <table className="border">

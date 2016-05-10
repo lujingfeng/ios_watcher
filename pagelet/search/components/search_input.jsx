@@ -25,7 +25,7 @@ var Search = React.createClass({
       ],
 
       searchKey: null,
-      equipment: 0,
+      device: 0,
       searchResultList: [],
 
       page: 1,
@@ -57,7 +57,7 @@ var Search = React.createClass({
 
   onChooseDevice: function(tab){
     this.setState({
-      equipment: tab.value
+      device: tab.value
     });
   },
 
@@ -101,7 +101,8 @@ var Search = React.createClass({
     }else{
       pathName = pathName + "1"
     }
-    params.equipment = this.state.equipment;
+
+    params.device = this.state.device;
 
     this.history.pushState("", pathName, params);
   },

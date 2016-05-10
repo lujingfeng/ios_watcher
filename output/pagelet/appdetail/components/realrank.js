@@ -16,6 +16,16 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
+  var _constants = require("constants");
+  
   var RRank = _react2["default"].createClass({
     displayName: "RRank",
   
@@ -47,6 +57,13 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
         // 使用刚指定的配置项和数据显示图表。
         rankChart.setOption(option);
+  
+        _actionAction2["default"].realRank({
+          country: _constants.countryCode.CHINA,
+          device: _constants.countryCode.IPHONE,
+          stime: "",
+          etime: ""
+        });
       });
     },
   

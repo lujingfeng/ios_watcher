@@ -3,6 +3,9 @@
   */
 
 import React from "react";
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
+import {countryCode, deviceType} from "constants";
 
 var RRank = React.createClass({ 
   componentDidMount: function(){
@@ -32,6 +35,13 @@ var RRank = React.createClass({
 
         // 使用刚指定的配置项和数据显示图表。
         rankChart.setOption(option);
+
+        DetailAction.realRank({
+          country: countryCode.CHINA,
+          device: countryCode.IPHONE,
+          stime: "",
+          etime: "" 
+        });
     });
   },
 

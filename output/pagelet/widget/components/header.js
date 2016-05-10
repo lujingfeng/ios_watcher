@@ -121,6 +121,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
             "div",
             { className: "input-con" },
             _react2["default"].createElement("input", {
+              placeholder: this.props.placeholder,
               value: this.state.searchKey,
               onChange: function (e) {
                 return _this.setState({ searchKey: e.target.value });
