@@ -18,8 +18,8 @@ define('pagelet/search/action/action', function(require, exports, module) {
   
   var SearchAction = _reflux2["default"].createActions(["search", "searchCmp"]);
   
-  SearchAction.search.preEmit = function (serachKey) {
-    var page = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+  SearchAction.search.preEmit = function (serachKey, page, country, device) {
+    if (page === undefined) page = 1;
   
     var params = {
       type: 'GET',
@@ -27,7 +27,9 @@ define('pagelet/search/action/action', function(require, exports, module) {
       data: {
         param: serachKey,
         pageSize: 20,
-        currentPage: page
+        currentPage: page,
+        country: country,
+        device: device
       },
       dataType: 'json'
     };

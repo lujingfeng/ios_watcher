@@ -7,6 +7,8 @@ import {History} from "reactRouter";
 import Calendar from "./calendar";
 import Loading from "./loading";
 
+import {payType} from "constants";
+
 import Reflux from "reflux";
 import $ from "/static/lib/jquery";
 
@@ -63,7 +65,8 @@ var Filter = React.createClass({
         days: null,
         country: null,
         device: null,
-        category: null
+        category: null,
+        pay: null
       }
     }
   },
@@ -141,6 +144,12 @@ var Filter = React.createClass({
     this.setState({curSelected});
   },
 
+  onPay: function(payMethod){
+    var curSelected = this.state.curSelected;
+    curSelected.pay = payMethod;
+    this.setState({curSelected});
+  },
+
   render: function(){
     if(this.state.loading){
       return <Loading/>
@@ -161,6 +170,7 @@ var Filter = React.createClass({
     var showDateTime = !!this.props.datetime;
     var showDays = !!this.props.days;
     var showCategory = !!this.props.category;
+    var showPayMethod = !!this.props.showPayMethod;
 
     return (
       <div className="c-filter">
@@ -188,6 +198,25 @@ var Filter = React.createClass({
                 }
               </ul>
             </div>):null
+        }
+
+        {
+          showPayMethod?(
+            <div>
+              <h5>是否支付</h5>
+              <ul className="f-type clearfix">
+                <li 
+                  className={curSelected.pay && curSelected.pay.value==payType.FREE?"selected":null}
+                  onClick={e=>this.onPay({name:"免费", value:payType.FREE})}>
+                  <span>免费</span>
+                </li>
+                <li 
+                  className={curSelected.pay && curSelected.pay.value==payType.FEE?"selected":null}
+                  onClick={e=>this.onPay({name:"付费", value:payType.FEE})}>
+                  <span>付费</span>
+                </li>
+              </ul>
+            </div>): null
         }
 
         {
@@ -257,12 +286,12 @@ var Filter = React.createClass({
               <li 
                 className={curSelected.days && curSelected.days.value==30?"selected":null}
                 onClick={e=>this.onDays({name:"30日", value:30})}>
-                <span>15日</span>
+                <span>30日</span>
               </li>
               <li 
                 className={curSelected.days && curSelected.days.value==60?"selected":null}
                 onClick={e=>this.onDays({name:"60日", value:60})}>
-                <span>15日</span>
+                <span>60日</span>
               </li>
             </ul>
           </div>): null

@@ -10,6 +10,8 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 
+import {countryCode, deviceType, countryToCode} from "constants";
+
 import SearchAction from "/pagelet/search/action/action";
 import SearchStore from "/pagelet/search/store/store";
 
@@ -20,12 +22,14 @@ var Search = React.createClass({
   getInitialState: function(){
     return {
       tabs: [
-        {name: "iPhone", value: 0},
-        {name: "iPad", value: 1}
+        {name: "iPhone", value: deviceType.IPHONE},
+        {name: "iPad", value: deviceType.IPAD}
       ],
 
       searchKey: null,
-      device: 0,
+      device: deviceType.IPHONE,
+      country: countryCode.CHINA,
+
       searchResultList: [],
 
       page: 1,
@@ -52,12 +56,25 @@ var Search = React.createClass({
     this.setState({
       searchKey: key
     });
-    SearchAction.search(key, 1);
+    SearchAction.search(
+      key, 
+      1,
+      this.state.country,
+      this.state.device
+    );
   },
 
   onChooseDevice: function(tab){
     this.setState({
-      device: tab.value
+      device: tab.value,
+      searchResultList:[]
+    }, ()=>{
+      SearchAction.search(
+        this.state.searchKey, 
+        1, 
+        this.state.country,
+        this.state.device
+      );
     });
   },
 
@@ -68,7 +85,12 @@ var Search = React.createClass({
       page:1,
       total: 0
     });
-    SearchAction.search(searchWord, 1);
+    SearchAction.search(
+      searchWord, 
+      1, 
+      this.state.country,
+      this.state.device
+    );
   },
 
   handleScroll: function(e) {
@@ -103,6 +125,7 @@ var Search = React.createClass({
     }
 
     params.device = this.state.device;
+    params.country = countryToCode[params.country];
 
     this.history.pushState("", pathName, params);
   },

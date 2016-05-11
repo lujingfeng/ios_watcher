@@ -36,6 +36,10 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
   var _constants = require("constants");
   
+  var _pageletWidgetComponentsFilter = require("pagelet/widget/components/filter.jsx");
+  
+  var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
+  
   var _my_fav_item = require("pagelet/compproduct/components/my_fav_item.jsx");
   
   var _my_fav_item2 = _interopRequireDefault(_my_fav_item);
@@ -57,63 +61,41 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       var query = this.props.location.query;
   
       return {
+        series: [],
+  
+        legend: {
+          data: [],
+          bottom: 0
+        },
+  
         app_1: query.app_1,
-        app_2: query.app_2
+        app_2: query.app_2,
+  
+        days: 30,
+        country: _constants.countryCode.CHINA,
+        payType: _constants.payType.FREE,
+        device: _constants.deviceType.IPHONE
       };
     },
   
     componentDidMount: function componentDidMount() {
-      var _this = this;
+      var _this2 = this;
   
+      var _this = this;
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       require.async(["static/lib/echarts.min"], function (echarts) {
-        var chart = echarts.init(_this.refs.chart);
-        // 指定图表的配置项和数据
-        var option = {
-          title: {
-            text: ''
-          },
-          tooltip: {},
-          legend: {},
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ["2012", "2013", "2014"]
-          },
-          yAxis: {},
-          series: [{
-            name: 'app1',
-            smooth: true,
-            type: 'line',
-            data: [5, 400, 36]
-          }, {
-            name: 'app2',
-            smooth: true,
-            type: 'line',
-            data: [3, 600, 20]
-          }, {
-            name: 'app3',
-            smooth: true,
-            type: 'line',
-            data: [8, 1000, 800]
-          }, {
-            name: 'app2',
-            smooth: true,
-            type: 'line',
-            data: [1, 200, 100]
-          }]
-        };
-  
-        // 使用刚指定的配置项和数据显示图表。
-        chart.setOption(option);
+        _this2.echarts = echarts;
+        _this2.intChart(echarts);
       });
-  
-      _actionAction2["default"].getCompare({
-        appId: "347" || this.state.app_1.appId,
-        interval: 7,
-        country: _constants.countryCode.CHINA,
-        device: _constants.deviceType.IPHONE,
-        type: _constants.payType.FREE
+      this.history.listen(function () {
+        var query = _this2.props.location.query;
+        if (!query.filter) {
+          console.log("filter");
+          _this2.intChart(_this2.echarts);
+        } else {
+          _this2.state.legend.data = [];
+          _this2.state.series = [];
+        }
       });
     },
   
@@ -121,11 +103,105 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       this.unSubscribe();
     },
   
+    intChart: function intChart(echarts) {
+      if (!this.refs.chart || this.chart || !echarts) {
+        return;
+      }
+      this.chart = echarts.init(this.refs.chart);
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: ''
+        },
+        tooltip: {},
+        legend: {
+          data: [],
+          bottom: 0
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: []
+        },
+        yAxis: {},
+        series: []
+      };
+  
+      //使用刚指定的配置项和数据显示图表。
+      this.chart.setOption(option);
+  
+      var params = {
+        interval: this.state.days,
+        country: this.state.country,
+        device: this.state.device,
+        type: this.state.payType
+      };
+  
+      _actionAction2["default"].getCompare(Object.assign({
+        appId: this.state.app_1.id
+      }, params));
+  
+      _actionAction2["default"].getCompare(Object.assign({
+        appId: this.state.app_2.id
+      }, params));
+    },
+  
     onStateChange: function onStateChange(state) {
+      if (state.series) {
+        this.state.series = this.state.series.concat(state.series);
+        this.state.legend.data = this.state.legend.data.concat(state.legend.data);
+  
+        this.chart.setOption({
+          xAxis: state.xAxis,
+          series: this.state.series,
+          legend: this.state.legend
+        });
+      }
+    },
+  
+    onFilter: function onFilter(selected) {
+      var state = {};
+      if (selected.days) {
+        state.days = selected.days.value;
+      }
+      if (selected.country) {
+        state.country = selected.country.value;
+      }
+      if (selected.pay) {
+        state.payType = selected.pay.value;
+      }
+      if (selected.device) {
+        state.device = selected.device.value;
+      }
+  
       this.setState(state);
     },
   
     render: function render() {
+      var query = this.props.location.query;
+  
+      var renderContent;
+  
+      if (query.filter) {
+        this.chart && this.chart.dispose();
+        this.chart = null;
+  
+        renderContent = _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+          onOk: this.onFilter,
+          showPayMethod: true,
+          device: true,
+          country: true,
+          datetime: true,
+          days: true,
+          category: true });
+      } else {
+        renderContent = this.renderCompare();
+      }
+  
+      return renderContent;
+    },
+  
+    renderCompare: function renderCompare() {
       var query = this.props.location.query || {};
   
       return _react2["default"].createElement(
@@ -133,7 +209,10 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         { className: "c-page app-compare" },
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
-          { showSideNav: this.props.showSideNav },
+          {
+            location: this.props.location,
+            filterEnabled: true,
+            showSideNav: this.props.showSideNav },
           "竞品对比"
         ),
         _react2["default"].createElement(
@@ -155,7 +234,13 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               _react2["default"].createElement(
                 "p",
                 { className: "fr f10 c999" },
-                "今日, 免费, 中国, 7天"
+                _constants.deviceTypeStr[this.state.device],
+                "  ",
+                _constants.payTypeToStr[this.state.payType],
+                "  ",
+                _constants.countryCode2Str[this.state.country],
+                "  ",
+                _constants.days2Str[this.state.days]
               ),
               _react2["default"].createElement("i", null),
               "排名趋势对比图"

@@ -87,13 +87,15 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       var toFilter = this.props.toFilter;
       var filterEnabled = this.state.filterEnabled;
   
+      var loc = this.props.location;
+  
       if (filterEnabled && toFilter) {
         toFilter();
       }
   
       if (filterEnabled) {
         var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-        this.history.pushState(null, pathname, { filter: true });
+        this.history.pushState(null, pathname, Object.assign({ filter: true }, loc.query));
       }
     },
   

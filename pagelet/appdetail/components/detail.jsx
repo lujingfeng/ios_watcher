@@ -39,7 +39,9 @@ var AppDetail = React.createClass({
 
     return (
       <div className="c-page c-app-detail">
-        <Header showSideNav={this.props.showSideNav}>应用详情</Header>
+        <Header 
+          filterEnabled={true}
+          showSideNav={this.props.showSideNav}>应用详情</Header>
         <div className="c-body" >
           <BaseInfo query={query}/>
           <Categofy 

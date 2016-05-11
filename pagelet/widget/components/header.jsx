@@ -75,6 +75,7 @@ var Header = React.createClass({
   toFilter: function(){
     const {toFilter} = this.props;
     const {filterEnabled} = this.state;
+    const loc = this.props.location;
 
     if(filterEnabled && toFilter){
       toFilter();
@@ -82,7 +83,7 @@ var Header = React.createClass({
 
     if(filterEnabled){
       var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-      this.history.pushState(null, pathname, {filter:true});
+      this.history.pushState(null, pathname, Object.assign({filter:true}, loc.query));
     }
   },
 

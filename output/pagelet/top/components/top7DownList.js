@@ -60,6 +60,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     getInitialState: function getInitialState() {
       return {
         loading: false,
+  
         tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
   
         list: [],

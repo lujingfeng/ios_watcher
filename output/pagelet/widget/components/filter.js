@@ -26,6 +26,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
   
   var _loading2 = _interopRequireDefault(_loading);
   
+  var _constants = require("constants");
+  
   var _reflux = require("reflux");
   
   var _reflux2 = _interopRequireDefault(_reflux);
@@ -85,7 +87,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           days: null,
           country: null,
           device: null,
-          category: null
+          category: null,
+          pay: null
         }
       };
     },
@@ -163,6 +166,12 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       this.setState({ curSelected: curSelected });
     },
   
+    onPay: function onPay(payMethod) {
+      var curSelected = this.state.curSelected;
+      curSelected.pay = payMethod;
+      this.setState({ curSelected: curSelected });
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -183,6 +192,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var showDateTime = !!this.props.datetime;
       var showDays = !!this.props.days;
       var showCategory = !!this.props.category;
+      var showPayMethod = !!this.props.showPayMethod;
   
       return _react2["default"].createElement(
         "div",
@@ -226,6 +236,45 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 )
               );
             })
+          )
+        ) : null,
+        showPayMethod ? _react2["default"].createElement(
+          "div",
+          null,
+          _react2["default"].createElement(
+            "h5",
+            null,
+            "是否支付"
+          ),
+          _react2["default"].createElement(
+            "ul",
+            { className: "f-type clearfix" },
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.pay && curSelected.pay.value == _constants.payType.FREE ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onPay({ name: "免费", value: _constants.payType.FREE });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "免费"
+              )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.pay && curSelected.pay.value == _constants.payType.FEE ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onPay({ name: "付费", value: _constants.payType.FEE });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "付费"
+              )
+            )
           )
         ) : null,
         showCountry && state.country.length ? _react2["default"].createElement(
@@ -382,7 +431,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               _react2["default"].createElement(
                 "span",
                 null,
-                "15日"
+                "30日"
               )
             ),
             _react2["default"].createElement(
@@ -395,7 +444,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               _react2["default"].createElement(
                 "span",
                 null,
-                "15日"
+                "60日"
               )
             )
           )

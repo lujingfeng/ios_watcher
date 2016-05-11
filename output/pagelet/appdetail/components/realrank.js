@@ -32,6 +32,8 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
     componentDidMount: function componentDidMount() {
       var _this = this;
   
+      var query = this.props.query;
+  
       require.async(["static/lib/echarts.min"], function (echarts) {
         var rankChart = echarts.init(_this.refs.rank);
         // 指定图表的配置项和数据
@@ -59,10 +61,9 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         rankChart.setOption(option);
   
         _actionAction2["default"].realRank({
-          country: _constants.countryCode.CHINA,
-          device: _constants.countryCode.IPHONE,
-          stime: "",
-          etime: ""
+          country: query.country,
+          device: query.device,
+          id: query.id
         });
       });
     },

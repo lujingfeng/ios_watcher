@@ -34,6 +34,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _constants = require("constants");
+  
   var _pageletSearchActionAction = require("pagelet/search/action/action");
   
   var _pageletSearchActionAction2 = _interopRequireDefault(_pageletSearchActionAction);
@@ -49,10 +51,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     getInitialState: function getInitialState() {
       return {
-        tabs: [{ name: "iPhone", value: 0 }, { name: "iPad", value: 1 }],
+        tabs: [{ name: "iPhone", value: _constants.deviceType.IPHONE }, { name: "iPad", value: _constants.deviceType.IPAD }],
   
         searchKey: null,
-        device: 0,
+        device: _constants.deviceType.IPHONE,
+        country: _constants.countryCode.CHINA,
+  
         searchResultList: [],
   
         page: 1,
@@ -79,12 +83,17 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       this.setState({
         searchKey: key
       });
-      _pageletSearchActionAction2["default"].search(key, 1);
+      _pageletSearchActionAction2["default"].search(key, 1, this.state.country, this.state.device);
     },
   
     onChooseDevice: function onChooseDevice(tab) {
+      var _this = this;
+  
       this.setState({
-        device: tab.value
+        device: tab.value,
+        searchResultList: []
+      }, function () {
+        _pageletSearchActionAction2["default"].search(_this.state.searchKey, 1, _this.state.country, _this.state.device);
       });
     },
   
@@ -95,7 +104,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
         page: 1,
         total: 0
       });
-      _pageletSearchActionAction2["default"].search(searchWord, 1);
+      _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
     },
   
     handleScroll: function handleScroll(e) {
@@ -127,12 +136,13 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       }
   
       params.device = this.state.device;
+      params.country = _constants.countryToCode[params.country];
   
       this.history.pushState("", pathName, params);
     },
   
     render: function render() {
-      var _this = this;
+      var _this2 = this;
   
       var hotApps = ["微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集", "微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集"];
       var historySearch = hotApps;
@@ -150,7 +160,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           searchValue: this.state.searchKey,
           onSearch: this.onSearch,
           onCancelSearch: function (e) {
-            return _this.history.goBack();
+            return _this2.history.goBack();
           },
           type: "search" }),
         _react2["default"].createElement(
@@ -168,7 +178,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
-                    return _this.onTagSelected(item);
+                    return _this2.onTagSelected(item);
                   } },
                 item
               );
@@ -186,7 +196,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
-                    return _this.onTagSelected(item);
+                    return _this2.onTagSelected(item);
                   } },
                 item
               );
@@ -262,7 +272,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 key: idx,
                 type: query.overlay ? 3 : 1,
-                onItemClick: _this.onClickSearchItem,
+                onItemClick: _this2.onClickSearchItem,
                 data: item,
                 index: idx });
             }),

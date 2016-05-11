@@ -45,13 +45,13 @@
 <script type="text/javascript" src="/pagelet/widget/components/tabs.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/rank.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/appItem.js"></script>
+<script type="text/javascript" src="/static/constants.js"></script>
 <script type="text/javascript" src="/static/lib/reflux.js"></script>
 <script type="text/javascript" src="/pagelet/search/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/search/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/search/components/search_input.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/baseinfo.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/category.js"></script>
-<script type="text/javascript" src="/static/constants.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/appinfo.js"></script>
@@ -306,6 +306,7 @@
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
                 "constants",
+                "pagelet/widget/components/filter.jsx",
                 "pagelet/compproduct/components/my_fav_item.jsx",
                 "pagelet/compproduct/action/action.js",
                 "pagelet/compproduct/store/store.js"
@@ -334,6 +335,37 @@
         },
         "pagelet/widget/app_item.less": {
             "uri": "/pagelet/widget/app_item.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/filter.jsx": {
+            "uri": "/pagelet/widget/components/filter.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/filter.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/calendar.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "constants",
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/widget/filter.less": {
+            "uri": "/pagelet/widget/filter.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/calendar.jsx": {
+            "uri": "/pagelet/widget/components/calendar.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/calendar.less",
+                "react",
+                "reactRouter"
+            ]
+        },
+        "pagelet/widget/calendar.less": {
+            "uri": "/pagelet/widget/calendar.css",
             "type": "css"
         },
         "pagelet/compproduct/components/my_fav_item.jsx": {
@@ -418,36 +450,6 @@
                 "pagelet/widget/components/filter.jsx"
             ]
         },
-        "pagelet/widget/components/filter.jsx": {
-            "uri": "/pagelet/widget/components/filter.js",
-            "type": "js",
-            "deps": [
-                "pagelet/widget/filter.less",
-                "react",
-                "reactRouter",
-                "pagelet/widget/components/calendar.jsx",
-                "pagelet/widget/components/loading.jsx",
-                "reflux",
-                "jquery"
-            ]
-        },
-        "pagelet/widget/filter.less": {
-            "uri": "/pagelet/widget/filter.css",
-            "type": "css"
-        },
-        "pagelet/widget/components/calendar.jsx": {
-            "uri": "/pagelet/widget/components/calendar.js",
-            "type": "js",
-            "deps": [
-                "pagelet/widget/calendar.less",
-                "react",
-                "reactRouter"
-            ]
-        },
-        "pagelet/widget/calendar.less": {
-            "uri": "/pagelet/widget/calendar.css",
-            "type": "css"
-        },
         "pagelet/hotkeyword/hotkeyword.less": {
             "uri": "/pagelet/hotkeyword/hotkeyword.css",
             "type": "css"
@@ -516,6 +518,7 @@
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
+                "constants",
                 "pagelet/search/action/action.js",
                 "pagelet/search/store/store.js"
             ]

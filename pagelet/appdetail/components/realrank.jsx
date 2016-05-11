@@ -8,7 +8,11 @@ import DetailStore from "../store/store";
 import {countryCode, deviceType} from "constants";
 
 var RRank = React.createClass({ 
+
   componentDidMount: function(){
+
+    var query = this.props.query;
+
     require.async("/static/lib/echarts.min", (echarts)=>{
       var rankChart = echarts.init(this.refs.rank);
       // 指定图表的配置项和数据
@@ -37,10 +41,9 @@ var RRank = React.createClass({
         rankChart.setOption(option);
 
         DetailAction.realRank({
-          country: countryCode.CHINA,
-          device: countryCode.IPHONE,
-          stime: "",
-          etime: "" 
+          country: query.country,
+          device: query.device,
+          id: query.id
         });
     });
   },

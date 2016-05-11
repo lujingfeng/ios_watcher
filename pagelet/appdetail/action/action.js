@@ -36,7 +36,7 @@ DetailAction.realRank.preEmit = (query={}) => {
   var params = {
     type: 'GET',
     url: SEARCH_HOST + '/apprank',
-    data:query,
+    data: query,
     dataType: 'json'
   }
 

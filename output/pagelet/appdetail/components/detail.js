@@ -85,7 +85,9 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         { className: "c-page c-app-detail" },
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
-          { showSideNav: this.props.showSideNav },
+          {
+            filterEnabled: true,
+            showSideNav: this.props.showSideNav },
           "应用详情"
         ),
         _react2["default"].createElement(
