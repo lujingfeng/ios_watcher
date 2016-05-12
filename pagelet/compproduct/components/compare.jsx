@@ -34,7 +34,8 @@ var AppCompare = React.createClass({
 
       legend: {
         data:[],
-        bottom: 0
+        bottom: 20,
+        itemWidth:50
       },
 
       app_1: query.app_1,
@@ -81,10 +82,12 @@ var AppCompare = React.createClass({
         title: {
             text: ''
         },
+        grid:[{x: '12%', y: '10%', width: '84%', height: '50%'}],
         tooltip: {},
         legend: {
           data:[],
-          bottom: 0,
+          bottom: 20,
+          itemWidth: 50
         },
         xAxis: {
           type: 'category',
@@ -107,11 +110,11 @@ var AppCompare = React.createClass({
 
     CompareAction.getCompare(Object.assign({
       appId: this.state.app_1.id
-    }, params));
+    }, params), this.state.app_1.title);
 
     CompareAction.getCompare(Object.assign({
       appId: this.state.app_2.id
-    }, params));
+    }, params),this.state.app_2.title);
   },
 
   onStateChange: function(state){
@@ -202,7 +205,7 @@ var AppCompare = React.createClass({
             </h5>
           </div>
 
-          <div ref="chart" style={{width:"100%", height: 200}}>
+          <div ref="chart" style={{width:"100%", height: 300}}>
 
           </div>
         </div>

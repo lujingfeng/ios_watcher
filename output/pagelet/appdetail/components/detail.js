@@ -65,6 +65,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       var query = this.props.location.query;
       var params = this.props.params;
       var bottomView;
+      var filterEnabled = false;
   
       if (params.module == 1) {
         bottomView = _react2["default"].createElement(_appinfo2["default"], { query: query });
@@ -75,6 +76,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       } else if (params.module == 4) {
         bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
+        filterEnabled = true;
         bottomView = _react2["default"].createElement(_comment2["default"], { query: query });
       } else if (params.module == 6) {
         bottomView = _react2["default"].createElement(_applevel2["default"], { query: query });
@@ -86,7 +88,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
           {
-            filterEnabled: true,
+            filterEnabled: filterEnabled,
             showSideNav: this.props.showSideNav },
           "应用详情"
         ),

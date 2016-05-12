@@ -22,6 +22,7 @@ var AppDetail = React.createClass({
     var query = this.props.location.query;
     var params = this.props.params;
     var bottomView;
+    var filterEnabled = false;
 
     if(params.module == 1){
       bottomView = <AppInfo query={query}/>
@@ -32,6 +33,7 @@ var AppDetail = React.createClass({
     }else if(params.module == 4){
       bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
+      filterEnabled = true;
       bottomView = <Comment query={query}/>
     }else if(params.module == 6){
       bottomView = <AppLevel query={query}/>
@@ -40,7 +42,7 @@ var AppDetail = React.createClass({
     return (
       <div className="c-page c-app-detail">
         <Header 
-          filterEnabled={true}
+          filterEnabled={filterEnabled}
           showSideNav={this.props.showSideNav}>应用详情</Header>
         <div className="c-body" >
           <BaseInfo query={query}/>

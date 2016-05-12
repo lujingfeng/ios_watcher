@@ -29,7 +29,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
       });
     },
   
-    getCompareCmp: function getCompareCmp(res) {
+    getCompareCmp: function getCompareCmp(res, appName) {
       var params = { loading: false };
       var categoryMap = {};
   
@@ -38,12 +38,13 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
           var mdataList = res[month];
           mdataList.forEach(function (item, idx) {
             for (var p in item) {
-              categoryMap[p] = categoryMap[p] || { data: [], title: [] };
+              var key = appName.slice(0, 5) + p;
+              categoryMap[key] = categoryMap[key] || { data: [], title: [] };
               var listMap = item[p];
               for (var d in listMap) {
                 var rank = parseFloat(listMap[d]);
-                categoryMap[p].data.push(rank || 0);
-                categoryMap[p].title.push(month + "-" + d);
+                categoryMap[key].data.push(rank || 0);
+                categoryMap[key].title.push(month + "-" + d);
               }
             }
           });

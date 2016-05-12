@@ -6,7 +6,7 @@ var CompareAction = Reflux.createActions([
   "getCompareCmp"
 ]);
 
-CompareAction.getCompare.preEmit = (query={}) => {
+CompareAction.getCompare.preEmit = (query={}, title) => {
   var params = {
       type: 'GET',
       url: SEARCH_HOST + '/ioscompare',
@@ -15,7 +15,7 @@ CompareAction.getCompare.preEmit = (query={}) => {
   }
 
   $.ajax(params).always(function( res ){
-      CompareAction.getCompareCmp(res);
+      CompareAction.getCompareCmp(res, title);
   });
 };
 

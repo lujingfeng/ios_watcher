@@ -18,8 +18,8 @@ define('pagelet/compproduct/action/action', function(require, exports, module) {
   
   var CompareAction = _reflux2["default"].createActions(["getCompare", "getCompareCmp"]);
   
-  CompareAction.getCompare.preEmit = function () {
-      var query = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  CompareAction.getCompare.preEmit = function (query, title) {
+      if (query === undefined) query = {};
   
       var params = {
           type: 'GET',
@@ -29,7 +29,7 @@ define('pagelet/compproduct/action/action', function(require, exports, module) {
       };
   
       _staticLibJquery2["default"].ajax(params).always(function (res) {
-          CompareAction.getCompareCmp(res);
+          CompareAction.getCompareCmp(res, title);
       });
   };
   

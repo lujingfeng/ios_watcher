@@ -70,7 +70,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "p",
             { className: "fr f-txt f10 c999" },
-            "所有评级, 所有版本, 7天"
+            "所有评级, 7天"
           ),
           _react2["default"].createElement("i", null),
           "评论详情"

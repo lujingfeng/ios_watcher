@@ -65,7 +65,8 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
         legend: {
           data: [],
-          bottom: 0
+          bottom: 20,
+          itemWidth: 50
         },
   
         app_1: query.app_1,
@@ -113,10 +114,12 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         title: {
           text: ''
         },
+        grid: [{ x: '12%', y: '10%', width: '84%', height: '50%' }],
         tooltip: {},
         legend: {
           data: [],
-          bottom: 0
+          bottom: 20,
+          itemWidth: 50
         },
         xAxis: {
           type: 'category',
@@ -139,11 +142,11 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
       _actionAction2["default"].getCompare(Object.assign({
         appId: this.state.app_1.id
-      }, params));
+      }, params), this.state.app_1.title);
   
       _actionAction2["default"].getCompare(Object.assign({
         appId: this.state.app_2.id
-      }, params));
+      }, params), this.state.app_2.title);
     },
   
     onStateChange: function onStateChange(state) {
@@ -246,7 +249,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               "排名趋势对比图"
             )
           ),
-          _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 200 } })
+          _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 300 } })
         )
       );
     }
