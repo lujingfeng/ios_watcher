@@ -65,7 +65,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
         legend: {
           data: [],
-          bottom: 20,
+          top: "70%",
           itemWidth: 50
         },
   
@@ -116,11 +116,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         },
         grid: [{ x: '12%', y: '10%', width: '84%', height: '50%' }],
         tooltip: {},
-        legend: {
-          data: [],
-          bottom: 20,
-          itemWidth: 50
-        },
+        legend: this.state.legend,
         xAxis: {
           type: 'category',
           boundaryGap: false,
