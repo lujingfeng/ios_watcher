@@ -65,7 +65,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
         legend: {
           data: [],
-          top: "70%",
+          top: "45%",
           itemWidth: 50
         },
   
@@ -114,7 +114,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         title: {
           text: ''
         },
-        grid: [{ x: '12%', y: '10%', width: '84%', height: '50%' }],
+        grid: [{ x: '12%', y: '10%', width: '84%', height: '30%' }],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -245,7 +245,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               "排名趋势对比图"
             )
           ),
-          _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 300 } })
+          _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 500 } })
         )
       );
     }

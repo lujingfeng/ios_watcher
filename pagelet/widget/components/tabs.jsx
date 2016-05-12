@@ -8,8 +8,17 @@ var Tabs = React.createClass({
 
   getInitialState: function(){
     return {
-      index: 0
+      index: this.props.tabIndex||0
     }
+  },
+
+  componentWillReceiveProps: function(nextProps){
+    var state = {};
+
+    if(nextProps.tabIndex != this.props.tabIndex){
+      state.index = nextProps.tabIndex;
+    }
+    this.setState(state);
   },
 
   onSelect: function(tab, idx){

@@ -1,11 +1,21 @@
 /**
   * @require ../detail.less
   */
-
+  
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
 import React from "react";
 
 var VersionLog = React.createClass({ 
+  componentDidMount:function(){
+    var query = this.props.query;
 
+    DetailAction.detailVersion({
+      country: query.country,
+      device: query.device,
+      id: query.id
+    });
+  },
   render: function(){
     return (
       <div className="version-log">

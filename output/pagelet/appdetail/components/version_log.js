@@ -12,6 +12,14 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
   
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var _react = require("react");
   
   var _react2 = _interopRequireDefault(_react);
@@ -19,6 +27,15 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
   var VersionLog = _react2["default"].createClass({
     displayName: "VersionLog",
   
+    componentDidMount: function componentDidMount() {
+      var query = this.props.query;
+  
+      _actionAction2["default"].detailVersion({
+        country: query.country,
+        device: query.device,
+        id: query.id
+      });
+    },
     render: function render() {
       return _react2["default"].createElement(
         "div",

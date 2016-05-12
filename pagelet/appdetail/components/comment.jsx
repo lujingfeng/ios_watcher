@@ -27,8 +27,6 @@ var Comment = React.createClass({
   },
 
   componentDidMount: function(){
-    
-
     DetailAction.commentDetail({
       id: this.state.id,
       duraTime: this.state.duraTime,

@@ -22,6 +22,8 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _actionAction = require("pagelet/appdetail/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -158,7 +160,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             _react2["default"].createElement(
               "td",
               null,
-              detail.filesize
+              (0, _staticMinxinsUtils.bytesToSize)(detail.filesize)
             )
           ),
           _react2["default"].createElement(

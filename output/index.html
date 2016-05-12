@@ -22,11 +22,12 @@
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/app_item.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/rank.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/appdetail/detail.css" />
-    <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/filter.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/compproduct/comp_analysis.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/myfav/my_fav.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/about.css" />
 </head>
 <body>
   
@@ -50,19 +51,22 @@
 <script type="text/javascript" src="/pagelet/search/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/search/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/search/components/search_input.js"></script>
-<script type="text/javascript" src="/pagelet/appdetail/components/baseinfo.js"></script>
-<script type="text/javascript" src="/pagelet/appdetail/components/category.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/baseinfo.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/category.js"></script>
+<script type="text/javascript" src="/static/minxins/utils.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/appinfo.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/realrank.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/version_log.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/keywords.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/comment.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/applevel.js"></script>
-<script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/calendar.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/filter.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
 <script type="text/javascript" src="/pagelet/top/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/top/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/top/components/topList.js"></script>
@@ -73,12 +77,13 @@
 <script type="text/javascript" src="/pagelet/underapp/components/underapp.js"></script>
 <script type="text/javascript" src="/pagelet/hotkeyword/components/hotkeyword.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/my_fav_item.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/index.js"></script>
-<script type="text/javascript" src="/pagelet/compproduct/action/action.js"></script>
-<script type="text/javascript" src="/pagelet/compproduct/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/components/compare.js"></script>
 <script type="text/javascript" src="/pagelet/myfav/components/my_fav_list.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/aso_service.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/about.js"></script>
 <script type="text/javascript" src="/static/entry.js"></script>
 <script>
   /**
@@ -109,6 +114,7 @@
                 "react",
                 "constants",
                 "pagelet/widget/components/loading.jsx",
+                "static/minxins/utils.js",
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js"
             ]
@@ -123,6 +129,13 @@
             "deps": [
                 "react"
             ]
+        },
+        "static/minxins/utils.js": {
+            "uri": "/static/minxins/utils.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "static/minxins/utils"
+            }
         },
         "pagelet/appdetail/store/store.js": {
             "uri": "/pagelet/appdetail/store/store.js",
@@ -165,7 +178,9 @@
             "deps": [
                 "pagelet/appdetail/detail.less",
                 "react",
-                "reactRouter"
+                "reactRouter",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js"
             ]
         },
         "reactRouter": {
@@ -215,7 +230,8 @@
                 "pagelet/appdetail/components/version_log.js",
                 "pagelet/appdetail/components/keywords.jsx",
                 "pagelet/appdetail/components/comment.jsx",
-                "pagelet/appdetail/components/applevel.jsx"
+                "pagelet/appdetail/components/applevel.jsx",
+                "pagelet/widget/components/filter.jsx"
             ]
         },
         "pagelet/widget/components/header.jsx": {
@@ -245,7 +261,31 @@
                 "react",
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js",
-                "constants"
+                "constants",
+                "pagelet/compproduct/action/action.js",
+                "pagelet/compproduct/store/store.js"
+            ]
+        },
+        "pagelet/compproduct/action/action.js": {
+            "uri": "/pagelet/compproduct/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/compproduct/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/compproduct/store/store.js": {
+            "uri": "/pagelet/compproduct/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/compproduct/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/compproduct/action/action.js"
             ]
         },
         "static/lib/echarts.min.js": {
@@ -263,6 +303,8 @@
             },
             "deps": [
                 "pagelet/appdetail/detail.less",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js",
                 "react"
             ]
         },
@@ -274,16 +316,36 @@
                 "react"
             ]
         },
-        "pagelet/compproduct/action/action.js": {
-            "uri": "/pagelet/compproduct/action/action.js",
+        "pagelet/widget/components/filter.jsx": {
+            "uri": "/pagelet/widget/components/filter.js",
             "type": "js",
-            "extras": {
-                "moduleId": "pagelet/compproduct/action/action"
-            },
             "deps": [
+                "pagelet/widget/filter.less",
+                "react",
+                "reactRouter",
+                "pagelet/widget/components/calendar.jsx",
+                "pagelet/widget/components/loading.jsx",
+                "constants",
                 "reflux",
                 "jquery"
             ]
+        },
+        "pagelet/widget/filter.less": {
+            "uri": "/pagelet/widget/filter.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/calendar.jsx": {
+            "uri": "/pagelet/widget/components/calendar.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/calendar.less",
+                "react",
+                "reactRouter"
+            ]
+        },
+        "pagelet/widget/calendar.less": {
+            "uri": "/pagelet/widget/calendar.css",
+            "type": "css"
         },
         "pagelet/compproduct/comp_analysis.less": {
             "uri": "/pagelet/compproduct/comp_analysis.css",
@@ -337,53 +399,11 @@
             "uri": "/pagelet/widget/app_item.css",
             "type": "css"
         },
-        "pagelet/widget/components/filter.jsx": {
-            "uri": "/pagelet/widget/components/filter.js",
-            "type": "js",
-            "deps": [
-                "pagelet/widget/filter.less",
-                "react",
-                "reactRouter",
-                "pagelet/widget/components/calendar.jsx",
-                "pagelet/widget/components/loading.jsx",
-                "constants",
-                "reflux",
-                "jquery"
-            ]
-        },
-        "pagelet/widget/filter.less": {
-            "uri": "/pagelet/widget/filter.css",
-            "type": "css"
-        },
-        "pagelet/widget/components/calendar.jsx": {
-            "uri": "/pagelet/widget/components/calendar.js",
-            "type": "js",
-            "deps": [
-                "pagelet/widget/calendar.less",
-                "react",
-                "reactRouter"
-            ]
-        },
-        "pagelet/widget/calendar.less": {
-            "uri": "/pagelet/widget/calendar.css",
-            "type": "css"
-        },
         "pagelet/compproduct/components/my_fav_item.jsx": {
             "uri": "/pagelet/compproduct/components/my_fav_item.js",
             "type": "js",
             "deps": [
                 "react"
-            ]
-        },
-        "pagelet/compproduct/store/store.js": {
-            "uri": "/pagelet/compproduct/store/store.js",
-            "type": "js",
-            "extras": {
-                "moduleId": "pagelet/compproduct/store/store"
-            },
-            "deps": [
-                "reflux",
-                "pagelet/compproduct/action/action.js"
             ]
         },
         "pagelet/compproduct/components/index.jsx": {
@@ -399,7 +419,9 @@
                 "pagelet/widget/components/appItem.jsx",
                 "pagelet/compproduct/components/my_fav_item.jsx",
                 "pagelet/search/action/action.js",
-                "pagelet/search/store/store.js"
+                "pagelet/search/store/store.js",
+                "pagelet/myfav/action/action.js",
+                "pagelet/myfav/store/store.js"
             ]
         },
         "pagelet/search/action/action.js": {
@@ -422,6 +444,28 @@
             "deps": [
                 "reflux",
                 "pagelet/search/action/action.js"
+            ]
+        },
+        "pagelet/myfav/action/action.js": {
+            "uri": "/pagelet/myfav/action/action.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/myfav/action/action"
+            },
+            "deps": [
+                "reflux",
+                "jquery"
+            ]
+        },
+        "pagelet/myfav/store/store.js": {
+            "uri": "/pagelet/myfav/store/store.js",
+            "type": "js",
+            "extras": {
+                "moduleId": "pagelet/myfav/store/store"
+            },
+            "deps": [
+                "reflux",
+                "pagelet/myfav/action/action.js"
             ]
         },
         "pagelet/hotkeyword/action/action.js": {
@@ -486,7 +530,9 @@
                 "pagelet/widget/components/header.jsx",
                 "pagelet/widget/components/loading.jsx",
                 "pagelet/widget/components/tabs.jsx",
-                "pagelet/widget/components/appItem.jsx"
+                "pagelet/widget/components/appItem.jsx",
+                "pagelet/myfav/action/action.js",
+                "pagelet/myfav/store/store.js"
             ]
         },
         "pagelet/myfav/my_fav.less": {
@@ -627,6 +673,7 @@
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
                 "pagelet/widget/components/filter.jsx",
+                "constants",
                 "pagelet/underapp/action/action.js",
                 "pagelet/underapp/store/store.js"
             ]
@@ -640,6 +687,19 @@
             "deps": [
                 "reflux",
                 "pagelet/underapp/action/action.js"
+            ]
+        },
+        "pagelet/widget/about.less": {
+            "uri": "/pagelet/widget/about.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/about.jsx": {
+            "uri": "/pagelet/widget/components/about.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/about.less",
+                "react",
+                "pagelet/widget/components/header.jsx"
             ]
         },
         "pagelet/widget/components/aso_service.js": {
@@ -687,7 +747,8 @@
                 "pagelet/compproduct/components/index.jsx",
                 "pagelet/compproduct/components/compare.jsx",
                 "pagelet/myfav/components/my_fav_list.jsx",
-                "pagelet/widget/components/aso_service.js"
+                "pagelet/widget/components/aso_service.js",
+                "pagelet/widget/components/about.jsx"
             ]
         },
         "constants": {
@@ -708,13 +769,6 @@
             "deps": [
                 "eventemitter3"
             ]
-        },
-        "static/minxins/utils.js": {
-            "uri": "/static/minxins/utils.js",
-            "type": "js",
-            "extras": {
-                "moduleId": "static/minxins/utils"
-            }
         }
     },
     "pkg": {}

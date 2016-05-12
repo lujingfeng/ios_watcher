@@ -4,12 +4,42 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
 
 var BaseInfo = React.createClass({ 
   mixins: [History], 
+
+  getInitialState: function(){
+    return {
+      isFav: false
+    }
+  },
+
+  componentDidMount: function(){
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+  },
+
+  componentWillUnmount: function(){
+    this.unSubscribe();
+  },
+
+  onStateChange: function(state){
+
+  },
    
   toCompare: function(){
     this.history.pushState(null, "/comp_analysis", this.props.query);
+  },
+
+  onFav: function(){
+    var query = this.props.query;
+    var isFav = !this.state.isFav;
+
+    this.setState({
+      isFav: isFav
+    });
+    DetailAction.addFav(query.appId, isFav?"attention":"cancel");
   },
 
   render: function(){
@@ -36,9 +66,9 @@ var BaseInfo = React.createClass({
               </div>
             </td>
             <td>
-              <div className="fav">
-                <div className="icon-fav fav-un"></div>
-                <p className="f12">添加关注</p>
+              <div className="fav" onClick={this.onFav}>
+                <div className={"icon-fav " + (this.state.isFav==0?"fav-un":"fav-added")}></div>
+                <p className="f12">{this.state.isFav?"取消关注":"添加关注"}</p>
               </div>
             </td>
           </tr>

@@ -21,6 +21,15 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
     init: function init() {
       this.listenTo(_actionActionJs2["default"].appInfo, this.loading);
       this.listenTo(_actionActionJs2["default"].appInfoCmp, this.appInfoCmp);
+  
+      this.listenTo(_actionActionJs2["default"].commentDetail, this.loading);
+      this.listenTo(_actionActionJs2["default"].commentDetailCmp, this.commentDetailCmp);
+  
+      this.listenTo(_actionActionJs2["default"].appLevel, this.loading);
+      this.listenTo(_actionActionJs2["default"].appLevelCmp, this.appLevelCmp);
+  
+      this.listenTo(_actionActionJs2["default"].detailVersion, this.loading);
+      this.listenTo(_actionActionJs2["default"].detailVersionCmp, this.detailVersionCmp);
     },
   
     loading: function loading() {
@@ -36,7 +45,14 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
         params.detailInfo = info;
       }
       this.trigger(params);
-    }
+    },
+  
+    detailVersionCmp: function detailVersionCmp(res) {},
+  
+    appLevelCmp: function appLevelCmp(res) {},
+  
+    commentDetailCmp: function commentDetailCmp(res) {}
+  
   });
   
   exports["default"] = DetailStore;

@@ -35,16 +35,8 @@ define('pagelet/top/store/store', function(require, exports, module) {
     fetchListCmp: function fetchListCmp(res) {
       var params = { loading: false };
   
-      if (res.fee) {
-        params.list = res.fee.rank ? res.fee.rank : [];
-      }
-  
-      if (res.free) {
-        params.list = res.free.rank ? res.free.rank : [];
-      }
-  
-      if (res.hot) {
-        params.list = res.hot.rank ? res.hot.rank : [];
+      if (res.rank) {
+        params.list = res.rank ? res.rank : [];
       }
   
       this.trigger(params);

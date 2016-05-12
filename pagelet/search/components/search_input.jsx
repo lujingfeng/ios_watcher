@@ -31,6 +31,8 @@ var Search = React.createClass({
       country: countryCode.CHINA,
 
       searchResultList: [],
+      hotWords:[],
+      records: [],
 
       page: 1,
       total: 0
@@ -39,6 +41,8 @@ var Search = React.createClass({
 
   componentDidMount: function(){
     this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    SearchAction.fetchHotApp();
+    SearchAction.fetchHistory();
   },
 
   componentWillUnmount: function(){
@@ -153,7 +157,7 @@ var Search = React.createClass({
           <label>热门应用</label>
           <div className="tags hot-app">
             {
-              hotApps.map((item, idx)=>{
+              this.state.hotWords.map((item, idx)=>{
                 return <span key={idx} onClick={()=>this.onTagSelected(item)}>{item}</span>
               })
             }
@@ -161,7 +165,7 @@ var Search = React.createClass({
           <label>历史搜索</label>
           <div className="tags history">
             {
-              historySearch.map((item, idx)=>{
+              this.state.records.map((item, idx)=>{
                 return <span key={idx} onClick={()=>this.onTagSelected(item)}>{item}</span>
               })
             }

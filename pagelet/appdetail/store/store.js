@@ -6,6 +6,15 @@ var DetailStore = Reflux.createStore({
     init: function(){
       this.listenTo(DetailAction.appInfo, this.loading);
       this.listenTo(DetailAction.appInfoCmp, this.appInfoCmp);
+
+      this.listenTo(DetailAction.commentDetail, this.loading);
+      this.listenTo(DetailAction.commentDetailCmp, this.commentDetailCmp);
+
+      this.listenTo(DetailAction.appLevel, this.loading);
+      this.listenTo(DetailAction.appLevelCmp, this.appLevelCmp);
+
+      this.listenTo(DetailAction.detailVersion, this.loading);
+      this.listenTo(DetailAction.detailVersionCmp, this.detailVersionCmp);
     },
     
     loading: function() {
@@ -21,7 +30,20 @@ var DetailStore = Reflux.createStore({
         params.detailInfo = info;
       }
       this.trigger(params);
+    },
+
+    detailVersionCmp: function(res){
+
+    },
+
+    appLevelCmp: function(res){
+
+    },
+
+    commentDetailCmp: function(res){
+      
     }
+
 });
 
 export default DetailStore;

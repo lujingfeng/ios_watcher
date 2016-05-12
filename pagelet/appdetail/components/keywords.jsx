@@ -5,7 +5,9 @@
 import React from "react";
 
 var Keywords = React.createClass({ 
-
+  componentDidMount: function(){
+    
+  },
   render: function(){
     
     return (

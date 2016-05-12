@@ -16,6 +16,8 @@ import CompAnalysis from "/pagelet/compproduct/components/index";
 import AppCompare from "/pagelet/compproduct/components/compare";
 import MyFavList from "/pagelet/myfav/components/my_fav_list";
 import ASOService from "/pagelet/widget/components/aso_service";
+import About from "/pagelet/widget/components/about";
+
 
 
 $.ajaxSetup ({
@@ -47,6 +49,9 @@ React.render((
        <Route path="/myfavlist" component={MyFavList}/>
        //ASO优化服务
        <Route path="/aso_service" component={ASOService}/>
+
+       //关于我们
+       <Route path="/about" component={About}/>
     </Route>
   </Router>
 ), document.body);

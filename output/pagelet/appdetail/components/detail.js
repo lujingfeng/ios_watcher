@@ -54,14 +54,40 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
   var _applevel2 = _interopRequireDefault(_applevel);
   
+  var _pageletWidgetComponentsFilter = require("pagelet/widget/components/filter.jsx");
+  
+  var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
+  
   var AppDetail = _react2["default"].createClass({
     displayName: "AppDetail",
   
     getInitialState: function getInitialState() {
-      return {};
+      return {
+        filter: null
+      };
+    },
+  
+    onFilter: function onFilter(filter) {
+      this.setState({
+        filter: filter
+      });
     },
   
     render: function render() {
+      var query = this.props.location.query;
+      if (query.filter) {
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+          onOk: this.onFilter,
+          showPayMethod: true,
+          device: true,
+          country: true,
+          days: true });
+      } else {
+        return this.renderDetail();
+      }
+    },
+  
+    renderDetail: function renderDetail() {
       var query = this.props.location.query;
       var params = this.props.params;
       var bottomView;
@@ -70,9 +96,10 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       if (params.module == 1) {
         bottomView = _react2["default"].createElement(_appinfo2["default"], { query: query });
       } else if (params.module == 2) {
-        bottomView = _react2["default"].createElement(_realrank2["default"], { query: query });
+        filterEnabled = true;
+        bottomView = _react2["default"].createElement(_realrank2["default"], { query: query, filter: this.state.filter });
       } else if (params.module == 3) {
-        bottomView = _react2["default"].createElement(_version_log2["default"], null);
+        bottomView = _react2["default"].createElement(_version_log2["default"], { query: query });
       } else if (params.module == 4) {
         bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
@@ -88,6 +115,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
           {
+            location: this.props.location,
             filterEnabled: filterEnabled,
             showSideNav: this.props.showSideNav },
           "应用详情"

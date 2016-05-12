@@ -46,6 +46,14 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
   
   var _pageletSearchStoreStore2 = _interopRequireDefault(_pageletSearchStoreStore);
   
+  var _pageletMyfavActionAction = require("pagelet/myfav/action/action");
+  
+  var _pageletMyfavActionAction2 = _interopRequireDefault(_pageletMyfavActionAction);
+  
+  var _pageletMyfavStoreStore = require("pagelet/myfav/store/store");
+  
+  var _pageletMyfavStoreStore2 = _interopRequireDefault(_pageletMyfavStoreStore);
+  
   var AppCompare = _react2["default"].createClass({
     displayName: "AppCompare",
   
@@ -53,8 +61,12 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
   
     getInitialState: function getInitialState() {
       return {
+        loading: false,
+  
         searchKey: null,
         searchResultList: [],
+  
+        favList: [],
   
         page: 1,
         total: 0
@@ -63,15 +75,25 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _pageletSearchStoreStore2["default"].listen(this.onStateChange.bind(this));
+      this.unFavSubscribe = _pageletMyfavStoreStore2["default"].listen(this.onFavStateChange.bind(this));
+      _pageletMyfavActionAction2["default"].fetFavLsit();
     },
   
     componentWillUnmount: function componentWillUnmount() {
       this.unSubscribe();
+      this.unFavSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
       if (state.searchResultList) {
         state.searchResultList = this.state.searchResultList.concat(state.searchResultList);
+      }
+      this.setState(state);
+    },
+  
+    onFavStateChange: function onFavStateChange(state) {
+      if (state.list) {
+        state.favList = state.list;
       }
       this.setState(state);
     },
@@ -116,8 +138,8 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
       this.history.pushState(null, pathName, params);
     },
   
-    onClickFavItem: function onClickFavItem() {
-      this.history.pushState(null, "/appcompare");
+    onClickFavItem: function onClickFavItem(data) {
+      this.onClickItem(data);
     },
   
     render: function render() {
@@ -126,6 +148,7 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
       var _state = this.state;
       var searchResultList = _state.searchResultList;
       var searchKey = _state.searchKey;
+      var favList = _state.favList;
   
       var query = this.props.location.query || {};
   
@@ -146,11 +169,10 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
           {
             onScroll: this.handleScroll.bind(this),
             className: "search-result c-body" },
-          _react2["default"].createElement(
+          searchResultList.length ? _react2["default"].createElement(
             "ul",
             {
-              className: "search-list",
-              style: { display: searchKey && searchResultList.length ? "block" : "none" } },
+              className: "search-list" },
             searchResultList.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 key: idx,
@@ -160,19 +182,15 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
                 index: idx });
             }),
             this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
-          ),
-          _react2["default"].createElement(
+          ) : null,
+          !this.state.loading && !searchResultList.length && favList.length ? _react2["default"].createElement(
             "ul",
-            {
-              style: { display: searchKey && searchResultList.length ? "none" : "block" },
-              className: "my-fav-list clearfix" },
-            _react2["default"].createElement(_my_fav_item2["default"], { onClick: this.onClickFavItem }),
-            _react2["default"].createElement(_my_fav_item2["default"], null),
-            _react2["default"].createElement(_my_fav_item2["default"], null),
-            _react2["default"].createElement(_my_fav_item2["default"], null),
-            _react2["default"].createElement(_my_fav_item2["default"], null),
-            _react2["default"].createElement(_my_fav_item2["default"], null)
-          )
+            { className: "my-fav-list clearfix" },
+            favList.map(function (item, idx) {
+              return _react2["default"].createElement(_my_fav_item2["default"], { data: item, onClick: _this.onClickFavItem });
+            })
+          ) : null,
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
         )
       );
     }

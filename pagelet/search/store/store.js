@@ -6,6 +6,12 @@ var SearchStore = Reflux.createStore({
     init: function(){
       this.listenTo(SearchAction.search, this.loading);
       this.listenTo(SearchAction.searchCmp, this.searchCmp);
+
+      this.listenTo(SearchAction.fetchHotApp, this.loading);
+      this.listenTo(SearchAction.fetchHotAppCmp, this.fetchHotAppCmp);
+
+      this.listenTo(SearchAction.fetchHistory, this.loading);
+      this.listenTo(SearchAction.fetchHistoryCmp, this.fetchHistoryCmp);
     },
     
     loading: function() {
@@ -26,6 +32,22 @@ var SearchStore = Reflux.createStore({
         searchResultList: searchResultList,
         total: total
       });
+    },
+
+    fetchHotAppCmp:function(res){
+      var params = {loading:false};
+      if(res && res.hotWords){
+        params.hotWords = res.hotWords||[];
+      }
+      this.trigger(params);
+    },
+
+    fetchHistoryCmp: function(res){
+      var params = {loading:false};
+      if(res && res.records){
+        params.records = res.records||[];
+      }
+      this.trigger(params);
     }
 });
 

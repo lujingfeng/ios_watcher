@@ -19,6 +19,7 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
   var Keywords = _react2["default"].createClass({
     displayName: "Keywords",
   
+    componentDidMount: function componentDidMount() {},
     render: function render() {
   
       return _react2["default"].createElement(

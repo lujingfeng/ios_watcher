@@ -66,6 +66,10 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var _pageletWidgetComponentsAso_service2 = _interopRequireDefault(_pageletWidgetComponentsAso_service);
   
+  var _pageletWidgetComponentsAbout = require("pagelet/widget/components/about.jsx");
+  
+  var _pageletWidgetComponentsAbout2 = _interopRequireDefault(_pageletWidgetComponentsAbout);
+  
   _staticLibJquery2["default"].ajaxSetup({
     cache: false //关闭AJAX缓存
   });
@@ -94,7 +98,9 @@ define('static/entry.jsx', function(require, exports, module) {
       "//我的关注",
       _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/myfavlist", component: _pageletMyfavComponentsMy_fav_list2["default"] }),
       "//ASO优化服务",
-      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/aso_service", component: _pageletWidgetComponentsAso_service2["default"] })
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/aso_service", component: _pageletWidgetComponentsAso_service2["default"] }),
+      "//关于我们",
+      _react2["default"].createElement(_staticLibReactRouter.Route, { path: "/about", component: _pageletWidgetComponentsAbout2["default"] })
     )
   ), document.body);
 

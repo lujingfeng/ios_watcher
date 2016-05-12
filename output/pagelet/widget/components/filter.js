@@ -274,6 +274,19 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 null,
                 "付费"
               )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.pay && curSelected.pay.value == _constants.payType.HOT ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onPay({ name: "畅销", value: _constants.payType.HOT });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "畅销"
+              )
             )
           )
         ) : null,

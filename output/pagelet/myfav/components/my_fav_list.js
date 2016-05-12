@@ -34,19 +34,32 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _actionAction = require("pagelet/myfav/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/myfav/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var MyFav = _react2["default"].createClass({
     displayName: "MyFav",
   
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
-      return {};
+      return {
+        list: []
+      };
     },
   
-    componentDidMount: function componentDidMount() {},
+    componentDidMount: function componentDidMount() {
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      _actionAction2["default"].fetFavLsit();
+    },
   
     componentWillUnmount: function componentWillUnmount() {
-      //this.unSubscribe();
+      this.unSubscribe();
     },
   
     onStateChange: function onStateChange(state) {
@@ -69,7 +82,9 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
         _react2["default"].createElement(
           "div",
           { className: "c-body" },
-          _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 6 })
+          this.state.list.map(function (item, idx) {
+            return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { key: idx, data: item, type: 6 });
+          })
         )
       );
     }

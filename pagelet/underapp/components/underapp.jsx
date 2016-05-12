@@ -12,6 +12,15 @@ import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
 
+import {
+  countryCode, 
+  deviceType, 
+  deviceTypeStr, 
+  payType,
+  payTypeToStr, 
+  days2Str,
+  countryCode2Str} from "constants";
+
 import UnderAppAction from "../action/action";
 import UnderAppStore from "../store/store";
 
@@ -19,27 +28,44 @@ var UnderAppList = React.createClass({
   mixins: [History],
 
   getInitialState: function(){
+    var now = new Date();
+    var defaultDatetime = {};
+    defaultDatetime.name = "今天";
+    defaultDatetime.value = 1;
+
     return {
       underAppList: [],
 
       //filter params
       page: 1,
-      country: "cn",
-      date: "20160409"
+      country: countryCode.CHINA,
+      date: defaultDatetime
     }
   },
 
   componentDidMount: function(){
     this.unSubscribe = UnderAppStore.listen(this.onStateChange.bind(this));
-    UnderAppAction.fetchUnderAppList({
-      country: this.state.country,
-      date: this.state.date,
-      page: this.state.page
-    });
+    this.fetchList();
   },
 
   componentWillUnmount: function(){
     this.unSubscribe();
+  },
+
+  fetchList: function(){
+    var state = this.state;
+    var date;
+    if(typeof state.date.value == "string"){
+      date = state.date.value.replace(/\-/g, "");
+    }else{
+      date = state.date.value;
+    }
+
+    UnderAppAction.fetchUnderAppList({
+      country: this.state.country,
+      date: date,
+      page: this.state.page
+    });
   },
 
   onStateChange: function(state){
@@ -63,12 +89,8 @@ var UnderAppList = React.createClass({
     var page = this.state.page + 1;
     this.setState({
       page: page
-    });
-
-    UnderAppAction.fetchUnderAppList({
-      country: this.state.country,
-      date: this.state.date,
-      page: this.state.page + 1
+    }, function(){
+      this.fetchList();
     });
   },
 
@@ -77,11 +99,34 @@ var UnderAppList = React.createClass({
     this.history.pushState("", "detail/1", query);
   },
 
+  onFilter: function(filter){
+    var state = {
+      underAppList: [],
+      page: 1
+    };
+
+  
+    if(filter.country){
+      state.country = filter.country.value;
+    }
+
+    if(filter.datetime){
+      state.date = filter.datetime;
+    }
+
+    this.setState(state, ()=>{
+      this.fetchList();
+    });
+  },
+
   render: function(){
     var query = this.props.location.query;
 
     if(query.filter){
-      return <Filter/>;
+      return <Filter
+              onOk={this.onFilter}
+              country={true}
+              datetime={true}/>;
     }else{
       return this.renderTop();
     }
@@ -93,6 +138,7 @@ var UnderAppList = React.createClass({
     return (
       <div className="c-page under-app-list">
         <Header 
+          location={this.props.location}
           filterEnabled={true}
           showSideNav={this.props.showSideNav}>
           下架应用监控
@@ -103,7 +149,8 @@ var UnderAppList = React.createClass({
           className="c-body">
 
           <p className="f12 center f-txt">
-            中国, 2016-04-29
+            {countryCode2Str[this.state.country]} &nbsp;
+            {this.state.date.name}
           </p>
 
           <ul className="list">

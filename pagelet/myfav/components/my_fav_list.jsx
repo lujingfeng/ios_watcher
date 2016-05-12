@@ -10,20 +10,25 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 
+import FavAction from "../action/action";
+import FavStore from "../store/store";
+
 var MyFav = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      list:[]
     }
   },
 
   componentDidMount: function(){
-  
+    this.unSubscribe = FavStore.listen(this.onStateChange.bind(this));
+    FavAction.fetFavLsit();
   },
 
   componentWillUnmount: function(){
-    //this.unSubscribe();
+    this.unSubscribe();
   },
 
   onStateChange: function(state){
@@ -42,7 +47,11 @@ var MyFav = React.createClass({
         </Header>
         
         <div className="c-body">
-          <AppItem type={6}/>
+          {
+            this.state.list.map((item, idx)=>{
+              return <AppItem key={idx} data={item} type={6}/>
+            })
+          }
         </div>
       </div>
     );

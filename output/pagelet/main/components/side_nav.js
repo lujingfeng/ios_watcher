@@ -165,7 +165,9 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             null,
             _react2["default"].createElement(
               "li",
-              null,
+              { onClick: function (e) {
+                  return _this2.onNav("/about");
+                } },
               _react2["default"].createElement("i", { className: "icon about" }),
               "关于我们"
             ),

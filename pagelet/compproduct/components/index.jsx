@@ -15,13 +15,21 @@ import MyFavItem from "./my_fav_item";
 import SearchAction from "/pagelet/search/action/action";
 import SearchStore from "/pagelet/search/store/store";
 
+import FavAction from "/pagelet/myfav/action/action";
+import FavStore from "/pagelet/myfav/store/store";
+
+
 var AppCompare = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      loading: false,
+
       searchKey: null,
       searchResultList: [],
+
+      favList: [],
 
       page: 1,
       total: 0
@@ -30,15 +38,25 @@ var AppCompare = React.createClass({
 
   componentDidMount: function(){
     this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
+    this.unFavSubscribe = FavStore.listen(this.onFavStateChange.bind(this));
+    FavAction.fetFavLsit();
   },
 
   componentWillUnmount: function(){
     this.unSubscribe();
+    this.unFavSubscribe();
   },
 
   onStateChange: function(state){
     if(state.searchResultList){
       state.searchResultList = this.state.searchResultList.concat(state.searchResultList);
+    }
+    this.setState(state);
+  },
+
+  onFavStateChange: function(state){
+    if(state.list){
+      state.favList = state.list;
     }
     this.setState(state);
   },
@@ -86,14 +104,15 @@ var AppCompare = React.createClass({
     this.history.pushState(null, pathName, params);
   },
 
-  onClickFavItem: function(){
-    this.history.pushState(null, "/appcompare");
+  onClickFavItem: function(data){
+    this.onClickItem(data);
   },
 
   render: function(){
     let {
       searchResultList,
-      searchKey
+      searchKey,
+      favList
     } = this.state;
 
     let query = this.props.location.query || {};
@@ -113,35 +132,41 @@ var AppCompare = React.createClass({
           onScroll={this.handleScroll.bind(this)}
           className="search-result c-body">
 
-          <ul 
-            className="search-list"
-            style={{display:searchKey && searchResultList.length?"block":"none"}}>
-            {
-              searchResultList.map((item, idx)=>{
-                return (
-                  <AppItem 
-                    key={idx}
-                    type={5} 
-                    onItemClick={this.onClickItem}
-                    data={item} 
-                    index={idx}/>)
-              })
-            }
-            {
-              this.state.loading?<Loading/>:null
-            }
-          </ul>
+          {
+            searchResultList.length ? (
+              <ul 
+                className="search-list">
+                {
+                  searchResultList.map((item, idx)=>{
+                    return (
+                      <AppItem 
+                        key={idx}
+                        type={5} 
+                        onItemClick={this.onClickItem}
+                        data={item} 
+                        index={idx}/>)
+                  })
+                }
+                {
+                  this.state.loading?<Loading/>:null
+                }
+              </ul>):null
+          }
 
-          <ul 
-            style={{display: searchKey && searchResultList.length?"none":"block"}}
-            className="my-fav-list clearfix">
-            <MyFavItem onClick={this.onClickFavItem}/>
-            <MyFavItem/>
-            <MyFavItem/>
-            <MyFavItem/>
-            <MyFavItem/>
-            <MyFavItem/>
-          </ul>
+          {
+            !this.state.loading && !searchResultList.length && favList.length?(
+              <ul className="my-fav-list clearfix">
+                {
+                  favList.map((item, idx)=>{
+                    return <MyFavItem data={item} onClick={this.onClickFavItem}/>
+                  })
+                }
+              </ul>):null
+          }
+
+          {
+            this.state.loading?<Loading/>:null
+          }
         </div>
       </div>
     );

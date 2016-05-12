@@ -16,7 +16,7 @@ define('pagelet/search/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var SearchAction = _reflux2["default"].createActions(["search", "searchCmp"]);
+  var SearchAction = _reflux2["default"].createActions(["search", "searchCmp", "fetchHotApp", "fetchHotAppCmp", "fetchHistory", "fetchHistoryCmp"]);
   
   SearchAction.search.preEmit = function (serachKey, page, country, device) {
     if (page === undefined) page = 1;
@@ -36,6 +36,32 @@ define('pagelet/search/action/action', function(require, exports, module) {
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
       SearchAction.searchCmp(res);
+    });
+  };
+  
+  SearchAction.fetchHotApp.preEmit = function () {
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/search/hotApp',
+      data: {},
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      SearchAction.fetchHotAppCmp(res);
+    });
+  };
+  
+  SearchAction.fetchHistory.preEmit = function () {
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/search/searchHistory',
+      data: {},
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      SearchAction.fetchHistoryCmp(res);
     });
   };
   

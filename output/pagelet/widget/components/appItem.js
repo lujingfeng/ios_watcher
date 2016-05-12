@@ -229,7 +229,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               null,
               _react2["default"].createElement(
                 "a",
-                { className: "f12 c-main" },
+                { className: "f12 c-main s-txt" },
                 "已选中"
               )
             );

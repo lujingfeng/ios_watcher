@@ -5,6 +5,7 @@
 import React from "react";
 import {deviceTypeStr, deviceStrToint} from "constants";
 import Loading from "/pagelet/widget/components/loading";
+import {bytesToSize} from "/static/minxins/utils";
 
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
@@ -62,7 +63,7 @@ var AppInfo = React.createClass({
           <tr><td>AppID:</td><td>{detail.appId}</td></tr>
           <tr><td>包名：</td><td>{detail.packageName}</td></tr>
           <tr><td>当前版本：</td><td>{detail.versionname}</td></tr>
-          <tr><td>应用大小:</td><td>{detail.filesize}</td></tr>
+          <tr><td>应用大小:</td><td>{bytesToSize(detail.filesize)}</td></tr>
           <tr><td>最后更新时间:</td><td>{updateTime}</td></tr>
           <tr style={{display: "none"}}><td >应用描述:</td><td></td></tr>
         </table>

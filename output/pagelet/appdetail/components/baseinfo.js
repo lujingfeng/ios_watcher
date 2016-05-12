@@ -18,13 +18,47 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var BaseInfo = _react2["default"].createClass({
     displayName: "BaseInfo",
   
     mixins: [_staticLibReactRouter.History],
   
+    getInitialState: function getInitialState() {
+      return {
+        isFav: false
+      };
+    },
+  
+    componentDidMount: function componentDidMount() {
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+    },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {},
+  
     toCompare: function toCompare() {
       this.history.pushState(null, "/comp_analysis", this.props.query);
+    },
+  
+    onFav: function onFav() {
+      var query = this.props.query;
+      var isFav = !this.state.isFav;
+  
+      this.setState({
+        isFav: isFav
+      });
+      _actionAction2["default"].addFav(query.appId, isFav ? "attention" : "cancel");
     },
   
     render: function render() {
@@ -80,12 +114,12 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "div",
-                { className: "fav" },
-                _react2["default"].createElement("div", { className: "icon-fav fav-un" }),
+                { className: "fav", onClick: this.onFav },
+                _react2["default"].createElement("div", { className: "icon-fav " + (this.state.isFav == 0 ? "fav-un" : "fav-added") }),
                 _react2["default"].createElement(
                   "p",
                   { className: "f12" },
-                  "添加关注"
+                  this.state.isFav ? "取消关注" : "添加关注"
                 )
               )
             )

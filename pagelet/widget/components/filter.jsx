@@ -215,6 +215,12 @@ var Filter = React.createClass({
                   onClick={e=>this.onPay({name:"付费", value:payType.FEE})}>
                   <span>付费</span>
                 </li>
+
+                <li 
+                  className={curSelected.pay && curSelected.pay.value==payType.HOT?"selected":null}
+                  onClick={e=>this.onPay({name:"畅销", value:payType.HOT})}>
+                  <span>畅销</span>
+                </li>
               </ul>
             </div>): null
         }

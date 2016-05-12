@@ -58,37 +58,42 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
+      var tabs = [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }];
+  
       return {
         loading: false,
   
-        tabs: [{ name: "免费榜", typeid: "" }, { name: "付费榜", typeid: "" }, { name: "畅销榜", typeid: "" }],
+        tabIndex: 0,
+        tabs: tabs,
   
         list: [],
   
-        genres: "",
+        genres: "总榜",
         payType: _constants.payType.FREE,
         device: _constants.deviceType.IPHONE,
         country: _constants.countryCode.CHINA,
   
         page: 1,
-        total: 0
+        pageSize: 20
       };
     },
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
-  
-      _actionAction2["default"].fetDownTopList({
-        genres: "",
-        type: this.state.payType,
-        device: this.state.device,
-        country: this.state.country,
-        test: true
-      });
+      this.fetchList();
     },
   
     componentWillUnmount: function componentWillUnmount() {
       this.unSubscribe();
+    },
+  
+    fetchList: function fetchList() {
+      _actionAction2["default"].fetDownTopList({
+        genres: this.state.genres,
+        type: this.state.payType,
+        device: this.state.device,
+        country: this.state.country
+      });
     },
   
     onStateChange: function onStateChange(state) {
@@ -98,51 +103,106 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     handleScroll: function handleScroll(e) {
       var _target = e.target;
   
-      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
+      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight) {
         this.loadMore();
       }
     },
   
-    loadMore: function loadMore() {},
+    loadMore: function loadMore() {
+      var page = this.state.page + 1;
+      this.setState({
+        page: page
+      });
+    },
   
     onItemClick: function onItemClick(data) {
       var query = Object.assign({}, data);
       this.history.pushState("", "detail/1", query);
     },
   
+    onSelectTab: function onSelectTab(tab, tabIndex) {
+      var _this = this;
+  
+      this.setState({
+        tabIndex: tabIndex,
+        list: [],
+        page: 1,
+        payType: tab.payType
+      }, function () {
+        _this.fetchList();
+      });
+    },
+  
+    onFilter: function onFilter(filter) {
+      var _this2 = this;
+  
+      var state = {
+        list: [],
+        page: 1
+      };
+  
+      if (filter.device) {
+        state.device = filter.device.value;
+      }
+      if (filter.country) {
+        state.country = filter.country.value;
+      }
+  
+      if (filter.category) {
+        state.genres = filter.category.name;
+      }
+      this.setState(state, function () {
+        _this2.fetchList();
+      });
+    },
+  
     render: function render() {
       var query = this.props.location.query;
   
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], null);
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+          onOk: this.onFilter,
+          device: true,
+          country: true,
+          category: true });
       } else {
         return this.renderTop();
       }
     },
   
     renderTop: function renderTop() {
-      var _this = this;
+      var _this3 = this;
   
       var list = this.state.list || [];
   
+      list = list.slice(0, this.state.page * this.state.pageSize);
+  
       return _react2["default"].createElement(
         "div",
-        { className: "c-page top7-down-list" },
+        { className: "c-page top7-up-list" },
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
           {
+            location: this.props.location,
             filterEnabled: true,
             showSideNav: this.props.showSideNav },
           "七日排名下降榜"
         ),
         _react2["default"].createElement(
           "div",
-          { className: "c-body" },
-          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs }),
+          { className: "c-body", onScroll: this.handleScroll },
+          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], {
+            tabIndex: this.state.tabIndex,
+            onSelect: this.onSelectTab,
+            tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            "所有分类，中国，iPhone, 2016-04-29"
+            this.state.genres,
+            "  ",
+            _constants.countryCode2Str[this.state.country],
+            "  ",
+            _constants.deviceTypeStr[this.state.device]
           ),
           _react2["default"].createElement(
             "ul",
@@ -150,7 +210,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
             list.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 type: 2,
-                onItemClick: _this.onItemClick,
+                onItemClick: _this3.onItemClick,
                 index: idx,
                 data: item });
             })

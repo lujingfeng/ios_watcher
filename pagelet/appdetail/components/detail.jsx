@@ -13,23 +13,50 @@ import KeyWords from "./keywords";
 import Comment from "./comment";
 import AppLevel from "./applevel";
 
+import Filter from "/pagelet/widget/components/filter";
+
+
 var AppDetail = React.createClass({
   getInitialState: function(){
-    return {}
+    return {
+      filter: null
+    }
+  },
+
+  onFilter: function(filter){
+    this.setState({
+      filter: filter
+    });
   },
 
   render: function(){
+    var query = this.props.location.query;
+    if(query.filter){
+      return <Filter
+              onOk={this.onFilter}
+              showPayMethod={true}
+              device={true}
+              country={true}
+              days={true}/>
+    }else{
+      return this.renderDetail();
+    }
+  },
+
+  renderDetail: function(){
     var query = this.props.location.query;
     var params = this.props.params;
     var bottomView;
     var filterEnabled = false;
 
+
     if(params.module == 1){
       bottomView = <AppInfo query={query}/>
     }else if(params.module == 2){
-      bottomView = <RealRank query={query}/>
+      filterEnabled = true;
+      bottomView = <RealRank query={query} filter={this.state.filter}/>
     }else if(params.module == 3){
-      bottomView = <VersionLog/>
+      bottomView = <VersionLog query={query}/>
     }else if(params.module == 4){
       bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
@@ -42,6 +69,7 @@ var AppDetail = React.createClass({
     return (
       <div className="c-page c-app-detail">
         <Header 
+          location={this.props.location}
           filterEnabled={filterEnabled}
           showSideNav={this.props.showSideNav}>应用详情</Header>
         <div className="c-body" >

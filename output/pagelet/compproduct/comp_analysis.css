@@ -25,6 +25,9 @@
   -webkit-background-size: 100% 100%;
           background-size: 100%;
 }
+.app-compare .my-fav-item {
+  height: 142px;
+}
 .my-fav-item {
   position: relative;
   float: left;

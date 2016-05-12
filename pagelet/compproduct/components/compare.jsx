@@ -18,7 +18,6 @@ import {
   days2Str,
   countryCode2Str} from "constants";
 import Filter from "/pagelet/widget/components/filter";
-
 import MyFavItem from "./my_fav_item";
 import CompareAction from "../action/action";
 import CompareStore from "../store/store";
@@ -34,7 +33,7 @@ var AppCompare = React.createClass({
 
       legend: {
         data:[],
-        top: "70%",
+        top: "45%",
         itemWidth:50
       },
 
@@ -82,7 +81,7 @@ var AppCompare = React.createClass({
         title: {
             text: ''
         },
-        grid:[{x: '12%', y: '10%', width: '84%', height: '50%'}],
+        grid:[{x: '12%', y: '10%', width: '84%', height: '30%'}],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -191,17 +190,17 @@ var AppCompare = React.createClass({
           <div className="content">
             <h5 className="title">
               <p className="fr f10 c999">
-              {deviceTypeStr[this.state.device]} &nbsp;
-              {payTypeToStr[this.state.payType]} &nbsp;
-              {countryCode2Str[this.state.country]} &nbsp;
-              {days2Str[this.state.days]}
+                {deviceTypeStr[this.state.device]} &nbsp;
+                {payTypeToStr[this.state.payType]} &nbsp;
+                {countryCode2Str[this.state.country]} &nbsp;
+                {days2Str[this.state.days]}
               </p>
               <i></i>
               排名趋势对比图
             </h5>
           </div>
 
-          <div ref="chart" style={{width:"100%", height: 300}}>
+          <div ref="chart" style={{width:"100%", height: 500}}>
 
           </div>
         </div>

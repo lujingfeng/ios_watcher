@@ -48,7 +48,6 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
     },
   
     componentDidMount: function componentDidMount() {
-  
       _actionAction2["default"].commentDetail({
         id: this.state.id,
         duraTime: this.state.duraTime,

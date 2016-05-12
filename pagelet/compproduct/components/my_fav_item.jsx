@@ -21,7 +21,7 @@ var MyFavItem = React.createClass({
     var type = this.props.type || "fav";
 
     return (
-      <li className="my-fav-item" onClick={this.props.onClick}>
+      <li className="my-fav-item" onClick={e=>this.props.onClick(data)}>
         <img src={data.icon}/>
         <p className="ellipsis mt6">
           {data.title}

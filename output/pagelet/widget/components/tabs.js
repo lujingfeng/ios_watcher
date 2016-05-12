@@ -21,8 +21,17 @@ define('pagelet/widget/components/tabs.jsx', function(require, exports, module) 
   
     getInitialState: function getInitialState() {
       return {
-        index: 0
+        index: this.props.tabIndex || 0
       };
+    },
+  
+    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+      var state = {};
+  
+      if (nextProps.tabIndex != this.props.tabIndex) {
+        state.index = nextProps.tabIndex;
+      }
+      this.setState(state);
     },
   
     onSelect: function onSelect(tab, idx) {

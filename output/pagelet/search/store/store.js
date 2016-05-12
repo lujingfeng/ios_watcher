@@ -21,6 +21,12 @@ define('pagelet/search/store/store', function(require, exports, module) {
     init: function init() {
       this.listenTo(_actionActionJs2["default"].search, this.loading);
       this.listenTo(_actionActionJs2["default"].searchCmp, this.searchCmp);
+  
+      this.listenTo(_actionActionJs2["default"].fetchHotApp, this.loading);
+      this.listenTo(_actionActionJs2["default"].fetchHotAppCmp, this.fetchHotAppCmp);
+  
+      this.listenTo(_actionActionJs2["default"].fetchHistory, this.loading);
+      this.listenTo(_actionActionJs2["default"].fetchHistoryCmp, this.fetchHistoryCmp);
     },
   
     loading: function loading() {
@@ -41,6 +47,22 @@ define('pagelet/search/store/store', function(require, exports, module) {
         searchResultList: searchResultList,
         total: total
       });
+    },
+  
+    fetchHotAppCmp: function fetchHotAppCmp(res) {
+      var params = { loading: false };
+      if (res && res.hotWords) {
+        params.hotWords = res.hotWords || [];
+      }
+      this.trigger(params);
+    },
+  
+    fetchHistoryCmp: function fetchHistoryCmp(res) {
+      var params = { loading: false };
+      if (res && res.records) {
+        params.records = res.records || [];
+      }
+      this.trigger(params);
     }
   });
   

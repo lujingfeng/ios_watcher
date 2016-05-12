@@ -30,12 +30,16 @@ define('pagelet/compproduct/components/my_fav_item.jsx', function(require, expor
     },
   
     render: function render() {
+      var _this = this;
+  
       var data = this.props.data || {};
       var type = this.props.type || "fav";
   
       return _react2["default"].createElement(
         "li",
-        { className: "my-fav-item", onClick: this.props.onClick },
+        { className: "my-fav-item", onClick: function (e) {
+            return _this.props.onClick(data);
+          } },
         _react2["default"].createElement("img", { src: data.icon }),
         _react2["default"].createElement(
           "p",

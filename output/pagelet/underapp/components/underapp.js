@@ -42,6 +42,8 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _constants = require("constants");
+  
   var _actionAction = require("pagelet/underapp/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -56,27 +58,44 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     mixins: [_staticLibReactRouter.History],
   
     getInitialState: function getInitialState() {
+      var now = new Date();
+      var defaultDatetime = {};
+      defaultDatetime.name = "今天";
+      defaultDatetime.value = 1;
+  
       return {
         underAppList: [],
   
         //filter params
         page: 1,
-        country: "cn",
-        date: "20160409"
+        country: _constants.countryCode.CHINA,
+        date: defaultDatetime
       };
     },
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
-      _actionAction2["default"].fetchUnderAppList({
-        country: this.state.country,
-        date: this.state.date,
-        page: this.state.page
-      });
+      this.fetchList();
     },
   
     componentWillUnmount: function componentWillUnmount() {
       this.unSubscribe();
+    },
+  
+    fetchList: function fetchList() {
+      var state = this.state;
+      var date;
+      if (typeof state.date.value == "string") {
+        date = state.date.value.replace(/\-/g, "");
+      } else {
+        date = state.date.value;
+      }
+  
+      _actionAction2["default"].fetchUnderAppList({
+        country: this.state.country,
+        date: date,
+        page: this.state.page
+      });
     },
   
     onStateChange: function onStateChange(state) {
@@ -98,12 +117,8 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
       var page = this.state.page + 1;
       this.setState({
         page: page
-      });
-  
-      _actionAction2["default"].fetchUnderAppList({
-        country: this.state.country,
-        date: this.state.date,
-        page: this.state.page + 1
+      }, function () {
+        this.fetchList();
       });
     },
   
@@ -112,18 +127,42 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
       this.history.pushState("", "detail/1", query);
     },
   
+    onFilter: function onFilter(filter) {
+      var _this = this;
+  
+      var state = {
+        underAppList: [],
+        page: 1
+      };
+  
+      if (filter.country) {
+        state.country = filter.country.value;
+      }
+  
+      if (filter.datetime) {
+        state.date = filter.datetime;
+      }
+  
+      this.setState(state, function () {
+        _this.fetchList();
+      });
+    },
+  
     render: function render() {
       var query = this.props.location.query;
   
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], null);
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+          onOk: this.onFilter,
+          country: true,
+          datetime: true });
       } else {
         return this.renderTop();
       }
     },
   
     renderTop: function renderTop() {
-      var _this = this;
+      var _this2 = this;
   
       var state = this.state;
   
@@ -133,6 +172,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
           {
+            location: this.props.location,
             filterEnabled: true,
             showSideNav: this.props.showSideNav },
           "下架应用监控"
@@ -145,7 +185,9 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            "中国, 2016-04-29"
+            _constants.countryCode2Str[this.state.country],
+            "  ",
+            this.state.date.name
           ),
           _react2["default"].createElement(
             "ul",
@@ -153,7 +195,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
             state.underAppList.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 type: 7,
-                onItemClick: _this.onItemClick,
+                onItemClick: _this2.onItemClick,
                 index: idx,
                 data: item });
             })

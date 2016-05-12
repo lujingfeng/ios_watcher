@@ -12,7 +12,13 @@ var DetailAction = Reflux.createActions([
   "commentDetailCmp",
 
   "appLevel",
-  "appLevelCmp"
+  "appLevelCmp",
+
+  "detailVersion",
+  "detailVersionCmp",
+
+  "addFav",
+  "addFavCmp"
 ]);
 
 DetailAction.appInfo.preEmit = function(id, device, country) {
@@ -68,6 +74,35 @@ DetailAction.appLevel.preEmit = (query={}) => {
 
   $.ajax(params).always(function( res ){
       DetailAction.appLevelCmp(res);
+  });
+};
+
+DetailAction.detailVersion.preEmit = (query={}) => {
+  var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/iosversiondetail',
+      data: query,
+      dataType: 'json'
+  }
+
+  $.ajax(params).always(function( res ){
+      DetailAction.detailVersionCmp(res);
+  });
+};
+
+DetailAction.addFav.preEmit = (appId, attention) => {
+  var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/attention/attention-app',
+      data: {
+        app_id: appId,
+        type: attention
+      },
+      dataType: 'json'
+  }
+
+  $.ajax(params).always(function( res ){
+      DetailAction.addFavCmp(res);
   });
 };
 

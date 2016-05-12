@@ -106,7 +106,7 @@ var SideNav = React.createClass({
           </ul>
 
           <ul>
-            <li>
+            <li onClick={e=>this.onNav("/about")}>
               <i className="icon about"></i>
               关于我们
             </li>

@@ -154,7 +154,7 @@ var AppItem = React.createClass({
         </td>);
       column3 = (
         <td>
-          <a className="f12 c-main">已选中</a>
+          <a className="f12 c-main s-txt">已选中</a>
         </td>
       );
     //我的关注Item

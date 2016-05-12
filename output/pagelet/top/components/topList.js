@@ -61,39 +61,46 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       var tabs = [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }];
   
       var now = new Date();
+      var defaultDatetime = {};
+      defaultDatetime.name = "今天";
+      defaultDatetime.value = 1;
   
       return {
+        loading: false,
+  
+        tabIndex: 0,
         tabs: tabs,
+  
         list: [],
   
-        genres: "",
+        genres: "总榜",
         payType: _constants.payType.FREE,
-        date: now.format("yyyy-MM-dd"),
-        country: _constants.countryCode.CHINA,
         device: _constants.deviceType.IPHONE,
+        country: _constants.countryCode.CHINA,
+        date: defaultDatetime,
   
         page: 1,
-        total: 0
+        pageSize: 20
       };
     },
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
-  
-      var now = new Date();
-  
-      _actionAction2["default"].fetchList({
-        genres: this.state.genres,
-        date: this.state.date,
-        country: this.state.country,
-        device: this.state.device,
-        type: this.state.payType,
-        test: true
-      });
+      this.fetchList();
     },
   
     componentWillUnmount: function componentWillUnmount() {
       this.unSubscribe();
+    },
+  
+    fetchList: function fetchList() {
+      _actionAction2["default"].fetchList({
+        genres: this.state.genres,
+        type: this.state.payType,
+        device: this.state.device,
+        country: this.state.country,
+        date: this.state.date.value
+      });
     },
   
     onStateChange: function onStateChange(state) {
@@ -103,7 +110,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     handleScroll: function handleScroll(e) {
       var _target = e.target;
   
-      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight && !this.state.loading && this.state.searchResultList.length < this.state.total) {
+      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight) {
         this.loadMore();
       }
     },
@@ -113,8 +120,6 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       this.setState({
         page: page
       });
-  
-      SearchAction.search(this.state.searchKey, page);
     },
   
     onItemClick: function onItemClick(data) {
@@ -122,24 +127,44 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       this.history.pushState("", "detail/1", query);
     },
   
-    onSelectTab: function onSelectTab(tab) {
+    onSelectTab: function onSelectTab(tab, tabIndex) {
       var _this = this;
   
       this.setState({
+        tabIndex: tabIndex,
+        list: [],
+        page: 1,
         payType: tab.payType
       }, function () {
-        _actionAction2["default"].fetchList({
-          date: _this.state.date,
-          country: _this.state.country,
-          device: _this.state.device,
-          type: _this.state.payType,
-          test: true
-        });
+        _this.fetchList();
       });
     },
   
-    onFilter: function onFilter(filterParams) {
-      console.log(filterParams);
+    onFilter: function onFilter(filter) {
+      var _this2 = this;
+  
+      var state = {
+        list: [],
+        page: 1
+      };
+  
+      if (filter.device) {
+        state.device = filter.device.value;
+      }
+      if (filter.country) {
+        state.country = filter.country.value;
+      }
+  
+      if (filter.category) {
+        state.genres = filter.category.name;
+      }
+  
+      if (filter.datetime) {
+        state.date = filter.datetime;
+      }
+      this.setState(state, function () {
+        _this2.fetchList();
+      });
     },
   
     render: function render() {
@@ -150,39 +175,48 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
           onOk: this.onFilter,
           device: true,
           country: true,
-          datetime: true,
-          days: true,
-          category: true });
+          category: true,
+          datetime: true });
       } else {
         return this.renderTop();
       }
     },
   
     renderTop: function renderTop() {
-      var _this2 = this;
+      var _this3 = this;
   
       var list = this.state.list || [];
   
+      list = list.slice(0, this.state.page * this.state.pageSize);
+  
       return _react2["default"].createElement(
         "div",
-        { className: "c-page top-list" },
+        { className: "c-page top7-up-list" },
         _react2["default"].createElement(
           _pageletWidgetComponentsHeader2["default"],
           {
+            location: this.props.location,
             filterEnabled: true,
             showSideNav: this.props.showSideNav },
           "iOS榜单排名"
         ),
         _react2["default"].createElement(
           "div",
-          { className: "c-body" },
+          { className: "c-body", onScroll: this.handleScroll },
           _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], {
+            tabIndex: this.state.tabIndex,
             onSelect: this.onSelectTab,
             tabs: this.state.tabs }),
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            "所有分类，中国，iPhone, 2016-04-29"
+            this.state.genres,
+            "  ",
+            _constants.countryCode2Str[this.state.country],
+            "  ",
+            _constants.deviceTypeStr[this.state.device],
+            "  ",
+            this.state.date.name
           ),
           _react2["default"].createElement(
             "ul",
@@ -190,7 +224,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
             list.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 type: 2,
-                onItemClick: _this2.onItemClick,
+                onItemClick: _this3.onItemClick,
                 index: idx,
                 data: item });
             })

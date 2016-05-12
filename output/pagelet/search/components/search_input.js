@@ -58,6 +58,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
         country: _constants.countryCode.CHINA,
   
         searchResultList: [],
+        hotWords: [],
+        records: [],
   
         page: 1,
         total: 0
@@ -66,6 +68,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _pageletSearchStoreStore2["default"].listen(this.onStateChange.bind(this));
+      _pageletSearchActionAction2["default"].fetchHotApp();
+      _pageletSearchActionAction2["default"].fetchHistory();
     },
   
     componentWillUnmount: function componentWillUnmount() {
@@ -174,7 +178,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           _react2["default"].createElement(
             "div",
             { className: "tags hot-app" },
-            hotApps.map(function (item, idx) {
+            this.state.hotWords.map(function (item, idx) {
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
@@ -192,7 +196,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           _react2["default"].createElement(
             "div",
             { className: "tags history" },
-            historySearch.map(function (item, idx) {
+            this.state.records.map(function (item, idx) {
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
