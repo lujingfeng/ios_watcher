@@ -64,7 +64,38 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       this.trigger(params);
     },
   
-    appLevelCmp: function appLevelCmp(res) {},
+    appLevelCmp: function appLevelCmp(res) {
+      var params = { loading: false };
+  
+      if (res["当前版本"]) {
+        var data = res["当前版本"];
+        var allCount = data.starCount;
+  
+        for (var i in allCount) {
+          var item = {};
+          data[i] = item;
+          item.count = parseInt(allCount[i]);
+          item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
+        }
+  
+        params.cur = data;
+      }
+  
+      if (res["历史版本"]) {
+        var data = res["历史版本"];
+        var allCount = data.starCount;
+  
+        for (var i in allCount) {
+          var item = {};
+          data[i] = item;
+          item.count = parseInt(allCount[i]);
+          item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
+        }
+        params.history = data;
+      }
+  
+      this.trigger(params);
+    },
   
     commentDetailCmp: function commentDetailCmp(res) {
       console.log(res);

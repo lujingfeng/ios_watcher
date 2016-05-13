@@ -6,6 +6,8 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     value: true
   });
   
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -76,12 +78,20 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     render: function render() {
       var query = this.props.location.query;
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
-          onOk: this.onFilter,
-          showPayMethod: true,
-          device: true,
-          country: true,
-          days: true });
+        var props = {};
+        var params = this.props.params;
+  
+        if (params.module == 2) {
+          props.showPayMethod = true;
+          props.device = true;
+          props.country = true;
+          props.days = true;
+        } else if (params.module == 5) {
+          props.days = true;
+          props.score = true;
+        }
+  
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({ onOk: this.onFilter }, props));
       } else {
         return this.renderDetail();
       }

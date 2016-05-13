@@ -32,12 +32,21 @@ var AppDetail = React.createClass({
   render: function(){
     var query = this.props.location.query;
     if(query.filter){
-      return <Filter
-              onOk={this.onFilter}
-              showPayMethod={true}
-              device={true}
-              country={true}
-              days={true}/>
+      var props = {};
+      var params = this.props.params;
+
+      if(params.module == 2){
+        props.showPayMethod = true;
+        props.device = true;
+        props.country = true;
+        props.days = true;
+      }else if(params.module == 5){
+        props.days = true;
+        props.score = true;
+      }
+
+
+      return <Filter onOk={this.onFilter} {...props}/>
     }else{
       return this.renderDetail();
     }

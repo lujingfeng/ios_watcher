@@ -77,7 +77,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       return {
         loading: true,
         showCalendar: false,
-  
+        score: [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }],
         device: [],
         country: [],
         genres: [],
@@ -172,6 +172,12 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       this.setState({ curSelected: curSelected });
     },
   
+    onScore: function onScore(score) {
+      var curSelected = this.state.curSelected;
+      curSelected.score = score;
+      this.setState({ curSelected: curSelected });
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -193,6 +199,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var showDays = !!this.props.days;
       var showCategory = !!this.props.category;
       var showPayMethod = !!this.props.showPayMethod;
+      var showScore = !!this.props.score;
   
       return _react2["default"].createElement(
         "div",
@@ -224,6 +231,37 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 return _this.onDevice(item);
               };
               if (curSelected.device && curSelected.device.value == item.value) {
+                props.className = "selected";
+              }
+              return _react2["default"].createElement(
+                "li",
+                props,
+                _react2["default"].createElement(
+                  "span",
+                  null,
+                  item.name
+                )
+              );
+            })
+          )
+        ) : null,
+        showScore && state.score.length ? _react2["default"].createElement(
+          "div",
+          null,
+          _react2["default"].createElement(
+            "h5",
+            null,
+            "评级"
+          ),
+          _react2["default"].createElement(
+            "ul",
+            { className: "f-type clearfix" },
+            state.score.map(function (item, idx) {
+              var props = {};
+              props.onClick = function (e) {
+                return _this.onScore(item);
+              };
+              if (curSelected.score && curSelected.score.value == item.value) {
                 props.className = "selected";
               }
               return _react2["default"].createElement(

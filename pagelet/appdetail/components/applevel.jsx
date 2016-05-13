@@ -4,6 +4,7 @@
 
 import React from "react";
 import Rank from "/pagelet/widget/components/rank";
+import Loading from "/pagelet/widget/components/loading";
 
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
@@ -14,22 +15,46 @@ var AppLevel = React.createClass({
     var query = this.props.query;
 
     return {
+      loading: true,
+
       id: query.id,
       country: countryCode.CHINA,
-      device: deviceType.IPHONE
+      device: deviceType.IPHONE,
+
+      history: {},
+      cur: {}
     }
   },
 
   componentDidMount: function(){
     DetailAction.appLevel({
-      id: this.state.id,
+      id: "77",//this.state.id,
       country: this.state.country,
       device: this.state.device
     });
+
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+  },
+
+  componentWillUnmount: function(){
+    this.unSubscribe();
+  },
+
+  onStateChange: function(state){
+    this.setState(state);
   },
 
   render: function(){
-    
+    var cur = this.state.cur;
+    var history = this.state.history;
+    console.log(cur, history);
+
+    if(this.state.loading){
+      return <Loading/>;
+    }
+
+    var width = 100;
+
     return (
       <div className="app-detail-level">
         <h5 className="title">
@@ -40,7 +65,7 @@ var AppLevel = React.createClass({
         <table className="border">
           <tr>
             <th>
-              <p className="fr">最后更新时间：2016-10-10</p>
+              <p className="fr">最后更新时间：{cur.updateTime}</p>
               <p>当前版本评分（3.2.4）</p>
             </th>
           </tr>
@@ -48,36 +73,36 @@ var AppLevel = React.createClass({
           <tr>
             <td className="clearfix">
               <div className="left fl">
-                <p className="f24 score">4.2</p>
-                <p><Rank value={4.2} width={14}/></p>
-                <p className="f10">评分次数:10240</p>
+                <p className="f24 score">{cur.averageScore}</p>
+                <p><Rank value={parseInt(cur.averageScore)} width={14}/></p>
+                <p className="f10">评分次数:{cur.totalCount}</p>
               </div>
               <div className="right fl">
                 <ul>
                   <li>
                     <span>5星</span>
-                    <i className="prs" style={{width: 80}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * cur[5].percentage }}></i>
+                    <span className="fr">{cur[5].count}</span>
                   </li>
                   <li>
                     <span>4星</span>
-                    <i className="prs" style={{width: 50}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width*cur[4].percentage}}></i>
+                    <span className="fr">{cur[4].count}</span>
                   </li>
                   <li>
                     <span>3星</span>
-                    <i className="prs" style={{width: 40}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width*cur[3].percentage}}></i>
+                    <span className="fr">{cur[3].count}</span>
                   </li>
                   <li>
                     <span>2星</span>
-                    <i className="prs" style={{width: 20}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width*cur[2].percentage}}></i>
+                    <span className="fr">{cur[2].count}</span>
                   </li>
                   <li>
                     <span>1星</span>
-                    <i className="prs" style={{width: 10}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width*cur[1].percentage}}></i>
+                    <span className="fr">{cur[1].count}</span>
                   </li>
                 </ul>
               </div>
@@ -88,7 +113,7 @@ var AppLevel = React.createClass({
         <table className="border">
           <tr>
             <th>
-              <p className="fr">最后更新时间:2016-10-10</p>
+              <p className="fr">最后更新时间:{history.updateTime}</p>
               <p>历史版本评分（3.2.4）</p>
             </th>
           </tr>
@@ -96,36 +121,36 @@ var AppLevel = React.createClass({
           <tr>
             <td className="clearfix">
               <div className="left fl">
-                <p className="f24 score">4.2</p>
-                <p><Rank value={4.2} width={14}/></p>
-                <p className="f10">评分次数：10240</p>
+                <p className="f24 score">{history.averageScore}</p>
+                <p><Rank value={parseInt(history.averageScore)} width={14}/></p>
+                <p className="f10">评分次数：{history.totalCount}</p>
               </div>
               <div className="right fl">
                 <ul>
                   <li>
                     <span>5星</span>
-                    <i className="prs" style={{width: 80}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * history[5].percentage}}></i>
+                    <span className="fr">{history[5].count}</span>
                   </li>
                   <li>
                     <span>4星</span>
-                    <i className="prs" style={{width: 50}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * history[4].percentage }}></i>
+                    <span className="fr">{history[4].count}</span>
                   </li>
                   <li>
                     <span>3星</span>
-                    <i className="prs" style={{width: 40}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * history[3].percentage }}></i>
+                    <span className="fr">{history[3].count}</span>
                   </li>
                   <li>
                     <span>2星</span>
-                    <i className="prs" style={{width: 20}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * history[2].percentage }}></i>
+                    <span className="fr">{history[2].count}</span>
                   </li>
                   <li>
                     <span>1星</span>
-                    <i className="prs" style={{width: 10}}></i>
-                    <span className="fr">12321</span>
+                    <i className="prs" style={{width: width * history[1].percentage }}></i>
+                    <span className="fr">{history[1].count}</span>
                   </li>
                 </ul>
               </div>

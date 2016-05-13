@@ -55,7 +55,12 @@ var Filter = React.createClass({
     return {
       loading: true,
       showCalendar:false,
-
+      score: [
+        {name: "1星", value:1},
+        {name: "2星", value:2},
+        {name: "3星", value:3},
+        {name: "4星", value:4},
+        {name: "5星", value:5}],
       device: [],
       country:[],
       genres: [],
@@ -150,6 +155,12 @@ var Filter = React.createClass({
     this.setState({curSelected});
   },
 
+  onScore: function(score){
+    var curSelected = this.state.curSelected;
+    curSelected.score = score;
+    this.setState({curSelected});
+  },
+
   render: function(){
     if(this.state.loading){
       return <Loading/>
@@ -171,6 +182,7 @@ var Filter = React.createClass({
     var showDays = !!this.props.days;
     var showCategory = !!this.props.category;
     var showPayMethod = !!this.props.showPayMethod;
+    var showScore = !!this.props.score;
 
     return (
       <div className="c-filter">
@@ -189,6 +201,27 @@ var Filter = React.createClass({
                     var props = {};
                     props.onClick=(e=>this.onDevice(item));
                     if(curSelected.device && curSelected.device.value == item.value){
+                      props.className="selected";
+                    }
+                    return (
+                      <li {...props}><span>{item.name}</span></li>
+                    );
+                  })
+                }
+              </ul>
+            </div>):null
+        }
+
+        {
+          showScore && state.score.length?(
+            <div>
+              <h5>评级</h5>
+              <ul className="f-type clearfix">
+                {
+                  state.score.map((item, idx)=>{
+                    var props = {};
+                    props.onClick=(e=>this.onScore(item));
+                    if(curSelected.score && curSelected.score.value == item.value){
                       props.className="selected";
                     }
                     return (
