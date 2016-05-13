@@ -95,7 +95,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
   
       if (filterEnabled) {
         var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-        this.history.pushState(null, pathname, Object.assign({ filter: true }, loc.query));
+        this.history.pushState(null, pathname, _jquery2["default"].extend({ filter: true }, loc.query));
       }
     },
   

@@ -18,6 +18,10 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -123,7 +127,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     },
   
     onItemClick: function onItemClick(data) {
-      var query = $.extend({}, data);
+      var query = _jquery2["default"].extend({}, data);
       this.history.pushState("", "detail/1", query);
     },
   

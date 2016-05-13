@@ -4,7 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-
+import $ from "jquery";
 import Header from "/pagelet/widget/components/header";
 import Rank from "/pagelet/widget/components/rank";
 import Loading from "/pagelet/widget/components/loading";

@@ -18,6 +18,10 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -117,7 +121,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     },
   
     onItemClick: function onItemClick(data) {
-      var query = $.extend({}, data);
+      var query = _jquery2["default"].extend({}, data);
       this.history.pushState("", "detail/1", query);
     },
   

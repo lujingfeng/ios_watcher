@@ -66,7 +66,21 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
   
     appLevelCmp: function appLevelCmp(res) {},
   
-    commentDetailCmp: function commentDetailCmp(res) {}
+    commentDetailCmp: function commentDetailCmp(res) {
+      console.log(res);
+      var array = [];
+      var comment;
+  
+      if (comment = res.comment) {
+        for (var i in comment) {
+          array.push(comment[i]);
+        }
+      }
+  
+      var params = { loading: false };
+      params.list = array;
+      this.trigger(params);
+    }
   
   });
   

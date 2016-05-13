@@ -20,6 +20,10 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsRank2 = _interopRequireDefault(_pageletWidgetComponentsRank);
   
+  var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
+  
+  var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
+  
   var _actionAction = require("pagelet/appdetail/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -43,22 +47,44 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
         device: _constants.deviceType.IPHONE,
         bIndex: 1,
         count: 20,
-        score: 3
+        score: 3,
+  
+        list: []
       };
     },
   
     componentDidMount: function componentDidMount() {
+      var score = "";
+  
+      for (var i = 1; i <= this.state.score; i++) {
+        score = score + "," + i;
+      }
+  
+      score = score.slice(1, score.length);
+  
       _actionAction2["default"].commentDetail({
-        id: this.state.id,
+        id: "711", //this.state.id,
         duraTime: this.state.duraTime,
         country: this.state.country,
         device: this.state.device,
         bIndex: this.state.bIndex,
         count: this.state.count,
-        score: this.state.score
+        score: score
       });
+  
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
     },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {
+      this.setState(state);
+    },
+  
     render: function render() {
+      var list = this.state.list;
   
       return _react2["default"].createElement(
         "div",
@@ -86,40 +112,43 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
               "评论内容"
             )
           ),
-          _react2["default"].createElement(
-            "tr",
-            null,
-            _react2["default"].createElement(
-              "td",
+          list.map(function (item, idx) {
+            return _react2["default"].createElement(
+              "tr",
               null,
               _react2["default"].createElement(
-                "p",
+                "td",
                 null,
-                "发撒旦发神经大夫isf打龙卷风离开 圣诞快乐解放路四大皆空发就是垃圾 啊放假看i维京人历史地看福建省里卡 多发觉就就解决了发   辅导书"
-              ),
-              _react2["default"].createElement(
-                "div",
-                { className: "c999 f10 mt6" },
                 _react2["default"].createElement(
-                  "i",
-                  { className: "mr6 t-vt" },
-                  "聚灵天下"
+                  "p",
+                  null,
+                  item.content
                 ),
                 _react2["default"].createElement(
-                  "i",
-                  { className: "mr6 t-vt" },
-                  "v1.2.0"
-                ),
-                _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: 2.5, width: 14 }),
-                _react2["default"].createElement(
-                  "i",
-                  { className: "ml6 t-vt" },
-                  "2016-02-29"
+                  "div",
+                  { className: "c999 f10 mt6" },
+                  _react2["default"].createElement(
+                    "i",
+                    { className: "mr6 t-vt" },
+                    item.authorName
+                  ),
+                  _react2["default"].createElement(
+                    "i",
+                    { className: "mr6 t-vt" },
+                    item.versionName
+                  ),
+                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: parseInt(item.score), width: 14 }),
+                  _react2["default"].createElement(
+                    "i",
+                    { className: "ml6 t-vt" },
+                    item.dateTime
+                  )
                 )
               )
-            )
-          )
-        )
+            );
+          })
+        ),
+        this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
       );
     }
   });

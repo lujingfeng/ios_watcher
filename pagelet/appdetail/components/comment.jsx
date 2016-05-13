@@ -4,7 +4,7 @@
 
 import React from "react";
 import Rank from "/pagelet/widget/components/rank";
-
+import Loading from "/pagelet/widget/components/loading";
 
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
@@ -22,23 +22,45 @@ var Comment = React.createClass({
       device: deviceType.IPHONE,
       bIndex: 1,
       count: 20,
-      score:3
+      score:3,
+
+      list: []
     }
   },
 
   componentDidMount: function(){
+    var score = "";
+    
+    for(var i=1; i<=this.state.score; i++){
+      score = score +","+i
+    }
+
+    score=score.slice(1,score.length);
+
     DetailAction.commentDetail({
-      id: this.state.id,
+      id: "711",//this.state.id,
       duraTime: this.state.duraTime,
       country: this.state.country,
       device: this.state.device,
       bIndex: this.state.bIndex,
       count: this.state.count,
-      score: this.state.score
+      score: score
     });
+
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
   },
+
+  componentWillUnmount: function(){
+    this.unSubscribe();
+  },
+
+  onStateChange: function(state){
+    this.setState(state);
+  },
+
   render: function(){
-    
+    var list = this.state.list;
+
     return (
       <div className="comment">
         <h5 className="title">
@@ -51,24 +73,29 @@ var Comment = React.createClass({
           <tr>
             <th>评论内容</th>
           </tr>
-
-          <tr>
-            <td>
-              <p>
-               发撒旦发神经大夫isf打龙卷风离开
-               圣诞快乐解放路四大皆空发就是垃圾
-               啊放假看i维京人历史地看福建省里卡
-               多发觉就就解决了发   辅导书
-              </p>
-              <div className="c999 f10 mt6">
-                <i className="mr6 t-vt">聚灵天下</i>
-                <i className="mr6 t-vt">v1.2.0</i>
-                <Rank value={2.5} width={14}/>
-                <i className="ml6 t-vt">2016-02-29</i>
-              </div>
-            </td>
-          </tr>
+          {
+            list.map((item, idx)=>{
+              return (
+                <tr>
+                  <td>
+                    <p>
+                    {item.content}
+                    </p>
+                    <div className="c999 f10 mt6">
+                      <i className="mr6 t-vt">{item.authorName}</i>
+                      <i className="mr6 t-vt">{item.versionName}</i>
+                      <Rank value={parseInt(item.score)} width={14}/>
+                      <i className="ml6 t-vt">{item.dateTime}</i>
+                    </div>
+                  </td>
+                </tr>)
+            })
+          }
         </table>
+        {
+          this.state.loading?<Loading/>: null
+        }
+
       </div>
     );
   }
