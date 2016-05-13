@@ -92,6 +92,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
         searchKey: key
       });
       _pageletSearchActionAction2["default"].search(key, 1, this.state.country, this.state.device);
+  
+      _pageletSearchActionAction2["default"].addHistory(key);
     },
   
     onChooseDevice: function onChooseDevice(tab) {
@@ -112,7 +114,10 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
         page: 1,
         total: 0
       });
+  
       _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
+  
+      _pageletSearchActionAction2["default"].addHistory(searchWord);
     },
   
     handleScroll: function handleScroll(e) {

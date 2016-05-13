@@ -67,6 +67,8 @@ var Search = React.createClass({
       this.state.country,
       this.state.device
     );
+    
+    SearchAction.addHistory(key);
   },
 
   onChooseDevice: function(tab){
@@ -90,12 +92,15 @@ var Search = React.createClass({
       page:1,
       total: 0
     });
+
     SearchAction.search(
       searchWord, 
       1, 
       this.state.country,
       this.state.device
     );
+
+    SearchAction.addHistory(searchWord);
   },
 
   handleScroll: function(e) {

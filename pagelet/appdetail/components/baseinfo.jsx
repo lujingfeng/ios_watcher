@@ -39,7 +39,7 @@ var BaseInfo = React.createClass({
     this.setState({
       isFav: isFav
     });
-    DetailAction.addFav(query.appId, isFav?"attention":"cancel");
+    DetailAction.addFav(query.id, isFav?"attention":"cancel");
   },
 
   render: function(){

@@ -38,7 +38,7 @@ var Comment = React.createClass({
     score=score.slice(1,score.length);
 
     DetailAction.commentDetail({
-      id: "711",//this.state.id,
+      id: this.state.id,//711可用
       duraTime: this.state.duraTime,
       country: this.state.country,
       device: this.state.device,

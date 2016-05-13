@@ -63,7 +63,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
       score = score.slice(1, score.length);
   
       _actionAction2["default"].commentDetail({
-        id: "711", //this.state.id,
+        id: this.state.id, //711可用
         duraTime: this.state.duraTime,
         country: this.state.country,
         device: this.state.device,

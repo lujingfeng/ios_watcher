@@ -12,6 +12,8 @@ var SearchStore = Reflux.createStore({
 
       this.listenTo(SearchAction.fetchHistory, this.loading);
       this.listenTo(SearchAction.fetchHistoryCmp, this.fetchHistoryCmp);
+
+      this.listenTo(SearchAction.addHistory, this.addHistory);
     },
     
     loading: function() {

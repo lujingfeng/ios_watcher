@@ -27,6 +27,8 @@ define('pagelet/search/store/store', function(require, exports, module) {
   
       this.listenTo(_actionActionJs2["default"].fetchHistory, this.loading);
       this.listenTo(_actionActionJs2["default"].fetchHistoryCmp, this.fetchHistoryCmp);
+  
+      this.listenTo(_actionActionJs2["default"].addHistory, this.addHistory);
     },
   
     loading: function loading() {

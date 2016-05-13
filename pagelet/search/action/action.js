@@ -7,9 +7,11 @@ var SearchAction = Reflux.createActions([
 
   "fetchHotApp",
   "fetchHotAppCmp",
-  
+
   "fetchHistory",
-  "fetchHistoryCmp"
+  "fetchHistoryCmp",
+
+  "addHistory"
 ]);
 
 SearchAction.search.preEmit = (serachKey, page=1, country, device) => {
@@ -54,6 +56,20 @@ SearchAction.fetchHistory.preEmit = () => {
 
   $.ajax(params).always(function( res ){
     SearchAction.fetchHistoryCmp(res);
+  });
+};
+
+SearchAction.addHistory.preEmit = (keyword)=>{
+  var params = {
+    type: 'GET',
+    url: SEARCH_HOST + '/search/addSearchHistory',
+    data:{
+      keyWord: keyword
+    },
+    dataType: 'json'
+  }
+  $.ajax(params).always(function( res ){
+    
   });
 };
 

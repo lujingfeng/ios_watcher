@@ -58,7 +58,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
       this.setState({
         isFav: isFav
       });
-      _actionAction2["default"].addFav(query.appId, isFav ? "attention" : "cancel");
+      _actionAction2["default"].addFav(query.id, isFav ? "attention" : "cancel");
     },
   
     render: function render() {

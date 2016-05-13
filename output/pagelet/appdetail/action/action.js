@@ -100,7 +100,7 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
       type: 'GET',
       url: SEARCH_HOST + '/attention/attention-app',
       data: {
-        app_id: appId,
+        appId: appId,
         type: attention
       },
       dataType: 'json'
