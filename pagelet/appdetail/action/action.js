@@ -95,7 +95,7 @@ DetailAction.addFav.preEmit = (appId, attention) => {
       type: 'GET',
       url: SEARCH_HOST + '/attention/attention-app',
       data: {
-        app_id: appId,
+        appId: appId,
         type: attention
       },
       dataType: 'json'
