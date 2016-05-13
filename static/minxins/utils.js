@@ -25,4 +25,13 @@ let bytesToSize = function(bytes) {
    return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 }
 
-export default {URL, bytesToSize};
+var getCookie = function(name){
+  var arr,
+      reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+  if(arr=document.cookie.match(reg))
+    return unescape(arr[2]);
+  else
+  return null;
+}
+
+export default {URL, bytesToSize, getCookie};

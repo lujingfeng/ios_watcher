@@ -12,7 +12,6 @@
   <meta http-equiv="Expires" content="0" />
 
   <title>酷传-ios版本</title>  
-  
 
     <link rel="stylesheet" type="text/css" href="/static/common.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/main/main.css" />
@@ -38,6 +37,7 @@
 <script type="text/javascript" src="/static/lib/react.js"></script>
 <script type="text/javascript" src="/static/lib/reactRouter.js"></script>
 <script type="text/javascript" src="/static/lib/jquery.js"></script>
+<script type="text/javascript" src="/static/minxins/utils.js"></script>
 <script type="text/javascript" src="/pagelet/main/components/side_nav.js"></script>
 <script type="text/javascript" src="/pagelet/main/components/main.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/header.js"></script>
@@ -55,7 +55,6 @@
 <script type="text/javascript" src="/pagelet/appdetail/store/store.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/baseinfo.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/category.js"></script>
-<script type="text/javascript" src="/static/minxins/utils.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/appinfo.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/compproduct/store/store.js"></script>
@@ -505,6 +504,8 @@
                 "pagelet/main/main.less",
                 "react",
                 "reactRouter",
+                "jquery",
+                "static/minxins/utils.js",
                 "pagelet/main/components/side_nav.jsx"
             ]
         },
@@ -517,7 +518,8 @@
             "type": "js",
             "deps": [
                 "react",
-                "reactRouter"
+                "reactRouter",
+                "static/minxins/utils.js"
             ]
         },
         "pagelet/myfav/components/my_fav_list.jsx": {
@@ -748,7 +750,8 @@
                 "pagelet/compproduct/components/compare.jsx",
                 "pagelet/myfav/components/my_fav_list.jsx",
                 "pagelet/widget/components/aso_service.js",
-                "pagelet/widget/components/about.jsx"
+                "pagelet/widget/components/about.jsx",
+                "static/minxins/utils.js"
             ]
         },
         "constants": {

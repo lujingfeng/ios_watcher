@@ -14,6 +14,8 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var SideNav = _react2["default"].createClass({
     displayName: "SideNav",
   
@@ -60,8 +62,15 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
       this.history.pushState(null, path, query);
     },
   
-    onClose: function onClose() {
+    onClose: function onClose(e) {
+      e.stopPropagation();
       this.hide();
+    },
+  
+    onClickLogin: function onClickLogin() {
+      if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
+        location.replace("/check/login-page");
+      }
     },
   
     render: function render() {
@@ -79,12 +88,12 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
           { className: "side-nav" },
           _react2["default"].createElement(
             "div",
-            { className: "profile" },
+            { className: "profile", onClick: this.onClickLogin },
             _react2["default"].createElement("i", { className: "awatar" }),
             _react2["default"].createElement(
               "span",
               null,
-              "123@gmail.com"
+              (0, _staticMinxinsUtils.getCookie)("uname") || "登录/注册"
             ),
             _react2["default"].createElement("div", { className: "close", onClick: this.onClose })
           ),

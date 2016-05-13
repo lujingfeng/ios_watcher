@@ -33,7 +33,13 @@ define('static/minxins/utils', function(require, exports, module) {
       return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
   };
   
-  exports["default"] = { URL: URL, bytesToSize: bytesToSize };
+  var getCookie = function getCookie(name) {
+      var arr,
+          reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+      if (arr = document.cookie.match(reg)) return unescape(arr[2]);else return null;
+  };
+  
+  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie };
   module.exports = exports["default"];
 
 });

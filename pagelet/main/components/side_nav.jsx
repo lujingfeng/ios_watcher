@@ -1,5 +1,6 @@
 import React from "react";
 import {History} from "/static/lib/reactRouter";
+import {getCookie} from "/static/minxins/utils";
 
 var SideNav = React.createClass({ 
   mixins: [History],
@@ -49,8 +50,15 @@ var SideNav = React.createClass({
     this.history.pushState(null, path, query);
   },
 
-  onClose: function(){
+  onClose: function(e){
+    e.stopPropagation();
     this.hide();
+  },
+
+  onClickLogin: function(){
+    if(!getCookie("uname")){
+      location.replace("/check/login-page");
+    }
   },
 
   render: function(){
@@ -61,9 +69,9 @@ var SideNav = React.createClass({
     return (
       <div className="c-page side-page" ref="root" onClick={this.onMask}>
         <div className="side-nav">
-          <div className="profile">
+          <div className="profile" onClick={this.onClickLogin}>
             <i className="awatar"></i>
-            <span>123@gmail.com</span>
+            <span>{getCookie("uname")||"登录/注册"}</span>
             <div className="close" onClick={this.onClose}></div>
           </div>
           <ul>

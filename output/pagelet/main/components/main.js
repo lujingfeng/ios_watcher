@@ -18,6 +18,12 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _side_nav = require("pagelet/main/components/side_nav.jsx");
   
   var _side_nav2 = _interopRequireDefault(_side_nav);
@@ -33,8 +39,15 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
       return {
         showSideNav: function showSideNav() {
           _this.refs.sideNav.show();
+        },
+        isLogin: function isLogin() {
+          return _this.isLogin();
         }
       };
+    },
+  
+    isLigin: function isLigin() {
+      return (0, _staticMinxinsUtils.getCookie)("uname");
     },
   
     componentDidMount: function componentDidMount() {},

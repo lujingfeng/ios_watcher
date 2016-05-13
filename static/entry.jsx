@@ -19,6 +19,13 @@ import ASOService from "/pagelet/widget/components/aso_service";
 import About from "/pagelet/widget/components/about";
 
 
+import {getCookie} from "/static/minxins/utils";
+
+var uname = getCookie("uname");
+if(!uname){
+  location.replace("/check/login-page");
+}
+
 
 $.ajaxSetup ({
   cache: false //关闭AJAX缓存

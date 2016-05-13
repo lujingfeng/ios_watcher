@@ -70,6 +70,13 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var _pageletWidgetComponentsAbout2 = _interopRequireDefault(_pageletWidgetComponentsAbout);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
+  var uname = (0, _staticMinxinsUtils.getCookie)("uname");
+  if (!uname) {
+    location.replace("/check/login-page");
+  }
+  
   _staticLibJquery2["default"].ajaxSetup({
     cache: false //关闭AJAX缓存
   });

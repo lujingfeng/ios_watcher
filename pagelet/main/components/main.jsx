@@ -4,7 +4,8 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-
+import $ from "jquery";
+import {getCookie} from "/static/minxins/utils";
 import SideNav from "./side_nav";
 
 
@@ -13,8 +14,13 @@ var MainView = React.createClass({
 
   getInitialState: function(){
     return {
-      showSideNav: ()=>{this.refs.sideNav.show();}
+      showSideNav: ()=>{this.refs.sideNav.show();},
+      isLogin: ()=>{return this.isLogin();}
     }
+  },
+
+  isLigin: function(){
+    return getCookie("uname");
   },
 
   componentDidMount: function(){
