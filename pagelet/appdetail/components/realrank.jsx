@@ -124,12 +124,12 @@ var RRank = React.createClass({
           <tr>
             <td>实时排名</td>
             <td>
-              <p className="m10 f16">1500</p>
-              <p className="f12 c999 mb10">2015-01-08前</p>
+              <p className="mt6 f16">1500</p>
+              <p className="f12 c999 mb6">2015-01-08前</p>
             </td>
             <td>
-              <p className="m10 f16">1200</p>
-              <p className="f12 c999 mb10">2015-01-08前</p>
+              <p className="m6 f16">1200</p>
+              <p className="f12 c999 mb6">2015-01-08前</p>
             </td>
           </tr>
         </table>

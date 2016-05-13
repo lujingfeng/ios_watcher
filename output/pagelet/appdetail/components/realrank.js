@@ -177,12 +177,12 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "p",
-                { className: "m10 f16" },
+                { className: "mt6 f16" },
                 "1500"
               ),
               _react2["default"].createElement(
                 "p",
-                { className: "f12 c999 mb10" },
+                { className: "f12 c999 mb6" },
                 "2015-01-08前"
               )
             ),
@@ -191,12 +191,12 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "p",
-                { className: "m10 f16" },
+                { className: "m6 f16" },
                 "1200"
               ),
               _react2["default"].createElement(
                 "p",
-                { className: "f12 c999 mb10" },
+                { className: "f12 c999 mb6" },
                 "2015-01-08前"
               )
             )
