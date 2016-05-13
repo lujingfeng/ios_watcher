@@ -33,7 +33,20 @@ var DetailStore = Reflux.createStore({
     },
 
     detailVersionCmp: function(res){
+      var params = {loading: false};
+      var versions = [];
 
+      if(res){
+        var keys = Object.keys(res) || [];
+        keys.forEach((item, idx)=>{
+          versions.push({
+            version: item,
+            date: res[item]
+          });
+        });
+        params.versions = versions;
+      }
+      this.trigger(params);
     },
 
     appLevelCmp: function(res){
@@ -41,7 +54,7 @@ var DetailStore = Reflux.createStore({
     },
 
     commentDetailCmp: function(res){
-      
+
     }
 
 });

@@ -47,7 +47,22 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       this.trigger(params);
     },
   
-    detailVersionCmp: function detailVersionCmp(res) {},
+    detailVersionCmp: function detailVersionCmp(res) {
+      var params = { loading: false };
+      var versions = [];
+  
+      if (res) {
+        var keys = Object.keys(res) || [];
+        keys.forEach(function (item, idx) {
+          versions.push({
+            version: item,
+            date: res[item]
+          });
+        });
+        params.versions = versions;
+      }
+      this.trigger(params);
+    },
   
     appLevelCmp: function appLevelCmp(res) {},
   

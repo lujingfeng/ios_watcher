@@ -16,6 +16,10 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _actionAction = require("pagelet/appdetail/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -63,16 +67,13 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
       this.iosUnscribe = _pageletCompproductStoreStore2["default"].listen(this.onRankChange.bind(this));
   
       var query = this.props.query;
-  
-      _actionAction2["default"].realRank({
-        country: query.country,
-        device: query.device,
-        id: query.id
-      });
-  
       require.async(["static/lib/echarts.min"], function (echarts) {
         _this.intChart(echarts);
       });
+    },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.iosUnscribe();
     },
   
     intChart: function intChart(echarts) {
@@ -110,13 +111,16 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         type: this.state.payType
       };
   
-      _pageletCompproductActionAction2["default"].getCompare(Object.assign({
-        appId: query.id
-      }, params), query.title);
-    },
-  
-    componentWillUnmount: function componentWillUnmount() {
-      this.iosUnscribe();
+      if (params.interval == 1 || params.interval == -1) {
+        //delete params.type;
+        _pageletCompproductActionAction2["default"].getRankBy(_jquery2["default"].extend({
+          id: query.id
+        }, params), query.title);
+      } else {
+        _pageletCompproductActionAction2["default"].getCompare(_jquery2["default"].extend({
+          appId: query.id
+        }, params), query.title);
+      }
     },
   
     onRankChange: function onRankChange(state) {

@@ -17,8 +17,8 @@ var TopStore = Reflux.createStore({
       });
     },
 
-    fetchListCmp: function(res){
-      var params = {loading: false};
+    fetchListCmp: function(res, flag){
+      var params = {loading: false, flag:flag};
 
       if(res.rank){
         params.list = res.rank ? res.rank : [];

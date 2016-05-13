@@ -123,7 +123,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     },
   
     onItemClick: function onItemClick(data) {
-      var query = Object.assign({}, data);
+      var query = $.extend({}, data);
       this.history.pushState("", "detail/1", query);
     },
   

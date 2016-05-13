@@ -4,7 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-
+import $ from "jquery";
 import Header from "/pagelet/widget/components/header";
 import Rank from "/pagelet/widget/components/rank";
 import Loading from "/pagelet/widget/components/loading";
@@ -95,7 +95,7 @@ var UnderAppList = React.createClass({
   },
 
   onItemClick: function(data){
-    var query = Object.assign({}, data);
+    var query = $.extend({}, data);
     this.history.pushState("", "detail/1", query);
   },
 

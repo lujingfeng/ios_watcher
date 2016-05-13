@@ -18,6 +18,10 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -123,7 +127,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     },
   
     onItemClick: function onItemClick(data) {
-      var query = Object.assign({}, data);
+      var query = _jquery2["default"].extend({}, data);
       this.history.pushState("", "detail/1", query);
     },
   

@@ -83,7 +83,7 @@ var Header = React.createClass({
 
     if(filterEnabled){
       var pathname = location.hash.slice(2, location.hash.indexOf("?"));
-      this.history.pushState(null, pathname, Object.assign({filter:true}, loc.query));
+      this.history.pushState(null, pathname, $.extend({filter:true}, loc.query));
     }
   },
 

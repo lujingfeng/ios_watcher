@@ -54,7 +54,7 @@ define('pagelet/top/action/action', function(require, exports, module) {
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
-      TopAction.fetchListCmp(res);
+      TopAction.fetchListCmp(res, query.flag);
     });
   };
   
@@ -71,7 +71,7 @@ define('pagelet/top/action/action', function(require, exports, module) {
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
-      TopAction.fetchListCmp(res);
+      TopAction.fetchListCmp(res, query.flag);
     });
   };
   

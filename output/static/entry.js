@@ -74,7 +74,7 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var uname = (0, _staticMinxinsUtils.getCookie)("uname");
   if (!uname) {
-    location.replace("/check/login-page");
+    //location.replace("/check/login-page");
   }
   
   _staticLibJquery2["default"].ajaxSetup({

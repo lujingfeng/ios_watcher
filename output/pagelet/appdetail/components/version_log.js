@@ -24,18 +24,39 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
+  
+  var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
+  
   var VersionLog = _react2["default"].createClass({
     displayName: "VersionLog",
   
+    getInitialState: function getInitialState() {
+      return {
+        loading: true,
+        versions: []
+      };
+    },
+  
     componentDidMount: function componentDidMount() {
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       var query = this.props.query;
   
       _actionAction2["default"].detailVersion({
         country: query.country,
         device: query.device,
-        id: query.id
+        appId: query.id
       });
     },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {
+      this.setState(state);
+    },
+  
     render: function render() {
       return _react2["default"].createElement(
         "div",
@@ -48,7 +69,7 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
         ),
         _react2["default"].createElement(
           "table",
-          null,
+          { className: "border" },
           _react2["default"].createElement(
             "tr",
             null,
@@ -68,26 +89,25 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
               "更新说明"
             )
           ),
-          _react2["default"].createElement(
-            "tr",
-            null,
-            _react2["default"].createElement(
-              "td",
+          this.state.versions.map(function (item, idx) {
+            return _react2["default"].createElement(
+              "tr",
               null,
-              "6.2.2.1"
-            ),
-            _react2["default"].createElement(
-              "td",
-              null,
-              "2016-04-25"
-            ),
-            _react2["default"].createElement(
-              "td",
-              null,
-              "sdfsdaf福建省嫡福晋阿发就看见发了多少，疯狂的撒分流k1辅导书开房间离开 sdfsdaf福建省嫡福晋阿发就看见发了多少，疯狂的撒分流k1辅导书开房间离开 sdfsdaf福建省嫡福晋阿发就看见发了多少，疯狂的撒分流k1辅导书开房间离开 sdfsdaf福建省嫡福晋阿发就看见发了多少，疯狂的撒分流k1辅导书开房间离开"
-            )
-          )
-        )
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.version
+              ),
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.date
+              ),
+              _react2["default"].createElement("td", null)
+            );
+          })
+        ),
+        this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
       );
     }
   });

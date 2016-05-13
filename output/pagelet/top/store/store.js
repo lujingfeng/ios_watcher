@@ -32,8 +32,8 @@ define('pagelet/top/store/store', function(require, exports, module) {
       });
     },
   
-    fetchListCmp: function fetchListCmp(res) {
-      var params = { loading: false };
+    fetchListCmp: function fetchListCmp(res, flag) {
+      var params = { loading: false, flag: flag };
   
       if (res.rank) {
         params.list = res.rank ? res.rank : [];

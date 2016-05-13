@@ -62,6 +62,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
   
       return {
         loading: false,
+        flag: 2,
   
         tabIndex: 0,
         tabs: tabs,
@@ -116,7 +117,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
     },
   
     onItemClick: function onItemClick(data) {
-      var query = Object.assign({}, data);
+      var query = $.extend({}, data);
       this.history.pushState("", "detail/1", query);
     },
   
@@ -209,6 +210,7 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
             { className: "list" },
             list.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                flag: _this3.state.flag,
                 type: 2,
                 onItemClick: _this3.onItemClick,
                 index: idx,

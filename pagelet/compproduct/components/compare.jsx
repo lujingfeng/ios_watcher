@@ -4,7 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-
+import $ from "jquery";
 import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
@@ -103,11 +103,11 @@ var AppCompare = React.createClass({
       type: this.state.payType
     };
 
-    CompareAction.getCompare(Object.assign({
+    CompareAction.getCompare($.extend({
       appId: this.state.app_1.id
     }, params), this.state.app_1.title);
 
-    CompareAction.getCompare(Object.assign({
+    CompareAction.getCompare($.extend({
       appId: this.state.app_2.id
     }, params),this.state.app_2.title);
   },

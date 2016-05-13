@@ -183,23 +183,30 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               _react2["default"].createElement(
                 "span",
                 { className: "c666 f12 mr6" },
-                topType || "当前"
+                data.other ? topType : "当前"
               ),
               _react2["default"].createElement(
                 "span",
                 { className: "c666 f12 ml6 t-vm" },
-                "第",
-                rank || "落榜",
-                "名"
+                rank == "落榜" ? "落榜" : "第" + rank + "名"
               )
             )
           );
   
           var rankFloat = data.rankfloat;
+          var icon = "";
+          if (this.props.flag == 1) {
+            icon = "up";
+          } else if (this.props.flag == 2) {
+            icon = "down";
+          } else {
+            icon = rankFloat > 0 ? "up" : "down";
+          }
+  
           column3 = _react2["default"].createElement(
             "td",
             { className: "center" },
-            _react2["default"].createElement("i", { className: rankFloat > 0 ? "up" : "down" }),
+            _react2["default"].createElement("i", { className: icon }),
             _react2["default"].createElement(
               "i",
               { className: "f12 t-vm" },

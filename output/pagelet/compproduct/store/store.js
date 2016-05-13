@@ -33,7 +33,41 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
       var params = { loading: false };
       var categoryMap = {};
   
-      if (res) {
+      if (res.curday) {
+        var legend = { data: [] };
+        var series = [];
+        var xAxis = {
+          type: 'category',
+          boundaryGap: false,
+          data: []
+        };
+  
+        var clist = res.curday.data || [];
+        for (var i = 0; i < clist.length; i++) {
+          var rankData = clist[i].rankData;
+          var data = [];
+          for (var h = 0; h < 24; h++) {
+            if (rankData[h]) {
+              data.push(rankData[h]);
+            } else {
+              data.push(0);
+            }
+            xAxis.data.push(h + "时");
+          }
+  
+          series.push({
+            name: clist[i].name,
+            smooth: true,
+            type: 'line',
+            data: data
+          });
+          legend.data.push(clist[i].name);
+        }
+  
+        params.series = series;
+        params.xAxis = xAxis;
+        params.legend = legend;
+      } else if (res) {
         for (var month in res) {
           var mdataList = res[month];
           mdataList.forEach(function (item, idx) {

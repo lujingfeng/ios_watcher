@@ -49,7 +49,7 @@ TopAction.fetUpTopList.preEmit = (query)=>{
   }
 
   $.ajax(params).always(function( res ){
-    TopAction.fetchListCmp(res);
+    TopAction.fetchListCmp(res, query.flag);
   });
 };
 
@@ -64,7 +64,7 @@ TopAction.fetDownTopList.preEmit = (query={})=>{
   }
 
   $.ajax(params).always(function( res ){
-    TopAction.fetchListCmp(res);
+    TopAction.fetchListCmp(res, query.flag);
   });
 }
 

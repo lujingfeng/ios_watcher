@@ -4,6 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
+import $ from "jquery";
 
 import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
@@ -119,7 +120,7 @@ var Search = React.createClass({
 
   onClickSearchItem:function(item){
     var query = this.props.location.query || {};
-    var params = Object.assign({}, item);
+    var params = $.extend({}, item);
     var pathName = "/detail/";
 
     if(query.overlay){

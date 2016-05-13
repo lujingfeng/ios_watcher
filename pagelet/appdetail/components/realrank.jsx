@@ -3,6 +3,7 @@
   */
 
 import React from "react";
+import $ from "jquery";
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
 import {countryCode, countryCode2Str, days2Str, deviceType, payType, payTypeToStr,deviceTypeStr} from "constants";
@@ -36,16 +37,13 @@ var RRank = React.createClass({
     this.iosUnscribe = iosCompareStore.listen(this.onRankChange.bind(this));
 
     var query = this.props.query;
-
-    DetailAction.realRank({
-      country: query.country,
-      device: query.device,
-      id: query.id
-    });
-
     require.async("/static/lib/echarts.min", (echarts)=>{
       this.intChart(echarts);
     });
+  },
+
+  componentWillUnmount: function(){
+    this.iosUnscribe();
   },
 
   intChart : function(echarts){
@@ -83,13 +81,16 @@ var RRank = React.createClass({
       type: this.state.payType
     };
 
-    iosCompareAction.getCompare(Object.assign({
-      appId: query.id
+    if(params.interval == 1 || params.interval == -1){
+      //delete params.type;
+      iosCompareAction.getRankBy($.extend({
+      id: query.id
     }, params), query.title);
-  },
-
-  componentWillUnmount: function(){
-    this.iosUnscribe();
+    }else{
+      iosCompareAction.getCompare($.extend({
+        appId: query.id
+      }, params), query.title);
+    }
   },
 
   onRankChange: function(state){

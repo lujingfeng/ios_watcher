@@ -18,6 +18,10 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -136,11 +140,11 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         type: this.state.payType
       };
   
-      _actionAction2["default"].getCompare(Object.assign({
+      _actionAction2["default"].getCompare(_jquery2["default"].extend({
         appId: this.state.app_1.id
       }, params), this.state.app_1.title);
   
-      _actionAction2["default"].getCompare(Object.assign({
+      _actionAction2["default"].getCompare(_jquery2["default"].extend({
         appId: this.state.app_2.id
       }, params), this.state.app_2.title);
     },

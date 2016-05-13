@@ -16,7 +16,7 @@ define('pagelet/compproduct/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var CompareAction = _reflux2["default"].createActions(["getCompare", "getCompareCmp"]);
+  var CompareAction = _reflux2["default"].createActions(["getCompare", "getCompareCmp", "getRankBy", "getRankByCmp"]);
   
   CompareAction.getCompare.preEmit = function (query, title) {
       if (query === undefined) query = {};
@@ -24,6 +24,21 @@ define('pagelet/compproduct/action/action', function(require, exports, module) {
       var params = {
           type: 'GET',
           url: SEARCH_HOST + '/ioscompare',
+          data: query,
+          dataType: 'json'
+      };
+  
+      _staticLibJquery2["default"].ajax(params).always(function (res) {
+          CompareAction.getCompareCmp(res, title);
+      });
+  };
+  
+  CompareAction.getRankBy.preEmit = function (query, title) {
+      if (query === undefined) query = {};
+  
+      var params = {
+          type: 'GET',
+          url: SEARCH_HOST + '/apprank',
           data: query,
           dataType: 'json'
       };

@@ -37,6 +37,7 @@ var Top7DownList = React.createClass({
 
     return {
       loading: false,
+      flag: 2,
 
       tabIndex: 0,
       tabs: tabs,
@@ -91,7 +92,7 @@ var Top7DownList = React.createClass({
   },
 
   onItemClick: function(data){
-    var query = Object.assign({}, data);
+    var query = $.extend({}, data);
     this.history.pushState("", "detail/1", query);
   },
 
@@ -171,6 +172,7 @@ var Top7DownList = React.createClass({
               list.map((item, idx)=>{
                 return (
                   <AppItem 
+                    flag={this.state.flag}
                     type={2} 
                     onItemClick={this.onItemClick} 
                     index={idx}
