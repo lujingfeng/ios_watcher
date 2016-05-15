@@ -1,6 +1,6 @@
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-import {getCookie} from "/static/minxins/utils";
+import {getCookie, setCookie} from "/static/minxins/utils";
 
 var SideNav = React.createClass({ 
   mixins: [History],
@@ -59,6 +59,11 @@ var SideNav = React.createClass({
     if(!getCookie("uname")){
       location.replace("/check/login-page");
     }
+  },
+
+  onLogout: function(){
+    setCookie("uname", "", 0);
+    location.replace("/check/login-page");
   },
 
   render: function(){
@@ -125,7 +130,7 @@ var SideNav = React.createClass({
                 400-6343-800
               </a>
             </li>
-            <li style={{color:"red",paddingLeft: 50}}>
+            <li style={{color:"red",paddingLeft: 50}} onClick={this.onLogout}>
               退出
             </li>
           </ul>

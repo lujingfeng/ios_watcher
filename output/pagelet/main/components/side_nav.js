@@ -73,6 +73,11 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
       }
     },
   
+    onLogout: function onLogout() {
+      (0, _staticMinxinsUtils.setCookie)("uname", "", 0);
+      location.replace("/check/login-page");
+    },
+  
     render: function render() {
       var _this2 = this;
   
@@ -193,7 +198,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             ),
             _react2["default"].createElement(
               "li",
-              { style: { color: "red", paddingLeft: 50 } },
+              { style: { color: "red", paddingLeft: 50 }, onClick: this.onLogout },
               "退出"
             )
           )

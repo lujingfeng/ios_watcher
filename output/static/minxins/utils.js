@@ -39,7 +39,13 @@ define('static/minxins/utils', function(require, exports, module) {
       if (arr = document.cookie.match(reg)) return unescape(arr[2]);else return null;
   };
   
-  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie };
+  function setCookie(cookiename, cookievalue, hours) {
+      var date = new Date();
+      date.setTime(date.getTime() + Number(hours) * 3600 * 1000);
+      document.cookie = cookiename + "=" + cookievalue + "; path=/;expires = " + date.toGMTString();
+  };
+  
+  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie, setCookie: setCookie };
   module.exports = exports["default"];
 
 });

@@ -19,11 +19,12 @@ import ASOService from "/pagelet/widget/components/aso_service";
 import About from "/pagelet/widget/components/about";
 
 
-import {getCookie} from "/static/minxins/utils";
+import {getCookie, setCookie} from "/static/minxins/utils";
 
 var uname = getCookie("uname");
+
 if(!uname){
-  //location.replace("/check/login-page");
+  location.replace("/check/login-page");
 }
 
 
