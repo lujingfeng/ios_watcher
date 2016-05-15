@@ -50,7 +50,7 @@ var AppItem = React.createClass({
   },
 
   onDelete: function(){
-    this.props.onDelete && this.props.onDelete(this.props.data);
+    this.props.onDelete && this.props.onDelete(this.props.data.id);
   },
 
   render: function(){

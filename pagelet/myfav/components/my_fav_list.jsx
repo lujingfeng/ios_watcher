@@ -10,6 +10,9 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 
+import DetailAction from "/pagelet/appdetail/action/action";
+import DetailStore from "/pagelet/appdetail/store/store";
+
 import FavAction from "../action/action";
 import FavStore from "../store/store";
 
@@ -18,6 +21,7 @@ var MyFav = React.createClass({
 
   getInitialState: function(){
     return {
+      loading: true,
       list:[]
     }
   },
@@ -35,6 +39,19 @@ var MyFav = React.createClass({
     this.setState(state);
   },
 
+  onDelete: function(id){
+    DetailAction.addFav(id, "cancel");
+    var app = this.state.list.filter((item, idx)=>{
+      if(item.id == id){
+        return item;
+      }
+    })[0]|| null;
+    if(app){
+      this.state.list.splice(this.state.list.indexOf(app), 1);
+      this.setState({list: this.state.list});
+    }
+  },
+
   render: function(){
     let query = this.props.location.query || {};
 
@@ -49,9 +66,17 @@ var MyFav = React.createClass({
         <div className="c-body">
           {
             this.state.list.map((item, idx)=>{
-              return <AppItem key={idx} data={item} type={6}/>
+              return <AppItem 
+                       key={idx} 
+                       data={item} 
+                       type={6} 
+                       onDelete={this.onDelete}/>
             })
           }
+          {
+            this.state.loading?<Loading/>:null
+          }
+          {!this.state.loading && !this.state.list.length ?<p className="center mt6 c999">您还未关注应用</p>:null}
         </div>
       </div>
     );

@@ -34,6 +34,14 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _pageletAppdetailActionAction = require("pagelet/appdetail/action/action");
+  
+  var _pageletAppdetailActionAction2 = _interopRequireDefault(_pageletAppdetailActionAction);
+  
+  var _pageletAppdetailStoreStore = require("pagelet/appdetail/store/store");
+  
+  var _pageletAppdetailStoreStore2 = _interopRequireDefault(_pageletAppdetailStoreStore);
+  
   var _actionAction = require("pagelet/myfav/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -49,6 +57,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
     getInitialState: function getInitialState() {
       return {
+        loading: true,
         list: []
       };
     },
@@ -66,7 +75,22 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       this.setState(state);
     },
   
+    onDelete: function onDelete(id) {
+      _pageletAppdetailActionAction2["default"].addFav(id, "cancel");
+      var app = this.state.list.filter(function (item, idx) {
+        if (item.id == id) {
+          return item;
+        }
+      })[0] || null;
+      if (app) {
+        this.state.list.splice(this.state.list.indexOf(app), 1);
+        this.setState({ list: this.state.list });
+      }
+    },
+  
     render: function render() {
+      var _this = this;
+  
       var query = this.props.location.query || {};
   
       return _react2["default"].createElement(
@@ -83,8 +107,18 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
           "div",
           { className: "c-body" },
           this.state.list.map(function (item, idx) {
-            return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { key: idx, data: item, type: 6 });
-          })
+            return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+              key: idx,
+              data: item,
+              type: 6,
+              onDelete: _this.onDelete });
+          }),
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
+          !this.state.loading && !this.state.list.length ? _react2["default"].createElement(
+            "p",
+            { className: "center mt6 c999" },
+            "您还未关注应用"
+          ) : null
         )
       );
     }
