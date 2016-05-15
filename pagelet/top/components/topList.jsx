@@ -99,6 +99,7 @@ var TopList = React.createClass({
 
   onItemClick: function(data){
     var query = $.extend({}, data);
+    
     this.history.pushState("", "detail/1", query);
   },
 

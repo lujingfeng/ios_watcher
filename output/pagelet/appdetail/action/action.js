@@ -16,7 +16,7 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "addFav", "addFavCmp"]);
+  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "ranklatest", "ranklatestCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "addFav", "addFavCmp"]);
   
   DetailAction.appInfo.preEmit = function (id, device, country) {
     var params = {
@@ -35,18 +35,18 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
     });
   };
   
-  DetailAction.realRank.preEmit = function () {
+  DetailAction.ranklatest.preEmit = function () {
     var query = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   
     var params = {
       type: 'GET',
-      url: SEARCH_HOST + '/apprank',
+      url: SEARCH_HOST + '/ranklatest',
       data: query,
       dataType: 'json'
     };
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
-      DetailAction.realRankCmp(res);
+      DetailAction.ranklatestCmp(res);
     });
   };
   

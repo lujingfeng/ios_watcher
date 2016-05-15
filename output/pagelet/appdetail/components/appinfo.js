@@ -46,7 +46,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
       var query = this.props.query;
   
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
-      _actionAction2["default"].appInfo(query.id, _constants.deviceStrToint[query.device], query.country);
+      _actionAction2["default"].appInfo(query.id, query.device, query.country);
     },
   
     componentWillUnmount: function componentWillUnmount() {

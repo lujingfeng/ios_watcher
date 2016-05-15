@@ -67,11 +67,12 @@ var Filter = React.createClass({
 
       curSelected: {
         datetime: null,
-        days: null,
+        days: this.props.daysValue||null,
         country: null,
         device: null,
         category: null,
-        pay: null
+        pay: null,
+        score:this.props.scoreValue||[]
       }
     }
   },
@@ -157,7 +158,17 @@ var Filter = React.createClass({
 
   onScore: function(score){
     var curSelected = this.state.curSelected;
-    curSelected.score = score;
+    var existedItem = curSelected.score.filter((item)=>{
+      if(score.value == item.value){
+        return item;
+      }
+    })[0]||null;
+
+    if(existedItem){
+      curSelected.score.splice(curSelected.score.indexOf(existedItem), 1);
+    }else{
+      curSelected.score.push(score);
+    }
     this.setState({curSelected});
   },
 
@@ -221,7 +232,14 @@ var Filter = React.createClass({
                   state.score.map((item, idx)=>{
                     var props = {};
                     props.onClick=(e=>this.onScore(item));
-                    if(curSelected.score && curSelected.score.value == item.value){
+
+                    var existedItem = curSelected.score.filter((score)=>{
+                      if(score.value == item.value){
+                        return item;
+                      }
+                    })[0]||null;
+
+                    if(existedItem){
                       props.className="selected";
                     }
                     return (

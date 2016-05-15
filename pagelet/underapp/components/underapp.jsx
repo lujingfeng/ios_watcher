@@ -96,6 +96,7 @@ var UnderAppList = React.createClass({
 
   onItemClick: function(data){
     var query = $.extend({}, data);
+    query.id = data.appId;
     this.history.pushState("", "detail/1", query);
   },
 

@@ -24,7 +24,7 @@ var AppInfo = React.createClass({
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
     DetailAction.appInfo(
       query.id, 
-      deviceStrToint[query.device],
+      query.device,
       query.country
     );
   },

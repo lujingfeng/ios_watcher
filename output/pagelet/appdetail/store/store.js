@@ -22,11 +22,14 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       this.listenTo(_actionActionJs2["default"].appInfo, this.loading);
       this.listenTo(_actionActionJs2["default"].appInfoCmp, this.appInfoCmp);
   
+      this.listenTo(_actionActionJs2["default"].appLevel, this.loading);
+      this.listenTo(_actionActionJs2["default"].appLevelCmp, this.appLevelCmp);
+  
       this.listenTo(_actionActionJs2["default"].commentDetail, this.loading);
       this.listenTo(_actionActionJs2["default"].commentDetailCmp, this.commentDetailCmp);
   
-      this.listenTo(_actionActionJs2["default"].appLevel, this.loading);
-      this.listenTo(_actionActionJs2["default"].appLevelCmp, this.appLevelCmp);
+      this.listenTo(_actionActionJs2["default"].ranklatest, this.loading);
+      this.listenTo(_actionActionJs2["default"].ranklatestCmp, this.ranklatestCmp);
   
       this.listenTo(_actionActionJs2["default"].detailVersion, this.loading);
       this.listenTo(_actionActionJs2["default"].detailVersionCmp, this.detailVersionCmp);
@@ -111,8 +114,17 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       var params = { loading: false };
       params.list = array;
       this.trigger(params);
-    }
+    },
   
+    ranklatestCmp: function ranklatestCmp(res) {
+      var params = { loading: false };
+  
+      if (res.data && res.data.length) {
+        params.top1 = res.data[0];
+        params.top2 = res.data[1];
+      }
+      this.trigger(params);
+    }
   });
   
   exports["default"] = DetailStore;

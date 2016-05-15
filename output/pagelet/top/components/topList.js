@@ -128,6 +128,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
     onItemClick: function onItemClick(data) {
       var query = _jquery2["default"].extend({}, data);
+  
       this.history.pushState("", "detail/1", query);
     },
   

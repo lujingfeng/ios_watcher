@@ -128,6 +128,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
     onItemClick: function onItemClick(data) {
       var query = _jquery2["default"].extend({}, data);
+      query.id = data.appId;
       this.history.pushState("", "detail/1", query);
     },
   

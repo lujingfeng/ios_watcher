@@ -15,7 +15,6 @@ import AppLevel from "./applevel";
 
 import Filter from "/pagelet/widget/components/filter";
 
-
 var AppDetail = React.createClass({
   getInitialState: function(){
     return {
@@ -31,6 +30,8 @@ var AppDetail = React.createClass({
 
   render: function(){
     var query = this.props.location.query;
+    var state = this.state;
+
     if(query.filter){
       var props = {};
       var params = this.props.params;
@@ -43,8 +44,10 @@ var AppDetail = React.createClass({
       }else if(params.module == 5){
         props.days = true;
         props.score = true;
-      }
 
+        props.daysValue = state.filter && state.filter.days ? state.filter.days: null;
+        props.scoreValue = state.filter && state.filter.score ? state.filter.score: [];
+      }
 
       return <Filter onOk={this.onFilter} {...props}/>
     }else{
@@ -58,7 +61,6 @@ var AppDetail = React.createClass({
     var bottomView;
     var filterEnabled = false;
 
-
     if(params.module == 1){
       bottomView = <AppInfo query={query}/>
     }else if(params.module == 2){
@@ -70,7 +72,7 @@ var AppDetail = React.createClass({
       bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
       filterEnabled = true;
-      bottomView = <Comment query={query}/>
+      bottomView = <Comment query={query} filter={this.state.filter}/>
     }else if(params.module == 6){
       bottomView = <AppLevel query={query}/>
     }

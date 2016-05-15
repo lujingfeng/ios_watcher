@@ -28,7 +28,7 @@ var AppLevel = React.createClass({
 
   componentDidMount: function(){
     DetailAction.appLevel({
-      id: "77",//this.state.id,
+      id: this.state.id,
       country: this.state.country,
       device: this.state.device
     });
@@ -66,7 +66,7 @@ var AppLevel = React.createClass({
           <tr>
             <th>
               <p className="fr">最后更新时间：{cur.updateTime}</p>
-              <p>当前版本评分（3.2.4）</p>
+              <p>当前版本评分（{cur.versionName}）</p>
             </th>
           </tr>
 
@@ -114,7 +114,7 @@ var AppLevel = React.createClass({
           <tr>
             <th>
               <p className="fr">最后更新时间:{history.updateTime}</p>
-              <p>历史版本评分（3.2.4）</p>
+              <p>历史版本评分</p>
             </th>
           </tr>
 

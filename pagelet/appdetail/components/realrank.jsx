@@ -18,6 +18,9 @@ var RRank = React.createClass({
     var filter = this.props.filter || {};
 
     return {
+      top1: {},
+      top2: {},
+
       series: [],
 
       legend: {
@@ -34,15 +37,24 @@ var RRank = React.createClass({
   },
 
   componentDidMount: function(){
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+
     this.iosUnscribe = iosCompareStore.listen(this.onRankChange.bind(this));
 
     var query = this.props.query;
     require.async("/static/lib/echarts.min", (echarts)=>{
       this.intChart(echarts);
     });
+
+    DetailAction.ranklatest({
+      id: query.id,
+      country: query.country,
+      device: query.device
+    });
   },
 
   componentWillUnmount: function(){
+    this.unSubscribe();
     this.iosUnscribe();
   },
 
@@ -93,6 +105,10 @@ var RRank = React.createClass({
     }
   },
 
+  onStateChange: function(state){
+    this.setState(state);
+  },
+
   onRankChange: function(state){
     if(state.series){
       this.state.series = this.state.series.concat(state.series);
@@ -117,19 +133,19 @@ var RRank = React.createClass({
 
         <table border="1" cellSpacing="0">
           <tr>
-            <th></th>
-            <th>总榜（免费）</th>
-            <th>软件（免费）</th>
+            <th style={{width:"auto"}}></th>
+            <th>{this.state.top1.name||"-"}</th>
+            <th>{this.state.top2.name||"-"}</th>
           </tr>
           <tr>
             <td>实时排名</td>
             <td>
-              <p className="mt6 f16">1500</p>
-              <p className="f12 c999 mb6">2015-01-08前</p>
+              <p className="mt6 f16">{this.state.top1.rank}</p>
+              <p className="f12 c999 mb6">{this.state.top1.time}</p>
             </td>
             <td>
-              <p className="m6 f16">1200</p>
-              <p className="f12 c999 mb6">2015-01-08前</p>
+              <p className="m6 f16">{this.state.top2.rank}</p>
+              <p className="f12 c999 mb6">{this.state.top2.time}</p>
             </td>
           </tr>
         </table>

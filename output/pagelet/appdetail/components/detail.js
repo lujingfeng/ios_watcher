@@ -77,6 +77,8 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
     render: function render() {
       var query = this.props.location.query;
+      var state = this.state;
+  
       if (query.filter) {
         var props = {};
         var params = this.props.params;
@@ -89,6 +91,9 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         } else if (params.module == 5) {
           props.days = true;
           props.score = true;
+  
+          props.daysValue = state.filter && state.filter.days ? state.filter.days : null;
+          props.scoreValue = state.filter && state.filter.score ? state.filter.score : [];
         }
   
         return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({ onOk: this.onFilter }, props));
@@ -114,7 +119,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
         filterEnabled = true;
-        bottomView = _react2["default"].createElement(_comment2["default"], { query: query });
+        bottomView = _react2["default"].createElement(_comment2["default"], { query: query, filter: this.state.filter });
       } else if (params.module == 6) {
         bottomView = _react2["default"].createElement(_applevel2["default"], { query: query });
       }

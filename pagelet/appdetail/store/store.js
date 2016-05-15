@@ -7,11 +7,14 @@ var DetailStore = Reflux.createStore({
       this.listenTo(DetailAction.appInfo, this.loading);
       this.listenTo(DetailAction.appInfoCmp, this.appInfoCmp);
 
+      this.listenTo(DetailAction.appLevel, this.loading);
+      this.listenTo(DetailAction.appLevelCmp, this.appLevelCmp);
+
       this.listenTo(DetailAction.commentDetail, this.loading);
       this.listenTo(DetailAction.commentDetailCmp, this.commentDetailCmp);
 
-      this.listenTo(DetailAction.appLevel, this.loading);
-      this.listenTo(DetailAction.appLevelCmp, this.appLevelCmp);
+      this.listenTo(DetailAction.ranklatest, this.loading);
+      this.listenTo(DetailAction.ranklatestCmp, this.ranklatestCmp);
 
       this.listenTo(DetailAction.detailVersion, this.loading);
       this.listenTo(DetailAction.detailVersionCmp, this.detailVersionCmp);
@@ -96,8 +99,17 @@ var DetailStore = Reflux.createStore({
       var params = {loading: false};
       params.list = array;
       this.trigger(params);
-    }
+    },
 
+    ranklatestCmp: function(res){
+      var params = {loading:false};
+      
+      if(res.data && res.data.length){
+        params.top1 = res.data[0];
+        params.top2 = res.data[1];
+      }
+      this.trigger(params);
+    }
 });
 
 export default DetailStore;

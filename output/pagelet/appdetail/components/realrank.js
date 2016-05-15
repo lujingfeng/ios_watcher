@@ -46,6 +46,9 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
       var filter = this.props.filter || {};
   
       return {
+        top1: {},
+        top2: {},
+  
         series: [],
   
         legend: {
@@ -64,15 +67,24 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
     componentDidMount: function componentDidMount() {
       var _this = this;
   
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+  
       this.iosUnscribe = _pageletCompproductStoreStore2["default"].listen(this.onRankChange.bind(this));
   
       var query = this.props.query;
       require.async(["static/lib/echarts.min"], function (echarts) {
         _this.intChart(echarts);
       });
+  
+      _actionAction2["default"].ranklatest({
+        id: query.id,
+        country: query.country,
+        device: query.device
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
       this.iosUnscribe();
     },
   
@@ -123,6 +135,10 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
       }
     },
   
+    onStateChange: function onStateChange(state) {
+      this.setState(state);
+    },
+  
     onRankChange: function onRankChange(state) {
       if (state.series) {
         this.state.series = this.state.series.concat(state.series);
@@ -152,16 +168,16 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
           _react2["default"].createElement(
             "tr",
             null,
-            _react2["default"].createElement("th", null),
+            _react2["default"].createElement("th", { style: { width: "auto" } }),
             _react2["default"].createElement(
               "th",
               null,
-              "总榜（免费）"
+              this.state.top1.name || "-"
             ),
             _react2["default"].createElement(
               "th",
               null,
-              "软件（免费）"
+              this.state.top2.name || "-"
             )
           ),
           _react2["default"].createElement(
@@ -178,12 +194,12 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
               _react2["default"].createElement(
                 "p",
                 { className: "mt6 f16" },
-                "1500"
+                this.state.top1.rank
               ),
               _react2["default"].createElement(
                 "p",
                 { className: "f12 c999 mb6" },
-                "2015-01-08前"
+                this.state.top1.time
               )
             ),
             _react2["default"].createElement(
@@ -192,12 +208,12 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
               _react2["default"].createElement(
                 "p",
                 { className: "m6 f16" },
-                "1200"
+                this.state.top2.rank
               ),
               _react2["default"].createElement(
                 "p",
                 { className: "f12 c999 mb6" },
-                "2015-01-08前"
+                this.state.top2.time
               )
             )
           )

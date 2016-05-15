@@ -8,6 +8,9 @@ var DetailAction = Reflux.createActions([
   "realRank",
   "realRankCmp",
 
+  "ranklatest",
+  "ranklatestCmp",
+
   "commentDetail",
   "commentDetailCmp",
 
@@ -38,16 +41,16 @@ DetailAction.appInfo.preEmit = function(id, device, country) {
   });
 };
 
-DetailAction.realRank.preEmit = (query={}) => {
+DetailAction.ranklatest.preEmit = (query={})=>{
   var params = {
     type: 'GET',
-    url: SEARCH_HOST + '/apprank',
+    url: SEARCH_HOST + '/ranklatest',
     data: query,
     dataType: 'json'
   }
 
   $.ajax(params).always(function( res ){
-    DetailAction.realRankCmp(res);
+    DetailAction.ranklatestCmp(res);
   });
 };
 

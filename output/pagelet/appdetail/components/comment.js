@@ -39,28 +39,29 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
     getInitialState: function getInitialState() {
       var query = this.props.query;
+      var filter = this.props.filter || {};
+      var scores = filter.score || [];
+  
+      scores = scores.map(function (s) {
+        return s.value;
+      });
+  
+      scores = scores.join(",");
   
       return {
         id: query.id,
-        country: _constants.countryCode.CHINA,
-        duraTime: 1,
-        device: _constants.deviceType.IPHONE,
+        country: filter.country ? filter.country.value : _constants.countryCode.CHINA,
+        duraTime: filter.days ? filter.days.value : 1,
+        device: filter.device ? filter.device.value : _constants.deviceType.IPHONE,
         bIndex: 1,
-        count: 20,
-        score: 3,
+        count: 1000,
+        score: scores || "1,2,3,4,5",
   
         list: []
       };
     },
   
     componentDidMount: function componentDidMount() {
-      var score = "";
-  
-      for (var i = 1; i <= this.state.score; i++) {
-        score = score + "," + i;
-      }
-  
-      score = score.slice(1, score.length);
   
       _actionAction2["default"].commentDetail({
         id: this.state.id, //711可用
@@ -69,7 +70,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
         device: this.state.device,
         bIndex: this.state.bIndex,
         count: this.state.count,
-        score: score
+        score: this.state.score
       });
   
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
@@ -86,6 +87,14 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
     render: function render() {
       var list = this.state.list;
   
+      var filter = this.props.filter || {};
+      var scores = filter.score || [];
+      var scoreLabel = scores.map(function (s) {
+        return s.name;
+      });
+  
+      scoreLabel = scoreLabel.join(",");
+  
       return _react2["default"].createElement(
         "div",
         { className: "comment" },
@@ -95,7 +104,9 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "p",
             { className: "fr f-txt f10 c999" },
-            "所有评级, 7天"
+            scoreLabel || "所有评级",
+            ", ",
+            _constants.days2Str[this.state.duraTime]
           ),
           _react2["default"].createElement("i", null),
           "评论详情"

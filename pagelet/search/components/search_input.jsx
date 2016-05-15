@@ -67,7 +67,7 @@ var Search = React.createClass({
       this.state.country,
       this.state.device
     );
-    
+
     SearchAction.addHistory(key);
   },
 

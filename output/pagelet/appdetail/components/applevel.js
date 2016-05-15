@@ -54,7 +54,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
   
     componentDidMount: function componentDidMount() {
       _actionAction2["default"].appLevel({
-        id: "77", //this.state.id,
+        id: this.state.id,
         country: this.state.country,
         device: this.state.device
       });
@@ -108,7 +108,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               _react2["default"].createElement(
                 "p",
                 null,
-                "当前版本评分（3.2.4）"
+                "当前版本评分（",
+                cur.versionName,
+                "）"
               )
             )
           ),
@@ -242,7 +244,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               _react2["default"].createElement(
                 "p",
                 null,
-                "历史版本评分（3.2.4）"
+                "历史版本评分"
               )
             )
           ),

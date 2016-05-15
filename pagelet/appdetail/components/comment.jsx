@@ -8,34 +8,43 @@ import Loading from "/pagelet/widget/components/loading";
 
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
-import {countryCode, deviceType} from "constants";
+
+import {
+  countryCode, 
+  deviceType, 
+  deviceTypeStr, 
+  payType,
+  payTypeToStr, 
+  days2Str,
+  countryCode2Str} from "constants";
 
 var Comment = React.createClass({ 
 
   getInitialState: function(){
     var query = this.props.query;
+    var filter = this.props.filter || {};
+    var scores = filter.score||[];
+
+    scores = scores.map((s)=>{
+      return s.value;
+    });
+
+    scores = scores.join(",");
 
     return {
       id: query.id,
-      country: countryCode.CHINA,
-      duraTime: 1,
-      device: deviceType.IPHONE,
+      country: filter.country? filter.country.value: countryCode.CHINA,
+      duraTime: filter.days?filter.days.value: 1,
+      device: filter.device ? filter.device.value : deviceType.IPHONE,
       bIndex: 1,
-      count: 20,
-      score:3,
+      count: 1000,
+      score: scores ||"1,2,3,4,5",
 
       list: []
     }
   },
 
   componentDidMount: function(){
-    var score = "";
-    
-    for(var i=1; i<=this.state.score; i++){
-      score = score +","+i
-    }
-
-    score=score.slice(1,score.length);
 
     DetailAction.commentDetail({
       id: this.state.id,//711可用
@@ -44,7 +53,7 @@ var Comment = React.createClass({
       device: this.state.device,
       bIndex: this.state.bIndex,
       count: this.state.count,
-      score: score
+      score: this.state.score
     });
 
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
@@ -61,10 +70,18 @@ var Comment = React.createClass({
   render: function(){
     var list = this.state.list;
 
+    var filter = this.props.filter || {};
+    var scores = filter.score||[];
+    var scoreLabel = scores.map((s)=>{
+      return s.name;
+    });
+
+    scoreLabel = scoreLabel.join(",");
+
     return (
       <div className="comment">
         <h5 className="title">
-          <p className="fr f-txt f10 c999">所有评级, 7天</p>
+          <p className="fr f-txt f10 c999">{scoreLabel||"所有评级"}, {days2Str[this.state.duraTime]}</p>
           <i></i>
           评论详情
         </h5>

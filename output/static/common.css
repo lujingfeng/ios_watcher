@@ -190,6 +190,10 @@ table th {
   background: #f6f6f6;
   line-height: 40px;
   font-size: 10px;
+  word-break: break-all;
+}
+table td {
+  word-break: break-all;
 }
 table.border th,
 table.border td {
