@@ -21,7 +21,10 @@ var DetailAction = Reflux.createActions([
   "detailVersionCmp",
 
   "addFav",
-  "addFavCmp"
+  "addFavCmp",
+
+  "isFav",
+  "isFavCmp"
 ]);
 
 DetailAction.appInfo.preEmit = function(id, device, country) {
@@ -106,6 +109,21 @@ DetailAction.addFav.preEmit = (appId, attention) => {
 
   $.ajax(params).always(function( res ){
       DetailAction.addFavCmp(res);
+  });
+};
+
+DetailAction.isFav.preEmit = (id) => {
+  var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/attention/is-attention',
+      data: {
+        appId: id
+      },
+      dataType: 'json'
+  }
+
+  $.ajax(params).always(function( res ){
+      DetailAction.isFavCmp(res);
   });
 };
 

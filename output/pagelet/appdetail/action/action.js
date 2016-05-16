@@ -16,7 +16,7 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "ranklatest", "ranklatestCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "addFav", "addFavCmp"]);
+  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "ranklatest", "ranklatestCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "addFav", "addFavCmp", "isFav", "isFavCmp"]);
   
   DetailAction.appInfo.preEmit = function (id, device, country) {
     var params = {
@@ -108,6 +108,21 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
       DetailAction.addFavCmp(res);
+    });
+  };
+  
+  DetailAction.isFav.preEmit = function (id) {
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/attention/is-attention',
+      data: {
+        appId: id
+      },
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      DetailAction.isFavCmp(res);
     });
   };
   

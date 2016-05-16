@@ -40,7 +40,9 @@ var MyFav = React.createClass({
     this.setState(state);
   },
 
-  onDelete: function(id){
+  onDelete: function(data){
+    var id = data.id || data.appId;
+
     DetailAction.addFav(id, "cancel");
     var app = this.state.list.filter((item, idx)=>{
       if(item.id == id){
@@ -57,6 +59,8 @@ var MyFav = React.createClass({
     var query = this.props.location.query || {};
     var params = $.extend({}, item);
     var pathName = "/detail/1";
+
+    params.id = params.id || params.appId;
 
     this.history.pushState(null, pathName, params);
   },

@@ -18,6 +18,7 @@ var BaseInfo = React.createClass({
 
   componentDidMount: function(){
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+    DetailAction.isFav(this.props.query.id);
   },
 
   componentWillUnmount: function(){
@@ -25,7 +26,7 @@ var BaseInfo = React.createClass({
   },
 
   onStateChange: function(state){
-
+    this.setState(state);
   },
    
   toCompare: function(){

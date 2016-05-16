@@ -79,7 +79,9 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       this.setState(state);
     },
   
-    onDelete: function onDelete(id) {
+    onDelete: function onDelete(data) {
+      var id = data.id || data.appId;
+  
       _pageletAppdetailActionAction2["default"].addFav(id, "cancel");
       var app = this.state.list.filter(function (item, idx) {
         if (item.id == id) {
@@ -96,6 +98,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       var query = this.props.location.query || {};
       var params = _jquery2["default"].extend({}, item);
       var pathName = "/detail/1";
+  
+      params.id = params.id || params.appId;
   
       this.history.pushState(null, pathName, params);
     },

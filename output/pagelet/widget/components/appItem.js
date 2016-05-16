@@ -65,7 +65,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
     },
   
     onDelete: function onDelete() {
-      this.props.onDelete && this.props.onDelete(this.props.data.id);
+      this.props.onDelete && this.props.onDelete(this.props.data);
     },
   
     render: function render() {

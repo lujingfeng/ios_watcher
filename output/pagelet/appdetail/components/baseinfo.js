@@ -39,13 +39,16 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      _actionAction2["default"].isFav(this.props.query.id);
     },
   
     componentWillUnmount: function componentWillUnmount() {
       this.unSubscribe();
     },
   
-    onStateChange: function onStateChange(state) {},
+    onStateChange: function onStateChange(state) {
+      this.setState(state);
+    },
   
     toCompare: function toCompare() {
       this.history.pushState(null, "/comp_analysis", this.props.query);

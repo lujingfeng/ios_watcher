@@ -18,6 +18,9 @@ var DetailStore = Reflux.createStore({
 
       this.listenTo(DetailAction.detailVersion, this.loading);
       this.listenTo(DetailAction.detailVersionCmp, this.detailVersionCmp);
+
+      //this.listenTo(DetailAction.isFav, this.loading);
+      this.listenTo(DetailAction.isFavCmp, this.isFavCmp);
     },
     
     loading: function() {
@@ -103,10 +106,18 @@ var DetailStore = Reflux.createStore({
 
     ranklatestCmp: function(res){
       var params = {loading:false};
-      
+
       if(res.data && res.data.length){
         params.top1 = res.data[0];
         params.top2 = res.data[1];
+      }
+      this.trigger(params);
+    },
+
+    isFavCmp: function(res){
+      var params = {};
+      if(res.status == 200){
+        params.isFav = true;
       }
       this.trigger(params);
     }

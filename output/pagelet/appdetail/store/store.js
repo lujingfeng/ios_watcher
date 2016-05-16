@@ -33,6 +33,9 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
   
       this.listenTo(_actionActionJs2["default"].detailVersion, this.loading);
       this.listenTo(_actionActionJs2["default"].detailVersionCmp, this.detailVersionCmp);
+  
+      //this.listenTo(DetailAction.isFav, this.loading);
+      this.listenTo(_actionActionJs2["default"].isFavCmp, this.isFavCmp);
     },
   
     loading: function loading() {
@@ -122,6 +125,14 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       if (res.data && res.data.length) {
         params.top1 = res.data[0];
         params.top2 = res.data[1];
+      }
+      this.trigger(params);
+    },
+  
+    isFavCmp: function isFavCmp(res) {
+      var params = {};
+      if (res.status == 200) {
+        params.isFav = true;
       }
       this.trigger(params);
     }
