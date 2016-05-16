@@ -58,7 +58,7 @@ var Dialog  = React.createClass({
           footer = <div className="footer">
                        <button style={{width: "50%"}} onClick={this.onCancel}>取消</button>
                        <i className="line"></i>
-                       <button style={{width: "50%"}} onClick={this.onOk}>确定</button>
+                       <button style={{width: "50%"}} onClick={this.onOk}>{this.props.okText||"确定"}</button>
                      </div>
         }else if(this.state.buttonkey == buttonKeys.EDIT_CANCEL){
           footer = <div className="footer">

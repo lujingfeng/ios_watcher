@@ -84,7 +84,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     },
   
     componentDidMount: function componentDidMount() {
-      //this.refs.favComfirm.show();
+      this.refs.favComfirm.show();
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
     },
   
@@ -186,6 +186,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
           _pageletWidgetComponentsDialog2["default"],
           {
             ref: "favComfirm",
+            okText: "管理应用",
             onOk: this.onFavOk,
             buttonkey: _pageletWidgetComponentsDialog2["default"].buttonKeys.CANCEL_OK },
           _react2["default"].createElement(

@@ -29,7 +29,7 @@ var AppDetail = React.createClass({
   },
 
   componentDidMount: function(){
-    //this.refs.favComfirm.show();
+    this.refs.favComfirm.show();
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
   },
 
@@ -121,6 +121,7 @@ var AppDetail = React.createClass({
 
         <Dialog 
           ref="favComfirm" 
+          okText="管理应用"
           onOk={this.onFavOk}
           buttonkey={Dialog.buttonKeys.CANCEL_OK}>
           <div>

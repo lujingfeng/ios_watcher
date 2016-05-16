@@ -82,7 +82,7 @@ define('pagelet/widget/components/dialog.jsx', function(require, exports, module
                   React.createElement(
                       "button",
                       { style: { width: "50%" }, onClick: this.onOk },
-                      "确定"
+                      this.props.okText || "确定"
                   )
               );
           } else if (this.state.buttonkey == buttonKeys.EDIT_CANCEL) {
