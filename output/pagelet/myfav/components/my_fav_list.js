@@ -18,6 +18,10 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -88,6 +92,14 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       }
     },
   
+    onItemClick: function onItemClick(item) {
+      var query = this.props.location.query || {};
+      var params = _jquery2["default"].extend({}, item);
+      var pathName = "/detail/1";
+  
+      this.history.pushState(null, pathName, params);
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -108,6 +120,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
           { className: "c-body" },
           this.state.list.map(function (item, idx) {
             return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+              onItemClick: _this.onItemClick,
               key: idx,
               data: item,
               type: 6,

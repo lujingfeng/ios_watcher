@@ -4,6 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
+import $ from "jquery";
 
 import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
@@ -52,6 +53,14 @@ var MyFav = React.createClass({
     }
   },
 
+  onItemClick: function(item){
+    var query = this.props.location.query || {};
+    var params = $.extend({}, item);
+    var pathName = "/detail/1";
+
+    this.history.pushState(null, pathName, params);
+  },
+
   render: function(){
     let query = this.props.location.query || {};
 
@@ -67,6 +76,7 @@ var MyFav = React.createClass({
           {
             this.state.list.map((item, idx)=>{
               return <AppItem 
+                       onItemClick={this.onItemClick}
                        key={idx} 
                        data={item} 
                        type={6} 
