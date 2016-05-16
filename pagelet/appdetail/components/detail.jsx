@@ -14,11 +14,32 @@ import Comment from "./comment";
 import AppLevel from "./applevel";
 
 import Filter from "/pagelet/widget/components/filter";
+import Dialog from "/pagelet/widget/components/dialog";
+
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
 
 var AppDetail = React.createClass({
+  mixins: [History],
+
   getInitialState: function(){
     return {
       filter: null
+    }
+  },
+
+  componentDidMount: function(){
+    //this.refs.favComfirm.show();
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+  },
+
+  componentWillUnmount: function(){
+    this.unSubscribe();
+  },
+
+  onStateChange: function(state){
+    if(state.isEight){
+      this.refs.favComfirm.show();
     }
   },
 
@@ -26,6 +47,10 @@ var AppDetail = React.createClass({
     this.setState({
       filter: filter
     });
+  },
+
+  onFavOk: function(){
+    this.history.pushState(null, "/myfavlist");
   },
 
   render: function(){
@@ -93,6 +118,16 @@ var AppDetail = React.createClass({
             {bottomView}
           </div>
         </div>
+
+        <Dialog 
+          ref="favComfirm" 
+          onOk={this.onFavOk}
+          buttonkey={Dialog.buttonKeys.CANCEL_OK}>
+          <div>
+            <p>您关注的应用超过8个</p>
+            <p>请管理应用和联系客服</p>
+          </div>
+        </Dialog>
       </div>
     );
   }

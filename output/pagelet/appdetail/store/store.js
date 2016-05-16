@@ -36,6 +36,8 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
   
       //this.listenTo(DetailAction.isFav, this.loading);
       this.listenTo(_actionActionJs2["default"].isFavCmp, this.isFavCmp);
+  
+      this.listenTo(_actionActionJs2["default"].addFavCmp, this.addFavCmp);
     },
   
     loading: function loading() {
@@ -126,6 +128,11 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
         params.top1 = res.data[0];
         params.top2 = res.data[1];
       }
+      this.trigger(params);
+    },
+  
+    addFavCmp: function addFavCmp(res) {
+      var params = { isEight: false };
       this.trigger(params);
     },
   

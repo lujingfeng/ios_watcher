@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="/pagelet/appdetail/detail.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/filter.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/widget/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/dialog.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/popup.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/compproduct/comp_analysis.css" />
     <link rel="stylesheet" type="text/css" href="/pagelet/myfav/my_fav.css" />
@@ -65,6 +67,8 @@
 <script type="text/javascript" src="/pagelet/appdetail/components/applevel.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/calendar.js"></script>
 <script type="text/javascript" src="/pagelet/widget/components/filter.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/popup.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/dialog.js"></script>
 <script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
 <script type="text/javascript" src="/pagelet/top/action/action.js"></script>
 <script type="text/javascript" src="/pagelet/top/store/store.js"></script>
@@ -232,7 +236,10 @@
                 "pagelet/appdetail/components/keywords.jsx",
                 "pagelet/appdetail/components/comment.jsx",
                 "pagelet/appdetail/components/applevel.jsx",
-                "pagelet/widget/components/filter.jsx"
+                "pagelet/widget/components/filter.jsx",
+                "pagelet/widget/components/dialog.jsx",
+                "pagelet/appdetail/action/action.js",
+                "pagelet/appdetail/store/store.js"
             ]
         },
         "pagelet/widget/components/header.jsx": {
@@ -348,6 +355,33 @@
         },
         "pagelet/widget/calendar.less": {
             "uri": "/pagelet/widget/calendar.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/dialog.jsx": {
+            "uri": "/pagelet/widget/components/dialog.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/dialog.less",
+                "react",
+                "jquery",
+                "pagelet/widget/components/popup.jsx"
+            ]
+        },
+        "pagelet/widget/dialog.less": {
+            "uri": "/pagelet/widget/dialog.css",
+            "type": "css"
+        },
+        "pagelet/widget/components/popup.jsx": {
+            "uri": "/pagelet/widget/components/popup.js",
+            "type": "js",
+            "deps": [
+                "pagelet/widget/popup.less",
+                "react",
+                "jquery"
+            ]
+        },
+        "pagelet/widget/popup.less": {
+            "uri": "/pagelet/widget/popup.css",
             "type": "css"
         },
         "pagelet/compproduct/comp_analysis.less": {

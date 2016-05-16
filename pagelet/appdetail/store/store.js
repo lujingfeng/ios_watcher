@@ -21,6 +21,8 @@ var DetailStore = Reflux.createStore({
 
       //this.listenTo(DetailAction.isFav, this.loading);
       this.listenTo(DetailAction.isFavCmp, this.isFavCmp);
+
+      this.listenTo(DetailAction.addFavCmp, this.addFavCmp);
     },
     
     loading: function() {
@@ -111,6 +113,11 @@ var DetailStore = Reflux.createStore({
         params.top1 = res.data[0];
         params.top2 = res.data[1];
       }
+      this.trigger(params);
+    },
+
+    addFavCmp: function(res){
+      var params = {isEight:false};
       this.trigger(params);
     },
 

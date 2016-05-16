@@ -60,8 +60,22 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _pageletWidgetComponentsDialog = require("pagelet/widget/components/dialog.jsx");
+  
+  var _pageletWidgetComponentsDialog2 = _interopRequireDefault(_pageletWidgetComponentsDialog);
+  
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
   var AppDetail = _react2["default"].createClass({
     displayName: "AppDetail",
+  
+    mixins: [_reactRouter.History],
   
     getInitialState: function getInitialState() {
       return {
@@ -69,10 +83,29 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       };
     },
   
+    componentDidMount: function componentDidMount() {
+      //this.refs.favComfirm.show();
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+    },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {
+      if (state.isEight) {
+        this.refs.favComfirm.show();
+      }
+    },
+  
     onFilter: function onFilter(filter) {
       this.setState({
         filter: filter
       });
+    },
+  
+    onFavOk: function onFavOk() {
+      this.history.pushState(null, "/myfavlist");
     },
   
     render: function render() {
@@ -147,6 +180,27 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
             {
               className: "category-detail" },
             bottomView
+          )
+        ),
+        _react2["default"].createElement(
+          _pageletWidgetComponentsDialog2["default"],
+          {
+            ref: "favComfirm",
+            onOk: this.onFavOk,
+            buttonkey: _pageletWidgetComponentsDialog2["default"].buttonKeys.CANCEL_OK },
+          _react2["default"].createElement(
+            "div",
+            null,
+            _react2["default"].createElement(
+              "p",
+              null,
+              "您关注的应用超过8个"
+            ),
+            _react2["default"].createElement(
+              "p",
+              null,
+              "请管理应用和联系客服"
+            )
           )
         )
       );
