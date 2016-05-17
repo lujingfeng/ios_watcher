@@ -78,17 +78,18 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         loading: true,
         showCalendar: false,
         score: [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }],
+  
         device: [],
         country: [],
         genres: [],
   
         curSelected: {
-          datetime: null,
+          datetime: this.props.datetimeValue || null,
           days: this.props.daysValue || null,
-          country: null,
-          device: null,
-          category: null,
-          pay: null,
+          country: this.props.countryValue || null,
+          device: this.props.deviceValue || null,
+          category: this.props.categoryValue || null,
+          pay: this.props.payValue || null,
           score: this.props.scoreValue || []
         }
       };

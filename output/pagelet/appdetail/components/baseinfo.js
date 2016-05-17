@@ -47,6 +47,9 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
     },
   
     onStateChange: function onStateChange(state) {
+      if (state.isEight) {
+        state.isFav = false;
+      }
       this.setState(state);
     },
   

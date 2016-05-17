@@ -34,6 +34,7 @@ var Top7DownList = React.createClass({
         {name:"付费榜",payType: payType.FEE },
         {name:"畅销榜",payType: payType.HOT }
       ];
+    var defaultGenres = {name:"总榜", value:1};
 
     return {
       loading: false,
@@ -44,7 +45,7 @@ var Top7DownList = React.createClass({
 
       list: [],
 
-      genres: "总榜",
+      genres: defaultGenres,
       payType: payType.FREE,
       device: deviceType.IPHONE,
       country: countryCode.CHINA,
@@ -65,7 +66,7 @@ var Top7DownList = React.createClass({
 
   fetchList: function(){
     TopAction.fetDownTopList({
-      genres: this.state.genres,
+      genres: this.state.genres.name,
       type: this.state.payType,
       device: this.state.device,
       country: this.state.country
@@ -121,7 +122,7 @@ var Top7DownList = React.createClass({
     }
 
     if(filter.category){
-      state.genres = filter.category.name;
+      state.genres = filter.category;
     }
     this.setState(state, ()=>{
       this.fetchList();
@@ -132,11 +133,16 @@ var Top7DownList = React.createClass({
     var query = this.props.location.query;
 
     if(query.filter){
+      var props = {};
+      props.device = props.country = props.category = true;
+
+      props.categoryValue = this.state.genres;
+      props.deviceValue = {name: deviceTypeStr[this.state.device], value: this.state.device};
+      props.countryValue = {name: countryCode2Str[this.state.country], value: this.state.country};
+
       return <Filter
               onOk={this.onFilter}
-              device={true}
-              country={true}
-              category={true}/>;
+              {...props}/>;
     }else{
       return this.renderTop();
     }
@@ -162,7 +168,7 @@ var Top7DownList = React.createClass({
             tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
-            {this.state.genres} &nbsp;
+            {this.state.genres.name} &nbsp;
             {countryCode2Str[this.state.country]} &nbsp;
             {deviceTypeStr[this.state.device]}
           </p>

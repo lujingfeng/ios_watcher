@@ -24,7 +24,8 @@ var AppDetail = React.createClass({
 
   getInitialState: function(){
     return {
-      filter: null
+      realFilter: null,
+      commentFilter: null
     }
   },
 
@@ -44,9 +45,16 @@ var AppDetail = React.createClass({
   },
 
   onFilter: function(filter){
-    this.setState({
-      filter: filter
-    });
+    var params = this.props.params;
+    if(params.module == 2){
+      this.setState({
+        realFilter: filter
+      });
+    }else if(params.module == 5){
+      this.setState({
+        commentFilter: filter
+      });
+    }
   },
 
   onFavOk: function(){
@@ -62,16 +70,26 @@ var AppDetail = React.createClass({
       var params = this.props.params;
 
       if(params.module == 2){
-        props.showPayMethod = true;
-        props.device = true;
-        props.country = true;
-        props.days = true;
+        var filter = this.state.realFilter;
+        props.showPayMethod = props.device = props.country = props.days = true;
+        props.payValue=filter&&filter.pay?filter.pay:{"name": "免费", value:"free"};
+        props.deviceValue=filter&&filter.device?filter.device:{"name": "iPhone", value:0};
+        props.countryValue=filter&&filter.country?filter.country:{"name": "中国", value:1};
+        props.daysValue=filter&&filter.days?filter.days:{"name": "今天", value:1};
+
+
       }else if(params.module == 5){
         props.days = true;
         props.score = true;
+        var filter = state.commentFilter;
 
-        props.daysValue = state.filter && state.filter.days ? state.filter.days: null;
-        props.scoreValue = state.filter && state.filter.score ? state.filter.score: [];
+        props.daysValue = filter && filter.days ? filter.days: {name:"今天", value:1};
+        props.scoreValue = filter && filter.score ? filter.score: [
+          {name: "1星", value:1},
+          {name: "2星", value:2},
+          {name: "3星", value:3},
+          {name: "4星", value:4},
+          {name: "5星", value:5}];
       }
 
       return <Filter onOk={this.onFilter} {...props}/>
@@ -90,14 +108,14 @@ var AppDetail = React.createClass({
       bottomView = <AppInfo query={query}/>
     }else if(params.module == 2){
       filterEnabled = true;
-      bottomView = <RealRank query={query} filter={this.state.filter}/>
+      bottomView = <RealRank query={query} filter={this.state.realFilter}/>
     }else if(params.module == 3){
       bottomView = <VersionLog query={query}/>
     }else if(params.module == 4){
       bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
       filterEnabled = true;
-      bottomView = <Comment query={query} filter={this.state.filter}/>
+      bottomView = <Comment query={query} filter={this.state.commentFilter}/>
     }else if(params.module == 6){
       bottomView = <AppLevel query={query}/>
     }

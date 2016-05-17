@@ -10,6 +10,8 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
     value: true
   });
   
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -141,13 +143,24 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         type: this.state.payType
       };
   
-      _actionAction2["default"].getCompare(_jquery2["default"].extend({
-        appId: this.state.app_1.id
-      }, params), this.state.app_1.title);
+      if (params.interval == 1 || params.interval == -1) {
+        //delete params.type;
+        _actionAction2["default"].getRankBy(_jquery2["default"].extend({
+          id: this.state.app_1.id
+        }, params), this.state.app_1.title);
   
-      _actionAction2["default"].getCompare(_jquery2["default"].extend({
-        appId: this.state.app_2.id
-      }, params), this.state.app_2.title);
+        _actionAction2["default"].getRankBy(_jquery2["default"].extend({
+          id: this.state.app_2.id
+        }, params), this.state.app_2.title);
+      } else {
+        _actionAction2["default"].getCompare(_jquery2["default"].extend({
+          appId: this.state.app_1.id
+        }, params), this.state.app_1.title);
+  
+        _actionAction2["default"].getCompare(_jquery2["default"].extend({
+          appId: this.state.app_2.id
+        }, params), this.state.app_2.title);
+      }
     },
   
     onStateChange: function onStateChange(state) {
@@ -190,14 +203,18 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         this.chart && this.chart.dispose();
         this.chart = null;
   
-        renderContent = _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
-          onOk: this.onFilter,
-          showPayMethod: true,
-          device: true,
-          country: true,
-          datetime: true,
-          days: true,
-          category: true });
+        var props = {};
+  
+        props.showPayMethod = props.device = props.days = props.country = true;
+  
+        props.payValue = { name: _constants.payTypeToStr[this.state.payType], value: this.state.payType };
+        props.deviceValue = { name: _constants.deviceTypeStr[this.state.device], value: this.state.device };
+        props.daysValue = { name: _constants.days2Str[this.state.days], value: this.state.days };
+        props.countryValue = { name: _constants.countryCode2Str[this.state.country], value: this.state.country };
+  
+        renderContent = _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({
+          onOk: this.onFilter
+        }, props));
       } else {
         renderContent = this.renderCompare();
       }

@@ -40,6 +40,8 @@ var TopList = React.createClass({
     defaultDatetime.name = "今天";
     defaultDatetime.value = 1;
 
+    var defaultGenres = {name:"总榜", value:1};
+
     return {
       loading: false,
 
@@ -48,7 +50,7 @@ var TopList = React.createClass({
 
       list: [],
 
-      genres: "总榜",
+      genres: defaultGenres,
       payType: payType.FREE,
       device: deviceType.IPHONE,
       country: countryCode.CHINA,
@@ -70,7 +72,7 @@ var TopList = React.createClass({
 
   fetchList: function(){
     TopAction.fetchList({
-      genres: this.state.genres,
+      genres: this.state.genres.name,
       type: this.state.payType,
       device: this.state.device,
       country: this.state.country,
@@ -128,7 +130,7 @@ var TopList = React.createClass({
     }
 
     if(filter.category){
-      state.genres = filter.category.name;
+      state.genres = filter.category;
     }
 
     if(filter.datetime){
@@ -143,12 +145,21 @@ var TopList = React.createClass({
     var query = this.props.location.query;
 
     if(query.filter){
+
+      var props = {};
+      props.device = true;
+      props.country = true;
+      props.category = true;
+      props.datetime = true;
+
+      props.categoryValue = this.state.genres;
+      props.deviceValue = {name: deviceTypeStr[this.state.device], value: this.state.device};
+      props.countryValue = {name: countryCode2Str[this.state.country], value: this.state.country};
+      props.datetimeValue = this.state.date;
+
       return <Filter
               onOk={this.onFilter}
-              device={true}
-              country={true}
-              category={true}
-              datetime={true}/>;
+              {...props}/>;
     }else{
       return this.renderTop();
     }
@@ -174,7 +185,7 @@ var TopList = React.createClass({
             tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
-            {this.state.genres} &nbsp;
+            {this.state.genres.name} &nbsp;
             {countryCode2Str[this.state.country]} &nbsp;
             {deviceTypeStr[this.state.device]} &nbsp;
             {this.state.date.name}

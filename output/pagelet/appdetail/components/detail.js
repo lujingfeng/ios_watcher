@@ -79,7 +79,8 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
     getInitialState: function getInitialState() {
       return {
-        filter: null
+        realFilter: null,
+        commentFilter: null
       };
     },
   
@@ -99,9 +100,16 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     },
   
     onFilter: function onFilter(filter) {
-      this.setState({
-        filter: filter
-      });
+      var params = this.props.params;
+      if (params.module == 2) {
+        this.setState({
+          realFilter: filter
+        });
+      } else if (params.module == 5) {
+        this.setState({
+          commentFilter: filter
+        });
+      }
     },
   
     onFavOk: function onFavOk() {
@@ -117,16 +125,19 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         var params = this.props.params;
   
         if (params.module == 2) {
-          props.showPayMethod = true;
-          props.device = true;
-          props.country = true;
-          props.days = true;
+          var filter = this.state.realFilter;
+          props.showPayMethod = props.device = props.country = props.days = true;
+          props.payValue = filter && filter.pay ? filter.pay : { "name": "免费", value: "free" };
+          props.deviceValue = filter && filter.device ? filter.device : { "name": "iPhone", value: 0 };
+          props.countryValue = filter && filter.country ? filter.country : { "name": "中国", value: 1 };
+          props.daysValue = filter && filter.days ? filter.days : { "name": "今天", value: 1 };
         } else if (params.module == 5) {
           props.days = true;
           props.score = true;
+          var filter = state.commentFilter;
   
-          props.daysValue = state.filter && state.filter.days ? state.filter.days : null;
-          props.scoreValue = state.filter && state.filter.score ? state.filter.score : [];
+          props.daysValue = filter && filter.days ? filter.days : { name: "今天", value: 1 };
+          props.scoreValue = filter && filter.score ? filter.score : [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }];
         }
   
         return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({ onOk: this.onFilter }, props));
@@ -145,14 +156,14 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         bottomView = _react2["default"].createElement(_appinfo2["default"], { query: query });
       } else if (params.module == 2) {
         filterEnabled = true;
-        bottomView = _react2["default"].createElement(_realrank2["default"], { query: query, filter: this.state.filter });
+        bottomView = _react2["default"].createElement(_realrank2["default"], { query: query, filter: this.state.realFilter });
       } else if (params.module == 3) {
         bottomView = _react2["default"].createElement(_version_log2["default"], { query: query });
       } else if (params.module == 4) {
         bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
         filterEnabled = true;
-        bottomView = _react2["default"].createElement(_comment2["default"], { query: query, filter: this.state.filter });
+        bottomView = _react2["default"].createElement(_comment2["default"], { query: query, filter: this.state.commentFilter });
       } else if (params.module == 6) {
         bottomView = _react2["default"].createElement(_applevel2["default"], { query: query });
       }

@@ -61,17 +61,18 @@ var Filter = React.createClass({
         {name: "3星", value:3},
         {name: "4星", value:4},
         {name: "5星", value:5}],
+
       device: [],
       country:[],
       genres: [],
 
       curSelected: {
-        datetime: null,
+        datetime: this.props.datetimeValue||null,
         days: this.props.daysValue||null,
-        country: null,
-        device: null,
-        category: null,
-        pay: null,
+        country: this.props.countryValue||null,
+        device: this.props.deviceValue||null,
+        category: this.props.categoryValue||null,
+        pay: this.props.payValue||null,
         score:this.props.scoreValue||[]
       }
     }

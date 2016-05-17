@@ -26,6 +26,9 @@ var BaseInfo = React.createClass({
   },
 
   onStateChange: function(state){
+    if(state.isEight){
+      state.isFav = false;
+    }
     this.setState(state);
   },
    

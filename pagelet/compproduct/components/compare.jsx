@@ -104,13 +104,25 @@ var AppCompare = React.createClass({
       type: this.state.payType
     };
 
-    CompareAction.getCompare($.extend({
-      appId: this.state.app_1.id
-    }, params), this.state.app_1.title);
+    if(params.interval == 1 || params.interval == -1){
+      //delete params.type;
+      CompareAction.getRankBy($.extend({
+        id: this.state.app_1.id
+      }, params), this.state.app_1.title);
 
-    CompareAction.getCompare($.extend({
-      appId: this.state.app_2.id
-    }, params),this.state.app_2.title);
+      CompareAction.getRankBy($.extend({
+        id: this.state.app_2.id
+      }, params), this.state.app_2.title);
+
+    }else{
+      CompareAction.getCompare($.extend({
+        appId: this.state.app_1.id
+      }, params), this.state.app_1.title);
+
+      CompareAction.getCompare($.extend({
+        appId: this.state.app_2.id
+      }, params),this.state.app_2.title);
+    }
   },
 
   onStateChange: function(state){
@@ -153,15 +165,19 @@ var AppCompare = React.createClass({
       this.chart && this.chart.dispose();
       this.chart = null;
 
+      var props = {};
+
+      props.showPayMethod = props.device = props.days = props.country = true;
+
+      props.payValue = {name: payTypeToStr[this.state.payType], value:this.state.payType};
+      props.deviceValue = {name: deviceTypeStr[this.state.device], value:this.state.device};
+      props.daysValue = {name:days2Str[this.state.days], value: this.state.days};
+      props.countryValue = {name: countryCode2Str[this.state.country], value:this.state.country};
+
       renderContent =(
             <Filter
               onOk={this.onFilter}
-              showPayMethod={true}
-              device={true}
-              country={true}
-              datetime={true}
-              days={true}
-              category={true}/>);
+              {...props}/>);
     }else{
       renderContent = this.renderCompare();
     }

@@ -10,6 +10,8 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
     value: true
   });
   
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -64,6 +66,8 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
     getInitialState: function getInitialState() {
       var tabs = [{ name: "免费榜", payType: _constants.payType.FREE }, { name: "付费榜", payType: _constants.payType.FEE }, { name: "畅销榜", payType: _constants.payType.HOT }];
   
+      var defaultGenres = { name: "总榜", value: 1 };
+  
       return {
         loading: false,
         flag: 1,
@@ -73,7 +77,7 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
         list: [],
   
-        genres: "总榜",
+        genres: defaultGenres,
         payType: _constants.payType.FREE,
         device: _constants.deviceType.IPHONE,
         country: _constants.countryCode.CHINA,
@@ -94,7 +98,7 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
     fetchList: function fetchList() {
       _actionAction2["default"].fetUpTopList({
-        genres: this.state.genres,
+        genres: this.state.genres.name,
         type: this.state.payType,
         device: this.state.device,
         country: this.state.country
@@ -154,7 +158,7 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
       }
   
       if (filter.category) {
-        state.genres = filter.category.name;
+        state.genres = filter.category;
       }
       this.setState(state, function () {
         _this2.fetchList();
@@ -165,11 +169,18 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
       var query = this.props.location.query;
   
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
-          onOk: this.onFilter,
-          device: true,
-          country: true,
-          category: true });
+        var props = {};
+        props.device = true;
+        props.country = true;
+        props.category = true;
+  
+        props.categoryValue = this.state.genres;
+        props.deviceValue = { name: _constants.deviceTypeStr[this.state.device], value: this.state.device };
+        props.countryValue = { name: _constants.countryCode2Str[this.state.country], value: this.state.country };
+  
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({
+          onOk: this.onFilter
+        }, props));
       } else {
         return this.renderTop();
       }
@@ -203,7 +214,7 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            this.state.genres,
+            this.state.genres.name,
             "  ",
             _constants.countryCode2Str[this.state.country],
             "  ",
