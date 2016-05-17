@@ -9,6 +9,7 @@
 }
 .app-compare .content {
   padding: 12px;
+  padding-bottom: 0;
 }
 .app-compare .content .title {
   line-height: 30px;
@@ -68,7 +69,4 @@
   font-size: 12px;
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
-}
-#cmp-chart {
-  margin-top: -100px;
 }
