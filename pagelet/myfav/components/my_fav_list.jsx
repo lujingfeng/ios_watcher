@@ -11,6 +11,9 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 
+import {countryCode, deviceStrToint, countryToCode} from "constants";
+
+
 import DetailAction from "/pagelet/appdetail/action/action";
 import DetailStore from "/pagelet/appdetail/store/store";
 
@@ -45,6 +48,7 @@ var MyFav = React.createClass({
 
     DetailAction.addFav(id, "cancel");
     var app = this.state.list.filter((item, idx)=>{
+      item.id = item.id || item.appId;
       if(item.id == id){
         return item;
       }
@@ -61,6 +65,8 @@ var MyFav = React.createClass({
     var pathName = "/detail/1";
 
     params.id = params.id || params.appId;
+    params.device = deviceStrToint[params.device];
+    params.country = countryToCode[params.country];
 
     this.history.pushState(null, pathName, params);
   },

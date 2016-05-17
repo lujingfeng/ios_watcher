@@ -40,6 +40,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           type: nextProps.type
         });
       }
+      this.setState({ isShowDelete: false });
     },
   
     onClickItem: function onClickItem() {
@@ -64,7 +65,8 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
       }
     },
   
-    onDelete: function onDelete() {
+    onDelete: function onDelete(e) {
+      e.stopPropagation();
       this.props.onDelete && this.props.onDelete(this.props.data);
     },
   
@@ -81,7 +83,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
         //返回的是字符串
         var score = parseFloat(data.score || 0);
-        var width = 200;
+        var _width = 200;
   
         if (type == 3) {
           column3 = _react2["default"].createElement(
@@ -109,7 +111,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               )
             )
           );
-          width = 160;
+          _width = 160;
         }
   
         column2 = _react2["default"].createElement(
@@ -118,7 +120,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           _react2["default"].createElement(
             "p",
             {
-              style: { width: width },
+              style: { width: _width },
               className: "title ellipsis" },
             this.props.index + 1,
             "、",
@@ -126,7 +128,9 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           ),
           _react2["default"].createElement(
             "p",
-            { className: "f12 c666 m5 mb5" },
+            {
+              style: { width: _width },
+              className: "f12 c666 m5 mb5 ellipsis" },
             data.developer
           ),
           _react2["default"].createElement(
@@ -148,7 +152,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
         //排名item
       } else if (type == 2) {
-          var width = window.innerWidth - 150;
+          var _width2 = window.innerWidth - 150;
           var topType;
           var rank = data.rank;
   
@@ -164,7 +168,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             _react2["default"].createElement(
               "p",
               {
-                style: { width: width },
+                style: { width: _width2 },
                 className: "title ellipsis" },
               this.props.index + 1,
               "、",
@@ -173,8 +177,8 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             _react2["default"].createElement(
               "p",
               {
-                style: { width: width },
-                className: "f12 c666 m5 mb5" },
+                style: { width: _width2 },
+                className: "f12 c666 m5 mb5 ellipsis" },
               data.developer
             ),
             _react2["default"].createElement(
@@ -203,6 +207,8 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             icon = rankFloat > 0 ? "up" : "down";
           }
   
+          console.log(rankFloat);
+  
           column3 = _react2["default"].createElement(
             "td",
             { className: "center" },
@@ -215,19 +221,23 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           );
           //竞品对比参考Item
         } else if (type == 4) {
+            var width = 170;
+  
             column2 = _react2["default"].createElement(
               "td",
               null,
               _react2["default"].createElement(
                 "p",
                 {
-                  style: { width: 170 },
+                  style: { width: width },
                   className: "title ellipsis" },
                 data.title
               ),
               _react2["default"].createElement(
                 "p",
-                { className: "f12 c666 m5 mb5" },
+                {
+                  style: { width: width },
+                  className: "f12 c666 m5 mb5 ellipsis" },
                 data.developer
               )
             );

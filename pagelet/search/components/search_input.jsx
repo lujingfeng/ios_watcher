@@ -134,6 +134,8 @@ var Search = React.createClass({
       pathName = pathName + "1"
     }
 
+    params.id = params.id || params.appId;
+
     params.device = this.state.device;
     params.country = countryToCode[params.country];
 
@@ -164,7 +166,7 @@ var Search = React.createClass({
           <div className="tags hot-app">
             {
               this.state.hotWords.map((item, idx)=>{
-                return <span key={idx} onClick={()=>this.onTagSelected(item)}>{item}</span>
+                return <span key={idx} onClick={()=>this.onClickSearchItem(item)}>{item.title}</span>
               })
             }
           </div>

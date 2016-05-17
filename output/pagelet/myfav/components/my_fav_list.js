@@ -38,6 +38,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _constants = require("constants");
+  
   var _pageletAppdetailActionAction = require("pagelet/appdetail/action/action");
   
   var _pageletAppdetailActionAction2 = _interopRequireDefault(_pageletAppdetailActionAction);
@@ -84,6 +86,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
       _pageletAppdetailActionAction2["default"].addFav(id, "cancel");
       var app = this.state.list.filter(function (item, idx) {
+        item.id = item.id || item.appId;
         if (item.id == id) {
           return item;
         }
@@ -100,6 +103,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       var pathName = "/detail/1";
   
       params.id = params.id || params.appId;
+      params.device = _constants.deviceStrToint[params.device];
+      params.country = _constants.countryToCode[params.country];
   
       this.history.pushState(null, pathName, params);
     },

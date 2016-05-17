@@ -25,6 +25,7 @@ var AppItem = React.createClass({
         type: nextProps.type
       });
     }
+    this.setState({isShowDelete:false});
   },
 
   onClickItem: function(){
@@ -49,7 +50,8 @@ var AppItem = React.createClass({
     }
   },
 
-  onDelete: function(){
+  onDelete: function(e){
+    e.stopPropagation();
     this.props.onDelete && this.props.onDelete(this.props.data);
   },
 
@@ -97,7 +99,11 @@ var AppItem = React.createClass({
             className="title ellipsis">
             {this.props.index+1}、{data.title}
           </p>
-          <p className="f12 c666 m5 mb5">{data.developer}</p>
+          <p 
+            style={{width: width}}
+            className="f12 c666 m5 mb5 ellipsis">
+            {data.developer}
+          </p>
           <div>
             <span className="t-vt c666 f12 mr6">{data.genres}</span>
             <Rank value={score} width={14}/>
@@ -127,7 +133,7 @@ var AppItem = React.createClass({
           </p>
           <p 
             style={{width: width}}
-            className="f12 c666 m5 mb5">{data.developer}</p>
+            className="f12 c666 m5 mb5 ellipsis">{data.developer}</p>
           <div>
             <span className="c666 f12 mr6">{data.other?topType:"当前"}</span>
             <span className="c666 f12 ml6 t-vm">{rank == "落榜" ? "落榜": "第"+rank+"名"}</span>
@@ -144,6 +150,8 @@ var AppItem = React.createClass({
         icon = rankFloat>0?"up":"down";
       }
 
+      console.log(rankFloat);
+
       column3 = (
         <td className="center">
           <i className={icon}></i>
@@ -152,14 +160,18 @@ var AppItem = React.createClass({
       );
     //竞品对比参考Item
     }else if(type==4){
+      var width = 170;
+
       column2 = (
         <td>
           <p 
-            style={{width: 170}}
+            style={{width: width}}
             className="title ellipsis">
             {data.title}
           </p>
-          <p className="f12 c666 m5 mb5">{data.developer}</p>
+          <p 
+           style={{width: width}}
+           className="f12 c666 m5 mb5 ellipsis">{data.developer}</p>
         </td>);
       column3 = (
         <td>

@@ -29,7 +29,7 @@ var AppDetail = React.createClass({
   },
 
   componentDidMount: function(){
-    this.refs.favComfirm.show();
+    //this.refs.favComfirm.show();
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
   },
 

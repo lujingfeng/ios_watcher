@@ -8,12 +8,15 @@ import $ from "jquery";
 import {getCookie} from "/static/minxins/utils";
 import SideNav from "./side_nav";
 
+import Popup from "./pagelet/widget/components/popup";
+
 
 var MainView = React.createClass({ 
   mixins: [History],
 
   getInitialState: function(){
     return {
+      confirmVisible: false,
       showSideNav: ()=>{this.refs.sideNav.show();},
       isLogin: ()=>{return this.isLogin();}
     }
@@ -41,12 +44,40 @@ var MainView = React.createClass({
     }.bind(this));
   },
 
+  onTapMasker: function(){
+    this.setState({
+      confirmVisible: false
+    });
+  },
+
+  logOut: function(){
+    this.refs.sideNav.onLogout();
+  },
+
+  showConfirm: function(){
+    this.setState({
+      confirmVisible: true
+    });
+  },
+
   render: function(){
 
     return (
       <div className="__runtime__">
         {this.renderChildren()}
-        <SideNav ref="sideNav"/>
+        <SideNav ref="sideNav" showConfirm={this.showConfirm}/>
+        {
+          this.state.confirmVisible?
+          <Popup ref="confirm" onTapMasker={this.onTapMasker}>
+            <div className="c-confirm">
+              <p>您确认要退出登录吗？</p>
+              <div>
+                <button className="btn normal" onClick={this.logOut}>退出</button>
+                <button className="btn main-btn" onClick={this.onTapMasker}>取消</button>
+              </div>
+            </div>
+          </Popup>: null
+        }
       </div>
     );
   }

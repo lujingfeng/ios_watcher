@@ -98,7 +98,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             _react2["default"].createElement(
               "span",
               null,
-              (0, _staticMinxinsUtils.getCookie)("uname") || "登录/注册"
+              (0, _staticMinxinsUtils.getCookie)("uname") || "登录 / 注册"
             ),
             _react2["default"].createElement("div", { className: "close", onClick: this.onClose })
           ),
@@ -149,7 +149,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
               "li",
               { onClick: function (e) {
                   return _this2.onNav("/search/input", { overlay: true });
-                } },
+                }, style: { display: "none" } },
               _react2["default"].createElement("i", { className: "icon" }),
               "App关键词覆盖数"
             ),
@@ -192,13 +192,14 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
               _react2["default"].createElement(
                 "a",
                 { href: "tel:4006343800" },
-                _react2["default"].createElement("i", { className: "icon" }),
                 "400-6343-800"
               )
             ),
             _react2["default"].createElement(
               "li",
-              { style: { color: "red", paddingLeft: 50 }, onClick: this.onLogout },
+              { style: { color: "red", paddingLeft: 50 }, onClick: function (e) {
+                  return _this2.props.showConfirm();
+                } },
               "退出"
             )
           )

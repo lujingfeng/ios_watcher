@@ -11,3 +11,7 @@
 .c-about p {
   color: #666;
 }
+.c-about img {
+  width: 50%;
+  max-width: 150px;
+}

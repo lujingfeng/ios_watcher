@@ -118,7 +118,8 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         title: {
           text: ''
         },
-        grid: [{ x: '12%', y: '10%', width: '84%', height: '30%' }],
+        geo: { top: 0 },
+        grid: [{ x: '12%', y: '10', width: '84%', height: '30%' }],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -249,7 +250,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               "排名趋势对比图"
             )
           ),
-          _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 500 } })
+          _react2["default"].createElement("div", { ref: "chart", id: "cmp-chart", style: { width: "100%", height: 500 } })
         )
       );
     }

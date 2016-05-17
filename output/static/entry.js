@@ -72,11 +72,24 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var _staticMinxinsUtils = require("static/minxins/utils");
   
-  var uname = (0, _staticMinxinsUtils.getCookie)("uname");
+  //setCookie("uname", "卢景锋", 100000000000000000);
   
-  if (!uname) {
-    location.replace("/check/login-page");
-  }
+  var init = function init() {
+    var uname = (0, _staticMinxinsUtils.getCookie)("uname");
+  
+    if (!uname && location.hash.indexOf("search") == -1) {
+      location.href = "/check/login-page";
+    }
+  
+    if (!uname && location.hash.indexOf("search/input") > -1) {
+      location.href = "/check/login-page";
+    }
+  };
+  init();
+  
+  window.addEventListener("hashchange", function () {
+    init();
+  });
   
   _staticLibJquery2["default"].ajaxSetup({
     cache: false //关闭AJAX缓存

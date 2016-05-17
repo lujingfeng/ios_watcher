@@ -228,6 +228,7 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
             { className: "list" },
             list.map(function (item, idx) {
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                key: idx,
                 type: 2,
                 onItemClick: _this3.onItemClick,
                 index: idx,

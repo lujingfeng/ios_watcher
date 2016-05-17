@@ -34,6 +34,8 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _constants = require("constants");
+  
   var _my_fav_item = require("pagelet/compproduct/components/my_fav_item.jsx");
   
   var _my_fav_item2 = _interopRequireDefault(_my_fav_item);
@@ -139,6 +141,10 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
     },
   
     onClickFavItem: function onClickFavItem(data) {
+      data.id = data.id || data.appId;
+      data.device = _constants.deviceStrToint[data.device];
+      data.country = _constants.countryToCode[data.country];
+  
       this.onClickItem(data);
     },
   
@@ -163,7 +169,11 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
             return _this.history.goBack();
           },
           type: "search" }),
-        _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 4, data: query }),
+        _react2["default"].createElement(
+          "div",
+          { className: "appselected" },
+          _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], { type: 4, data: query })
+        ),
         _react2["default"].createElement(
           "div",
           {
@@ -186,8 +196,16 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
           !this.state.loading && !searchResultList.length && favList.length ? _react2["default"].createElement(
             "ul",
             { className: "my-fav-list clearfix" },
+            _react2["default"].createElement(
+              "h5",
+              { className: "title" },
+              _react2["default"].createElement("i", null),
+              "关注对比"
+            ),
             favList.map(function (item, idx) {
-              return _react2["default"].createElement(_my_fav_item2["default"], { data: item, onClick: _this.onClickFavItem });
+              return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
+                index: idx,
+                type: 5, data: item, onItemClick: _this.onClickFavItem });
             })
           ) : null,
           this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null

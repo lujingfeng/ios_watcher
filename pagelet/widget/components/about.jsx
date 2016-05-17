@@ -23,8 +23,8 @@ var About = React.createClass({
           <p>3、关注酷传推广手册订阅号（tuiguangshouce）及酷传监控服务号（coolchuanhjk）、了解移动互联网行业动态、洞察APP推广方法。</p>
 
           <div>
-            <img src=""></img>
-            <img src=""></img>
+            <img src="/static/image/icon_1.png"></img>
+            <img src="/static/image/icon_2.png"></img>
           </div>
         </div>
       </div>

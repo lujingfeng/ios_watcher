@@ -28,6 +28,10 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
   
   var _side_nav2 = _interopRequireDefault(_side_nav);
   
+  var _pageletWidgetComponentsPopup = require("pagelet/widget/components/popup.jsx");
+  
+  var _pageletWidgetComponentsPopup2 = _interopRequireDefault(_pageletWidgetComponentsPopup);
+  
   var MainView = _react2["default"].createClass({
     displayName: "MainView",
   
@@ -37,6 +41,7 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
       var _this = this;
   
       return {
+        confirmVisible: false,
         showSideNav: function showSideNav() {
           _this.refs.sideNav.show();
         },
@@ -62,13 +67,56 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
       }).bind(this));
     },
   
+    onTapMasker: function onTapMasker() {
+      this.setState({
+        confirmVisible: false
+      });
+    },
+  
+    logOut: function logOut() {
+      this.refs.sideNav.onLogout();
+    },
+  
+    showConfirm: function showConfirm() {
+      this.setState({
+        confirmVisible: true
+      });
+    },
+  
     render: function render() {
   
       return _react2["default"].createElement(
         "div",
         { className: "__runtime__" },
         this.renderChildren(),
-        _react2["default"].createElement(_side_nav2["default"], { ref: "sideNav" })
+        _react2["default"].createElement(_side_nav2["default"], { ref: "sideNav", showConfirm: this.showConfirm }),
+        this.state.confirmVisible ? _react2["default"].createElement(
+          _pageletWidgetComponentsPopup2["default"],
+          { ref: "confirm", onTapMasker: this.onTapMasker },
+          _react2["default"].createElement(
+            "div",
+            { className: "c-confirm" },
+            _react2["default"].createElement(
+              "p",
+              null,
+              "您确认要退出登录吗？"
+            ),
+            _react2["default"].createElement(
+              "div",
+              null,
+              _react2["default"].createElement(
+                "button",
+                { className: "btn normal", onClick: this.logOut },
+                "退出"
+              ),
+              _react2["default"].createElement(
+                "button",
+                { className: "btn main-btn", onClick: this.onTapMasker },
+                "取消"
+              )
+            )
+          )
+        ) : null
       );
     }
   });

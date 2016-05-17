@@ -60,8 +60,8 @@ define('pagelet/widget/components/about.jsx', function(require, exports, module)
           _react2["default"].createElement(
             "div",
             null,
-            _react2["default"].createElement("img", { src: "" }),
-            _react2["default"].createElement("img", { src: "" })
+            _react2["default"].createElement("img", { src: "/static/image/icon_1.png" }),
+            _react2["default"].createElement("img", { src: "/static/image/icon_2.png" })
           )
         )
       );

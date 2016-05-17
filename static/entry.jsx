@@ -18,14 +18,27 @@ import MyFavList from "/pagelet/myfav/components/my_fav_list";
 import ASOService from "/pagelet/widget/components/aso_service";
 import About from "/pagelet/widget/components/about";
 
-
 import {getCookie, setCookie} from "/static/minxins/utils";
 
-var uname = getCookie("uname");
+//setCookie("uname", "卢景锋", 100000000000000000);
 
-if(!uname){
-  location.replace("/check/login-page");
+
+var init = function(){
+  var uname = getCookie("uname");
+
+  if(!uname && location.hash.indexOf("search") == -1){
+    location.href= "/check/login-page";
+  }
+
+  if(!uname && location.hash.indexOf("search/input") >-1){
+    location.href = "/check/login-page";
+  }
 }
+init();
+
+window.addEventListener("hashchange", ()=>{
+  init();
+});
 
 
 $.ajaxSetup ({

@@ -76,7 +76,7 @@ var SideNav = React.createClass({
         <div className="side-nav">
           <div className="profile" onClick={this.onClickLogin}>
             <i className="awatar"></i>
-            <span>{getCookie("uname")||"登录/注册"}</span>
+            <span>{getCookie("uname")||"登录 / 注册"}</span>
             <div className="close" onClick={this.onClose}></div>
           </div>
           <ul>
@@ -102,7 +102,7 @@ var SideNav = React.createClass({
               <i className="icon"></i>
               关键词热度排行榜
             </li>
-            <li onClick={e=>this.onNav("/search/input", {overlay: true})}>
+            <li onClick={e=>this.onNav("/search/input", {overlay: true})} style={{display:"none"}}>
               <i className="icon"></i>
               App关键词覆盖数
             </li>
@@ -126,11 +126,10 @@ var SideNav = React.createClass({
             <li>
               <i className="icon callin"></i>
               <a href="tel:4006343800">
-                <i className="icon"></i>
                 400-6343-800
               </a>
             </li>
-            <li style={{color:"red",paddingLeft: 50}} onClick={this.onLogout}>
+            <li style={{color:"red",paddingLeft: 50}} onClick={e=>this.props.showConfirm()}>
               退出
             </li>
           </ul>

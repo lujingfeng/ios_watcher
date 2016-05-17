@@ -99,7 +99,7 @@ var TopList = React.createClass({
 
   onItemClick: function(data){
     var query = $.extend({}, data);
-    
+
     this.history.pushState("", "detail/1", query);
   },
 
@@ -185,6 +185,7 @@ var TopList = React.createClass({
               list.map((item, idx)=>{
                 return (
                   <AppItem 
+                    key={idx}
                     type={2} 
                     onItemClick={this.onItemClick} 
                     index={idx}

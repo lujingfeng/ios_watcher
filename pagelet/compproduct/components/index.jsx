@@ -9,6 +9,12 @@ import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
+import {
+  countryCode, 
+  deviceStrToint,
+  countryCode2Str, 
+  countryToCode,
+  days2Str, deviceType, payType, payTypeToStr,deviceTypeStr} from "constants";
 
 import MyFavItem from "./my_fav_item";
 
@@ -105,6 +111,10 @@ var AppCompare = React.createClass({
   },
 
   onClickFavItem: function(data){
+    data.id = data.id || data.appId;
+    data.device = deviceStrToint[data.device];
+    data.country = countryToCode[data.country];
+
     this.onClickItem(data);
   },
 
@@ -126,7 +136,9 @@ var AppCompare = React.createClass({
           onCancelSearch={e=>this.history.goBack()}
           type="search"/>
 
-        <AppItem type={4} data={query}/>
+        <div className="appselected">
+          <AppItem type={4} data={query}/>
+        </div>
         
         <div 
           onScroll={this.handleScroll.bind(this)}
@@ -156,9 +168,15 @@ var AppCompare = React.createClass({
           {
             !this.state.loading && !searchResultList.length && favList.length?(
               <ul className="my-fav-list clearfix">
+                <h5 className="title">
+                  <i></i>
+                  关注对比
+                </h5>
                 {
                   favList.map((item, idx)=>{
-                    return <MyFavItem data={item} onClick={this.onClickFavItem}/>
+                    return <AppItem  
+                              index={idx}
+                              type={5} data={item} onItemClick={this.onClickFavItem}/>
                   })
                 }
               </ul>):null
