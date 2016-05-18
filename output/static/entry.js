@@ -74,6 +74,12 @@ define('static/entry.jsx', function(require, exports, module) {
   
   //setCookie("uname", "卢景锋", 100000000000000000);
   
+  (0, _staticMinxinsUtils.send)({
+    type: "entry",
+    opra: "pv",
+    label: document.referrer
+  });
+  
   var init = function init() {
     var uname = (0, _staticMinxinsUtils.getCookie)("uname");
     var hash = location.hash;

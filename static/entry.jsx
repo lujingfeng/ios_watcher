@@ -18,9 +18,16 @@ import MyFavList from "/pagelet/myfav/components/my_fav_list";
 import ASOService from "/pagelet/widget/components/aso_service";
 import About from "/pagelet/widget/components/about";
 
-import {getCookie, setCookie} from "/static/minxins/utils";
+import {getCookie, setCookie,send} from "/static/minxins/utils";
 
 //setCookie("uname", "卢景锋", 100000000000000000);
+
+
+send({
+  type: "entry",
+  opra: "pv",
+  label: document.referrer
+});
 
 
 var init = function(){
