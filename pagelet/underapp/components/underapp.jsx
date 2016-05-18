@@ -112,6 +112,12 @@ var UnderAppList = React.createClass({
     }
 
     if(filter.datetime){
+      if(filter.datetime.year){
+        var datetime = filter.datetime;
+        var d = new Date(datetime.year, datetime.month, datetime.day);
+        filter.datetime.value =d.format("yyyy-MM-dd");
+        filter.datetime.name = d.format("yyyy-MM-dd");
+      }
       state.date = filter.datetime;
     }
 
@@ -124,10 +130,14 @@ var UnderAppList = React.createClass({
     var query = this.props.location.query;
 
     if(query.filter){
+      var props = {};
+      props.countryValue = {name: countryCode2Str[this.state.country], value: this.state.country};
+      props.datetimeValue = this.state.date;
+
       return <Filter
               onOk={this.onFilter}
               country={true}
-              datetime={true}/>;
+              datetime={true} {...props}/>;
     }else{
       return this.renderTop();
     }

@@ -134,6 +134,12 @@ var TopList = React.createClass({
     }
 
     if(filter.datetime){
+      if(filter.datetime.year){
+        var datetime = filter.datetime;
+        var d = new Date(datetime.year, datetime.month, datetime.day);
+        filter.datetime.value =d.format("yyyy-MM-dd");
+        filter.datetime.name = d.format("yyyy-MM-dd");
+      }
       state.date = filter.datetime;
     }
     this.setState(state, ()=>{

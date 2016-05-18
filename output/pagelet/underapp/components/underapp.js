@@ -10,6 +10,8 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     value: true
   });
   
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -145,6 +147,12 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
       }
   
       if (filter.datetime) {
+        if (filter.datetime.year) {
+          var datetime = filter.datetime;
+          var d = new Date(datetime.year, datetime.month, datetime.day);
+          filter.datetime.value = d.format("yyyy-MM-dd");
+          filter.datetime.name = d.format("yyyy-MM-dd");
+        }
         state.date = filter.datetime;
       }
   
@@ -157,10 +165,14 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
       var query = this.props.location.query;
   
       if (query.filter) {
-        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], {
+        var props = {};
+        props.countryValue = { name: _constants.countryCode2Str[this.state.country], value: this.state.country };
+        props.datetimeValue = this.state.date;
+  
+        return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({
           onOk: this.onFilter,
           country: true,
-          datetime: true });
+          datetime: true }, props));
       } else {
         return this.renderTop();
       }
