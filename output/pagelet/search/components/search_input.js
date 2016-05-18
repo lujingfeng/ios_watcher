@@ -22,6 +22,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
   var _jquery2 = _interopRequireDefault(_jquery);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -74,6 +76,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       this.unSubscribe = _pageletSearchStoreStore2["default"].listen(this.onStateChange.bind(this));
       _pageletSearchActionAction2["default"].fetchHotApp();
       _pageletSearchActionAction2["default"].fetchHistory();
+  
+      (0, _staticMinxinsUtils.send)({
+        type: "search",
+        opra: "pv",
+        label: "搜索"
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {
@@ -94,6 +102,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       _pageletSearchActionAction2["default"].search(key, 1, this.state.country, this.state.device);
   
       _pageletSearchActionAction2["default"].addHistory(key);
+  
+      (0, _staticMinxinsUtils.send)({
+        type: "search",
+        opra: "history",
+        label: key
+      });
     },
   
     onChooseDevice: function onChooseDevice(tab) {
@@ -118,6 +132,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
   
       _pageletSearchActionAction2["default"].addHistory(searchWord);
+  
+      (0, _staticMinxinsUtils.send)({
+        type: "search",
+        opra: "search",
+        label: key
+      });
     },
   
     handleScroll: function handleScroll(e) {
@@ -154,6 +174,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       params.country = _constants.countryToCode[params.country];
   
       this.history.pushState("", pathName, params);
+  
+      (0, _staticMinxinsUtils.send)({
+        type: "search",
+        opra: "hot",
+        label: params.title
+      });
     },
   
     render: function render() {

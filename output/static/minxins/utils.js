@@ -5,6 +5,82 @@ define('static/minxins/utils', function(require, exports, module) {
   Object.defineProperty(exports, "__esModule", {
       value: true
   });
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+  
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
+  var request = _jquery2["default"].ajax;
+  
+  _jquery2["default"].ajax = function (params) {
+      var _fail = [];
+      var _done = [];
+      var _always = [];
+      var req = request.apply(_jquery2["default"], arguments);
+  
+      var start = Date.now();
+  
+      req.fail(function (res) {
+          var _this = this;
+  
+          var args = arguments;
+  
+          send({
+              type: "request",
+              opra: params.url,
+              label: "失败"
+          });
+  
+          _fail.forEach(function (func) {
+              func.apply(_this, args);
+          });
+      });
+  
+      req.done(function (res) {
+          var _this2 = this;
+  
+          var args = arguments;
+          var end = Date.now();
+  
+          send({
+              type: "request",
+              opra: params.url,
+              label: "成功-" + (end - start)
+          });
+  
+          _done.forEach(function (func) {
+              func.apply(_this2, args);
+          });
+      });
+  
+      req.always(function (res) {
+          var _this3 = this;
+  
+          var args = arguments;
+  
+          _always.forEach(function (func) {
+              func.apply(_this3, args);
+          });
+      });
+  
+      return {
+          always: function always(func) {
+              _always.push(func);
+              return this;
+          },
+          done: function done(func) {
+              _done.push(func);
+              return this;
+          },
+          fail: function fail(func) {
+              _fail.push(func);
+              return this;
+          }
+      };
+  };
+  
   var URL = {
       getParameters: function getParameters() {
           var search = location.search || "";
@@ -45,7 +121,15 @@ define('static/minxins/utils', function(require, exports, module) {
       document.cookie = cookiename + "=" + cookievalue + "; path=/;expires = " + date.toGMTString();
   };
   
-  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie, setCookie: setCookie };
+  function send(params) {
+      request.apply(_jquery2["default"], [{
+          url: "/other/write-log",
+          type: "get",
+          data: params
+      }]);
+  }
+  
+  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie, setCookie: setCookie, send: send };
   module.exports = exports["default"];
 
 });

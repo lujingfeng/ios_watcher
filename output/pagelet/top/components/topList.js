@@ -48,6 +48,8 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _constants = require("constants");
   
   var _actionAction = require("pagelet/top/action/action");
@@ -95,6 +97,12 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       this.fetchList();
+  
+      (0, _staticMinxinsUtils.send)({
+        type: "top",
+        opra: "pv",
+        label: "iOS榜单排名"
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {

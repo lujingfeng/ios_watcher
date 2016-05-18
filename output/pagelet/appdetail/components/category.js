@@ -18,6 +18,8 @@ define('pagelet/appdetail/components/category.jsx', function(require, exports, m
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var DetailCategory = _react2["default"].createClass({
     displayName: "DetailCategory",
   
@@ -39,6 +41,26 @@ define('pagelet/appdetail/components/category.jsx', function(require, exports, m
   
     onCategofy: function onCategofy(category) {
       this.history.pushState("", "/detail/" + category, this.props.query);
+  
+      var label = "";
+      if (category == 1) {
+        label = "应用信息";
+      } else if (category == 2) {
+        label = "实时排名";
+      } else if (category == 3) {
+        label = "版本记录";
+      } else if (category == 4) {
+        label = "关键词覆盖数";
+      } else if (category == 5) {
+        label = "评论详情";
+      } else if (category == 6) {
+        label = "应用评级";
+      }
+      (0, _staticMinxinsUtils.send)({
+        type: "detail-tab",
+        opra: "click",
+        label: label
+      });
     },
   
     render: function render() {

@@ -18,6 +18,8 @@ define('pagelet/search/components/index.jsx', function(require, exports, module)
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _pageletWidgetComponentsHeader = require("pagelet/widget/components/header.jsx");
   
   var _pageletWidgetComponentsHeader2 = _interopRequireDefault(_pageletWidgetComponentsHeader);
@@ -31,7 +33,13 @@ define('pagelet/search/components/index.jsx', function(require, exports, module)
       return {};
     },
   
-    componentDidMount: function componentDidMount() {},
+    componentDidMount: function componentDidMount() {
+      (0, _staticMinxinsUtils.send)({
+        type: "search",
+        opra: "pv",
+        label: "首页"
+      });
+    },
   
     componentWillUnmount: function componentWillUnmount() {},
   

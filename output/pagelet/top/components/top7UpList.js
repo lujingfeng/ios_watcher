@@ -48,6 +48,8 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _constants = require("constants");
   
   var _actionAction = require("pagelet/top/action/action");
@@ -90,6 +92,11 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       this.fetchList();
+      (0, _staticMinxinsUtils.send)({
+        type: "top",
+        opra: "pv",
+        label: "七日排名上升榜"
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {

@@ -12,6 +12,7 @@ import VersionLog from "./version_log";
 import KeyWords from "./keywords";
 import Comment from "./comment";
 import AppLevel from "./applevel";
+import {send} from "/static/minxins/utils";
 
 import Filter from "/pagelet/widget/components/filter";
 import Dialog from "/pagelet/widget/components/dialog";
@@ -32,6 +33,10 @@ var AppDetail = React.createClass({
   componentDidMount: function(){
     //this.refs.favComfirm.show();
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+    send({
+      type: "detail",
+      opra: "pv"
+    });
   },
 
   componentWillUnmount: function(){

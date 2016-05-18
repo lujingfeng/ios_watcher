@@ -56,6 +56,8 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
   
   var _applevel2 = _interopRequireDefault(_applevel);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _pageletWidgetComponentsFilter = require("pagelet/widget/components/filter.jsx");
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
@@ -87,6 +89,10 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     componentDidMount: function componentDidMount() {
       //this.refs.favComfirm.show();
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+      (0, _staticMinxinsUtils.send)({
+        type: "detail",
+        opra: "pv"
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {

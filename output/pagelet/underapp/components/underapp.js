@@ -48,6 +48,8 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsFilter2 = _interopRequireDefault(_pageletWidgetComponentsFilter);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _constants = require("constants");
   
   var _actionAction = require("pagelet/underapp/action/action");
@@ -82,6 +84,11 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
       this.fetchList();
+      (0, _staticMinxinsUtils.send)({
+        type: "offshelve",
+        opra: "pv",
+        label: "下架应用监控"
+      });
     },
   
     componentWillUnmount: function componentWillUnmount() {

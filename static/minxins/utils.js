@@ -1,3 +1,70 @@
+import $ from "jquery";
+
+
+var request = $.ajax;
+
+$.ajax = function(params){
+    var fail = [];
+    var done = [];
+    var always = [];
+    var req = request.apply($, arguments);
+
+
+    var start = Date.now();
+
+    req.fail(function(res){
+        var args = arguments;
+
+        send({
+          type: "request",
+          opra: params.url,
+          label: "失败"
+        });
+
+        fail.forEach((func)=>{
+            func.apply(this, args);
+        });
+    });
+
+    req.done(function(res){
+        var args = arguments;
+        var end = Date.now();
+
+        send({
+          type: "request",
+          opra: params.url,
+          label: "成功-" + (end-start)
+        });
+        
+        done.forEach((func)=>{
+            func.apply(this, args);
+        });
+    });
+
+    req.always(function(res){
+        var args = arguments;
+        
+        always.forEach((func)=>{
+            func.apply(this, args);
+        });
+    });
+
+    return {
+        always: function(func){
+            always.push(func);
+            return this;
+        },
+        done: function(func){
+            done.push(func);
+            return this;
+        },
+        fail: function(func){
+            fail.push(func);
+            return this;
+        }
+    }
+};
+
 let URL = {
     getParameters: function(){
         let search = location.search || "";
@@ -40,4 +107,12 @@ function setCookie(cookiename, cookievalue, hours) {
   document.cookie = cookiename + "=" + cookievalue + "; path=/;expires = " + date.toGMTString();
 };
 
-export default {URL, bytesToSize, getCookie, setCookie};
+function send(params){
+  request.apply($,[{
+    url: "/other/write-log",
+    type:"get",
+    data: params
+  }]);
+}
+
+export default {URL, bytesToSize, getCookie, setCookie, send};

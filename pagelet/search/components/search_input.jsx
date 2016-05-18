@@ -5,6 +5,7 @@
 import React from "react";
 import {History} from "/static/lib/reactRouter";
 import $ from "jquery";
+import {send} from "/static/minxins/utils";
 
 import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
@@ -44,6 +45,12 @@ var Search = React.createClass({
     this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
     SearchAction.fetchHotApp();
     SearchAction.fetchHistory();
+
+    send({
+      type: "search",
+      opra: "pv",
+      label:"搜索"
+    });
   },
 
   componentWillUnmount: function(){
@@ -69,6 +76,12 @@ var Search = React.createClass({
     );
 
     SearchAction.addHistory(key);
+
+    send({
+      type: "search",
+      opra: "history",
+      label: key
+    });
   },
 
   onChooseDevice: function(tab){
@@ -101,6 +114,12 @@ var Search = React.createClass({
     );
 
     SearchAction.addHistory(searchWord);
+
+    send({
+      type: "search",
+      opra: "search",
+      label: key
+    });
   },
 
   handleScroll: function(e) {
@@ -140,6 +159,12 @@ var Search = React.createClass({
     params.country = countryToCode[params.country];
 
     this.history.pushState("", pathName, params);
+
+    send({
+      type: "search",
+      opra: "hot",
+      label: params.title
+    });
   },
 
   render: function(){

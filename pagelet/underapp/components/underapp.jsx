@@ -11,6 +11,7 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
+import {send} from "/static/minxins/utils";
 
 import {
   countryCode, 
@@ -46,6 +47,11 @@ var UnderAppList = React.createClass({
   componentDidMount: function(){
     this.unSubscribe = UnderAppStore.listen(this.onStateChange.bind(this));
     this.fetchList();
+    send({
+      type: "offshelve",
+      opra: "pv",
+      label: "下架应用监控"
+    });
   },
 
   componentWillUnmount: function(){

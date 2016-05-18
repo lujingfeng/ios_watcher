@@ -12,6 +12,8 @@ import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Filter from "/pagelet/widget/components/filter";
 
+import {send} from "/static/minxins/utils";
+
 import {
   countryCode, 
   deviceType, 
@@ -64,6 +66,12 @@ var TopList = React.createClass({
   componentDidMount: function(){
     this.unSubscribe = TopStore.listen(this.onStateChange.bind(this));
     this.fetchList();
+
+    send({
+      type: "top",
+      opra: "pv",
+      label: "iOS榜单排名"
+    });
   },
 
   componentWillUnmount: function(){

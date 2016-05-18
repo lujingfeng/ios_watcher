@@ -4,7 +4,7 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
-
+import {send} from "/static/minxins/utils";
 import Header from "/pagelet/widget/components/header";
 var Search = React.createClass({ 
   mixins: [History],
@@ -15,7 +15,11 @@ var Search = React.createClass({
   },
 
   componentDidMount: function(){
-    
+    send({
+      type: "search",
+      opra: "pv",
+      label: "首页"
+    });
   },
 
   componentWillUnmount: function(){
