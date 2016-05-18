@@ -76,8 +76,9 @@ define('static/entry.jsx', function(require, exports, module) {
   
   var init = function init() {
     var uname = (0, _staticMinxinsUtils.getCookie)("uname");
+    var hash = location.hash;
   
-    if (!uname && location.hash.indexOf("search") == -1) {
+    if (!uname && hash.indexOf("search") == -1 && hash.indexOf("about") == -1 && hash.indexOf("aso_service") == -1) {
       location.href = "/check/login-page";
     }
   

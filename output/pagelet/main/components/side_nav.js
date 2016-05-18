@@ -97,7 +97,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             _react2["default"].createElement("i", { className: "awatar" }),
             _react2["default"].createElement(
               "span",
-              null,
+              { className: "ellipsis" },
               (0, _staticMinxinsUtils.getCookie)("uname") || "登录 / 注册"
             ),
             _react2["default"].createElement("div", { className: "close", onClick: this.onClose })

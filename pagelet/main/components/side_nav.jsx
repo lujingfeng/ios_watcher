@@ -76,7 +76,7 @@ var SideNav = React.createClass({
         <div className="side-nav">
           <div className="profile" onClick={this.onClickLogin}>
             <i className="awatar"></i>
-            <span>{getCookie("uname")||"登录 / 注册"}</span>
+            <span className="ellipsis">{getCookie("uname")||"登录 / 注册"}</span>
             <div className="close" onClick={this.onClose}></div>
           </div>
           <ul>

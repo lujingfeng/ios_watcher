@@ -270,12 +270,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 _react2["default"].createElement(
                   "td",
                   null,
-                  "123213"
+                  "-"
                 ),
                 _react2["default"].createElement(
                   "td",
                   null,
-                  this.state.total
+                  this.state.total || "-"
                 )
               )
             )

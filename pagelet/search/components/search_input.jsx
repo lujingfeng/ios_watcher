@@ -205,8 +205,8 @@ var Search = React.createClass({
                   </tr>
                   <tr>
                     <td>{this.state.searchKey}</td>
-                    <td>123213</td>
-                    <td>{this.state.total}</td>
+                    <td>-</td>
+                    <td>{this.state.total||"-"}</td>
                   </tr>
                 </table>
               </div>
