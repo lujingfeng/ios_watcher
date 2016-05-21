@@ -7,7 +7,14 @@ import {History} from "reactRouter";
 import Calendar from "./calendar";
 import Loading from "./loading";
 
-import {payType} from "constants";
+import {
+  countryCode, 
+  deviceType, 
+  deviceTypeStr, 
+  payType,
+  payTypeToStr, 
+  days2Str,
+  countryCode2Str} from "constants";
 
 import Reflux from "reflux";
 import $ from "/static/lib/jquery";
@@ -118,6 +125,27 @@ var Filter = React.createClass({
     });
     var curSelected = this.state.curSelected;
     curSelected.datetime = datetime;
+
+    if(datetime.year){
+      var d = new Date();
+      var prevDate = new Date(d.getTime() - 24*60*60*1000);
+
+      if(datetime.year == d.getFullYear() &&
+         datetime.month == (d.getMonth() + 1) &&
+         datetime.day == d.getDate()){
+        datetime.value = 1;
+        datetime.name = days2Str[datetime.value];
+      }else if(datetime.year == prevDate.getFullYear() &&
+         datetime.month == (prevDate.getMonth() + 1) &&
+         datetime.day == prevDate.getDate()){
+        datetime.value = -1;
+        datetime.name = days2Str[datetime.value];
+      }else{
+        datetime.value = datetime.year + "-" + datetime.month + "-" + datetime.day;
+        datetime.name = datetime.value;
+      }
+    }
+
     this.setState({curSelected});
   },
 
@@ -185,6 +213,8 @@ var Filter = React.createClass({
           cancel={this.onCanlendarCancel}/>
         )
     }
+
+
     var state = this.state;
     var curSelected = state.curSelected
 
@@ -195,6 +225,18 @@ var Filter = React.createClass({
     var showCategory = !!this.props.category;
     var showPayMethod = !!this.props.showPayMethod;
     var showScore = !!this.props.score;
+    var showDateDay = !!this.props.showDateDay;
+
+
+    var otherLabel;
+    var datetime = curSelected.datetime;
+
+    if(datetime && 
+      datetime.value != 1 &&
+      datetime.value != -1){
+      var d = new Date(datetime.year, datetime.month - 1, datetime.day);
+      otherLabel = d.format("yyyy-MM-dd");
+    }
 
     return (
       <div className="c-filter">
@@ -255,7 +297,7 @@ var Filter = React.createClass({
         {
           showPayMethod?(
             <div>
-              <h5>是否支付</h5>
+              <h5>分类</h5>
               <ul className="f-type clearfix">
                 <li 
                   className={curSelected.pay && curSelected.pay.value==payType.FREE?"selected":null}
@@ -289,7 +331,6 @@ var Filter = React.createClass({
                     if(curSelected.country && curSelected.country.value == item.value){
                       props.className="selected";
                     }
-
                     return (
                       <li {...props}><span>{item.name}</span></li>
                     );
@@ -310,7 +351,12 @@ var Filter = React.createClass({
                 className={curSelected.datetime && curSelected.datetime.value==-1?"selected":null}
                 onClick={e=>this.onDatetime({name:"昨天", value:-1})}><span>昨天</span></li>
               <li 
-                style={{width:"50%"}} onClick={this.onOtherDate}><span>其他</span></li>
+                className={otherLabel?"selected":""}
+                style={{width:"50%"}} onClick={this.onOtherDate}>
+                <span>
+                  {otherLabel||"其他"}
+                </span>
+              </li>
             </ul>
           </div>):null
         }
@@ -351,6 +397,39 @@ var Filter = React.createClass({
                 onClick={e=>this.onDays({name:"60日", value:60})}>
                 <span>60日</span>
               </li>
+            </ul>
+          </div>): null
+        }
+
+        {
+          showDateDay?(
+          <div>
+            <h5>时间</h5>
+            <ul className="f-type clearfix">
+              <li 
+                className={curSelected.datetime && curSelected.datetime.value==7?"selected":null}
+                onClick={e=>this.onDatetime({name:"7日", value:7})}>
+                <span>7日</span>
+              </li>
+              <li 
+                className={curSelected.datetime && curSelected.datetime.value==15?"selected":null}
+                onClick={e=>this.onDatetime({name:"15日", value:15})}>
+                <span>15日</span>
+              </li>
+
+              <li 
+                className={curSelected.datetime && curSelected.datetime.value==30?"selected":null}
+                onClick={e=>this.onDatetime({name:"30日", value:30})}>
+                <span>30日</span>
+              </li>
+              <li 
+                className={curSelected.datetime && curSelected.datetime.value==60?"selected":null}
+                onClick={e=>this.onDatetime({name:"60日", value:60})}>
+                <span>60日</span>
+              </li>
+
+              <li 
+                style={{width:"50%"}} onClick={this.onOtherDate}><span>其他</span></li>
             </ul>
           </div>): null
         }

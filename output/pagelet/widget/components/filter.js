@@ -135,6 +135,23 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       });
       var curSelected = this.state.curSelected;
       curSelected.datetime = datetime;
+  
+      if (datetime.year) {
+        var d = new Date();
+        var prevDate = new Date(d.getTime() - 24 * 60 * 60 * 1000);
+  
+        if (datetime.year == d.getFullYear() && datetime.month == d.getMonth() + 1 && datetime.day == d.getDate()) {
+          datetime.value = 1;
+          datetime.name = _constants.days2Str[datetime.value];
+        } else if (datetime.year == prevDate.getFullYear() && datetime.month == prevDate.getMonth() + 1 && datetime.day == prevDate.getDate()) {
+          datetime.value = -1;
+          datetime.name = _constants.days2Str[datetime.value];
+        } else {
+          datetime.value = datetime.year + "-" + datetime.month + "-" + datetime.day;
+          datetime.name = datetime.value;
+        }
+      }
+  
       this.setState({ curSelected: curSelected });
     },
   
@@ -202,6 +219,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           onSelected: this.onCalendarSelect,
           cancel: this.onCanlendarCancel });
       }
+  
       var state = this.state;
       var curSelected = state.curSelected;
   
@@ -212,6 +230,15 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var showCategory = !!this.props.category;
       var showPayMethod = !!this.props.showPayMethod;
       var showScore = !!this.props.score;
+      var showDateDay = !!this.props.showDateDay;
+  
+      var otherLabel;
+      var datetime = curSelected.datetime;
+  
+      if (datetime && datetime.value != 1 && datetime.value != -1) {
+        var d = new Date(datetime.year, datetime.month - 1, datetime.day);
+        otherLabel = d.format("yyyy-MM-dd");
+      }
   
       return _react2["default"].createElement(
         "div",
@@ -301,7 +328,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           _react2["default"].createElement(
             "h5",
             null,
-            "是否支付"
+            "分类"
           ),
           _react2["default"].createElement(
             "ul",
@@ -366,7 +393,6 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               if (curSelected.country && curSelected.country.value == item.value) {
                 props.className = "selected";
               }
-  
               return _react2["default"].createElement(
                 "li",
                 props,
@@ -419,11 +445,12 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             _react2["default"].createElement(
               "li",
               {
+                className: otherLabel ? "selected" : "",
                 style: { width: "50%" }, onClick: this.onOtherDate },
               _react2["default"].createElement(
                 "span",
                 null,
-                "其他"
+                otherLabel || "其他"
               )
             )
           )
@@ -515,6 +542,81 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 "span",
                 null,
                 "60日"
+              )
+            )
+          )
+        ) : null,
+        showDateDay ? _react2["default"].createElement(
+          "div",
+          null,
+          _react2["default"].createElement(
+            "h5",
+            null,
+            "时间"
+          ),
+          _react2["default"].createElement(
+            "ul",
+            { className: "f-type clearfix" },
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.datetime && curSelected.datetime.value == 7 ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onDatetime({ name: "7日", value: 7 });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "7日"
+              )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.datetime && curSelected.datetime.value == 15 ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onDatetime({ name: "15日", value: 15 });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "15日"
+              )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.datetime && curSelected.datetime.value == 30 ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onDatetime({ name: "30日", value: 30 });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "30日"
+              )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                className: curSelected.datetime && curSelected.datetime.value == 60 ? "selected" : null,
+                onClick: function (e) {
+                  return _this.onDatetime({ name: "60日", value: 60 });
+                } },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "60日"
+              )
+            ),
+            _react2["default"].createElement(
+              "li",
+              {
+                style: { width: "50%" }, onClick: this.onOtherDate },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "其他"
               )
             )
           )

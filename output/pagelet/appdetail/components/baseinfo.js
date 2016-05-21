@@ -69,7 +69,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
     render: function render() {
       var query = this.props.query;
-      var titleWidth = window.innerWidth - 180;
+      var titleWidth = window.innerWidth - 190;
   
       return _react2["default"].createElement(
         "div",

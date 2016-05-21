@@ -6,6 +6,7 @@
 }
 .c-about p {
   margin-bottom: 12px;
+  word-break: break-all;
 }
 .c-about h5,
 .c-about p {
@@ -13,5 +14,4 @@
 }
 .c-about img {
   width: 50%;
-  max-width: 150px;
 }

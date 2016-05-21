@@ -48,7 +48,7 @@ var BaseInfo = React.createClass({
 
   render: function(){
     var query = this.props.query;
-    var titleWidth = window.innerWidth - 180;
+    var titleWidth = window.innerWidth - 190;
 
     return (
       <div className="c-app-base-info">

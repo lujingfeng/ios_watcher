@@ -104,11 +104,14 @@ var AppItem = React.createClass({
             className="f12 c666 m5 mb5 ellipsis">
             {data.developer}
           </p>
-          <div>
-            <span className="t-vt c666 f12 mr6">{data.genres}</span>
-            <Rank value={score} width={14}/>
-            <span className="c666 f12 ml6 t-vt">{data.score}</span>
-          </div>
+          {
+            !this.props.isCompare?
+            <div>
+              <span className="t-vt c666 f12 mr6">{data.genres}</span>
+              <Rank value={score} width={14}/>
+              <span className="c666 f12 ml6 t-vt">{data.score}</span>
+            </div>:null
+          }
         </td>
       );
 

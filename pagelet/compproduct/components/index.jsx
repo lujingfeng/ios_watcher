@@ -126,6 +126,7 @@ var AppCompare = React.createClass({
     } = this.state;
 
     let query = this.props.location.query || {};
+    var appId = query.id || query.appId;
 
     return (
       <div className="c-page comp-analysis">
@@ -150,6 +151,10 @@ var AppCompare = React.createClass({
                 className="search-list">
                 {
                   searchResultList.map((item, idx)=>{
+                    var searchId = item.id || item.appId;
+                    if(searchId == appId){
+                      return null;
+                    }
                     return (
                       <AppItem 
                         key={idx}
@@ -174,9 +179,16 @@ var AppCompare = React.createClass({
                 </h5>
                 {
                   favList.map((item, idx)=>{
+                    var favId = item.id || item.appId;
+                    if(favId == appId){
+                      return null;
+                    }
                     return <AppItem  
                               index={idx}
-                              type={5} data={item} onItemClick={this.onClickFavItem}/>
+                              type={5} 
+                              isCompare={true}
+                              data={item} 
+                              onItemClick={this.onClickFavItem}/>
                   })
                 }
               </ul>):null

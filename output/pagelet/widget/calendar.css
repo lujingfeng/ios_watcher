@@ -11,6 +11,9 @@
   height: 36px;
   vertical-align: middle;
 }
+.c-month .disabled {
+  color: #999;
+}
 .c-month .selected {
   background: #1970e3;
   color: #fff;

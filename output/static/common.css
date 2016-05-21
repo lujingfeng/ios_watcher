@@ -261,7 +261,7 @@ button[disabled] {
   text-align: center;
 }
 .f10 {
-  font-size: 10px;
+  font-size: 12px;
 }
 .f12 {
   font-size: 12px;
@@ -411,11 +411,10 @@ h5.title i {
 }
 .icon-vs {
   width: 31px;
-  height: 17px;
+  height: 19px;
   display: inline-block;
 }
 .icon-vs {
-  margin-top: 6px;
   background: url(/static/image/vs.png) no-repeat;
   -webkit-background-size: contain;
           background-size: contain;

@@ -22,10 +22,13 @@
     text-align: center;
   }
 
-  .vs,.fav{
+  .fav{
+    margin-top: -6px;
+  }
 
+  .vs,.fav{
     p{
-      transform: scale(0.7);
+      transform: scale(0.875);
     }
   }
 
@@ -47,7 +50,6 @@
 
 .c-category{
   margin: 0 15px;
-  padding-bottom: 15px;
   border-bottom: 1px solid #d9d9d9;
 
   .tabs{
@@ -79,7 +81,10 @@
       width:100%;
       tr td:first-child{
         font-weight: bold;
-        line-height: 24px;
+        height: 24px;
+      }
+      td{
+        vertical-align: top;
       }
     }
   }

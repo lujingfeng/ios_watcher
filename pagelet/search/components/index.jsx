@@ -43,12 +43,14 @@ var Search = React.createClass({
         <div className="default">
           <div className="coolchuan"></div>
           <div 
-            onTouchStart={this.onDefaultSearchTouch}
             className="input-search">
             <input 
+              onClick={this.onDefaultSearchTouch}
               placeholder="支持应用名称或AppID搜索"
               type="text"/>
-            <i className="icon-query"></i>
+            <i 
+              onClick={this.onDefaultSearchTouch}
+              className="icon-query"></i>
           </div>
         </div>
       </div>

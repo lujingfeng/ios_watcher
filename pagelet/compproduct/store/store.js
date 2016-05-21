@@ -64,7 +64,8 @@ var CompareStore = Reflux.createStore({
               for(var d in listMap){
                 var rank = parseFloat(listMap[d]);
                 categoryMap[key].data.push(rank || 0);
-                categoryMap[key].title.push(month+"-"+d);
+                var mkey = month.slice(4,6);
+                categoryMap[key].title.push(mkey+"-"+d);
               }
             }
           });
@@ -86,7 +87,7 @@ var CompareStore = Reflux.createStore({
             name: c,
             smooth: true,
             type: 'line',
-            data:data
+            data: data
           };
 
           series.push(item);

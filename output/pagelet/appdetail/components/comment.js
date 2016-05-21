@@ -48,10 +48,18 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
       scores = scores.join(",");
   
+      if (filter.datetime && filter.datetime.year) {
+        var date = new Date(filter.datetime.year, filter.datetime.month - 1, filter.datetime.day);
+        filter.datetime.value = date.format("yyyy-MM-dd");
+        filter.datetime.name = date.format("yyyy-MM-dd");
+      }
+  
       return {
+        loading: true,
+  
         id: query.id,
         country: filter.country ? filter.country.value : _constants.countryCode.CHINA,
-        duraTime: filter.days ? filter.days.value : 1,
+        duraTime: filter.datetime || { "name": "7日", value: 7 },
         device: filter.device ? filter.device.value : _constants.deviceType.IPHONE,
         bIndex: 1,
         count: 1000,
@@ -65,7 +73,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
       _actionAction2["default"].commentDetail({
         id: this.state.id, //711可用
-        duraTime: this.state.duraTime,
+        duraTime: this.state.duraTime.value,
         country: this.state.country,
         device: this.state.device,
         bIndex: this.state.bIndex,
@@ -86,9 +94,11 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
     render: function render() {
       var list = this.state.list;
-  
+      var state = this.state;
       var filter = this.props.filter || {};
       var scores = filter.score || [];
+      var name;
+  
       var scoreLabel = scores.map(function (s) {
         return s.name;
       });
@@ -103,15 +113,15 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
           { className: "title" },
           _react2["default"].createElement(
             "p",
-            { className: "fr f-txt f10 c999" },
-            scoreLabel || "所有评级",
-            ", ",
-            _constants.days2Str[this.state.duraTime]
+            { className: "fr f-txt f10" },
+            scoreLabel && scores.length != 5 ? scoreLabel : "所有评级",
+            " ",
+            this.state.duraTime.name
           ),
           _react2["default"].createElement("i", null),
           "评论详情"
         ),
-        _react2["default"].createElement(
+        list.length ? _react2["default"].createElement(
           "table",
           { className: "border" },
           _react2["default"].createElement(
@@ -158,7 +168,12 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
               )
             );
           })
-        ),
+        ) : null,
+        !this.state.loading && !list.length ? _react2["default"].createElement(
+          "p",
+          { className: "center" },
+          "暂无数据"
+        ) : null,
         this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
       );
     }

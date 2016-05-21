@@ -19,6 +19,10 @@ define('pagelet/widget/components/aso_service', function(require, exports, modul
   var ASOService = _react2["default"].createClass({
     displayName: "ASOService",
   
+    onGotService: function onGotService() {
+      location.href = "http://www.coolchuan.com/aso";
+    },
+  
     render: function render() {
       var sbg = "/static/image/service_bg.jpg";
       var bottom_bg = "/static/image/service_bottom.jpg";
@@ -40,12 +44,10 @@ define('pagelet/widget/components/aso_service', function(require, exports, modul
           _react2["default"].createElement("img", { src: bottom_bg, style: { width: "100%" } }),
           _react2["default"].createElement(
             "button",
-            { className: "btn main-btn top" },
-            "获取ASO优化方案"
-          ),
-          _react2["default"].createElement(
-            "button",
-            { className: "btn main-btn", style: { marginBottom: 20 } },
+            {
+              onClick: this.onGotService,
+              className: "btn main-btn",
+              style: { marginBottom: 20 } },
             "获取ASO优化方案"
           )
         )

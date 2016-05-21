@@ -7,10 +7,8 @@ import $ from "jquery";
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
 import {countryCode, countryCode2Str, days2Str, deviceType, payType, payTypeToStr,deviceTypeStr} from "constants";
-
 import iosCompareAction from "/pagelet/compproduct/action/action";
 import iosCompareStore from "/pagelet/compproduct/store/store";
-
 
 var RRank = React.createClass({ 
   getInitialState: function(){
@@ -25,11 +23,11 @@ var RRank = React.createClass({
 
       legend: {
         data:[],
-        top: "45%",
+        top: "40%",
         itemWidth:50
       },
 
-      days: filter.days ? filter.days.value:30,
+      days: filter.days ? filter.days.value:1,
       country: filter.country? filter.country.value: countryCode.CHINA,
       payType: filter.pay? filter.pay.value: payType.FREE,
       device: filter.device ? filter.device.value: deviceType.IPHONE,
@@ -69,7 +67,7 @@ var RRank = React.createClass({
         title: {
             text: ''
         },
-        grid:[{x: '12%', y: '10%', width: '84%', height: '30%'}],
+        grid:[{x: '12%', y: 10, width: '84%', height: '30%'}],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -150,7 +148,7 @@ var RRank = React.createClass({
           </tr>
         </table>
         <h5 className="title">
-          <p className="fr f10 c999">
+          <p className="fr f10">
             {deviceTypeStr[this.state.device]} &nbsp;
             {payTypeToStr[this.state.payType]} &nbsp;
             {countryCode2Str[this.state.country]} &nbsp;

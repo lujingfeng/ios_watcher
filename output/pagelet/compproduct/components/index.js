@@ -157,6 +157,7 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
       var favList = _state.favList;
   
       var query = this.props.location.query || {};
+      var appId = query.id || query.appId;
   
       return _react2["default"].createElement(
         "div",
@@ -184,6 +185,10 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
             {
               className: "search-list" },
             searchResultList.map(function (item, idx) {
+              var searchId = item.id || item.appId;
+              if (searchId == appId) {
+                return null;
+              }
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 key: idx,
                 type: 5,
@@ -203,9 +208,16 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
               "关注对比"
             ),
             favList.map(function (item, idx) {
+              var favId = item.id || item.appId;
+              if (favId == appId) {
+                return null;
+              }
               return _react2["default"].createElement(_pageletWidgetComponentsAppItem2["default"], {
                 index: idx,
-                type: 5, data: item, onItemClick: _this.onClickFavItem });
+                type: 5,
+                isCompare: true,
+                data: item,
+                onItemClick: _this.onClickFavItem });
             })
           ) : null,
           this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null

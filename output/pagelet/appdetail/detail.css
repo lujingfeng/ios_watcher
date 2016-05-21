@@ -17,10 +17,13 @@
   width: 50px;
   text-align: center;
 }
+.c-app-base-info .fav {
+  margin-top: -6px;
+}
 .c-app-base-info .vs p,
 .c-app-base-info .fav p {
-  -webkit-transform: scale(0.7);
-          transform: scale(0.7);
+  -webkit-transform: scale(0.875);
+          transform: scale(0.875);
 }
 .c-app-base-info .icon-fav {
   width: 26px;

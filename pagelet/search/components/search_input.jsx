@@ -27,8 +27,6 @@ var Search = React.createClass({
         {name: "iPhone", value: deviceType.IPHONE},
         {name: "iPad", value: deviceType.IPAD}
       ],
-
-      searchKey: null,
       device: deviceType.IPHONE,
       country: countryCode.CHINA,
 
@@ -45,6 +43,12 @@ var Search = React.createClass({
     this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
     SearchAction.fetchHotApp();
     SearchAction.fetchHistory();
+
+    var locQuery = this.props.location.query;
+
+    if(locQuery.searchWord){
+      this.onSearch(locQuery.searchWord);
+    }
 
     send({
       type: "search",
@@ -64,33 +68,25 @@ var Search = React.createClass({
     this.setState(state);
   },
 
-  onTagSelected: function(key){
-    this.setState({
-      searchKey: key
-    });
-    SearchAction.search(
-      key, 
-      1,
-      this.state.country,
-      this.state.device
-    );
-
-    SearchAction.addHistory(key);
+  onTagSelected: function(searchWord){
+    this.onSearch(searchWord);
 
     send({
       type: "search",
       opra: "history",
-      label: key
+      label: searchWord
     });
   },
 
   onChooseDevice: function(tab){
+    var locQuery = this.props.location.query;
+
     this.setState({
       device: tab.value,
       searchResultList:[]
     }, ()=>{
       SearchAction.search(
-        this.state.searchKey, 
+        locQuery.searchWord, 
         1, 
         this.state.country,
         this.state.device
@@ -100,7 +96,6 @@ var Search = React.createClass({
 
   onSearch: function(searchWord){
     this.setState({
-      searchKey: searchWord,
       searchResultList: [],
       page:1,
       total: 0
@@ -114,11 +109,12 @@ var Search = React.createClass({
     );
 
     SearchAction.addHistory(searchWord);
+    this.history.pushState(null, this.props.location.pathname, {searchWord:searchWord});
 
     send({
       type: "search",
       opra: "search",
-      label: key
+      label: searchWord
     });
   },
 
@@ -135,11 +131,12 @@ var Search = React.createClass({
 
   loadMore: function(){
     var page = this.state.page + 1;
+    var locQuery = this.props.location.query;
     this.setState({
       page: page
     });
 
-    SearchAction.search(this.state.searchKey, page);
+    SearchAction.search(locQuery.searchWord, page);
   },
 
   onClickSearchItem:function(item){
@@ -158,7 +155,7 @@ var Search = React.createClass({
     params.device = this.state.device;
     params.country = countryToCode[params.country];
 
-    this.history.pushState("", pathName, params);
+    this.history.pushState(null, pathName, params);
 
     send({
       type: "search",
@@ -168,25 +165,23 @@ var Search = React.createClass({
   },
 
   render: function(){
-    var hotApps = ["微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集", "微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集"];
-    var historySearch = hotApps;
-
     let {
       deviceType,
       searchResultList
     } = this.state;
 
     let query = this.props.location.query || {};
+    let searchWord = query.searchWord;
 
     return (
       <div className="c-page input-search">
         <Header 
-          searchValue={this.state.searchKey}
+          searchValue={searchWord}
           onSearch={this.onSearch}
           onCancelSearch={e=>this.history.goBack()}
           type="search"/>
 
-        <div className="default-view" style={{display:this.state.searchKey?"none":"block"}}>
+        <div className="default-view" style={{display:searchWord?"none":"block"}}>
           <label>热门应用</label>
           <div className="tags hot-app">
             {
@@ -205,56 +200,58 @@ var Search = React.createClass({
           </div>
         </div>
 
-        <div 
-          onScroll={this.handleScroll.bind(this)}
-          className="search-result c-body" 
-          style={{display:this.state.searchKey?"block":"none"}}>
+        {
+          searchWord?
+          <div 
+            onScroll={this.handleScroll.bind(this)}
+            className="search-result c-body">
 
-          <Tabs tabs={this.state.tabs} onSelect={this.onChooseDevice}/>
+            <Tabs tabs={this.state.tabs} onSelect={this.onChooseDevice}/>
 
-          {
-            query && !query.overlay ?(
-              <p className="center c999 f10">
-                {this.state.searchKey}, {this.state.total}条结果 {new Date().format("yyyy-MM-dd hh:mm:ss")}
-              </p>): null
-          }
-
-          {
-            query && !query.overlay ? (
-              <div className="keyword-desc" >
-                <table border="1" cellSpacing="0">
-                  <tr>
-                    <th>关键字</th>
-                    <th>搜索热度</th>
-                    <th>搜索结果数</th>
-                  </tr>
-                  <tr>
-                    <td>{this.state.searchKey}</td>
-                    <td>-</td>
-                    <td>{this.state.total||"-"}</td>
-                  </tr>
-                </table>
-              </div>
-              ): null
-          }
-
-          <ul>
             {
-              searchResultList.map((item, idx)=>{
-                return (
-                  <AppItem 
-                    key={idx}
-                    type={query.overlay?3:1} 
-                    onItemClick={this.onClickSearchItem}
-                    data={item} 
-                    index={idx}/>)
-              })
+              query && !query.overlay ?(
+                <p className="center c999 f10">
+                  {searchWord}，{this.state.total}条结果，{new Date().format("yyyy-MM-dd hh:mm:ss")}
+                </p>): null
             }
+
             {
-              this.state.loading?<Loading/>:null
+              query && !query.overlay ? (
+                <div className="keyword-desc" >
+                  <table border="1" cellSpacing="0">
+                    <tr>
+                      <th>关键字</th>
+                      <th>搜索热度</th>
+                      <th>搜索结果数</th>
+                    </tr>
+                    <tr>
+                      <td>{searchWord}</td>
+                      <td>-</td>
+                      <td>{this.state.total||"-"}</td>
+                    </tr>
+                  </table>
+                </div>
+                ): null
             }
-          </ul>
-        </div>
+
+            <ul>
+              {
+                searchResultList.map((item, idx)=>{
+                  return (
+                    <AppItem 
+                      key={idx}
+                      type={query.overlay?3:1} 
+                      onItemClick={this.onClickSearchItem}
+                      data={item} 
+                      index={idx}/>)
+                })
+              }
+              {
+                this.state.loading?<Loading/>:null
+              }
+            </ul>
+          </div>: null
+        }
       </div>
     );
   }

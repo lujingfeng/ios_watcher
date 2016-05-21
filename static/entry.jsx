@@ -34,14 +34,7 @@ var init = function(){
   var uname = getCookie("uname");
   var hash = location.hash;
 
-  if(!uname && 
-    hash.indexOf("search") == -1 && 
-    hash.indexOf("about") == -1 && 
-    hash.indexOf("aso_service") == -1){
-    location.href= "/check/login-page";
-  }
-
-  if(!uname && location.hash.indexOf("search/input") >-1){
+  if(!uname && location.hash.indexOf("myfavlist") >-1){
     location.href = "/check/login-page";
   }
 }

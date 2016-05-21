@@ -26,10 +26,14 @@
   -webkit-background-size: contain;
           background-size: contain;
   background-position: center;
-  margin: 140px auto 10px;
+  margin: 0 auto 10px;
 }
 .c-search .default {
   overflow: hidden;
+  position: absolute;
+  top: 50%;
+  margin-top: -80px;
+  width: 100%;
 }
 .c-search .input-search {
   text-align: center;

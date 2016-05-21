@@ -71,12 +71,14 @@ define('pagelet/search/components/index.jsx', function(require, exports, module)
           _react2["default"].createElement(
             "div",
             {
-              onTouchStart: this.onDefaultSearchTouch,
               className: "input-search" },
             _react2["default"].createElement("input", {
+              onClick: this.onDefaultSearchTouch,
               placeholder: "支持应用名称或AppID搜索",
               type: "text" }),
-            _react2["default"].createElement("i", { className: "icon-query" })
+            _react2["default"].createElement("i", {
+              onClick: this.onDefaultSearchTouch,
+              className: "icon-query" })
           )
         )
       );

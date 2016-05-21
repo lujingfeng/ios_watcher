@@ -53,11 +53,11 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
         legend: {
           data: [],
-          top: "45%",
+          top: "40%",
           itemWidth: 50
         },
   
-        days: filter.days ? filter.days.value : 30,
+        days: filter.days ? filter.days.value : 1,
         country: filter.country ? filter.country.value : _constants.countryCode.CHINA,
         payType: filter.pay ? filter.pay.value : _constants.payType.FREE,
         device: filter.device ? filter.device.value : _constants.deviceType.IPHONE
@@ -99,7 +99,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         title: {
           text: ''
         },
-        grid: [{ x: '12%', y: '10%', width: '84%', height: '30%' }],
+        grid: [{ x: '12%', y: 10, width: '84%', height: '30%' }],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -223,7 +223,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
           { className: "title" },
           _react2["default"].createElement(
             "p",
-            { className: "fr f10 c999" },
+            { className: "fr f10" },
             _constants.deviceTypeStr[this.state.device],
             "  ",
             _constants.payTypeToStr[this.state.payType],

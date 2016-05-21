@@ -40,7 +40,7 @@ var AppCompare = React.createClass({
       app_1: query.app_1,
       app_2: query.app_2,
 
-      days: 30,
+      days: 1,
       country: countryCode.CHINA,
       payType: payType.FREE,
       device: deviceType.IPHONE,

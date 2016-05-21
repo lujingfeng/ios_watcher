@@ -138,11 +138,11 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
           props.countryValue = filter && filter.country ? filter.country : { "name": "中国", value: 1 };
           props.daysValue = filter && filter.days ? filter.days : { "name": "今天", value: 1 };
         } else if (params.module == 5) {
-          props.days = true;
+          props.showDateDay = true;
           props.score = true;
           var filter = state.commentFilter;
   
-          props.daysValue = filter && filter.days ? filter.days : { name: "今天", value: 1 };
+          props.datetime = filter && filter.datetime ? filter.datetime : { name: "7日", value: 7 };
           props.scoreValue = filter && filter.score ? filter.score : [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }];
         }
   
@@ -212,12 +212,12 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
             _react2["default"].createElement(
               "p",
               null,
-              "您关注的应用超过8个"
+              "您关注的应用已达8个"
             ),
             _react2["default"].createElement(
               "p",
               null,
-              "请管理应用和联系客服"
+              "请管理应用或联系客服"
             )
           )
         )

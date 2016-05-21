@@ -142,12 +142,6 @@ var TopList = React.createClass({
     }
 
     if(filter.datetime){
-      if(filter.datetime.year){
-        var datetime = filter.datetime;
-        var d = new Date(datetime.year, datetime.month, datetime.day);
-        filter.datetime.value =d.format("yyyy-MM-dd");
-        filter.datetime.name = d.format("yyyy-MM-dd");
-      }
       state.date = filter.datetime;
     }
     this.setState(state, ()=>{
@@ -199,10 +193,10 @@ var TopList = React.createClass({
             tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
-            {this.state.genres.name} &nbsp;
-            {countryCode2Str[this.state.country]} &nbsp;
-            {deviceTypeStr[this.state.device]} &nbsp;
-            {this.state.date.name}
+            {deviceTypeStr[this.state.device]}&nbsp;
+            {countryCode2Str[this.state.country]}&nbsp;
+            {this.state.date.name}&nbsp;
+            {this.state.genres.name} 
           </p>
 
           <ul className="list">

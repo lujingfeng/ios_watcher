@@ -218,11 +218,11 @@ define('pagelet/top/components/top7DownList.jsx', function(require, exports, mod
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            this.state.genres.name,
-            "  ",
+            _constants.deviceTypeStr[this.state.device],
+            " ",
             _constants.countryCode2Str[this.state.country],
-            "  ",
-            _constants.deviceTypeStr[this.state.device]
+            " ",
+            this.state.genres.name
           ),
           _react2["default"].createElement(
             "ul",

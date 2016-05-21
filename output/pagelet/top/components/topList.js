@@ -177,12 +177,6 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
       }
   
       if (filter.datetime) {
-        if (filter.datetime.year) {
-          var datetime = filter.datetime;
-          var d = new Date(datetime.year, datetime.month, datetime.day);
-          filter.datetime.value = d.format("yyyy-MM-dd");
-          filter.datetime.name = d.format("yyyy-MM-dd");
-        }
         state.date = filter.datetime;
       }
       this.setState(state, function () {
@@ -242,13 +236,13 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
           _react2["default"].createElement(
             "p",
             { className: "f12 center f-txt" },
-            this.state.genres.name,
-            "  ",
-            _constants.countryCode2Str[this.state.country],
-            "  ",
             _constants.deviceTypeStr[this.state.device],
-            "  ",
-            this.state.date.name
+            " ",
+            _constants.countryCode2Str[this.state.country],
+            " ",
+            this.state.date.name,
+            " ",
+            this.state.genres.name
           ),
           _react2["default"].createElement(
             "ul",

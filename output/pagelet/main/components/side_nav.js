@@ -85,6 +85,8 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
         return null;
       }
   
+      var uname = (0, _staticMinxinsUtils.getCookie)("uname");
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-page side-page", ref: "root", onClick: this.onMask },
@@ -195,13 +197,13 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
                 "400-6343-800"
               )
             ),
-            _react2["default"].createElement(
+            uname ? _react2["default"].createElement(
               "li",
               { style: { color: "red", paddingLeft: 50 }, onClick: function (e) {
                   return _this2.props.showConfirm();
                 } },
               "退出"
-            )
+            ) : null
           )
         )
       );

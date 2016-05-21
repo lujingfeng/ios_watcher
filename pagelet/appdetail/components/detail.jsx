@@ -84,11 +84,11 @@ var AppDetail = React.createClass({
 
 
       }else if(params.module == 5){
-        props.days = true;
+        props.showDateDay = true;
         props.score = true;
         var filter = state.commentFilter;
 
-        props.daysValue = filter && filter.days ? filter.days: {name:"今天", value:1};
+        props.datetime = filter && filter.datetime ? filter.datetime: {name:"7日", value:7};
         props.scoreValue = filter && filter.score ? filter.score: [
           {name: "1星", value:1},
           {name: "2星", value:2},
@@ -148,8 +148,8 @@ var AppDetail = React.createClass({
           onOk={this.onFavOk}
           buttonkey={Dialog.buttonKeys.CANCEL_OK}>
           <div>
-            <p>您关注的应用超过8个</p>
-            <p>请管理应用和联系客服</p>
+            <p>您关注的应用已达8个</p>
+            <p>请管理应用或联系客服</p>
           </div>
         </Dialog>
       </div>

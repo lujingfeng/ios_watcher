@@ -75,49 +75,31 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
     appLevelCmp: function appLevelCmp(res) {
       var params = { loading: false };
   
-      try {
+      if (res["当前版本"]) {
+        var data = res["当前版本"];
+        var allCount = data.starCount;
   
-        if (res["当前版本"]) {
-          var data = res["当前版本"];
-          var allCount = data.starCount;
-  
-          for (var i in allCount) {
-            var item = {};
-            data[i] = item;
-            item.count = parseInt(allCount[i]);
-            item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
-          }
-  
-          params.cur = data;
+        for (var i in allCount) {
+          var item = {};
+          data[i] = item;
+          item.count = parseInt(allCount[i]);
+          item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
         }
   
-        if (res["历史版本"]) {
-          var data = res["历史版本"];
-          var allCount = data.starCount;
+        params.cur = data;
+      }
   
-          for (var i in allCount) {
-            var item = {};
-            data[i] = item;
-            item.count = parseInt(allCount[i]);
-            item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
-          }
-          params.history = data;
+      if (res["历史版本"]) {
+        var data = res["历史版本"];
+        var allCount = data.starCount;
+  
+        for (var i in allCount) {
+          var item = {};
+          data[i] = item;
+          item.count = parseInt(allCount[i]);
+          item.percentage = item.count === 0 ? item.count : item.count / parseInt(data.totalCount);
         }
-      } catch (e) {
-        params.cur = {};
-        params.history = {};
-  
-        params.cur[5] = {};
-        params.cur[4] = {};
-        params.cur[3] = {};
-        params.cur[2] = {};
-        params.cur[1] = {};
-  
-        params.history[5] = {};
-        params.history[4] = {};
-        params.history[3] = {};
-        params.history[2] = {};
-        params.history[1] = {};
+        params.history = data;
       }
   
       this.trigger(params);

@@ -47,8 +47,8 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
         country: _constants.countryCode.CHINA,
         device: _constants.deviceType.IPHONE,
   
-        history: {},
-        cur: {}
+        history: null,
+        cur: null
       };
     },
   
@@ -90,7 +90,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
           _react2["default"].createElement("i", null),
           "应用评级"
         ),
-        _react2["default"].createElement(
+        cur ? _react2["default"].createElement(
           "table",
           { className: "border" },
           _react2["default"].createElement(
@@ -225,8 +225,12 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               )
             )
           )
+        ) : _react2["default"].createElement(
+          "p",
+          { className: "center" },
+          "暂无数据"
         ),
-        _react2["default"].createElement(
+        history ? _react2["default"].createElement(
           "table",
           { className: "border" },
           _react2["default"].createElement(
@@ -359,7 +363,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               )
             )
           )
-        )
+        ) : null
       );
     }
   });

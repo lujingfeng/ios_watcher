@@ -78,7 +78,8 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
               for (var d in listMap) {
                 var rank = parseFloat(listMap[d]);
                 categoryMap[key].data.push(rank || 0);
-                categoryMap[key].title.push(month + "-" + d);
+                var mkey = month.slice(4, 6);
+                categoryMap[key].title.push(mkey + "-" + d);
               }
             }
           });

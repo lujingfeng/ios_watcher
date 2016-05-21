@@ -174,9 +174,9 @@ var Top7DownList = React.createClass({
             tabs={this.state.tabs}/>
 
           <p className="f12 center f-txt">
-            {this.state.genres.name} &nbsp;
-            {countryCode2Str[this.state.country]} &nbsp;
-            {deviceTypeStr[this.state.device]}
+            {deviceTypeStr[this.state.device]}&nbsp;
+            {countryCode2Str[this.state.country]}&nbsp;
+            {this.state.genres.name} 
           </p>
 
           <ul className="list">

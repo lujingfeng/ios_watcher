@@ -17,7 +17,7 @@ var Month = React.createClass({
 
   onSelect: function(date){
     this.props.onSelected(date);
-  },  
+  },
 
   render: function(){
     var array =[];
@@ -31,10 +31,12 @@ var Month = React.createClass({
     }
 
     for(var d=1; d<=days; d++){
+      var time = +new Date(this.props.year, this.props.month - 1, d);
       initialArray.push({
         year: this.props.year,
         month: this.props.month,
-        day: d
+        day: d,
+        time: time
       });
     }
 
@@ -46,10 +48,29 @@ var Month = React.createClass({
     var row6 = initialArray.slice(35, initialArray.length);
 
     var curDatetime = this.props.curDatetime;
+    var now = Date.now();
+
+    if(curDatetime && curDatetime.value == 1){
+      var curDate = new Date();
+      curDatetime.year = curDate.getFullYear();
+      curDatetime.month = curDate.getMonth() + 1;
+      curDatetime.day = curDate.getDate();
+    }
+
+    if(curDatetime && curDatetime.value == -1){
+      var curDate = new Date();
+      curDate.setTime(curDate.getTime() - 24 * 60 * 60 * 1000);
+      curDatetime.year = curDate.getFullYear();
+      curDatetime.month = curDate.getMonth() + 1;
+      curDatetime.day = curDate.getDate();
+    }
+
+
+    var thisMonth = new Date(this.props.year, this.props.month -1);
 
     return (
       <div className="c-month">
-        <h5>{this.props.year+"年"+this.props.month+"月"}</h5>
+        <h5>{thisMonth.format("yyyy年MM月")}</h5>
         <table>
           <tr>
             <th>周日</th>
@@ -70,8 +91,15 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -85,8 +113,15 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -100,8 +135,16 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -115,8 +158,16 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -130,8 +181,16 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -145,8 +204,15 @@ var Month = React.createClass({
                  curDatetime.month == item.month &&
                  curDatetime.day == item.day){
                 props.className = "selected";
+                props.id = "curDatetime";
               }
-              return <td {...props} onClick={e=>{this.onSelect(item)}}>{item.day||""}</td>
+
+              if(item.time > now){
+                props.className = " disabled";
+              }else{
+                props.onClick = e=>{this.onSelect(item)};
+              }
+              return <td {...props}>{item.day||""}</td>
             })
           }
           </tr>
@@ -165,8 +231,8 @@ var Calendar = React.createClass({
   },
 
   componentDidMount: function(){
-    var lastMonth = document.querySelector(".c-month:last-child");
-    lastMonth.scrollIntoView();
+    var month = document.querySelector("#curDatetime");
+    month && month.scrollIntoView();
   },
 
   onCancel: function(){
@@ -184,6 +250,7 @@ var Calendar = React.createClass({
           <Month 
             year={startYear} 
             month={m} 
+            curDatetime={this.props.curDatetime}
             onSelected={this.props.onSelected}/>
           );
       }

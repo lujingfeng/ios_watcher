@@ -58,8 +58,6 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
     getInitialState: function getInitialState() {
       return {
         tabs: [{ name: "iPhone", value: _constants.deviceType.IPHONE }, { name: "iPad", value: _constants.deviceType.IPAD }],
-  
-        searchKey: null,
         device: _constants.deviceType.IPHONE,
         country: _constants.countryCode.CHINA,
   
@@ -76,6 +74,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       this.unSubscribe = _pageletSearchStoreStore2["default"].listen(this.onStateChange.bind(this));
       _pageletSearchActionAction2["default"].fetchHotApp();
       _pageletSearchActionAction2["default"].fetchHistory();
+  
+      var locQuery = this.props.location.query;
+  
+      if (locQuery.searchWord) {
+        this.onSearch(locQuery.searchWord);
+      }
   
       (0, _staticMinxinsUtils.send)({
         type: "search",
@@ -95,35 +99,31 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       this.setState(state);
     },
   
-    onTagSelected: function onTagSelected(key) {
-      this.setState({
-        searchKey: key
-      });
-      _pageletSearchActionAction2["default"].search(key, 1, this.state.country, this.state.device);
-  
-      _pageletSearchActionAction2["default"].addHistory(key);
+    onTagSelected: function onTagSelected(searchWord) {
+      this.onSearch(searchWord);
   
       (0, _staticMinxinsUtils.send)({
         type: "search",
         opra: "history",
-        label: key
+        label: searchWord
       });
     },
   
     onChooseDevice: function onChooseDevice(tab) {
       var _this = this;
   
+      var locQuery = this.props.location.query;
+  
       this.setState({
         device: tab.value,
         searchResultList: []
       }, function () {
-        _pageletSearchActionAction2["default"].search(_this.state.searchKey, 1, _this.state.country, _this.state.device);
+        _pageletSearchActionAction2["default"].search(locQuery.searchWord, 1, _this.state.country, _this.state.device);
       });
     },
   
     onSearch: function onSearch(searchWord) {
       this.setState({
-        searchKey: searchWord,
         searchResultList: [],
         page: 1,
         total: 0
@@ -132,11 +132,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
   
       _pageletSearchActionAction2["default"].addHistory(searchWord);
+      this.history.pushState(null, this.props.location.pathname, { searchWord: searchWord });
   
       (0, _staticMinxinsUtils.send)({
         type: "search",
         opra: "search",
-        label: key
+        label: searchWord
       });
     },
   
@@ -150,11 +151,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     loadMore: function loadMore() {
       var page = this.state.page + 1;
+      var locQuery = this.props.location.query;
       this.setState({
         page: page
       });
   
-      _pageletSearchActionAction2["default"].search(this.state.searchKey, page);
+      _pageletSearchActionAction2["default"].search(locQuery.searchWord, page);
     },
   
     onClickSearchItem: function onClickSearchItem(item) {
@@ -173,7 +175,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       params.device = this.state.device;
       params.country = _constants.countryToCode[params.country];
   
-      this.history.pushState("", pathName, params);
+      this.history.pushState(null, pathName, params);
   
       (0, _staticMinxinsUtils.send)({
         type: "search",
@@ -185,20 +187,18 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
     render: function render() {
       var _this2 = this;
   
-      var hotApps = ["微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集", "微信", "去哪儿旅行", "爱奇艺", "神州租车", "贵催等全集"];
-      var historySearch = hotApps;
-  
       var _state = this.state;
       var deviceType = _state.deviceType;
       var searchResultList = _state.searchResultList;
   
       var query = this.props.location.query || {};
+      var searchWord = query.searchWord;
   
       return _react2["default"].createElement(
         "div",
         { className: "c-page input-search" },
         _react2["default"].createElement(_pageletWidgetComponentsHeader2["default"], {
-          searchValue: this.state.searchKey,
+          searchValue: searchWord,
           onSearch: this.onSearch,
           onCancelSearch: function (e) {
             return _this2.history.goBack();
@@ -206,7 +206,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           type: "search" }),
         _react2["default"].createElement(
           "div",
-          { className: "default-view", style: { display: this.state.searchKey ? "none" : "block" } },
+          { className: "default-view", style: { display: searchWord ? "none" : "block" } },
           _react2["default"].createElement(
             "label",
             null,
@@ -244,20 +244,19 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             })
           )
         ),
-        _react2["default"].createElement(
+        searchWord ? _react2["default"].createElement(
           "div",
           {
             onScroll: this.handleScroll.bind(this),
-            className: "search-result c-body",
-            style: { display: this.state.searchKey ? "block" : "none" } },
+            className: "search-result c-body" },
           _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs, onSelect: this.onChooseDevice }),
           query && !query.overlay ? _react2["default"].createElement(
             "p",
             { className: "center c999 f10" },
-            this.state.searchKey,
-            ", ",
+            searchWord,
+            "，",
             this.state.total,
-            "条结果 ",
+            "条结果，",
             new Date().format("yyyy-MM-dd hh:mm:ss")
           ) : null,
           query && !query.overlay ? _react2["default"].createElement(
@@ -291,7 +290,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 _react2["default"].createElement(
                   "td",
                   null,
-                  this.state.searchKey
+                  searchWord
                 ),
                 _react2["default"].createElement(
                   "td",
@@ -319,7 +318,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             }),
             this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
           )
-        )
+        ) : null
       );
     }
   });

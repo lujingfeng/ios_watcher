@@ -133,7 +133,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               className: "f12 c666 m5 mb5 ellipsis" },
             data.developer
           ),
-          _react2["default"].createElement(
+          !this.props.isCompare ? _react2["default"].createElement(
             "div",
             null,
             _react2["default"].createElement(
@@ -147,7 +147,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               { className: "c666 f12 ml6 t-vt" },
               data.score
             )
-          )
+          ) : null
         );
   
         //排名item

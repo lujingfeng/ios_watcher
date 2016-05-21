@@ -78,7 +78,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         app_1: query.app_1,
         app_2: query.app_2,
   
-        days: 30,
+        days: 1,
         country: _constants.countryCode.CHINA,
         payType: _constants.payType.FREE,
         device: _constants.deviceType.IPHONE

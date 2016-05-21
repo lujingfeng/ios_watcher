@@ -10,8 +10,6 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
     value: true
   });
   
-  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-  
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
   
   var _react = require("react");
@@ -50,10 +48,12 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
       }
   
       for (var d = 1; d <= days; d++) {
+        var time = +new Date(this.props.year, this.props.month - 1, d);
         initialArray.push({
           year: this.props.year,
           month: this.props.month,
-          day: d
+          day: d,
+          time: time
         });
       }
   
@@ -65,6 +65,24 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
       var row6 = initialArray.slice(35, initialArray.length);
   
       var curDatetime = this.props.curDatetime;
+      var now = Date.now();
+  
+      if (curDatetime && curDatetime.value == 1) {
+        var curDate = new Date();
+        curDatetime.year = curDate.getFullYear();
+        curDatetime.month = curDate.getMonth() + 1;
+        curDatetime.day = curDate.getDate();
+      }
+  
+      if (curDatetime && curDatetime.value == -1) {
+        var curDate = new Date();
+        curDate.setTime(curDate.getTime() - 24 * 60 * 60 * 1000);
+        curDatetime.year = curDate.getFullYear();
+        curDatetime.month = curDate.getMonth() + 1;
+        curDatetime.day = curDate.getDate();
+      }
+  
+      var thisMonth = new Date(this.props.year, this.props.month - 1);
   
       return _react2["default"].createElement(
         "div",
@@ -72,7 +90,7 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
         _react2["default"].createElement(
           "h5",
           null,
-          this.props.year + "年" + this.props.month + "月"
+          thisMonth.format("yyyy年MM月")
         ),
         _react2["default"].createElement(
           "table",
@@ -124,12 +142,19 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
+              }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
               }
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -142,12 +167,19 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
+              }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
               }
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -160,12 +192,20 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
               }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
+              }
+  
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -178,12 +218,20 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
               }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
+              }
+  
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -196,12 +244,20 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
               }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
+              }
+  
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -214,12 +270,19 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
   
               if (curDatetime && typeof curDatetime.year != "undefined" && curDatetime.year == item.year && curDatetime.month == item.month && curDatetime.day == item.day) {
                 props.className = "selected";
+                props.id = "curDatetime";
+              }
+  
+              if (item.time > now) {
+                props.className = " disabled";
+              } else {
+                props.onClick = function (e) {
+                  _this.onSelect(item);
+                };
               }
               return _react2["default"].createElement(
                 "td",
-                _extends({}, props, { onClick: function (e) {
-                    _this.onSelect(item);
-                  } }),
+                props,
                 item.day || ""
               );
             })
@@ -239,8 +302,8 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
     },
   
     componentDidMount: function componentDidMount() {
-      var lastMonth = document.querySelector(".c-month:last-child");
-      lastMonth.scrollIntoView();
+      var month = document.querySelector("#curDatetime");
+      month && month.scrollIntoView();
     },
   
     onCancel: function onCancel() {
@@ -257,6 +320,7 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
           months.push(_react2["default"].createElement(Month, {
             year: startYear,
             month: m,
+            curDatetime: this.props.curDatetime,
             onSelected: this.props.onSelected }));
         }
       }

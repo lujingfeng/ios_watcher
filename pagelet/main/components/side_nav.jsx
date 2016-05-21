@@ -71,6 +71,8 @@ var SideNav = React.createClass({
       return null;
     }
 
+    var uname = getCookie("uname");
+
     return (
       <div className="c-page side-page" ref="root" onClick={this.onMask}>
         <div className="side-nav">
@@ -129,9 +131,12 @@ var SideNav = React.createClass({
                 400-6343-800
               </a>
             </li>
-            <li style={{color:"red",paddingLeft: 50}} onClick={e=>this.props.showConfirm()}>
-              退出
-            </li>
+            {
+              uname?
+              <li style={{color:"red",paddingLeft: 50}} onClick={e=>this.props.showConfirm()}>
+                退出
+              </li>:null
+            }
           </ul>
         </div>
       </div>
