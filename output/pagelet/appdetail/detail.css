@@ -42,8 +42,6 @@
 }
 .c-category {
   margin: 0 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #d9d9d9;
 }
 .c-category .tabs div {
   width: 33.333333333%;
@@ -68,7 +66,10 @@
 }
 .c-app-detail .app-info table tr td:first-child {
   font-weight: bold;
-  line-height: 24px;
+  height: 24px;
+}
+.c-app-detail .app-info table td {
+  vertical-align: top;
 }
 .c-app-detail .real-rank table {
   width: 100%;

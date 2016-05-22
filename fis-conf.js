@@ -15,6 +15,7 @@ var ISCROLL_LITE = 'iscrollLite';
 
 var OUTPUT_DIR = "./output";
 
+fis.config.set("project.watch.usePolling", true)
 fis.set('project.charset', 'utf-8');
 fis.set('project.md5Length', 8);
 fis.set('project.md5Connector ', '_');
