@@ -135,6 +135,9 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
       params.app_1 = query;
       params.app_2 = item;
   
+      item.device = _constants.deviceStrToint[item.device];
+      item.country = _constants.countryToCode[item.country];
+  
       var pathName = "/appcompare";
   
       this.history.pushState(null, pathName, params);

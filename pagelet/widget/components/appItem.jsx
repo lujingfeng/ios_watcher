@@ -146,19 +146,21 @@ var AppItem = React.createClass({
       var rankFloat = data.rankfloat;
       var icon = "";
       if(this.props.flag == 1){
-        icon = "up";
+        icon = rankFloat!=0?"up":"";
       }else if(this.props.flag == 2){
-        icon = "down";
+        icon = rankFloat!=0?"down":"";
       }else{
-        icon = rankFloat>0?"up":"down";
+        if(rankFloat > 0){
+          icon = "up";
+        }else if(rankFloat < 0){
+          icon = "down";
+        }
       }
-
-      console.log(rankFloat);
 
       column3 = (
         <td className="center">
           <i className={icon}></i>
-          <i className="f12 t-vm">{Math.abs(rankFloat)}</i>
+          <i className="f12 t-vm">{Math.abs(rankFloat)!=0?Math.abs(rankFloat):""}</i>
         </td>
       );
     //竞品对比参考Item

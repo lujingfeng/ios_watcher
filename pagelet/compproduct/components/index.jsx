@@ -105,6 +105,9 @@ var AppCompare = React.createClass({
     params.app_1 = query;
     params.app_2 = item;
 
+    item.device = deviceStrToint[item.device];
+    item.country = countryToCode[item.country];
+
     var pathName = "/appcompare";
 
     this.history.pushState(null, pathName, params);

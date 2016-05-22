@@ -67,6 +67,10 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
             date: res[item]
           });
         });
+        versions = versions.sort(function (a, b) {
+          return a.date < b.date ? 1 : -1;
+        });
+        //versions = versions.reverse();
         params.versions = versions;
       }
       this.trigger(params);

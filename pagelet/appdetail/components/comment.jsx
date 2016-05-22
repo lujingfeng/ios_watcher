@@ -42,11 +42,11 @@ var Comment = React.createClass({
 
       id: query.id,
       country: filter.country? filter.country.value: countryCode.CHINA,
-      duraTime: filter.datetime|| {"name":"7日", value:7},
+      duraTime: filter.datetime,
       device: filter.device ? filter.device.value : deviceType.IPHONE,
       bIndex: 1,
       count: 1000,
-      score: scores ||"1,2,3,4,5",
+      score: scores,
 
       list: []
     }
@@ -92,7 +92,7 @@ var Comment = React.createClass({
       <div className="comment">
         <h5 className="title">
           <p className="fr f-txt f10">
-            {scoreLabel && scores.length !=5 ? scoreLabel: "所有评级"} {this.state.duraTime.name}
+            {scoreLabel && scores.length ==5 ? "所有评级":scoreLabel} {this.state.duraTime.name}
           </p>
           <i></i>
           评论详情

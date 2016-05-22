@@ -82,7 +82,10 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     getInitialState: function getInitialState() {
       return {
         realFilter: null,
-        commentFilter: null
+        commentFilter: {
+          score: [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }],
+          datetime: { name: "7日", value: 7 }
+        }
       };
     },
   
@@ -142,8 +145,13 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
           props.score = true;
           var filter = state.commentFilter;
   
-          props.datetime = filter && filter.datetime ? filter.datetime : { name: "7日", value: 7 };
+          props.datetimeValue = filter && filter.datetime ? filter.datetime : { name: "7日", value: 7 };
           props.scoreValue = filter && filter.score ? filter.score : [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }];
+  
+          if (props.datetimeValue.value == 1 || props.datetimeValue.value == -1) {
+            delete props.datetimeValue.value;
+            delete props.datetimeValue.name;
+          }
         }
   
         return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({ onOk: this.onFilter }, props));

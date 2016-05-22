@@ -136,7 +136,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var curSelected = this.state.curSelected;
       curSelected.datetime = datetime;
   
-      if (datetime.year) {
+      if (datetime.year && this.props.datetime) {
         var d = new Date();
         var prevDate = new Date(d.getTime() - 24 * 60 * 60 * 1000);
   
@@ -207,6 +207,24 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       this.setState({ curSelected: curSelected });
     },
   
+    clearScore: function clearScore() {
+      var curSelected = this.state.curSelected;
+      if (curSelected.score.length == 5) {
+        curSelected.score = [];
+      } else {
+        curSelected.score = [];
+        this.state.score.forEach(function (item) {
+          curSelected.score.push({
+            name: item.name,
+            value: item.value
+          });
+        });
+      }
+      this.setState({
+        curSelected: curSelected
+      });
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -235,7 +253,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var otherLabel;
       var datetime = curSelected.datetime;
   
-      if (datetime && datetime.value != 1 && datetime.value != -1) {
+      if (datetime && datetime.value != 1 && datetime.value != -1 && datetime.value != 7 && datetime.value != 15 && datetime.value != 30 && datetime.value != 60) {
         var d = new Date(datetime.year, datetime.month - 1, datetime.day);
         otherLabel = d.format("yyyy-MM-dd");
       }
@@ -249,7 +267,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           "筛选",
           _react2["default"].createElement(
             "i",
-            { className: "c999", onClick: this.onCancel },
+            { onClick: this.onCancel },
             "取消"
           )
         ),
@@ -295,6 +313,17 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           _react2["default"].createElement(
             "ul",
             { className: "f-type clearfix" },
+            _react2["default"].createElement(
+              "li",
+              {
+                onClick: this.clearScore,
+                className: curSelected.score.length == 5 ? "selected" : "" },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "全部"
+              )
+            ),
             state.score.map(function (item, idx) {
               var props = {};
               props.onClick = function (e) {
@@ -612,11 +641,12 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             _react2["default"].createElement(
               "li",
               {
+                className: otherLabel ? "selected" : "",
                 style: { width: "50%" }, onClick: this.onOtherDate },
               _react2["default"].createElement(
                 "span",
                 null,
-                "其他"
+                otherLabel || "其他"
               )
             )
           )

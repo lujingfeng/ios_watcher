@@ -222,6 +222,13 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       return renderContent;
     },
   
+    toDetail: function toDetail(data) {
+      data.id = data.id || data.appId;
+      var pathName = "/detail/1";
+  
+      this.history.pushState(null, pathName, data);
+    },
+  
     renderCompare: function renderCompare() {
       var query = this.props.location.query || {};
   
@@ -242,8 +249,14 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
           _react2["default"].createElement(
             "ul",
             { className: "clearfix rel" },
-            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp", data: this.state.app_1 }),
-            _react2["default"].createElement(_my_fav_item2["default"], { type: "comp", data: this.state.app_2 }),
+            _react2["default"].createElement(_my_fav_item2["default"], {
+              type: "comp",
+              data: this.state.app_1,
+              onClick: this.toDetail }),
+            _react2["default"].createElement(_my_fav_item2["default"], {
+              type: "comp",
+              data: this.state.app_2,
+              onClick: this.toDetail }),
             _react2["default"].createElement("i", { className: "icon-vs" })
           ),
           _react2["default"].createElement(

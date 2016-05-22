@@ -61,7 +61,7 @@ var BaseInfo = React.createClass({
             </td>
             <td>
               <p className="title ellipsis" style={{width: titleWidth}}>{query.title}</p>
-              <p className="f12 c666">{query.developer}</p>
+              <p className="f12 c666 ellipsis" style={{width: titleWidth}}>{query.developer}</p>
             </td>
             <td>
               <div className="vs" onClick={this.toCompare}>

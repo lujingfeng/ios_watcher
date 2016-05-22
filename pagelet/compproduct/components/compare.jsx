@@ -185,6 +185,13 @@ var AppCompare = React.createClass({
     return renderContent;
   },
 
+  toDetail: function(data){
+    data.id = data.id || data.appId;
+    var pathName = "/detail/1";
+
+    this.history.pushState(null, pathName, data);
+  },
+
   renderCompare: function(){
     let query = this.props.location.query || {};
 
@@ -199,8 +206,14 @@ var AppCompare = React.createClass({
         
         <div className="c-body">
           <ul className="clearfix rel">
-            <MyFavItem type="comp" data={this.state.app_1}/>
-            <MyFavItem type="comp" data={this.state.app_2}/>
+            <MyFavItem 
+              type="comp" 
+              data={this.state.app_1} 
+              onClick={this.toDetail}/>
+            <MyFavItem 
+              type="comp" 
+              data={this.state.app_2}
+              onClick={this.toDetail}/>
             <i className="icon-vs"></i>
           </ul>
 

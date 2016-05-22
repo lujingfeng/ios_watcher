@@ -59,11 +59,11 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
   
         id: query.id,
         country: filter.country ? filter.country.value : _constants.countryCode.CHINA,
-        duraTime: filter.datetime || { "name": "7日", value: 7 },
+        duraTime: filter.datetime,
         device: filter.device ? filter.device.value : _constants.deviceType.IPHONE,
         bIndex: 1,
         count: 1000,
-        score: scores || "1,2,3,4,5",
+        score: scores,
   
         list: []
       };
@@ -114,7 +114,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
           _react2["default"].createElement(
             "p",
             { className: "fr f-txt f10" },
-            scoreLabel && scores.length != 5 ? scoreLabel : "所有评级",
+            scoreLabel && scores.length == 5 ? "所有评级" : scoreLabel,
             " ",
             this.state.duraTime.name
           ),

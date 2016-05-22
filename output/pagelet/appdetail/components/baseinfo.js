@@ -97,7 +97,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
               ),
               _react2["default"].createElement(
                 "p",
-                { className: "f12 c666" },
+                { className: "f12 c666 ellipsis", style: { width: titleWidth } },
                 query.developer
               )
             ),

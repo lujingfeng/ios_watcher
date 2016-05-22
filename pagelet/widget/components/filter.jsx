@@ -126,7 +126,7 @@ var Filter = React.createClass({
     var curSelected = this.state.curSelected;
     curSelected.datetime = datetime;
 
-    if(datetime.year){
+    if(datetime.year && this.props.datetime){
       var d = new Date();
       var prevDate = new Date(d.getTime() - 24*60*60*1000);
 
@@ -201,6 +201,24 @@ var Filter = React.createClass({
     this.setState({curSelected});
   },
 
+  clearScore: function(){
+    var curSelected = this.state.curSelected;
+    if(curSelected.score.length==5){
+      curSelected.score = [];
+    }else{
+      curSelected.score = [];
+      this.state.score.forEach((item)=>{
+        curSelected.score.push({
+          name: item.name,
+          value: item.value
+        });
+      }); 
+    }
+    this.setState({
+      curSelected: curSelected
+    });
+  },
+
   render: function(){
     if(this.state.loading){
       return <Loading/>
@@ -227,13 +245,16 @@ var Filter = React.createClass({
     var showScore = !!this.props.score;
     var showDateDay = !!this.props.showDateDay;
 
-
     var otherLabel;
     var datetime = curSelected.datetime;
 
     if(datetime && 
       datetime.value != 1 &&
-      datetime.value != -1){
+      datetime.value != -1 &&
+      datetime.value != 7 &&
+      datetime.value != 15 &&
+      datetime.value != 30 &&
+      datetime.value != 60 ){
       var d = new Date(datetime.year, datetime.month - 1, datetime.day);
       otherLabel = d.format("yyyy-MM-dd");
     }
@@ -242,7 +263,7 @@ var Filter = React.createClass({
       <div className="c-filter">
         <div className="hdr">
           筛选
-          <i className="c999" onClick={this.onCancel}>取消</i>
+          <i onClick={this.onCancel}>取消</i>
         </div>
 
         {
@@ -271,6 +292,12 @@ var Filter = React.createClass({
             <div>
               <h5>评级</h5>
               <ul className="f-type clearfix">
+                <li 
+                  onClick={this.clearScore}
+                  className={curSelected.score.length == 5?"selected":""}>
+                  <span>全部</span>
+                </li>
+
                 {
                   state.score.map((item, idx)=>{
                     var props = {};
@@ -429,7 +456,10 @@ var Filter = React.createClass({
               </li>
 
               <li 
-                style={{width:"50%"}} onClick={this.onOtherDate}><span>其他</span></li>
+                className={otherLabel?"selected":""}
+                style={{width:"50%"}} onClick={this.onOtherDate}>
+                 <span>{otherLabel||"其他"}</span>
+              </li>
             </ul>
           </div>): null
         }
