@@ -109,7 +109,7 @@ var Search = React.createClass({
     );
 
     SearchAction.addHistory(searchWord);
-    this.history.pushState(null, this.props.location.pathname, {searchWord:searchWord});
+    this.history.replaceState(null, this.props.location.pathname, {searchWord:searchWord});
 
     send({
       type: "search",

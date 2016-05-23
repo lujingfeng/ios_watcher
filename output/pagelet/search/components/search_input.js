@@ -132,7 +132,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
   
       _pageletSearchActionAction2["default"].addHistory(searchWord);
-      this.history.pushState(null, this.props.location.pathname, { searchWord: searchWord });
+      this.history.replaceState(null, this.props.location.pathname, { searchWord: searchWord });
   
       (0, _staticMinxinsUtils.send)({
         type: "search",
