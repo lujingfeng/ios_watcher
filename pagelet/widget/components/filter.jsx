@@ -73,6 +73,8 @@ var Filter = React.createClass({
       country:[],
       genres: [],
 
+      subGenres: [],
+
       curSelected: {
         datetime: this.props.datetimeValue||null,
         days: this.props.daysValue||null,
@@ -470,14 +472,33 @@ var Filter = React.createClass({
             <ul className="f-type clearfix">
               {
                 state.genres.map((item, idx)=>{
-                  var props = {};
+                  var props = {style:{}};
                   props.onClick=(e=>this.onCategory(item));
                   if(curSelected.category && curSelected.category.value == item.value){
                     props.className="selected";
                   }
+                  if(item.value == 25 || item.value == 26){
+                    props.style.width = "50%";
+                    props.onClick = ()=>{
+                      var data = this.state.subGenres == item.data?[]:item.data;
+                      this.setState({
+                        subGenres: data
+                      });
+                    }
+                  }
 
                   return (
-                    <li {...props}><span>{item.name}</span></li>
+                    <li {...props}>
+                     <span>
+                      {item.name}
+                    </span>
+                     {
+                       item.value == 25?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 50}}></i>: null
+                     }
+                     {
+                       item.value == 26?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 39}}></i>: null
+                     }
+                    </li>
                   );
                 })
               }
@@ -486,21 +507,17 @@ var Filter = React.createClass({
         }
 
         <ul 
-          className="f-type clearfix" 
-          style={{display:"none"}}>
-          <li><span>全部</span></li>
-          <li><span>流行时尚</span></li>
-          <li><span>家居园艺</span></li>
-          <li><span>户外自然</span></li> 
-
-          <li style={{width: "50%"}}>
-            <span>娱乐场游戏</span>
-            <i className="unfolder"></i>
-          </li>
-          <li style={{width: "50%"}}>
-            <span>报刊杂志</span>
-            <i className="unfolder"></i>
-          </li>  
+          className="f-type clearfix">
+          {
+            this.state.subGenres.map((item, idx)=>{
+              var props = {};
+              props.onClick=(e=>this.onCategory(item));
+              if(curSelected.category && curSelected.category.value == item.value){
+                props.className="selected";
+              }
+              return <li {...props}><span>{item.name}</span></li>;
+            })
+          } 
         </ul>
 
         <div style={{padding:"0 12px"}}>

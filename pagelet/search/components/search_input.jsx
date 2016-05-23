@@ -220,7 +220,7 @@ var Search = React.createClass({
                 <div className="keyword-desc" >
                   <table border="1" cellSpacing="0">
                     <tr>
-                      <th>关键字</th>
+                      <th>关键词</th>
                       <th>搜索热度</th>
                       <th>搜索结果数</th>
                     </tr>

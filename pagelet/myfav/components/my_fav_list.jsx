@@ -10,6 +10,7 @@ import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
+import Popup from "./pagelet/widget/components/popup";
 
 import {countryCode, deviceStrToint, countryToCode} from "constants";
 
@@ -26,6 +27,7 @@ var MyFav = React.createClass({
   getInitialState: function(){
     return {
       loading: true,
+      confirmVisible: false,
       list:[]
     }
   },
@@ -71,6 +73,26 @@ var MyFav = React.createClass({
     this.history.pushState(null, pathName, params);
   },
 
+  onTapMasker: function(){
+    this.setState({
+      confirmVisible: false
+    });
+  },
+
+  onDeleteHandler: function(item){
+    this.setState({
+      confirmVisible: true,
+      selectedItem: item
+    });
+  },
+
+  detete: function(){
+    this.onDelete(this.state.selectedItem);
+    this.setState({
+      confirmVisible:false
+    });
+  },
+
   render: function(){
     let query = this.props.location.query || {};
 
@@ -90,7 +112,8 @@ var MyFav = React.createClass({
                        key={idx} 
                        data={item} 
                        type={6} 
-                       onDelete={this.onDelete}/>
+                       isShowDelete={true}
+                       onDelete={this.onDeleteHandler}/>
             })
           }
           {
@@ -98,6 +121,19 @@ var MyFav = React.createClass({
           }
           {!this.state.loading && !this.state.list.length ?<p className="center mt6 c999">您还未关注应用</p>:null}
         </div>
+
+        {
+          this.state.confirmVisible?
+          <Popup ref="confirm" onTapMasker={this.onTapMasker}>
+            <div className="c-confirm">
+              <p>您确定要删除应用关注吗？</p>
+              <div>
+                <button className="btn normal" onClick={e=>this.detete()}>删除</button>
+                <button className="btn main-btn" onClick={this.onTapMasker}>取消</button>
+              </div>
+            </div>
+          </Popup>: null
+        }
       </div>
     );
   }

@@ -343,7 +343,7 @@ define('pagelet/widget/components/calendar.jsx', function(require, exports, modu
           "选择时间",
           _react2["default"].createElement(
             "i",
-            { className: "c999", onClick: this.onCancel },
+            { onClick: this.onCancel },
             "取消"
           )
         ),

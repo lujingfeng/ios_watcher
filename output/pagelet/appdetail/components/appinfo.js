@@ -179,7 +179,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
           ),
           _react2["default"].createElement(
             "tr",
-            { style: { display: "none" } },
+            null,
             _react2["default"].createElement(
               "td",
               null,
@@ -190,8 +190,8 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
         ),
         _react2["default"].createElement(
           "div",
-          { className: "app-description", style: { display: "none" } },
-          "后端暂没定这个字段"
+          { className: "app-description" },
+          detail.title
         )
       );
     }

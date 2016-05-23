@@ -271,7 +271,7 @@ var Calendar = React.createClass({
       <div className="c-page c-calendar">
         <div className="hdr">
           选择时间
-          <i className="c999" onClick={this.onCancel}>取消</i>
+          <i onClick={this.onCancel}>取消</i>
         </div>
 
         <div className="c-body" ref="list">

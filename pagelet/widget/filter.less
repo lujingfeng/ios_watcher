@@ -32,7 +32,7 @@
     margin: 0 15px;
     li{
       float: left;
-      width: 25%;
+      min-width: 25%;
       line-height: 32px;
       text-align: center;
       position: relative;
@@ -43,17 +43,21 @@
         margin: 0 5px 10px;
         border-radius: 3px;
         font-size: 12px;
+        padding: 0 3px;
       }
 
       .unfolder{
         position: absolute;
-        top: 15px;
+        top: 16px;
         right: 26px;
         width: 6px;
         height: 4px;
         display:inline-block;
         background: url(static/image/unfolder.png) no-repeat;
         background-size: contain;
+      }
+      .unfolder.fd{
+        transform: rotate(180deg);
       }
     }
   }

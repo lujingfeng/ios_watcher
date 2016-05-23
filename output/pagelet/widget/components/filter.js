@@ -83,6 +83,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         country: [],
         genres: [],
   
+        subGenres: [],
+  
         curSelected: {
           datetime: this.props.datetimeValue || null,
           days: this.props.daysValue || null,
@@ -663,12 +665,21 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             "ul",
             { className: "f-type clearfix" },
             state.genres.map(function (item, idx) {
-              var props = {};
+              var props = { style: {} };
               props.onClick = function (e) {
                 return _this.onCategory(item);
               };
               if (curSelected.category && curSelected.category.value == item.value) {
                 props.className = "selected";
+              }
+              if (item.value == 25 || item.value == 26) {
+                props.style.width = "50%";
+                props.onClick = function () {
+                  var data = _this.state.subGenres == item.data ? [] : item.data;
+                  _this.setState({
+                    subGenres: data
+                  });
+                };
               }
   
               return _react2["default"].createElement(
@@ -678,7 +689,9 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                   "span",
                   null,
                   item.name
-                )
+                ),
+                item.value == 25 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
+                item.value == 26 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
               );
             })
           )
@@ -686,64 +699,25 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         _react2["default"].createElement(
           "ul",
           {
-            className: "f-type clearfix",
-            style: { display: "none" } },
-          _react2["default"].createElement(
-            "li",
-            null,
-            _react2["default"].createElement(
-              "span",
-              null,
-              "全部"
-            )
-          ),
-          _react2["default"].createElement(
-            "li",
-            null,
-            _react2["default"].createElement(
-              "span",
-              null,
-              "流行时尚"
-            )
-          ),
-          _react2["default"].createElement(
-            "li",
-            null,
-            _react2["default"].createElement(
-              "span",
-              null,
-              "家居园艺"
-            )
-          ),
-          _react2["default"].createElement(
-            "li",
-            null,
-            _react2["default"].createElement(
-              "span",
-              null,
-              "户外自然"
-            )
-          ),
-          _react2["default"].createElement(
-            "li",
-            { style: { width: "50%" } },
-            _react2["default"].createElement(
-              "span",
-              null,
-              "娱乐场游戏"
-            ),
-            _react2["default"].createElement("i", { className: "unfolder" })
-          ),
-          _react2["default"].createElement(
-            "li",
-            { style: { width: "50%" } },
-            _react2["default"].createElement(
-              "span",
-              null,
-              "报刊杂志"
-            ),
-            _react2["default"].createElement("i", { className: "unfolder" })
-          )
+            className: "f-type clearfix" },
+          this.state.subGenres.map(function (item, idx) {
+            var props = {};
+            props.onClick = function (e) {
+              return _this.onCategory(item);
+            };
+            if (curSelected.category && curSelected.category.value == item.value) {
+              props.className = "selected";
+            }
+            return _react2["default"].createElement(
+              "li",
+              props,
+              _react2["default"].createElement(
+                "span",
+                null,
+                item.name
+              )
+            );
+          })
         ),
         _react2["default"].createElement(
           "div",

@@ -271,7 +271,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 _react2["default"].createElement(
                   "th",
                   null,
-                  "关键字"
+                  "关键词"
                 ),
                 _react2["default"].createElement(
                   "th",

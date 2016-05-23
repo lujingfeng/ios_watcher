@@ -42,15 +42,17 @@
   white-space: nowrap;
 }
 .app-item .del {
-  width: 75px;
-  color: #fff;
-  background: #1970e3;
+  width: 40px;
   position: absolute;
   right: 0;
   top: 0;
   height: 100%;
   text-align: center;
   line-height: 75px;
+  background: url(/static/image/del.png) no-repeat;
+  -webkit-background-size: 6px 6px;
+          background-size: 6px 6px;
+  background-position: center;
 }
 .app-item .s-txt {
   white-space: nowrap;

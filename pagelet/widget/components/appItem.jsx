@@ -15,7 +15,6 @@ var AppItem = React.createClass({
   getInitialState: function(){
     return {
       type: this.props.type || 1,//1: 搜索Item 2: 
-      isShowDelete: false
     }
   },
 
@@ -33,11 +32,13 @@ var AppItem = React.createClass({
   },
 
   onTouchStart: function(e){
+    return false;
     var touch = getTouch(e.nativeEvent);
     this.startX = touch.pageX;
   },
 
   onTouchEnd: function(e){
+    return;
     var touch = getTouch(e.nativeEvent);
     if(touch.pageX - this.startX > 10){
       this.setState({
@@ -187,16 +188,19 @@ var AppItem = React.createClass({
     }else if(type == 6){
       //返回的是字符串
       let score = parseFloat(data.score || 0);
+      let width = window.innerWidth - 120;
 
       column2 = (
         <td>
           <p 
-            style={{width: 200}}
+            style={{width: width}}
             className="title ellipsis">
             {data.title}
           </p>
-          <p className="f12 c666 m5 mb5">{data.developer}</p>
-          <div>
+          <p 
+           style={{width: width}}
+           className="f12 c666 m5 mb5 ellipsis">{data.developer}</p>
+          <div className="ellipsis" style={{width: width}}>
             <span className="t-vt c666 f12 mr6">{data.genres}</span>
             <Rank value={score} width={14}/>
             <span className="c666 f12 ml6 t-vt">{data.score}</span>
@@ -243,9 +247,8 @@ var AppItem = React.createClass({
           </tr>
         </table>
         {
-          state.isShowDelete?(
+          this.props.isShowDelete?(
             <div className="del" onClick={this.onDelete}>
-              删除
             </div>
           ): null
         }

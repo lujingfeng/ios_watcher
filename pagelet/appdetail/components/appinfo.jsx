@@ -53,8 +53,6 @@ var AppInfo = React.createClass({
       return <Loading/>
     }
 
-
-
     return (
       <div className="app-info">
         <table>
@@ -65,11 +63,11 @@ var AppInfo = React.createClass({
           <tr><td>当前版本：</td><td>{detail.versionname}</td></tr>
           <tr><td>应用大小:</td><td>{bytesToSize(detail.filesize)}</td></tr>
           <tr><td>最后更新时间:</td><td>{updateTime}</td></tr>
-          <tr style={{display: "none"}}><td >应用描述:</td><td></td></tr>
+          <tr><td >应用描述:</td><td></td></tr>
         </table>
 
-        <div className="app-description" style={{display: "none"}}>
-          后端暂没定这个字段
+        <div className="app-description">
+          {detail.title}
         </div>
       </div>
     );

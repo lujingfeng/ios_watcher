@@ -29,11 +29,10 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
   
     getInitialState: function getInitialState() {
       return {
-        type: this.props.type || 1, //1: 搜索Item 2:
-        isShowDelete: false
-      };
+        type: this.props.type || 1 };
     },
   
+    //1: 搜索Item 2:
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
       if (nextProps.type != this.props.type) {
         this.setState({
@@ -48,11 +47,13 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
     },
   
     onTouchStart: function onTouchStart(e) {
+      return false;
       var touch = getTouch(e.nativeEvent);
       this.startX = touch.pageX;
     },
   
     onTouchEnd: function onTouchEnd(e) {
+      return;
       var touch = getTouch(e.nativeEvent);
       if (touch.pageX - this.startX > 10) {
         this.setState({
@@ -256,6 +257,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
           } else if (type == 6) {
               //返回的是字符串
               var score = parseFloat(data.score || 0);
+              var _width3 = window.innerWidth - 120;
   
               column2 = _react2["default"].createElement(
                 "td",
@@ -263,18 +265,20 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
                 _react2["default"].createElement(
                   "p",
                   {
-                    style: { width: 200 },
+                    style: { width: _width3 },
                     className: "title ellipsis" },
                   data.title
                 ),
                 _react2["default"].createElement(
                   "p",
-                  { className: "f12 c666 m5 mb5" },
+                  {
+                    style: { width: _width3 },
+                    className: "f12 c666 m5 mb5 ellipsis" },
                   data.developer
                 ),
                 _react2["default"].createElement(
                   "div",
-                  null,
+                  { className: "ellipsis", style: { width: _width3 } },
                   _react2["default"].createElement(
                     "span",
                     { className: "t-vt c666 f12 mr6" },
@@ -345,11 +349,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
             column3
           )
         ),
-        state.isShowDelete ? _react2["default"].createElement(
-          "div",
-          { className: "del", onClick: this.onDelete },
-          "删除"
-        ) : null
+        this.props.isShowDelete ? _react2["default"].createElement("div", { className: "del", onClick: this.onDelete }) : null
       );
     }
   });

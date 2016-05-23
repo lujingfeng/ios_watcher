@@ -38,6 +38,10 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _pageletWidgetComponentsPopup = require("pagelet/widget/components/popup.jsx");
+  
+  var _pageletWidgetComponentsPopup2 = _interopRequireDefault(_pageletWidgetComponentsPopup);
+  
   var _constants = require("constants");
   
   var _pageletAppdetailActionAction = require("pagelet/appdetail/action/action");
@@ -64,6 +68,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
     getInitialState: function getInitialState() {
       return {
         loading: true,
+        confirmVisible: false,
         list: []
       };
     },
@@ -109,6 +114,26 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       this.history.pushState(null, pathName, params);
     },
   
+    onTapMasker: function onTapMasker() {
+      this.setState({
+        confirmVisible: false
+      });
+    },
+  
+    onDeleteHandler: function onDeleteHandler(item) {
+      this.setState({
+        confirmVisible: true,
+        selectedItem: item
+      });
+    },
+  
+    detete: function detete() {
+      this.onDelete(this.state.selectedItem);
+      this.setState({
+        confirmVisible: false
+      });
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -133,7 +158,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
               key: idx,
               data: item,
               type: 6,
-              onDelete: _this.onDelete });
+              isShowDelete: true,
+              onDelete: _this.onDeleteHandler });
           }),
           this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
           !this.state.loading && !this.state.list.length ? _react2["default"].createElement(
@@ -141,7 +167,36 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
             { className: "center mt6 c999" },
             "您还未关注应用"
           ) : null
-        )
+        ),
+        this.state.confirmVisible ? _react2["default"].createElement(
+          _pageletWidgetComponentsPopup2["default"],
+          { ref: "confirm", onTapMasker: this.onTapMasker },
+          _react2["default"].createElement(
+            "div",
+            { className: "c-confirm" },
+            _react2["default"].createElement(
+              "p",
+              null,
+              "您确定要删除应用关注吗？"
+            ),
+            _react2["default"].createElement(
+              "div",
+              null,
+              _react2["default"].createElement(
+                "button",
+                { className: "btn normal", onClick: function (e) {
+                    return _this.detete();
+                  } },
+                "删除"
+              ),
+              _react2["default"].createElement(
+                "button",
+                { className: "btn main-btn", onClick: this.onTapMasker },
+                "取消"
+              )
+            )
+          )
+        ) : null
       );
     }
   });
