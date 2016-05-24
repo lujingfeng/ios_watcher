@@ -209,11 +209,13 @@ var Search = React.createClass({
             onScroll={this.handleScroll.bind(this)}
             className="search-result c-body">
 
-            <Tabs tabs={this.state.tabs} onSelect={this.onChooseDevice}/>
+            {
+              false?<Tabs tabs={this.state.tabs} onSelect={this.onChooseDevice}/>:null
+            }
 
             {
               query && !query.overlay ?(
-                <p className="center c999 f10">
+                <p className="center c999 f10 mt12">
                   {searchWord}，{this.state.total}条结果，{new Date().format("yyyy-MM-dd hh:mm:ss")}
                 </p>): null
             }

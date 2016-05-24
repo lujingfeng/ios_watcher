@@ -176,7 +176,9 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
       var query = this.props.location.query;
   
       if (query.filter) {
-        var props = {};
+        var props = {
+          location: this.props.location
+        };
         props.device = true;
         props.country = true;
         props.category = true;

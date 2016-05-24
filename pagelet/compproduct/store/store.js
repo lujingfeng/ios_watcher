@@ -100,6 +100,8 @@ var CompareStore = Reflux.createStore({
         params.legend = legend;
       }
 
+      console.log(params);
+
       this.trigger(params);
     }
 });

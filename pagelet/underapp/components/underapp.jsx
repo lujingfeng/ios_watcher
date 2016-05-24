@@ -30,16 +30,23 @@ var UnderAppList = React.createClass({
 
   getInitialState: function(){
     var now = new Date();
-    var defaultDatetime = {};
-    defaultDatetime.name = "今天";
-    defaultDatetime.value = 1;
+    var defaultDatetime = {
+      name: "今天",
+      value: 1
+    };
+
+    var locQuery = this.props.location.query;
+    var country;
+
+    defaultDatetime = locQuery.datetime?locQuery.datetime:defaultDatetime;
+    country = locQuery.country?locQuery.country.value:countryCode.CHINA;
 
     return {
       underAppList: [],
 
       //filter params
       page: 1,
-      country: countryCode.CHINA,
+      country: country,
       date: defaultDatetime
     }
   },
@@ -142,6 +149,7 @@ var UnderAppList = React.createClass({
       return <Filter
               onOk={this.onFilter}
               country={true}
+              location = {this.props.location}
               datetime={true} {...props}/>;
     }else{
       return this.renderTop();

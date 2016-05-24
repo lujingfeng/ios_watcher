@@ -99,7 +99,16 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
   
     onOk: function onOk() {
       this.props.onOk && this.props.onOk(this.state.curSelected);
-      this.history.goBack();
+      if (this.props.location) {
+        var pathname = this.props.location.pathname;
+        var query = this.props.location.query;
+        delete query.filter;
+        query = _staticLibJquery2["default"].extend(query, this.state.curSelected);
+  
+        this.history.replaceState(null, pathname, query);
+      } else {
+        this.history.goBack();
+      }
     },
   
     componentDidMount: function componentDidMount() {
@@ -202,10 +211,9 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       })[0] || null;
   
       if (existedItem) {
-        curSelected.score.splice(curSelected.score.indexOf(existedItem), 1);
-      } else {
-        curSelected.score.push(score);
-      }
+        //curSelected.score.splice(curSelected.score.indexOf(existedItem), 1);
+      } else {}
+      curSelected.score = [score];
       this.setState({ curSelected: curSelected });
     },
   
@@ -338,7 +346,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 }
               })[0] || null;
   
-              if (existedItem) {
+              if (existedItem && curSelected.score.length != 5) {
                 props.className = "selected";
               }
               return _react2["default"].createElement(

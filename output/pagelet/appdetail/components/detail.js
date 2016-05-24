@@ -80,8 +80,19 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     mixins: [_reactRouter.History],
   
     getInitialState: function getInitialState() {
+  
+      var realFilter = null;
+      var locQuery = this.props.location.query;
+  
+      if (locQuery.country && locQuery.device) {
+        realFilter = {};
+        realFilter.days = locQuery.days;
+        realFilter.pay = locQuery.pay;
+        realFilter.country = locQuery.country;
+        realFilter.device = locQuery.device;
+      }
       return {
-        realFilter: null,
+        realFilter: realFilter,
         commentFilter: {
           score: [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }],
           datetime: { name: "7日", value: 7 }
@@ -130,7 +141,9 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       var state = this.state;
   
       if (query.filter) {
-        var props = {};
+        var props = {
+          location: this.props.location
+        };
         var params = this.props.params;
   
         if (params.module == 2) {

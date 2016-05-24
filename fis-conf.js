@@ -41,7 +41,7 @@ fis.match("/static/(constants).js", {id: "$1",moduleId: "$1"});
 fis.match('*.less', {
   parser: fis.plugin('less'),
   postprocessor: fis.plugin('autoprefixer', {
-      browsers: ["Android >= 2.3", "ChromeAndroid > 1%", "iOS >= 4"],
+      browsers: ["Android >= 2.3", "ChromeAndroid > 1%", "iOS >= 4", "Firefox >= 20", "last 2 versions"],
       cascade: true
     }),
   rExt: '.css'

@@ -67,16 +67,23 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
   
     getInitialState: function getInitialState() {
       var now = new Date();
-      var defaultDatetime = {};
-      defaultDatetime.name = "今天";
-      defaultDatetime.value = 1;
+      var defaultDatetime = {
+        name: "今天",
+        value: 1
+      };
+  
+      var locQuery = this.props.location.query;
+      var country;
+  
+      defaultDatetime = locQuery.datetime ? locQuery.datetime : defaultDatetime;
+      country = locQuery.country ? locQuery.country.value : _constants.countryCode.CHINA;
   
       return {
         underAppList: [],
   
         //filter params
         page: 1,
-        country: _constants.countryCode.CHINA,
+        country: country,
         date: defaultDatetime
       };
     },
@@ -179,6 +186,7 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
         return _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({
           onOk: this.onFilter,
           country: true,
+          location: this.props.location,
           datetime: true }, props));
       } else {
         return this.renderTop();

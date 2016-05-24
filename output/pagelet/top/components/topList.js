@@ -189,7 +189,10 @@ define('pagelet/top/components/topList.jsx', function(require, exports, module) 
   
       if (query.filter) {
   
-        var props = {};
+        var props = {
+          location: this.props.location
+        };
+  
         props.device = true;
         props.country = true;
         props.category = true;

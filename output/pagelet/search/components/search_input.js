@@ -252,10 +252,10 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           {
             onScroll: this.handleScroll.bind(this),
             className: "search-result c-body" },
-          _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs, onSelect: this.onChooseDevice }),
+          false ? _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs, onSelect: this.onChooseDevice }) : null,
           query && !query.overlay ? _react2["default"].createElement(
             "p",
-            { className: "center c999 f10" },
+            { className: "center c999 f10 mt12" },
             searchWord,
             "，",
             this.state.total,

@@ -89,7 +89,16 @@ var Filter = React.createClass({
 
   onOk: function(){
     this.props.onOk && this.props.onOk(this.state.curSelected);
-    this.history.goBack();
+    if(this.props.location){
+      var pathname = this.props.location.pathname;
+      var query = this.props.location.query;
+      delete query.filter;
+      query = $.extend(query, this.state.curSelected);
+
+      this.history.replaceState(null, pathname, query);
+    }else{
+      this.history.goBack();
+    }
   },
 
   componentDidMount: function(){
@@ -196,10 +205,11 @@ var Filter = React.createClass({
     })[0]||null;
 
     if(existedItem){
-      curSelected.score.splice(curSelected.score.indexOf(existedItem), 1);
+      //curSelected.score.splice(curSelected.score.indexOf(existedItem), 1);
     }else{
-      curSelected.score.push(score);
+      
     }
+    curSelected.score = [score];
     this.setState({curSelected});
   },
 
@@ -311,7 +321,7 @@ var Filter = React.createClass({
                       }
                     })[0]||null;
 
-                    if(existedItem){
+                    if(existedItem && curSelected.score.length != 5){
                       props.className="selected";
                     }
                     return (

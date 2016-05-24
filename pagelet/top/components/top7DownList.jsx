@@ -139,7 +139,9 @@ var Top7DownList = React.createClass({
     var query = this.props.location.query;
 
     if(query.filter){
-      var props = {};
+      var props = {
+        location: this.props.location
+      };
       props.device = props.country = props.category = true;
 
       props.categoryValue = this.state.genres;
