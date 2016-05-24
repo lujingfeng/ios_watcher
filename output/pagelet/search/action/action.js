@@ -16,7 +16,7 @@ define('pagelet/search/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var SearchAction = _reflux2["default"].createActions(["search", "searchCmp", "fetchHotApp", "fetchHotAppCmp", "fetchHistory", "fetchHistoryCmp", "addHistory"]);
+  var SearchAction = _reflux2["default"].createActions(["search", "searchCmp", "fetchHotApp", "fetchHotAppCmp", "fetchHistory", "fetchHistoryCmp", "addHistory", "searchWordHot", "searchWordHotCmp"]);
   
   SearchAction.search.preEmit = function (serachKey, page, country, device) {
     if (page === undefined) page = 1;
@@ -75,6 +75,20 @@ define('pagelet/search/action/action', function(require, exports, module) {
       dataType: 'json'
     };
     _staticLibJquery2["default"].ajax(params).always(function (res) {});
+  };
+  
+  SearchAction.searchWordHot.preEmit = function (keyword) {
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/keywordhot',
+      data: {
+        keyword: keyword
+      },
+      dataType: 'json'
+    };
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      SearchAction.searchWordHotCmp(res);
+    });
   };
   
   exports["default"] = SearchAction;

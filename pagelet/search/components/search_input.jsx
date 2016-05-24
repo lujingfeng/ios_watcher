@@ -33,6 +33,7 @@ var Search = React.createClass({
       searchResultList: [],
       hotWords:[],
       records: [],
+      hot:"",
 
       page: 1,
       total: 0
@@ -98,7 +99,8 @@ var Search = React.createClass({
     this.setState({
       searchResultList: [],
       page:1,
-      total: 0
+      total: 0,
+      hot:""
     });
 
     SearchAction.search(
@@ -109,6 +111,7 @@ var Search = React.createClass({
     );
 
     SearchAction.addHistory(searchWord);
+    SearchAction.searchWordHot(searchWord);
     this.history.replaceState(null, this.props.location.pathname, {searchWord:searchWord});
 
     send({
@@ -226,7 +229,7 @@ var Search = React.createClass({
                     </tr>
                     <tr>
                       <td>{searchWord}</td>
-                      <td>-</td>
+                      <td>{this.state.hot||"-"}</td>
                       <td>{this.state.total||"-"}</td>
                     </tr>
                   </table>

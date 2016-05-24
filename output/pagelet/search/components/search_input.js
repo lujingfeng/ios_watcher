@@ -64,6 +64,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
         searchResultList: [],
         hotWords: [],
         records: [],
+        hot: "",
   
         page: 1,
         total: 0
@@ -126,12 +127,14 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       this.setState({
         searchResultList: [],
         page: 1,
-        total: 0
+        total: 0,
+        hot: ""
       });
   
       _pageletSearchActionAction2["default"].search(searchWord, 1, this.state.country, this.state.device);
   
       _pageletSearchActionAction2["default"].addHistory(searchWord);
+      _pageletSearchActionAction2["default"].searchWordHot(searchWord);
       this.history.replaceState(null, this.props.location.pathname, { searchWord: searchWord });
   
       (0, _staticMinxinsUtils.send)({
@@ -295,7 +298,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 _react2["default"].createElement(
                   "td",
                   null,
-                  "-"
+                  this.state.hot || "-"
                 ),
                 _react2["default"].createElement(
                   "td",

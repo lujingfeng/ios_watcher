@@ -28,6 +28,9 @@ define('pagelet/search/store/store', function(require, exports, module) {
       this.listenTo(_actionActionJs2["default"].fetchHistory, this.loading);
       this.listenTo(_actionActionJs2["default"].fetchHistoryCmp, this.fetchHistoryCmp);
   
+      this.listenTo(_actionActionJs2["default"].searchWordHot, function () {});
+      this.listenTo(_actionActionJs2["default"].searchWordHotCmp, this.searchWordHotCmp);
+  
       this.listenTo(_actionActionJs2["default"].addHistory, this.addHistory);
     },
   
@@ -63,6 +66,14 @@ define('pagelet/search/store/store', function(require, exports, module) {
       var params = { loading: false };
       if (res && res.records) {
         params.records = res.records || [];
+      }
+      this.trigger(params);
+    },
+    searchWordHotCmp: function searchWordHotCmp(res) {
+      var params = {};
+  
+      if (res.hot) {
+        params.hot = res.hot;
       }
       this.trigger(params);
     }
