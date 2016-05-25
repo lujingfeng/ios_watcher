@@ -27,7 +27,7 @@ var RRank = React.createClass({
         itemWidth:50
       },
 
-      days: filter.days ? filter.days.value:30,
+      days: filter.days ? filter.days.value:1,
       country: filter.country? filter.country.value: countryCode.CHINA,
       payType: filter.pay? filter.pay.value: payType.FREE,
       device: filter.device ? filter.device.value: deviceType.IPHONE,
@@ -121,6 +121,7 @@ var RRank = React.createClass({
   },
 
   render: function(){
+    
     return (
       <div className="real-rank">
 

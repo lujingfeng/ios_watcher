@@ -144,11 +144,18 @@ var Filter = React.createClass({
       if(datetime.year == d.getFullYear() &&
          datetime.month == (d.getMonth() + 1) &&
          datetime.day == d.getDate()){
+        delete datetime.month;
+        delete datetime.day;
+        delete datetime.year;
+        
         datetime.value = 1;
         datetime.name = days2Str[datetime.value];
       }else if(datetime.year == prevDate.getFullYear() &&
          datetime.month == (prevDate.getMonth() + 1) &&
          datetime.day == prevDate.getDate()){
+        delete datetime.month;
+        delete datetime.day;
+        delete datetime.year;
         datetime.value = -1;
         datetime.name = days2Str[datetime.value];
       }else{
@@ -488,13 +495,7 @@ var Filter = React.createClass({
                     props.className="selected";
                   }
                   if(item.value == 25 || item.value == 26){
-                    props.style.width = "50%";
-                    props.onClick = ()=>{
-                      var data = this.state.subGenres == item.data?[]:item.data;
-                      this.setState({
-                        subGenres: data
-                      });
-                    }
+                    return null;
                   }
 
                   return (
@@ -515,6 +516,49 @@ var Filter = React.createClass({
             </ul>
           </div>):null
         }
+
+        {
+          showCategory?
+        <ul 
+          className="f-type clearfix">
+          {
+            state.genres.map((item, idx)=>{
+              var props = {style:{}};
+
+              if(curSelected.category && curSelected.category.value == item.value){
+                props.className="selected";
+              }
+
+              if(item.value == 25 || item.value == 26){
+                props.style.width = "50%";
+                props.onClick = ()=>{
+                  var data = this.state.subGenres == item.data?[]:item.data;
+                  this.setState({
+                    subGenres: data
+                  });
+                  this.onCategory(item)
+                }
+              }else{
+                return null;
+              }
+
+              return (
+                <li {...props}>
+                 <span>
+                  {item.name}
+                </span>
+                 {
+                   item.value == 25?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 50}}></i>: null
+                 }
+                 {
+                   item.value == 26?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 39}}></i>: null
+                 }
+                </li>
+              );
+            })
+          }
+        </ul>:null
+      }
 
         <ul 
           className="f-type clearfix">

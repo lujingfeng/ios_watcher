@@ -85,7 +85,7 @@ define('static/entry.jsx', function(require, exports, module) {
     var hash = location.hash;
   
     if (!uname && location.hash.indexOf("myfavlist") > -1) {
-      location.href = "/check/login-page";
+      location.href = "/check/login-page?myfav=true";
     }
   };
   init();

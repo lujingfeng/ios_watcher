@@ -87,6 +87,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
     },
   
     onDelete: function onDelete(data) {
+      data.id = data.infoId || data.id;
       var id = data.id || data.appId;
   
       _pageletAppdetailActionAction2["default"].addFav(id, "cancel");
@@ -103,6 +104,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
     },
   
     onItemClick: function onItemClick(item) {
+      item.id = item.infoId || item.id;
+  
       var query = this.props.location.query || {};
       var params = _jquery2["default"].extend({}, item);
       var pathName = "/detail/1";

@@ -75,7 +75,8 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
   
     onLogout: function onLogout() {
       (0, _staticMinxinsUtils.setCookie)("uname", "", 0);
-      location.replace("/check/login-page");
+      location.replace("/#/search");
+      this.hide();
     },
   
     render: function render() {

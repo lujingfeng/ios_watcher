@@ -63,7 +63,8 @@ var SideNav = React.createClass({
 
   onLogout: function(){
     setCookie("uname", "", 0);
-    location.replace("/check/login-page");
+    location.replace("/#/search");
+    this.hide();
   },
 
   render: function(){

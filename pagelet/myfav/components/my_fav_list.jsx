@@ -46,6 +46,7 @@ var MyFav = React.createClass({
   },
 
   onDelete: function(data){
+    data.id = data.infoId||data.id;
     var id = data.id || data.appId;
 
     DetailAction.addFav(id, "cancel");
@@ -62,6 +63,8 @@ var MyFav = React.createClass({
   },
 
   onItemClick: function(item){
+    item.id = item.infoId||item.id;
+    
     var query = this.props.location.query || {};
     var params = $.extend({}, item);
     var pathName = "/detail/1";

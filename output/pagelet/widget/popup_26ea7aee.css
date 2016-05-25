@@ -1,0 +1,1 @@
+.m-mask{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.1);z-index:1000}.m-mask.m-popup-mask{background:rgba(0,0,0,.5)}.m-pupop{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;overflow:hidden;border-radius:3px}

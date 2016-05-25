@@ -152,9 +152,16 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         var prevDate = new Date(d.getTime() - 24 * 60 * 60 * 1000);
   
         if (datetime.year == d.getFullYear() && datetime.month == d.getMonth() + 1 && datetime.day == d.getDate()) {
+          delete datetime.month;
+          delete datetime.day;
+          delete datetime.year;
+  
           datetime.value = 1;
           datetime.name = _constants.days2Str[datetime.value];
         } else if (datetime.year == prevDate.getFullYear() && datetime.month == prevDate.getMonth() + 1 && datetime.day == prevDate.getDate()) {
+          delete datetime.month;
+          delete datetime.day;
+          delete datetime.year;
           datetime.value = -1;
           datetime.name = _constants.days2Str[datetime.value];
         } else {
@@ -681,13 +688,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 props.className = "selected";
               }
               if (item.value == 25 || item.value == 26) {
-                props.style.width = "50%";
-                props.onClick = function () {
-                  var data = _this.state.subGenres == item.data ? [] : item.data;
-                  _this.setState({
-                    subGenres: data
-                  });
-                };
+                return null;
               }
   
               return _react2["default"].createElement(
@@ -703,6 +704,43 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               );
             })
           )
+        ) : null,
+        showCategory ? _react2["default"].createElement(
+          "ul",
+          {
+            className: "f-type clearfix" },
+          state.genres.map(function (item, idx) {
+            var props = { style: {} };
+  
+            if (curSelected.category && curSelected.category.value == item.value) {
+              props.className = "selected";
+            }
+  
+            if (item.value == 25 || item.value == 26) {
+              props.style.width = "50%";
+              props.onClick = function () {
+                var data = _this.state.subGenres == item.data ? [] : item.data;
+                _this.setState({
+                  subGenres: data
+                });
+                _this.onCategory(item);
+              };
+            } else {
+              return null;
+            }
+  
+            return _react2["default"].createElement(
+              "li",
+              props,
+              _react2["default"].createElement(
+                "span",
+                null,
+                item.name
+              ),
+              item.value == 25 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
+              item.value == 26 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
+            );
+          })
         ) : null,
         _react2["default"].createElement(
           "ul",

@@ -57,7 +57,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
           itemWidth: 50
         },
   
-        days: filter.days ? filter.days.value : 30,
+        days: filter.days ? filter.days.value : 1,
         country: filter.country ? filter.country.value : _constants.countryCode.CHINA,
         payType: filter.pay ? filter.pay.value : _constants.payType.FREE,
         device: filter.device ? filter.device.value : _constants.deviceType.IPHONE
@@ -153,6 +153,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
     },
   
     render: function render() {
+  
       return _react2["default"].createElement(
         "div",
         { className: "real-rank" },

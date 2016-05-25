@@ -144,6 +144,8 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
     },
   
     onClickFavItem: function onClickFavItem(data) {
+      data.id = data.infoId || data.id;
+  
       data.id = data.id || data.appId;
       data.device = _constants.deviceStrToint[data.device];
       data.country = _constants.countryToCode[data.country];
@@ -211,7 +213,7 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
               "关注对比"
             ),
             favList.map(function (item, idx) {
-              var favId = item.id || item.appId;
+              var favId = item.id || item.infoId;
               if (favId == appId) {
                 return null;
               }

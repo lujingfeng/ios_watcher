@@ -114,6 +114,8 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
         params.legend = legend;
       }
   
+      console.log(params);
+  
       this.trigger(params);
     }
   });

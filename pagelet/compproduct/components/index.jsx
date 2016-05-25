@@ -114,6 +114,8 @@ var AppCompare = React.createClass({
   },
 
   onClickFavItem: function(data){
+    data.id = data.infoId||data.id;
+
     data.id = data.id || data.appId;
     data.device = deviceStrToint[data.device];
     data.country = countryToCode[data.country];
@@ -182,7 +184,7 @@ var AppCompare = React.createClass({
                 </h5>
                 {
                   favList.map((item, idx)=>{
-                    var favId = item.id || item.appId;
+                    var favId = item.id || item.infoId;
                     if(favId == appId){
                       return null;
                     }

@@ -58,7 +58,6 @@
           transform: rotate(180deg);
 }
 .c-filter li.selected span {
-  background: #1970e3;
-  color: #fff;
+  color: #1970e3;
   border: 1px solid #1970e3;
 }

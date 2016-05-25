@@ -75,6 +75,9 @@ define('pagelet/main/components/main.jsx', function(require, exports, module) {
   
     logOut: function logOut() {
       this.refs.sideNav.onLogout();
+      this.setState({
+        confirmVisible: false
+      });
     },
   
     showConfirm: function showConfirm() {

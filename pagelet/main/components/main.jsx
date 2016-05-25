@@ -52,6 +52,9 @@ var MainView = React.createClass({
 
   logOut: function(){
     this.refs.sideNav.onLogout();
+    this.setState({
+      confirmVisible: false
+    });
   },
 
   showConfirm: function(){

@@ -84,7 +84,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       var realFilter = null;
       var locQuery = this.props.location.query;
   
-      if (locQuery.country && locQuery.device) {
+      if (locQuery.country && locQuery.device && locQuery.days && locQuery.pay) {
         realFilter = {};
         realFilter.days = locQuery.days;
         realFilter.pay = locQuery.pay;
@@ -149,6 +149,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         if (params.module == 2) {
           var filter = this.state.realFilter;
           props.showPayMethod = props.device = props.country = props.days = true;
+  
           props.payValue = filter && filter.pay ? filter.pay : { "name": "免费", value: "free" };
           props.deviceValue = filter && filter.device ? filter.device : { "name": "iPhone", value: 0 };
           props.countryValue = filter && filter.country ? filter.country : { "name": "中国", value: 1 };
