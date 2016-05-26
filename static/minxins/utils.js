@@ -14,7 +14,7 @@ $.ajax = function(params){
 
     req.fail(function(res){
         var args = arguments;
-
+        
         send({
           type: "request",
           opra: params.url,

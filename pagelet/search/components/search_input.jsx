@@ -152,7 +152,7 @@ var Search = React.createClass({
     }else{
       pathName = pathName + "1"
     }
-
+    params.id = params.infoId||params.id;
     params.id = params.id || params.appId;
 
     params.device = this.state.device;
