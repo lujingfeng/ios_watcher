@@ -86,6 +86,17 @@ var AppDetail = React.createClass({
     this.history.pushState(null, "/myfavlist");
   },
 
+  handleScroll: function(){
+    const _target = e.target;
+
+    if ((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) {
+      var params = this.props.params;
+      if(params.module == 5){
+        this.refs.comment.loadMore();
+      }
+    }
+  },
+
   render: function(){
     var query = this.props.location.query;
     var state = this.state;
@@ -148,7 +159,7 @@ var AppDetail = React.createClass({
       bottomView = <KeyWords query={query}/>
     }else if(params.module == 5){
       filterEnabled = true;
-      bottomView = <Comment query={query} filter={this.state.commentFilter}/>
+      bottomView = <Comment ref="comment" query={query} filter={this.state.commentFilter}/>
     }else if(params.module == 6){
       bottomView = <AppLevel query={query}/>
     }
@@ -159,7 +170,7 @@ var AppDetail = React.createClass({
           location={this.props.location}
           filterEnabled={filterEnabled}
           showSideNav={this.props.showSideNav}>应用详情</Header>
-        <div className="c-body" >
+        <div className="c-body" onScroll={this.handleScroll.bind(this)}>
           <BaseInfo query={query}/>
           <Categofy 
             query={query} 

@@ -45,7 +45,7 @@ var Comment = React.createClass({
       duraTime: filter.datetime,
       device: filter.device ? filter.device.value : deviceType.IPHONE,
       bIndex: 1,
-      count: 1000,
+      count: 50,
       score: scores,
 
       list: []
@@ -53,7 +53,11 @@ var Comment = React.createClass({
   },
 
   componentDidMount: function(){
+    this.fetchList();
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+  },
 
+  fetchList: function(){
     DetailAction.commentDetail({
       id: this.state.id,//711可用
       duraTime: this.state.duraTime.value,
@@ -63,8 +67,6 @@ var Comment = React.createClass({
       count: this.state.count,
       score: this.state.score
     });
-
-    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
   },
 
   componentWillUnmount: function(){
@@ -72,7 +74,16 @@ var Comment = React.createClass({
   },
 
   onStateChange: function(state){
+    if(state.list){
+      state.list = this.state.list.concat(state.list);
+    }
     this.setState(state);
+  },
+
+  loadMore: function(){
+    this.setState({
+      bIndex: ++this.state.bIndex
+    });
   },
 
   render: function(){

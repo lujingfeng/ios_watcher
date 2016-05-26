@@ -136,6 +136,17 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       this.history.pushState(null, "/myfavlist");
     },
   
+    handleScroll: function handleScroll() {
+      var _target = e.target;
+  
+      if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight) {
+        var params = this.props.params;
+        if (params.module == 5) {
+          this.refs.comment.loadMore();
+        }
+      }
+    },
+  
     render: function render() {
       var query = this.props.location.query;
       var state = this.state;
@@ -191,7 +202,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         bottomView = _react2["default"].createElement(_keywords2["default"], { query: query });
       } else if (params.module == 5) {
         filterEnabled = true;
-        bottomView = _react2["default"].createElement(_comment2["default"], { query: query, filter: this.state.commentFilter });
+        bottomView = _react2["default"].createElement(_comment2["default"], { ref: "comment", query: query, filter: this.state.commentFilter });
       } else if (params.module == 6) {
         bottomView = _react2["default"].createElement(_applevel2["default"], { query: query });
       }
@@ -209,7 +220,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         ),
         _react2["default"].createElement(
           "div",
-          { className: "c-body" },
+          { className: "c-body", onScroll: this.handleScroll.bind(this) },
           _react2["default"].createElement(_baseinfo2["default"], { query: query }),
           _react2["default"].createElement(_category2["default"], {
             query: query,

@@ -172,7 +172,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       } else {
         pathName = pathName + "1";
       }
-  
+      params.id = params.infoId || params.id;
       params.id = params.id || params.appId;
   
       params.device = this.state.device;

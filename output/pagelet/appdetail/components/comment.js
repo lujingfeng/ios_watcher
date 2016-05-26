@@ -62,7 +62,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
         duraTime: filter.datetime,
         device: filter.device ? filter.device.value : _constants.deviceType.IPHONE,
         bIndex: 1,
-        count: 1000,
+        count: 50,
         score: scores,
   
         list: []
@@ -70,7 +70,11 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
     },
   
     componentDidMount: function componentDidMount() {
+      this.fetchList();
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+    },
   
+    fetchList: function fetchList() {
       _actionAction2["default"].commentDetail({
         id: this.state.id, //711可用
         duraTime: this.state.duraTime.value,
@@ -80,8 +84,6 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
         count: this.state.count,
         score: this.state.score
       });
-  
-      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
     },
   
     componentWillUnmount: function componentWillUnmount() {
@@ -89,7 +91,16 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
     },
   
     onStateChange: function onStateChange(state) {
+      if (state.list) {
+        state.list = this.state.list.concat(state.list);
+      }
       this.setState(state);
+    },
+  
+    loadMore: function loadMore() {
+      this.setState({
+        bIndex: ++this.state.bIndex
+      });
     },
   
     render: function render() {
