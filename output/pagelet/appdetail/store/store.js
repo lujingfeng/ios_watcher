@@ -60,18 +60,7 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       var versions = [];
   
       if (res) {
-        var keys = Object.keys(res) || [];
-        keys.forEach(function (item, idx) {
-          versions.push({
-            version: item,
-            date: res[item]
-          });
-        });
-        versions = versions.sort(function (a, b) {
-          return a.date < b.date ? 1 : -1;
-        });
-        //versions = versions.reverse();
-        params.versions = versions;
+        params.versions = res;
       }
       this.trigger(params);
     },

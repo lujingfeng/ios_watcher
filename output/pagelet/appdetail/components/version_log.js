@@ -75,7 +75,7 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
             null,
             _react2["default"].createElement(
               "th",
-              null,
+              { style: { width: 50 } },
               "版本"
             ),
             _react2["default"].createElement(
@@ -96,14 +96,18 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
               _react2["default"].createElement(
                 "td",
                 null,
-                item.version
+                item.versionName
               ),
               _react2["default"].createElement(
                 "td",
                 null,
-                item.date
+                item.begintime
               ),
-              _react2["default"].createElement("td", null)
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.updatecontent
+              )
             );
           })
         ),

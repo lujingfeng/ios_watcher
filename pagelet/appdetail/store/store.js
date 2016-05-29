@@ -45,18 +45,7 @@ var DetailStore = Reflux.createStore({
       var versions = [];
 
       if(res){
-        var keys = Object.keys(res) || [];
-        keys.forEach((item, idx)=>{
-          versions.push({
-            version: item,
-            date: res[item]
-          });
-        });
-        versions = versions.sort((a, b)=>{
-          return a.date < b.date? 1:-1
-        });
-        //versions = versions.reverse();
-        params.versions = versions;
+        params.versions = res;
       }
       this.trigger(params);
     },

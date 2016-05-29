@@ -45,7 +45,7 @@ var VersionLog = React.createClass({
 
         <table className="border">
           <tr>
-            <th>版本</th>
+            <th style={{width:50}}>版本</th>
             <th style={{width:100}}>更新时间</th>
             <th>更新说明</th>
           </tr>
@@ -53,13 +53,14 @@ var VersionLog = React.createClass({
           {
             this.state.versions.map((item, idx)=>{
               return (<tr>
-                      <td>
-                        {item.version}
+                      <td >
+                        {item.versionName}
                       </td>
                       <td>
-                        {item.date}
+                        {item.begintime}
                       </td>
                       <td>
+                        {item.updatecontent}
                       </td>
                     </tr>)
             })

@@ -136,7 +136,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
       this.history.pushState(null, "/myfavlist");
     },
   
-    handleScroll: function handleScroll() {
+    handleScroll: function handleScroll(e) {
       var _target = e.target;
   
       if (_target.offsetHeight + _target.scrollTop + 10 >= _target.scrollHeight) {

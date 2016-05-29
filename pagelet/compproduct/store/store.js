@@ -39,14 +39,14 @@ var CompareStore = Reflux.createStore({
             }
             xAxis.data.push(h+"时");
           }
-
+          var title = appName?(appName.substring(0, 5)+clist[i].name):clist[i].name
           series.push({
-            name: clist[i].name,
+            name: title,
             smooth: true,
             type: 'line',
             data: data
           });
-          legend.data.push(clist[i].name);
+          legend.data.push(title);
         }
 
         params.series = series;

@@ -33,17 +33,17 @@ var AppCompare = React.createClass({
 
       legend: {
         data:[],
-        top: "45%",
+        top: "40%",
         itemWidth:50
       },
 
       app_1: query.app_1,
       app_2: query.app_2,
 
-      days: 1,
-      country: countryCode.CHINA,
-      payType: payType.FREE,
-      device: deviceType.IPHONE,
+      days: query.days? query.days.value:1,
+      country: query.country? query.country.value: countryCode.CHINA,
+      payType: query.pay?query.pay.value:payType.FREE,
+      device: query.device?query.device.value:deviceType.IPHONE,
     }
   },
 
@@ -58,7 +58,6 @@ var AppCompare = React.createClass({
     this.history.listen(()=>{
       var query = this.props.location.query;
       if(!query.filter){
-        console.log("filter");
         this.intChart(this.echarts);
       }else{
         this.state.legend.data = [];
@@ -176,6 +175,7 @@ var AppCompare = React.createClass({
 
       renderContent =(
             <Filter
+              location={this.props.location}
               onOk={this.onFilter}
               {...props}/>);
     }else{

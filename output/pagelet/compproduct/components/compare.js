@@ -71,17 +71,17 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
         legend: {
           data: [],
-          top: "45%",
+          top: "40%",
           itemWidth: 50
         },
   
         app_1: query.app_1,
         app_2: query.app_2,
   
-        days: 1,
-        country: _constants.countryCode.CHINA,
-        payType: _constants.payType.FREE,
-        device: _constants.deviceType.IPHONE
+        days: query.days ? query.days.value : 1,
+        country: query.country ? query.country.value : _constants.countryCode.CHINA,
+        payType: query.pay ? query.pay.value : _constants.payType.FREE,
+        device: query.device ? query.device.value : _constants.deviceType.IPHONE
       };
     },
   
@@ -97,7 +97,6 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       this.history.listen(function () {
         var query = _this2.props.location.query;
         if (!query.filter) {
-          console.log("filter");
           _this2.intChart(_this2.echarts);
         } else {
           _this2.state.legend.data = [];
@@ -213,6 +212,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         props.countryValue = { name: _constants.countryCode2Str[this.state.country], value: this.state.country };
   
         renderContent = _react2["default"].createElement(_pageletWidgetComponentsFilter2["default"], _extends({
+          location: this.props.location,
           onOk: this.onFilter
         }, props));
       } else {

@@ -86,7 +86,7 @@ var AppDetail = React.createClass({
     this.history.pushState(null, "/myfavlist");
   },
 
-  handleScroll: function(){
+  handleScroll: function(e){
     const _target = e.target;
 
     if ((_target.offsetHeight + _target.scrollTop + 10) >= _target.scrollHeight) {

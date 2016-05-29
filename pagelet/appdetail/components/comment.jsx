@@ -81,8 +81,13 @@ var Comment = React.createClass({
   },
 
   loadMore: function(){
+    if(this.state.loading){
+      return;
+    }
     this.setState({
       bIndex: ++this.state.bIndex
+    }, ()=>{
+      this.fetchList();
     });
   },
 
@@ -116,6 +121,9 @@ var Comment = React.createClass({
             </tr>
             {
               list.map((item, idx)=>{
+                var time = parseInt(item.dateTime);
+                var d = new Date(time);
+
                 return (
                   <tr>
                     <td>
@@ -126,7 +134,7 @@ var Comment = React.createClass({
                         <i className="mr6 t-vt">{item.authorName}</i>
                         <i className="mr6 t-vt">{item.versionName}</i>
                         <Rank value={parseInt(item.score)} width={14}/>
-                        <i className="ml6 t-vt">{item.dateTime}</i>
+                        <i className="ml6 t-vt">{d.format("yyyy-MM-dd")}</i>
                       </div>
                     </td>
                   </tr>)

@@ -98,8 +98,15 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
     },
   
     loadMore: function loadMore() {
+      var _this = this;
+  
+      if (this.state.loading) {
+        return;
+      }
       this.setState({
         bIndex: ++this.state.bIndex
+      }, function () {
+        _this.fetchList();
       });
     },
   
@@ -145,6 +152,9 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
             )
           ),
           list.map(function (item, idx) {
+            var time = parseInt(item.dateTime);
+            var d = new Date(time);
+  
             return _react2["default"].createElement(
               "tr",
               null,
@@ -173,7 +183,7 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
                   _react2["default"].createElement(
                     "i",
                     { className: "ml6 t-vt" },
-                    item.dateTime
+                    d.format("yyyy-MM-dd")
                   )
                 )
               )

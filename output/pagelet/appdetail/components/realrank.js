@@ -20,6 +20,8 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
   var _jquery2 = _interopRequireDefault(_jquery);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _actionAction = require("pagelet/appdetail/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -111,10 +113,21 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         series: []
       };
   
+      // option.xAxis.data =  getLegends(this.state.days);
+      // option.series = [
+      //   {
+      //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      //     name: "",
+      //     smooth: true,
+      //     type: 'line'
+      //   }
+      // ];
+  
       //使用刚指定的配置项和数据显示图表。
       this.chart.setOption(option);
   
       var query = this.props.query;
+      //return;
   
       var params = {
         interval: this.state.days,

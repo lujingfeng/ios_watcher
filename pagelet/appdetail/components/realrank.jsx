@@ -4,6 +4,7 @@
 
 import React from "react";
 import $ from "jquery";
+import {getLegends} from "./static/minxins/utils";
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
 import {countryCode, countryCode2Str, days2Str, deviceType, payType, payTypeToStr,deviceTypeStr} from "constants";
@@ -79,10 +80,21 @@ var RRank = React.createClass({
         series: []
     };
 
+    // option.xAxis.data =  getLegends(this.state.days);
+    // option.series = [
+    //   {
+    //     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    //     name: "",
+    //     smooth: true,
+    //     type: 'line'
+    //   }
+    // ];
+
     //使用刚指定的配置项和数据显示图表。
     this.chart.setOption(option);
 
     var query = this.props.query;
+    //return;
 
     var params = {
       interval: this.state.days,

@@ -129,7 +129,25 @@ define('static/minxins/utils', function(require, exports, module) {
       }]);
   }
   
-  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie, setCookie: setCookie, send: send };
+  function getLegends(days) {
+      var curDate = new Date();
+      var curDatetime = curDate.getTime();
+      var arrays = [];
+  
+      if (days == 1 || days == -1) {
+          for (var i = 0; i <= 23; i++) {
+              arrays.push(i + "时");
+          }
+      } else if (days == 7 || days == 15 || days == 30 || days == 60) {
+          for (var i = days; i > 0; i--) {
+              var d = new Date(curDatetime - 24 * 60 * 60 * 1000);
+              arrays.push(d.format("yyyy-MM-dd"));
+          }
+      }
+      return arrays;
+  }
+  
+  exports["default"] = { URL: URL, bytesToSize: bytesToSize, getCookie: getCookie, setCookie: setCookie, send: send, getLegends: getLegends };
   module.exports = exports["default"];
 
 });
