@@ -59,14 +59,14 @@
   z-index: 1;
 }
 .category-detail {
-  padding: 15px;
+  padding: 28px 15px;
 }
 .c-app-detail .app-info table {
   width: 100%;
 }
 .c-app-detail .app-info table tr td:first-child {
   font-weight: bold;
-  height: 24px;
+  height: 34px;
 }
 .c-app-detail .app-info table td {
   vertical-align: top;
@@ -93,6 +93,9 @@
   padding: 12px;
   line-height: 20px;
 }
+.c-app-detail .comment .rank {
+  margin-top: 2px;
+}
 .c-app-detail .app-detail-level table {
   margin-bottom: 10px;
 }
@@ -104,18 +107,24 @@
   text-align: left;
   margin-left: 12px;
   line-height: normal;
+  width: 90px;
+  margin-bottom: 12px;
+}
+.c-app-detail .app-detail-level .left p {
+  white-space: nowrap;
 }
 .c-app-detail .app-detail-level .left .score {
   font-weight: bold;
   margin: 29px 0 16px;
 }
 .c-app-detail .app-detail-level .right {
-  margin-left: 12px;
+  position: absolute;
+  right: 27px;
 }
 .c-app-detail .app-detail-level .right li {
   font-size: 12px;
   text-align: left;
-  min-width: 150px;
+  min-width: 160px;
   line-height: 24px;
 }
 .c-app-detail .app-detail-level .right li i {

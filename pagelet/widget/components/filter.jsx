@@ -530,12 +530,22 @@ var Filter = React.createClass({
 
               if(item.value == 25 || item.value == 26){
                 props.style.width = "50%";
+
                 props.onClick = ()=>{
                   var data = this.state.subGenres == item.data?[]:item.data;
+
                   this.setState({
                     subGenres: data
                   });
                 }
+
+                item.data.filter((subItem, idx)=>{
+                  if(this.state.subGenres != item.data && 
+                    curSelected.category && 
+                    subItem.value == curSelected.category.value){
+                     props.className="selected";
+                  }
+                });
               }else{
                 return null;
               }

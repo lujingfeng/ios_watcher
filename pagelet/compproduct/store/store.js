@@ -46,7 +46,10 @@ var CompareStore = Reflux.createStore({
             type: 'line',
             data: data
           });
-          legend.data.push(title);
+          legend.data.push({
+            name: title,
+            icon: ""
+          });
         }
 
         params.series = series;
@@ -92,7 +95,10 @@ var CompareStore = Reflux.createStore({
 
           series.push(item);
           xAxis.data = title.sort();
-          legend.data.push(c);
+          legend.data.push({
+            name: c,
+            icon: ""
+          });
         }
 
         params.series = series;

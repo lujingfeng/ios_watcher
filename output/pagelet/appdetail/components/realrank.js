@@ -54,8 +54,12 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         series: [],
   
         legend: {
+          formatter: function formatter(name) {
+            return name;
+          },
+          orient: "vertical",
           data: [],
-          top: "35%",
+          top: "65%",
           itemWidth: 50
         },
   
@@ -101,7 +105,15 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         title: {
           text: ''
         },
-        grid: [{ x: '12%', y: 10, width: '84%', height: '25%' }],
+  
+        grid: {
+          top: '5',
+          left: '1%',
+          height: 150,
+          right: '6%',
+          bottom: '5%',
+          containLabel: true
+        },
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -109,7 +121,13 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
           boundaryGap: false,
           data: []
         },
-        yAxis: {},
+        yAxis: {
+          scale: true,
+          splitArea: {
+            show: true
+          },
+          min: 0
+        },
         series: []
       };
   
@@ -221,7 +239,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "p",
-                { className: "m6 f16" },
+                { className: "mt6 f16" },
                 this.state.top2.rank
               ),
               _react2["default"].createElement(
@@ -249,7 +267,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
           _react2["default"].createElement("i", null),
           "排名趋势"
         ),
-        _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 500 } })
+        _react2["default"].createElement("div", { ref: "chart", style: { width: "100%", height: 250 } })
       );
     }
   });

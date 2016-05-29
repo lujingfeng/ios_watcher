@@ -61,7 +61,10 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
             type: 'line',
             data: data
           });
-          legend.data.push(title);
+          legend.data.push({
+            name: title,
+            icon: ""
+          });
         }
   
         params.series = series;
@@ -106,7 +109,10 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
   
           series.push(item);
           xAxis.data = title.sort();
-          legend.data.push(c);
+          legend.data.push({
+            name: c,
+            icon: ""
+          });
         }
   
         params.series = series;

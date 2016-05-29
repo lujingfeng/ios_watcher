@@ -187,7 +187,7 @@ define('pagelet/widget/components/appItem.jsx', function(require, exports, modul
               null,
               _react2["default"].createElement(
                 "span",
-                { className: "c666 f12 mr6" },
+                { className: "c666 f12 t-vm" },
                 data.other ? topType : "当前"
               ),
               _react2["default"].createElement(

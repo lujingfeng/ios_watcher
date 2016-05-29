@@ -24,10 +24,11 @@ var RRank = React.createClass({
 
       legend: {
         formatter: function(name){
-          console.log(name);
+          return name;
         },
+        orient:"vertical",
         data:[],
-        top: "35%",
+        top: "65%",
         itemWidth:50
       },
 
@@ -71,7 +72,15 @@ var RRank = React.createClass({
         title: {
             text: ''
         },
-        grid:[{x: '12%', y: 10, width: '84%', height: '25%'}],
+
+        grid: {
+          top:'5',
+          left: '1%',
+          height: 150,
+          right: '6%',
+          bottom: '5%',
+          containLabel: true
+        },
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -79,7 +88,13 @@ var RRank = React.createClass({
           boundaryGap: false,
           data: []
         },
-        yAxis: {},
+        yAxis: {
+          scale: true,
+          splitArea: {
+            show: true
+          },
+          min:0
+        },
         series: []
     };
 
@@ -158,7 +173,7 @@ var RRank = React.createClass({
               <p className="f12 c999 mb6">{this.state.top1.time}</p>
             </td>
             <td>
-              <p className="m6 f16">{this.state.top2.rank}</p>
+              <p className="mt6 f16">{this.state.top2.rank}</p>
               <p className="f12 c999 mb6">{this.state.top2.time}</p>
             </td>
           </tr>
@@ -173,7 +188,7 @@ var RRank = React.createClass({
           <i></i>
           排名趋势
         </h5>
-        <div ref="chart" style={{width:"100%", height: 500}}>
+        <div ref="chart" style={{width:"100%", height: 250}}>
 
         </div>
       </div>

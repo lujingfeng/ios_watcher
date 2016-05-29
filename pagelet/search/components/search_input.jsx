@@ -23,6 +23,8 @@ var Search = React.createClass({
 
   getInitialState: function(){
     return {
+      loading:true,
+
       tabs: [
         {name: "iPhone", value: deviceType.IPHONE},
         {name: "iPad", value: deviceType.IPAD}
@@ -66,7 +68,7 @@ var Search = React.createClass({
     if(state.searchResultList){
       state.searchResultList = this.state.searchResultList.concat(state.searchResultList);
     }
-    this.setState(state);
+     this.setState(state);
   },
 
   onTagSelected: function(searchWord){
@@ -215,7 +217,7 @@ var Search = React.createClass({
 
             {
               query && !query.overlay ?(
-                <p className="center c999 f10 mt12">
+                <p className="center f10 mt12">
                   {searchWord}，{this.state.total}条结果，{new Date().format("yyyy-MM-dd hh:mm:ss")}
                 </p>): null
             }
@@ -253,6 +255,9 @@ var Search = React.createClass({
               }
               {
                 this.state.loading?<Loading/>:null
+              }
+              {
+                this.state.total==0&&!this.state.loading?<p className="center c999">{"没有搜索到应用"}</p>:""
               }
             </ul>
           </div>: null

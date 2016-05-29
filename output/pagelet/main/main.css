@@ -36,6 +36,7 @@
           transition: transform .2s ease;
   -webkit-transform: translate(-240px);
           transform: translate(-240px);
+  overflow: auto;
 }
 .side-page .side-nav .profile {
   height: 50px;
@@ -44,7 +45,7 @@
 }
 .side-page .side-nav .profile span {
   display: inline-block;
-  width: 145px;
+  width: 130px;
   vertical-align: middle;
 }
 .side-page .side-nav a {
@@ -54,7 +55,7 @@
   border-top: 1px solid #dedede;
 }
 .side-page .side-nav ul li {
-  line-height: 38px;
+  line-height: 46px;
   padding-left: 22px;
 }
 .side-page .side-nav ul li .icon {
@@ -84,6 +85,9 @@
   background: url(/static/image/callin.png) no-repeat;
   -webkit-background-size: 14px 13px;
           background-size: 14px 13px;
+}
+.side-page .side-nav .nav1 {
+  padding-top: 5px;
 }
 .side-page.visible .side-nav {
   -webkit-transform: translate(0px);

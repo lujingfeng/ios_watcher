@@ -139,7 +139,7 @@ var AppItem = React.createClass({
             style={{width: width}}
             className="f12 c666 m5 mb5 ellipsis">{data.developer}</p>
           <div>
-            <span className="c666 f12 mr6">{data.other?topType:"当前"}</span>
+            <span className="c666 f12 t-vm">{data.other?topType:"当前"}</span>
             <span className="c666 f12 ml6 t-vm">{rank == "落榜" ? "落榜": "第"+rank+"名"}</span>
           </div>
         </td>);

@@ -32,9 +32,12 @@ var AppCompare = React.createClass({
       series: [],
 
       legend: {
+        formatter: function(name){
+          return name;
+        },
+        orient:"vertical",
         data:[],
-        top: "35%",
-
+        top: "65%",
         itemWidth:50
       },
 
@@ -82,7 +85,14 @@ var AppCompare = React.createClass({
             text: ''
         },
         geo:{top:0},
-        grid:[{x: '12%', y: '10', width: '84%', height: '25%'}],
+        grid: {
+          top:'5',
+          left: '1%',
+          height: 150,
+          right: '6%',
+          bottom: '5%',
+          containLabel: true
+        },
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -90,7 +100,13 @@ var AppCompare = React.createClass({
           boundaryGap: false,
           data: []
         },
-        yAxis: {},
+        yAxis: {
+          scale: true,
+          splitArea: {
+            show: true
+          },
+          min:0
+        },
         series: []
     };
 
@@ -231,7 +247,7 @@ var AppCompare = React.createClass({
             </h5>
           </div>
 
-          <div ref="chart" id="cmp-chart" style={{width:"100%", height: 500}}>
+          <div ref="chart" id="cmp-chart" style={{width:"100%", height: 250}}>
 
           </div>
         </div>

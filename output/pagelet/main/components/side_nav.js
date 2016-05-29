@@ -107,7 +107,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
           ),
           _react2["default"].createElement(
             "ul",
-            null,
+            { className: "nav1" },
             _react2["default"].createElement(
               "li",
               { onClick: function (e) {

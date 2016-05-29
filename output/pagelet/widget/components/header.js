@@ -63,7 +63,13 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       this.setState(state);
     },
   
-    componentDidMount: function componentDidMount() {},
+    componentDidMount: function componentDidMount() {
+      var _this = this;
+  
+      setTimeout(function () {
+        (0, _jquery2["default"])(_this.refs.search).focus();
+      }, 500);
+    },
   
     componentWillUnmount: function componentWillUnmount() {},
   
@@ -105,7 +111,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
     },
   
     render: function render() {
-      var _this = this;
+      var _this2 = this;
   
       var type = this.state.type;
       var filterStyle = {};
@@ -114,6 +120,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       if (!state.filterEnabled) {
         filterStyle.opacity = 0.5;
       }
+  
       if (!state.filterVisible) {
         filterStyle.display = "none";
       }
@@ -131,13 +138,15 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
               "form",
               { onSubmit: this.onSubmit },
               _react2["default"].createElement("input", {
+                ref: "search",
+                autoFocus: "autofocus",
                 onKeyUp: this.onKeyUp,
                 placeholder: this.props.placeholder,
                 value: this.state.searchKey,
                 onChange: function (e) {
-                  return _this.setState({ searchKey: e.target.value });
+                  return _this2.setState({ searchKey: e.target.value });
                 },
-                type: "text" }),
+                type: "search" }),
               _react2["default"].createElement("i", { className: "icon-q", onClick: this.onSearch })
             )
           ),
@@ -151,7 +160,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
           "div",
           { className: "normal" },
           _react2["default"].createElement("div", { className: "icon-menu", onClick: function (e) {
-              return _this.props.showSideNav();
+              return _this2.props.showSideNav();
             } }),
           _react2["default"].createElement(
             "div",

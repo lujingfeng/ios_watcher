@@ -57,6 +57,8 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
   
     getInitialState: function getInitialState() {
       return {
+        loading: true,
+  
         tabs: [{ name: "iPhone", value: _constants.deviceType.IPHONE }, { name: "iPad", value: _constants.deviceType.IPAD }],
         device: _constants.deviceType.IPHONE,
         country: _constants.countryCode.CHINA,
@@ -255,7 +257,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           false ? _react2["default"].createElement(_pageletWidgetComponentsTabs2["default"], { tabs: this.state.tabs, onSelect: this.onChooseDevice }) : null,
           query && !query.overlay ? _react2["default"].createElement(
             "p",
-            { className: "center c999 f10 mt12" },
+            { className: "center f10 mt12" },
             searchWord,
             "，",
             this.state.total,
@@ -319,7 +321,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                 data: item,
                 index: idx });
             }),
-            this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
+            this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
+            this.state.total == 0 && !this.state.loading ? _react2["default"].createElement(
+              "p",
+              { className: "center c999" },
+              "没有搜索到应用"
+            ) : ""
           )
         ) : null
       );

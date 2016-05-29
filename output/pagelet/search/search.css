@@ -82,7 +82,6 @@
 }
 .input-search .search-result .keyword-desc table th,
 .input-search .search-result .keyword-desc table td {
-  line-height: 32px;
   width: 33.333333333%;
   text-align: center;
   border: 1px solid #e9e9e9;

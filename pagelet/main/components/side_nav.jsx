@@ -82,7 +82,7 @@ var SideNav = React.createClass({
             <span className="ellipsis">{getCookie("uname")||"登录 / 注册"}</span>
             <div className="close" onClick={this.onClose}></div>
           </div>
-          <ul>
+          <ul className="nav1">
             <li onClick={e=>this.onNav("/toplist")}>
               <i className="icon"></i>
               iOS榜单排名

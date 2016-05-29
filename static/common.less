@@ -111,12 +111,15 @@ table{
   border-collapse: collapse;
   th{
     background:#f6f6f6;
-    line-height: 40px;
+    height: 40px;
+    vertical-align: middle;
     font-size: 12px;
     word-break: break-all;
   }
   td{
+    height: 32px;
     word-break: break-all;
+    vertical-align: middle;
   }
 }
 table.border{
@@ -124,9 +127,6 @@ table.border{
     border: 1px solid @ce9e;
     text-align: center;
     vertical-align: middle;
-  }
-  td{
-    line-height: 32px;
   }
 }
 
@@ -178,6 +178,7 @@ i{
 }
 
 [type="text"],
+[type="search"],
 [type="password"],  
 [type="tel"],
 [type="number"],

@@ -28,15 +28,15 @@ var SearchStore = Reflux.createStore({
     searchCmp: function(list){
       var total = 0;
       var searchResultList = list && list.length ? list.splice(0, list.length - 1) : [];
+      var params = {loading: false};
 
       if(list && list.length){
         total = parseInt(list[list.length - 1].hitscount);
+        params.total = total;
       }
-      this.trigger({
-        loading: false,
-        searchResultList: searchResultList,
-        total: total
-      });
+
+      params.searchResultList = searchResultList;
+      this.trigger(params);
     },
 
     fetchHotAppCmp:function(res){

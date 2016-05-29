@@ -47,7 +47,9 @@ var Header = React.createClass({
   },
 
   componentDidMount: function(){
-   
+    setTimeout(()=>{
+      $(this.refs.search).focus();
+    }, 500);
   },
 
   componentWillUnmount: function(){
@@ -100,6 +102,7 @@ var Header = React.createClass({
     if(!state.filterEnabled){
       filterStyle.opacity = 0.5;
     }
+
     if(!state.filterVisible){
       filterStyle.display = "none";
     }
@@ -112,11 +115,13 @@ var Header = React.createClass({
               <div className="input-con">
                 <form onSubmit={this.onSubmit}>
                   <input 
+                    ref="search"
+                    autoFocus="autofocus"
                     onKeyUp={this.onKeyUp}
                     placeholder={this.props.placeholder}
                     value={this.state.searchKey}
                     onChange={e=>this.setState({searchKey:e.target.value})}
-                    type="text"/>
+                    type="search"/>
                   <i className="icon-q" onClick={this.onSearch}></i>
                 </form>
               </div>

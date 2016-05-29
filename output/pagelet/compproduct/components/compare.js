@@ -70,9 +70,12 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
         series: [],
   
         legend: {
+          formatter: function formatter(name) {
+            return name;
+          },
+          orient: "vertical",
           data: [],
-          top: "35%",
-  
+          top: "65%",
           itemWidth: 50
         },
   
@@ -121,7 +124,14 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
           text: ''
         },
         geo: { top: 0 },
-        grid: [{ x: '12%', y: '10', width: '84%', height: '25%' }],
+        grid: {
+          top: '5',
+          left: '1%',
+          height: 150,
+          right: '6%',
+          bottom: '5%',
+          containLabel: true
+        },
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -129,7 +139,13 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
           boundaryGap: false,
           data: []
         },
-        yAxis: {},
+        yAxis: {
+          scale: true,
+          splitArea: {
+            show: true
+          },
+          min: 0
+        },
         series: []
       };
   
@@ -281,7 +297,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               "排名趋势对比图"
             )
           ),
-          _react2["default"].createElement("div", { ref: "chart", id: "cmp-chart", style: { width: "100%", height: 500 } })
+          _react2["default"].createElement("div", { ref: "chart", id: "cmp-chart", style: { width: "100%", height: 250 } })
         )
       );
     }

@@ -718,12 +718,20 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
   
             if (item.value == 25 || item.value == 26) {
               props.style.width = "50%";
+  
               props.onClick = function () {
                 var data = _this.state.subGenres == item.data ? [] : item.data;
+  
                 _this.setState({
                   subGenres: data
                 });
               };
+  
+              item.data.filter(function (subItem, idx) {
+                if (_this.state.subGenres != item.data && curSelected.category && subItem.value == curSelected.category.value) {
+                  props.className = "selected";
+                }
+              });
             } else {
               return null;
             }

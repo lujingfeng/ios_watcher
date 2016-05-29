@@ -43,15 +43,15 @@ define('pagelet/search/store/store', function(require, exports, module) {
     searchCmp: function searchCmp(list) {
       var total = 0;
       var searchResultList = list && list.length ? list.splice(0, list.length - 1) : [];
+      var params = { loading: false };
   
       if (list && list.length) {
         total = parseInt(list[list.length - 1].hitscount);
+        params.total = total;
       }
-      this.trigger({
-        loading: false,
-        searchResultList: searchResultList,
-        total: total
-      });
+  
+      params.searchResultList = searchResultList;
+      this.trigger(params);
     },
   
     fetchHotAppCmp: function fetchHotAppCmp(res) {
