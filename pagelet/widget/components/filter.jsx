@@ -55,7 +55,6 @@ var FilterStore = Reflux.createStore({
     }
 });
 
-
 var Filter = React.createClass({
   mixins: [History],
   getInitialState: function(){
@@ -536,7 +535,6 @@ var Filter = React.createClass({
                   this.setState({
                     subGenres: data
                   });
-                  this.onCategory(item)
                 }
               }else{
                 return null;
@@ -566,6 +564,7 @@ var Filter = React.createClass({
             this.state.subGenres.map((item, idx)=>{
               var props = {};
               props.onClick=(e=>this.onCategory(item));
+              console.log(curSelected.category.value, item.value);
               if(curSelected.category && curSelected.category.value == item.value){
                 props.className="selected";
               }

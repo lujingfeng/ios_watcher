@@ -723,7 +723,6 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 _this.setState({
                   subGenres: data
                 });
-                _this.onCategory(item);
               };
             } else {
               return null;
@@ -751,6 +750,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             props.onClick = function (e) {
               return _this.onCategory(item);
             };
+            console.log(curSelected.category.value, item.value);
             if (curSelected.category && curSelected.category.value == item.value) {
               props.className = "selected";
             }

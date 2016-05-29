@@ -9,6 +9,8 @@ import Header from "/pagelet/widget/components/header";
 import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
+import {getCookie} from "/static/minxins/utils";
+
 import {
   countryCode, 
   deviceStrToint,
@@ -45,7 +47,9 @@ var AppCompare = React.createClass({
   componentDidMount: function(){
     this.unSubscribe = SearchStore.listen(this.onStateChange.bind(this));
     this.unFavSubscribe = FavStore.listen(this.onFavStateChange.bind(this));
-    FavAction.fetFavLsit();
+    if(getCookie("uname")){
+      FavAction.fetFavLsit();
+    }
   },
 
   componentWillUnmount: function(){

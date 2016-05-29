@@ -99,6 +99,11 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       }
     },
   
+    onSubmit: function onSubmit(e) {
+      e.preventDefault();
+      this.onSearch();
+    },
+  
     render: function render() {
       var _this = this;
   
@@ -122,15 +127,19 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
           _react2["default"].createElement(
             "div",
             { className: "input-con" },
-            _react2["default"].createElement("input", {
-              onKeyUp: this.onKeyUp,
-              placeholder: this.props.placeholder,
-              value: this.state.searchKey,
-              onChange: function (e) {
-                return _this.setState({ searchKey: e.target.value });
-              },
-              type: "text" }),
-            _react2["default"].createElement("i", { className: "icon-q", onClick: this.onSearch })
+            _react2["default"].createElement(
+              "form",
+              { onSubmit: this.onSubmit },
+              _react2["default"].createElement("input", {
+                onKeyUp: this.onKeyUp,
+                placeholder: this.props.placeholder,
+                value: this.state.searchKey,
+                onChange: function (e) {
+                  return _this.setState({ searchKey: e.target.value });
+                },
+                type: "text" }),
+              _react2["default"].createElement("i", { className: "icon-q", onClick: this.onSearch })
+            )
           ),
           _react2["default"].createElement(
             "i",

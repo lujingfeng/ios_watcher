@@ -34,6 +34,8 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsAppItem2 = _interopRequireDefault(_pageletWidgetComponentsAppItem);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _constants = require("constants");
   
   var _my_fav_item = require("pagelet/compproduct/components/my_fav_item.jsx");
@@ -78,7 +80,9 @@ define('pagelet/compproduct/components/index.jsx', function(require, exports, mo
     componentDidMount: function componentDidMount() {
       this.unSubscribe = _pageletSearchStoreStore2["default"].listen(this.onStateChange.bind(this));
       this.unFavSubscribe = _pageletMyfavStoreStore2["default"].listen(this.onFavStateChange.bind(this));
-      _pageletMyfavActionAction2["default"].fetFavLsit();
+      if ((0, _staticMinxinsUtils.getCookie)("uname")) {
+        _pageletMyfavActionAction2["default"].fetFavLsit();
+      }
     },
   
     componentWillUnmount: function componentWillUnmount() {

@@ -87,6 +87,11 @@ var Header = React.createClass({
     }
   },
 
+  onSubmit: function(e){
+    e.preventDefault();
+    this.onSearch();
+  },
+
   render: function(){
     let type = this.state.type;
     let filterStyle = {};
@@ -105,13 +110,15 @@ var Header = React.createClass({
           type == "search" ? (
             <div className="search">
               <div className="input-con">
-                <input 
-                  onKeyUp={this.onKeyUp}
-                  placeholder={this.props.placeholder}
-                  value={this.state.searchKey}
-                  onChange={e=>this.setState({searchKey:e.target.value})}
-                  type="text"/>
-                <i className="icon-q" onClick={this.onSearch}></i>
+                <form onSubmit={this.onSubmit}>
+                  <input 
+                    onKeyUp={this.onKeyUp}
+                    placeholder={this.props.placeholder}
+                    value={this.state.searchKey}
+                    onChange={e=>this.setState({searchKey:e.target.value})}
+                    type="text"/>
+                  <i className="icon-q" onClick={this.onSearch}></i>
+                </form>
               </div>
               <i className="cl" onClick={this.onCancelSearch}>取消</i>
             </div>
