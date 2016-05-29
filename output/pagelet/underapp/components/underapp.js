@@ -105,10 +105,11 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
     fetchList: function fetchList() {
       var state = this.state;
       var date;
-      if (typeof state.date.value == "string") {
-        date = state.date.value.replace(/\-/g, "");
-      } else {
+  
+      if (state.date.value == -1 || state.date.value == 1) {
         date = state.date.value;
+      } else {
+        date = state.date.value.replace(/\-/g, "");
       }
   
       _actionAction2["default"].fetchUnderAppList({

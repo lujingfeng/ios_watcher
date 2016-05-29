@@ -80,6 +80,59 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
       }
   
       var width = 100;
+      var cur5 = 0;
+      var cur4 = 0;
+      var cur3 = 0;
+      var cur2 = 0;
+      var cur1 = 0;
+  
+      var history5 = 0;
+      var history4 = 0;
+      var history3 = 0;
+      var history2 = 0;
+      var history1 = 0;
+  
+      if (cur[5]) {
+        cur5 = width * cur[5].percentage;
+        cur5 = cur5 > 1 ? cur5 : cur5 > 0 ? 1 : 0;
+      }
+      if (cur[4]) {
+        cur4 = width * cur[4].percentage;
+        cur4 = cur4 > 1 ? cur4 : cur5 > 0 ? 1 : 0;
+      }
+      if (cur[3]) {
+        cur3 = width * cur[3].percentage;
+        cur3 = cur3 > 1 ? cur3 : cur3 > 0 ? 1 : 0;
+      }
+      if (cur[2]) {
+        cur2 = width * cur[2].percentage;
+        cur2 = cur2 > 1 ? cur2 : cur2 > 0 ? 1 : 0;
+      }
+      if (cur[1]) {
+        cur1 = width * cur[1].percentage;
+        cur1 = cur1 > 1 ? cur1 : cur1 > 0 ? 1 : 0;
+      }
+  
+      if (history[5]) {
+        history5 = width * history[5].percentage;
+        history5 = history5 > 1 ? history5 : history5 > 0 ? 1 : 0;
+      }
+      if (history[4]) {
+        history4 = width * history[4].percentage;
+        history4 = history4 > 1 ? history4 : history4 > 0 ? 1 : 0;
+      }
+      if (cur[3]) {
+        history3 = width * history[3].percentage;
+        history3 = history3 > 1 ? history3 : history3 > 0 ? 1 : 0;
+      }
+      if (history[2]) {
+        history2 = width * history[2].percentage;
+        history2 = history2 > 1 ? history2 : history2 > 0 ? 1 : 0;
+      }
+      if (history[1]) {
+        history1 = width * history[1].percentage;
+        history1 = history1 > 1 ? history1 : history1 > 0 ? 1 : 0;
+      }
   
       return _react2["default"].createElement(
         "div",
@@ -101,13 +154,13 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "p",
-                { className: "fr" },
-                "最后更新时间：",
+                { className: "fr mr6" },
+                "最后更新时间:",
                 cur.updateTime
               ),
               _react2["default"].createElement(
                 "p",
-                null,
+                { className: "fl ml6" },
                 "当前版本评分（",
                 cur.versionName,
                 "）"
@@ -154,7 +207,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "5星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * cur[5].percentage } }),
+                    _react2["default"].createElement("i", {
+                      className: "prs",
+                      style: { width: cur5 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -169,7 +224,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "4星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * cur[4].percentage } }),
+                    _react2["default"].createElement("i", {
+                      className: "prs",
+                      style: { width: cur4 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -184,7 +241,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "3星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * cur[3].percentage } }),
+                    _react2["default"].createElement("i", {
+                      className: "prs",
+                      style: { width: cur3 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -199,7 +258,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "2星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * cur[2].percentage } }),
+                    _react2["default"].createElement("i", {
+                      className: "prs",
+                      style: { width: cur2 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -214,7 +275,9 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "1星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * cur[1].percentage } }),
+                    _react2["default"].createElement("i", {
+                      className: "prs",
+                      style: { width: cur1 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -241,13 +304,13 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "p",
-                { className: "fr" },
+                { className: "fr mr6" },
                 "最后更新时间:",
                 history.updateTime
               ),
               _react2["default"].createElement(
                 "p",
-                null,
+                { className: "fl ml6" },
                 "历史版本评分"
               )
             )
@@ -274,7 +337,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                 _react2["default"].createElement(
                   "p",
                   { className: "f10" },
-                  "评分次数：",
+                  "评分次数:",
                   history.totalCount
                 )
               ),
@@ -292,7 +355,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "5星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * history[5].percentage } }),
+                    _react2["default"].createElement("i", { className: "prs", style: { width: history5 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -307,7 +370,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "4星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * history[4].percentage } }),
+                    _react2["default"].createElement("i", { className: "prs", style: { width: history4 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -322,7 +385,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "3星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * history[3].percentage } }),
+                    _react2["default"].createElement("i", { className: "prs", style: { width: history3 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -337,7 +400,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "2星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * history[2].percentage } }),
+                    _react2["default"].createElement("i", { className: "prs", style: { width: history2 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },
@@ -352,7 +415,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                       null,
                       "1星"
                     ),
-                    _react2["default"].createElement("i", { className: "prs", style: { width: width * history[1].percentage } }),
+                    _react2["default"].createElement("i", { className: "prs", style: { width: history1 } }),
                     _react2["default"].createElement(
                       "span",
                       { className: "fr" },

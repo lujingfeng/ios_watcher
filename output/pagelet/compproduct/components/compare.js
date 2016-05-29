@@ -71,7 +71,8 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
   
         legend: {
           data: [],
-          top: "40%",
+          top: "35%",
+  
           itemWidth: 50
         },
   
@@ -120,7 +121,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
           text: ''
         },
         geo: { top: 0 },
-        grid: [{ x: '12%', y: '10', width: '84%', height: '30%' }],
+        grid: [{ x: '12%', y: '10', width: '84%', height: '25%' }],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -267,7 +268,7 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
               { className: "title" },
               _react2["default"].createElement(
                 "p",
-                { className: "fr f10 c999" },
+                { className: "fr f10" },
                 _constants.deviceTypeStr[this.state.device],
                 "  ",
                 _constants.payTypeToStr[this.state.payType],

@@ -23,8 +23,11 @@ var RRank = React.createClass({
       series: [],
 
       legend: {
+        formatter: function(name){
+          console.log(name);
+        },
         data:[],
-        top: "40%",
+        top: "35%",
         itemWidth:50
       },
 
@@ -68,7 +71,7 @@ var RRank = React.createClass({
         title: {
             text: ''
         },
-        grid:[{x: '12%', y: 10, width: '84%', height: '30%'}],
+        grid:[{x: '12%', y: 10, width: '84%', height: '25%'}],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {

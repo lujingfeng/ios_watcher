@@ -33,7 +33,8 @@ var AppCompare = React.createClass({
 
       legend: {
         data:[],
-        top: "40%",
+        top: "35%",
+
         itemWidth:50
       },
 
@@ -81,7 +82,7 @@ var AppCompare = React.createClass({
             text: ''
         },
         geo:{top:0},
-        grid:[{x: '12%', y: '10', width: '84%', height: '30%'}],
+        grid:[{x: '12%', y: '10', width: '84%', height: '25%'}],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
@@ -219,7 +220,7 @@ var AppCompare = React.createClass({
 
           <div className="content">
             <h5 className="title">
-              <p className="fr f10 c999">
+              <p className="fr f10">
                 {deviceTypeStr[this.state.device]} &nbsp;
                 {payTypeToStr[this.state.payType]} &nbsp;
                 {countryCode2Str[this.state.country]} &nbsp;

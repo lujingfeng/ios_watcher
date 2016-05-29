@@ -55,7 +55,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
   
         legend: {
           data: [],
-          top: "40%",
+          top: "35%",
           itemWidth: 50
         },
   
@@ -101,7 +101,7 @@ define('pagelet/appdetail/components/realrank.jsx', function(require, exports, m
         title: {
           text: ''
         },
-        grid: [{ x: '12%', y: 10, width: '84%', height: '30%' }],
+        grid: [{ x: '12%', y: 10, width: '84%', height: '25%' }],
         tooltip: {},
         legend: this.state.legend,
         xAxis: {
