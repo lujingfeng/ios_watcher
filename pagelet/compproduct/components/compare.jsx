@@ -52,7 +52,6 @@ var AppCompare = React.createClass({
   },
 
   componentDidMount: function(){
-
     var _this = this;
     this.unSubscribe = CompareStore.listen(this.onStateChange.bind(this));
     require.async("/static/lib/echarts.min", (echarts)=>{
@@ -62,7 +61,9 @@ var AppCompare = React.createClass({
     this.history.listen(()=>{
       var query = this.props.location.query;
       if(!query.filter){
-        this.intChart(this.echarts);
+        setTimeout(()=>{
+          this.intChart(this.echarts);
+        }, 50);
       }else{
         this.state.legend.data = [];
         this.state.series = [];
@@ -180,7 +181,6 @@ var AppCompare = React.createClass({
     if(query.filter){
       this.chart && this.chart.dispose();
       this.chart = null;
-
       var props = {};
 
       props.showPayMethod = props.device = props.days = props.country = true;
@@ -191,10 +191,10 @@ var AppCompare = React.createClass({
       props.countryValue = {name: countryCode2Str[this.state.country], value:this.state.country};
 
       renderContent =(
-            <Filter
-              location={this.props.location}
-              onOk={this.onFilter}
-              {...props}/>);
+        <Filter
+          location={this.props.location}
+          onOk={this.onFilter}
+          {...props}/>);
     }else{
       renderContent = this.renderCompare();
     }

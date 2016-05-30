@@ -18,6 +18,8 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
   var _staticLibReactRouter = require("reactRouter");
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _actionAction = require("pagelet/appdetail/action/action");
   
   var _actionAction2 = _interopRequireDefault(_actionAction);
@@ -58,6 +60,9 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
     },
   
     onFav: function onFav() {
+      if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
+        return null;
+      }
       var query = this.props.query;
       var isFav = !this.state.isFav;
   

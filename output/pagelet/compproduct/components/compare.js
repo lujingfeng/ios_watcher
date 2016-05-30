@@ -101,7 +101,9 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       this.history.listen(function () {
         var query = _this2.props.location.query;
         if (!query.filter) {
-          _this2.intChart(_this2.echarts);
+          setTimeout(function () {
+            _this2.intChart(_this2.echarts);
+          }, 50);
         } else {
           _this2.state.legend.data = [];
           _this2.state.series = [];
@@ -218,7 +220,6 @@ define('pagelet/compproduct/components/compare.jsx', function(require, exports, 
       if (query.filter) {
         this.chart && this.chart.dispose();
         this.chart = null;
-  
         var props = {};
   
         props.showPayMethod = props.device = props.days = props.country = true;
