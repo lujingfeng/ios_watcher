@@ -121,7 +121,21 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
     },
   
     onStateChange: function onStateChange(state) {
-      this.setState(state);
+      var _this = this;
+  
+      var callback = function callback() {
+        if (state.device) {
+          var root = _this.refs.root;
+          var height = (0, _staticLibJquery2["default"])(root).height();
+          if (root.scrollHeight - 45 > height) {
+            _this.setState({
+              okStatus: 1
+            });
+          }
+        }
+      };
+  
+      this.setState(state, callback);
     },
   
     onCancel: function onCancel() {
@@ -243,7 +257,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
     },
   
     render: function render() {
-      var _this = this;
+      var _this2 = this;
   
       if (this.state.loading) {
         return _react2["default"].createElement(_loading2["default"], null);
@@ -275,9 +289,22 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         otherLabel = d.format("yyyy-MM-dd");
       }
   
+      var okStyle = {
+        padding: "0 12px",
+        position: "fixed",
+        width: "100%",
+        bottom: 0,
+        background: "#fff"
+      };
+  
+      if (this.state.okStatus == 1) {
+        okStyle.position = "relative";
+        okStyle.bottom = "auto";
+      }
+  
       return _react2["default"].createElement(
         "div",
-        { className: "c-filter" },
+        { className: "c-filter", ref: "root" },
         _react2["default"].createElement(
           "div",
           { className: "hdr" },
@@ -302,7 +329,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             state.device.map(function (item, idx) {
               var props = {};
               props.onClick = function (e) {
-                return _this.onDevice(item);
+                return _this2.onDevice(item);
               };
               if (curSelected.device && curSelected.device.value == item.value) {
                 props.className = "selected";
@@ -344,7 +371,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             state.score.map(function (item, idx) {
               var props = {};
               props.onClick = function (e) {
-                return _this.onScore(item);
+                return _this2.onScore(item);
               };
   
               var existedItem = curSelected.score.filter(function (score) {
@@ -384,7 +411,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.pay && curSelected.pay.value == _constants.payType.FREE ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onPay({ name: "免费", value: _constants.payType.FREE });
+                  return _this2.onPay({ name: "免费", value: _constants.payType.FREE });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -397,7 +424,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.pay && curSelected.pay.value == _constants.payType.FEE ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onPay({ name: "付费", value: _constants.payType.FEE });
+                  return _this2.onPay({ name: "付费", value: _constants.payType.FEE });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -410,7 +437,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.pay && curSelected.pay.value == _constants.payType.HOT ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onPay({ name: "畅销", value: _constants.payType.HOT });
+                  return _this2.onPay({ name: "畅销", value: _constants.payType.HOT });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -434,7 +461,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             state.country.map(function (item, idx) {
               var props = {};
               props.onClick = function (e) {
-                return _this.onCountry(item);
+                return _this2.onCountry(item);
               };
               if (curSelected.country && curSelected.country.value == item.value) {
                 props.className = "selected";
@@ -467,7 +494,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == 1 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "今天", value: 1 });
+                  return _this2.onDatetime({ name: "今天", value: 1 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -480,7 +507,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == -1 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "昨天", value: -1 });
+                  return _this2.onDatetime({ name: "昨天", value: -1 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -517,7 +544,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == 1 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "今天", value: 1 });
+                  return _this2.onDays({ name: "今天", value: 1 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -530,7 +557,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == -1 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "昨天", value: -1 });
+                  return _this2.onDays({ name: "昨天", value: -1 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -543,7 +570,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == 7 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "7日", value: 7 });
+                  return _this2.onDays({ name: "7日", value: 7 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -556,7 +583,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == 15 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "15日", value: 15 });
+                  return _this2.onDays({ name: "15日", value: 15 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -569,7 +596,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == 30 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "30日", value: 30 });
+                  return _this2.onDays({ name: "30日", value: 30 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -582,7 +609,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.days && curSelected.days.value == 60 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDays({ name: "60日", value: 60 });
+                  return _this2.onDays({ name: "60日", value: 60 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -608,7 +635,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == 7 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "7日", value: 7 });
+                  return _this2.onDatetime({ name: "7日", value: 7 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -621,7 +648,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == 15 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "15日", value: 15 });
+                  return _this2.onDatetime({ name: "15日", value: 15 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -634,7 +661,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == 30 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "30日", value: 30 });
+                  return _this2.onDatetime({ name: "30日", value: 30 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -647,7 +674,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               {
                 className: curSelected.datetime && curSelected.datetime.value == 60 ? "selected" : null,
                 onClick: function (e) {
-                  return _this.onDatetime({ name: "60日", value: 60 });
+                  return _this2.onDatetime({ name: "60日", value: 60 });
                 } },
               _react2["default"].createElement(
                 "span",
@@ -682,7 +709,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             state.genres.map(function (item, idx) {
               var props = { style: {} };
               props.onClick = function (e) {
-                return _this.onCategory(item);
+                return _this2.onCategory(item);
               };
               if (curSelected.category && curSelected.category.value == item.value) {
                 props.className = "selected";
@@ -699,8 +726,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                   null,
                   item.name
                 ),
-                item.value == 25 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
-                item.value == 26 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
+                item.value == 25 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
+                item.value == 26 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
               );
             })
           )
@@ -720,15 +747,15 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               props.style.width = "50%";
   
               props.onClick = function () {
-                var data = _this.state.subGenres == item.data ? [] : item.data;
+                var data = _this2.state.subGenres == item.data ? [] : item.data;
   
-                _this.setState({
+                _this2.setState({
                   subGenres: data
                 });
               };
   
               item.data.filter(function (subItem, idx) {
-                if (_this.state.subGenres != item.data && curSelected.category && subItem.value == curSelected.category.value) {
+                if (_this2.state.subGenres != item.data && curSelected.category && subItem.value == curSelected.category.value) {
                   props.className = "selected";
                 }
               });
@@ -744,8 +771,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
                 null,
                 item.name
               ),
-              item.value == 25 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
-              item.value == 26 ? _react2["default"].createElement("i", { className: _this.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
+              item.value == 25 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
+              item.value == 26 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
             );
           })
         ) : null,
@@ -756,7 +783,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
           this.state.subGenres.map(function (item, idx) {
             var props = {};
             props.onClick = function (e) {
-              return _this.onCategory(item);
+              return _this2.onCategory(item);
             };
             console.log(curSelected.category.value, item.value);
             if (curSelected.category && curSelected.category.value == item.value) {
@@ -773,9 +800,10 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             );
           })
         ),
+        _react2["default"].createElement("div", { style: { height: 60 } }),
         _react2["default"].createElement(
           "div",
-          { style: { padding: "0 12px" } },
+          { style: okStyle },
           _react2["default"].createElement(
             "button",
             {

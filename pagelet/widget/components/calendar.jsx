@@ -245,6 +245,7 @@ var Calendar = React.createClass({
     var months = [];
     
     for(var startYear=2014; startYear < thisYear; startYear++){
+      break;
       for(var m=1; m <= 12; m++){
         months.push(
           <Month 
@@ -257,7 +258,7 @@ var Calendar = React.createClass({
     }
 
     var curMonth = today.getMonth()+1;
-    for(var i=1; i<=curMonth; i++){
+    for(var i=3; i<=curMonth; i++){
       months.push(
           <Month 
             year={thisYear} 

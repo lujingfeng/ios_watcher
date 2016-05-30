@@ -110,7 +110,19 @@ var Filter = React.createClass({
   },
 
   onStateChange: function(state){
-    this.setState(state);
+    var callback = ()=>{
+      if(state.device){
+        var root = this.refs.root;
+        var height = $(root).height();
+        if(root.scrollHeight - 45 > height){
+          this.setState({
+            okStatus: 1
+          });
+        }
+      }
+    }
+    
+    this.setState(state, callback);
   },
 
   onCancel: function(){
@@ -277,8 +289,21 @@ var Filter = React.createClass({
       otherLabel = d.format("yyyy-MM-dd");
     }
 
+    var okStyle = {
+      padding: "0 12px",
+      position: "fixed",
+      width: "100%",
+      bottom: 0,
+      background:"#fff"
+    };
+
+    if(this.state.okStatus == 1){
+      okStyle.position = "relative";
+      okStyle.bottom = "auto";
+    }
+
     return (
-      <div className="c-filter">
+      <div className="c-filter" ref="root">
         <div className="hdr">
           筛选
           <i onClick={this.onCancel}>取消</i>
@@ -582,8 +607,9 @@ var Filter = React.createClass({
             })
           } 
         </ul>
+        <div style={{height:60}}></div>
 
-        <div style={{padding:"0 12px"}}>
+        <div style={okStyle}>
           <button 
             onClick={this.onOk}
             style={{width:"100%"}}

@@ -54,7 +54,9 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
             }
             xAxis.data.push(h + "时");
           }
-          var title = appName ? appName.substring(0, 5) + clist[i].name : clist[i].name;
+  
+          var title = appName ? appName.substring(0, 5) + "(" + clist[i].name + ")" : clist[i].name;
+  
           series.push({
             name: title,
             smooth: true,
@@ -75,7 +77,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
           var mdataList = res[month];
           mdataList.forEach(function (item, idx) {
             for (var p in item) {
-              var key = appName.slice(0, 5) + p;
+              var key = appName.slice(0, 5) + "(" + p + ")";
               categoryMap[key] = categoryMap[key] || { data: [], title: [] };
               var listMap = item[p];
               for (var d in listMap) {
