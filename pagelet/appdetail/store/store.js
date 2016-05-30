@@ -33,8 +33,10 @@ var DetailStore = Reflux.createStore({
 
     appInfoCmp: function(info){
       var params = {loading: false};
-
-      if(info){
+      
+      if(info && info.statusText == "error"){
+        params.errorText = info.statusText;
+      }else if(info){
         params.detailInfo = info;
       }
       this.trigger(params);
@@ -44,7 +46,9 @@ var DetailStore = Reflux.createStore({
       var params = {loading: false};
       var versions = [];
 
-      if(res){
+      if(res && res.statusText == "error"){
+        params.errorText = res.statusText;
+      }else if(res){
         params.versions = res;
       }
       this.trigger(params);
@@ -79,6 +83,9 @@ var DetailStore = Reflux.createStore({
         }
         params.history = data;
       }
+      if(res && res.statusText == "error"){
+        params.errorText = "error";
+      }
 
       this.trigger(params);
     },
@@ -96,6 +103,10 @@ var DetailStore = Reflux.createStore({
 
       var params = {loading: false};
       params.list = array;
+
+      if(res && res.statusText == "error"){
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     },
 

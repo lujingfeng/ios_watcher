@@ -141,6 +141,7 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
       var _this = this;
   
       var query = this.props.location.query || {};
+      var state = this.state;
   
       return _react2["default"].createElement(
         "div",
@@ -164,8 +165,13 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
               isShowDelete: true,
               onDelete: _this.onDeleteHandler });
           }),
-          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
-          !this.state.loading && !this.state.list.length ? _react2["default"].createElement(
+          state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
+          state.errorText ? _react2["default"].createElement(
+            "p",
+            { className: "center c999" },
+            "暂无数据"
+          ) : null,
+          !state.loading && !state.list.length && !state.errorText ? _react2["default"].createElement(
             "p",
             { className: "center mt6 c999" },
             "您还未关注应用"

@@ -32,6 +32,10 @@ define('pagelet/myfav/store/store', function(require, exports, module) {
     fetFavLsitCmp: function fetFavLsitCmp(res) {
       var params = { loading: false };
       params.list = res.data || [];
+  
+      if (res && res.statusText == "error") {
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     }
   });

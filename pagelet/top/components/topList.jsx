@@ -219,6 +219,9 @@ var TopList = React.createClass({
           {
             this.state.loading?<Loading/>:null
           }
+          {
+            this.state.errorText?<p className="center c999">暂无数据</p>:null
+          }
         </div>
       </div>
     );

@@ -44,6 +44,9 @@ var SearchStore = Reflux.createStore({
       if(res && res.hotWords){
         params.hotWords = res.hotWords||[];
       }
+      if(res && res.statusText == "error"){
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     },
 
@@ -51,6 +54,9 @@ var SearchStore = Reflux.createStore({
       var params = {loading:false};
       if(res && res.records){
         params.records = res.records||[];
+      }
+      if(res && res.statusText == "error"){
+        params.errorText = res.statusText;
       }
       this.trigger(params);
     },

@@ -98,6 +98,7 @@ var MyFav = React.createClass({
 
   render: function(){
     let query = this.props.location.query || {};
+    let state = this.state;
 
     return (
       <div className="c-page my-fav-page">
@@ -120,9 +121,13 @@ var MyFav = React.createClass({
             })
           }
           {
-            this.state.loading?<Loading/>:null
+            state.loading?<Loading/>:null
           }
-          {!this.state.loading && !this.state.list.length ?<p className="center mt6 c999">您还未关注应用</p>:null}
+
+          {
+            state.errorText?<p className="center c999">暂无数据</p>:null
+          }
+          {!state.loading && !state.list.length && !state.errorText ?<p className="center mt6 c999">您还未关注应用</p>:null}
         </div>
 
         {

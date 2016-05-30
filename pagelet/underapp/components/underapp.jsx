@@ -193,6 +193,9 @@ var UnderAppList = React.createClass({
           {
             state.loading ? <Loading/>: null
           }
+          {
+            this.state.errorText?<p className="center c999">暂无数据</p>:null
+          }
         </div>
       </div>
     );

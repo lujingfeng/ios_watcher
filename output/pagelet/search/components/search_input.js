@@ -195,6 +195,10 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
       var _state = this.state;
       var deviceType = _state.deviceType;
       var searchResultList = _state.searchResultList;
+      var hotWords = _state.hotWords;
+      var records = _state.records;
+  
+      var state = this.state;
   
       var query = this.props.location.query || {};
       var searchWord = query.searchWord;
@@ -220,7 +224,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           _react2["default"].createElement(
             "div",
             { className: "tags hot-app" },
-            this.state.hotWords.map(function (item, idx) {
+            hotWords.map(function (item, idx) {
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
@@ -228,7 +232,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                   } },
                 item.title
               );
-            })
+            }),
+            !hotWords.length && state.errorText == "error" ? _react2["default"].createElement(
+              "p",
+              { className: "center c999" },
+              "暂无数据"
+            ) : null
           ),
           _react2["default"].createElement(
             "label",
@@ -238,7 +247,7 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
           _react2["default"].createElement(
             "div",
             { className: "tags history" },
-            this.state.records.map(function (item, idx) {
+            records.map(function (item, idx) {
               return _react2["default"].createElement(
                 "span",
                 { key: idx, onClick: function () {
@@ -246,7 +255,12 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
                   } },
                 item
               );
-            })
+            }),
+            !records.length && state.errorText == "error" ? _react2["default"].createElement(
+              "p",
+              { className: "center c999" },
+              "暂无数据"
+            ) : null
           )
         ),
         searchWord ? _react2["default"].createElement(

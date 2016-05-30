@@ -59,6 +59,9 @@ define('pagelet/search/store/store', function(require, exports, module) {
       if (res && res.hotWords) {
         params.hotWords = res.hotWords || [];
       }
+      if (res && res.statusText == "error") {
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     },
   
@@ -66,6 +69,9 @@ define('pagelet/search/store/store', function(require, exports, module) {
       var params = { loading: false };
       if (res && res.records) {
         params.records = res.records || [];
+      }
+      if (res && res.statusText == "error") {
+        params.errorText = res.statusText;
       }
       this.trigger(params);
     },

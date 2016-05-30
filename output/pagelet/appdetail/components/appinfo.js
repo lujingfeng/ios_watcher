@@ -38,7 +38,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
     getInitialState: function getInitialState() {
       return {
         loading: true,
-        detailInfo: {}
+        detailInfo: null
       };
     },
   
@@ -54,15 +54,13 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
     },
   
     onStateChange: function onStateChange(state) {
-      if (state.detailInfo) {
-        this.setState(state);
-      }
+      this.setState(state);
     },
   
     render: function render() {
       var query = this.props.query;
       var detail = this.state.detailInfo;
-      var updateTime = detail.begintime;
+      var updateTime = detail && detail.begintime;
   
       if (updateTime) {
         var d = new Date(updateTime);
@@ -76,7 +74,7 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
       return _react2["default"].createElement(
         "div",
         { className: "app-info" },
-        _react2["default"].createElement(
+        detail ? _react2["default"].createElement(
           "table",
           null,
           _react2["default"].createElement(
@@ -187,12 +185,17 @@ define('pagelet/appdetail/components/appinfo.jsx', function(require, exports, mo
             ),
             _react2["default"].createElement("td", null)
           )
-        ),
-        _react2["default"].createElement(
+        ) : null,
+        detail ? _react2["default"].createElement(
           "div",
           { className: "app-description" },
           detail.title
-        )
+        ) : null,
+        this.state.errorText ? _react2["default"].createElement(
+          "p",
+          { className: "center c999" },
+          "暂无数据"
+        ) : null
       );
     }
   });

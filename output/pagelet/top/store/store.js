@@ -39,6 +39,10 @@ define('pagelet/top/store/store', function(require, exports, module) {
         params.list = res.rank ? res.rank : [];
       }
   
+      if (res && res.statusText == "error") {
+        params.errorText = res.statusText;
+      }
+  
       this.trigger(params);
     }
   });

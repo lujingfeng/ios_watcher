@@ -34,7 +34,9 @@ define('pagelet/underapp/store/store', function(require, exports, module) {
       var underAppList = res.data || [];
   
       params.underAppList = underAppList.length ? underAppList : [];
-  
+      if (res && res.statusText == "error") {
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     }
   });

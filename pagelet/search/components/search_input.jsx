@@ -172,8 +172,12 @@ var Search = React.createClass({
   render: function(){
     let {
       deviceType,
-      searchResultList
+      searchResultList,
+      hotWords,
+      records
     } = this.state;
+
+    var state = this.state;
 
     let query = this.props.location.query || {};
     let searchWord = query.searchWord;
@@ -190,17 +194,23 @@ var Search = React.createClass({
           <label>热门应用</label>
           <div className="tags hot-app">
             {
-              this.state.hotWords.map((item, idx)=>{
+              hotWords.map((item, idx)=>{
                 return <span key={idx} onClick={()=>this.onClickSearchItem(item)}>{item.title}</span>
               })
+            }
+            {
+              !hotWords.length && state.errorText=="error"?<p className="center c999">暂无数据</p>:null
             }
           </div>
           <label>历史搜索</label>
           <div className="tags history">
             {
-              this.state.records.map((item, idx)=>{
+              records.map((item, idx)=>{
                 return <span key={idx} onClick={()=>this.onTagSelected(item)}>{item}</span>
               })
+            }
+            {
+              !records.length && state.errorText=="error"?<p className="center c999">暂无数据</p>:null
             }
           </div>
         </div>

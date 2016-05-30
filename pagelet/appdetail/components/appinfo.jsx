@@ -14,7 +14,7 @@ var AppInfo = React.createClass({
   getInitialState: function(){
     return {
       loading: true,
-      detailInfo: {}
+      detailInfo: null
     }
   },
 
@@ -34,15 +34,13 @@ var AppInfo = React.createClass({
   },
 
   onStateChange: function(state){
-    if(state.detailInfo){
-      this.setState(state);
-    }
+    this.setState(state);
   },
 
   render: function(){
     var query = this.props.query;
     var detail = this.state.detailInfo;
-    var updateTime = detail.begintime;
+    var updateTime = detail && detail.begintime;
 
     if(updateTime){
       var d = new Date(updateTime);
@@ -55,7 +53,8 @@ var AppInfo = React.createClass({
 
     return (
       <div className="app-info">
-        <table>
+       {
+        detail?<table>
           <tr><td>分类：</td><td>{detail.genres}</td></tr>
           <tr><td>设备：</td><td>{detail.device}</td></tr>
           <tr><td>AppID:</td><td>{detail.appId}</td></tr>
@@ -64,11 +63,17 @@ var AppInfo = React.createClass({
           <tr><td>应用大小:</td><td>{bytesToSize(detail.filesize)}</td></tr>
           <tr><td>最后更新时间:</td><td>{updateTime}</td></tr>
           <tr><td >应用描述:</td><td></td></tr>
-        </table>
-
-        <div className="app-description">
+        </table>:null
+      }
+      {
+        detail?<div className="app-description">
           {detail.title}
-        </div>
+        </div>:null
+      }
+
+        {
+          this.state.errorText?<p className="center c999">暂无数据</p>:null
+        }
       </div>
     );
   }

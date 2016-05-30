@@ -144,7 +144,7 @@ var Comment = React.createClass({
         }
 
         {
-          !this.state.loading && !list.length?<p className="center">暂无数据</p>:null
+          (!state.loading && !list.length) || state.errorText ? <p className="center c999">暂无数据</p>:null
         }
 
         {

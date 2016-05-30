@@ -241,7 +241,12 @@ define('pagelet/top/components/top7UpList.jsx', function(require, exports, modul
                 data: item });
             })
           ),
-          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
+          this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
+          this.state.errorText ? _react2["default"].createElement(
+            "p",
+            { className: "center c999" },
+            "暂无数据"
+          ) : null
         )
       );
     }

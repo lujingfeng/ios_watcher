@@ -4,6 +4,8 @@
 
 import React from "react";
 import {History} from "/static/lib/reactRouter";
+import {getCookie} from "/static/minxins/utils";
+
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
 
@@ -37,6 +39,9 @@ var BaseInfo = React.createClass({
   },
 
   onFav: function(){
+    if(!getCookie("uname")){
+      return null;
+    }
     var query = this.props.query;
     var isFav = !this.state.isFav;
 

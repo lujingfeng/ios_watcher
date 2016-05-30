@@ -17,6 +17,10 @@ var FavStore = Reflux.createStore({
     fetFavLsitCmp: function(res){
       var params = {loading: false};
       params.list = res.data || [];
+
+      if(res && res.statusText == "error"){
+        params.errorText = res.statusText;
+      }
       this.trigger(params);
     }
 });

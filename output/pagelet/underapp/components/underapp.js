@@ -233,7 +233,12 @@ define('pagelet/underapp/components/underapp.jsx', function(require, exports, mo
                 data: item });
             })
           ),
-          state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
+          state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
+          this.state.errorText ? _react2["default"].createElement(
+            "p",
+            { className: "center c999" },
+            "暂无数据"
+          ) : null
         )
       );
     }

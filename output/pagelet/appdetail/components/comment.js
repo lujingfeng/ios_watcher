@@ -190,9 +190,9 @@ define('pagelet/appdetail/components/comment.jsx', function(require, exports, mo
             );
           })
         ) : null,
-        !this.state.loading && !list.length ? _react2["default"].createElement(
+        !state.loading && !list.length || state.errorText ? _react2["default"].createElement(
           "p",
-          { className: "center" },
+          { className: "center c999" },
           "暂无数据"
         ) : null,
         this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
