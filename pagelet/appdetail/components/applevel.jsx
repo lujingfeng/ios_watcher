@@ -73,7 +73,7 @@ var AppLevel = React.createClass({
     }
     if(cur && cur[4]){
       cur4 = width * cur[4].percentage;
-      cur4 = cur4 > 1? cur4:(cur5>0?1:0);
+      cur4 = cur4 > 1? cur4:(cur4>0?1:0);
     }
     if(cur && cur[3]){
       cur3 = width * cur[3].percentage;
