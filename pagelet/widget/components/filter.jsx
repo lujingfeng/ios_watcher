@@ -113,8 +113,8 @@ var Filter = React.createClass({
     var callback = ()=>{
       if(state.device){
         var root = this.refs.root;
-        var height = $(root).height();
-        if(root.scrollHeight - 45 > height){
+        var height = $(root).outerHeight();
+        if(window.innerHeight < height){
           this.setState({
             okStatus: 1
           });
@@ -607,7 +607,6 @@ var Filter = React.createClass({
             })
           } 
         </ul>
-        <div style={{height:60}}></div>
 
         <div style={okStyle}>
           <button 

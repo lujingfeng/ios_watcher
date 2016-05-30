@@ -126,8 +126,8 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
       var callback = function callback() {
         if (state.device) {
           var root = _this.refs.root;
-          var height = (0, _staticLibJquery2["default"])(root).height();
-          if (root.scrollHeight - 45 > height) {
+          var height = (0, _staticLibJquery2["default"])(root).outerHeight();
+          if (window.innerHeight < height) {
             _this.setState({
               okStatus: 1
             });
@@ -800,7 +800,6 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             );
           })
         ),
-        _react2["default"].createElement("div", { style: { height: 60 } }),
         _react2["default"].createElement(
           "div",
           { style: okStyle },
