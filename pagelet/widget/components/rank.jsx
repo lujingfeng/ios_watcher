@@ -43,6 +43,8 @@ class Rank extends React.Component{
       val,
     } = this.state;
 
+    console.log(this.state.value, this.props.width);
+
     return (
       
       <div className="rank" style={this.style.rank}>

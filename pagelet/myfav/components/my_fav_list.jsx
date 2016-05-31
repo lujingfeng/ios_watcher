@@ -11,9 +11,8 @@ import Loading from "/pagelet/widget/components/loading";
 import Tabs from "/pagelet/widget/components/tabs";
 import AppItem from "/pagelet/widget/components/appItem";
 import Popup from "./pagelet/widget/components/popup";
-
+import {getCookie} from "/static/minxins/utils";
 import {countryCode, deviceStrToint, countryToCode} from "constants";
-
 
 import DetailAction from "/pagelet/appdetail/action/action";
 import DetailStore from "/pagelet/appdetail/store/store";
@@ -99,6 +98,11 @@ var MyFav = React.createClass({
   render: function(){
     let query = this.props.location.query || {};
     let state = this.state;
+
+    //用户名不存在
+    if(!getCookie("uname")){
+      return null;
+    }
 
     return (
       <div className="c-page my-fav-page">

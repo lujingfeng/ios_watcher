@@ -19,6 +19,9 @@ var DetailStore = Reflux.createStore({
       this.listenTo(DetailAction.detailVersion, this.loading);
       this.listenTo(DetailAction.detailVersionCmp, this.detailVersionCmp);
 
+      this.listenTo(DetailAction.keywordCover, this.loading);
+      this.listenTo(DetailAction.keywordCoverCmp, this.keywordCoverCmp);
+
       //this.listenTo(DetailAction.isFav, this.loading);
       this.listenTo(DetailAction.isFavCmp, this.isFavCmp);
 
@@ -129,6 +132,14 @@ var DetailStore = Reflux.createStore({
       var params = {};
       if(res.status == 200){
         params.isFav = true;
+      }
+      this.trigger(params);
+    },
+
+    keywordCoverCmp: function(res){
+      var params = {loading:false};
+      if(res && res.length>0){
+        params.keywords = res;
       }
       this.trigger(params);
     }

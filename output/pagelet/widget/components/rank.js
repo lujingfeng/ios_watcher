@@ -72,6 +72,8 @@ define('pagelet/widget/components/rank.jsx', function(require, exports, module) 
         var value = _state.value;
         var val = _state.val;
   
+        console.log(this.state.value, this.props.width);
+  
         return _react2['default'].createElement(
           'div',
           { className: 'rank', style: this.style.rank },

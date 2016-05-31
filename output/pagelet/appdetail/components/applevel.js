@@ -184,7 +184,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                 _react2["default"].createElement(
                   "p",
                   null,
-                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: parseInt(cur.averageScore), width: 14 })
+                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: parseFloat(cur.averageScore), width: 14 })
                 ),
                 _react2["default"].createElement(
                   "p",
@@ -328,7 +328,7 @@ define('pagelet/appdetail/components/applevel.jsx', function(require, exports, m
                 _react2["default"].createElement(
                   "p",
                   null,
-                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: parseInt(history.averageScore), width: 14 })
+                  _react2["default"].createElement(_pageletWidgetComponentsRank2["default"], { value: parseFloat(history.averageScore), width: 14 })
                 ),
                 _react2["default"].createElement(
                   "p",

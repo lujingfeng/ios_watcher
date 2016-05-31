@@ -79,7 +79,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
       var favStyle = {};
       if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
-        favStyle.opacity = "0.5";
+        //favStyle.opacity = "0.5";
       }
   
       return _react2["default"].createElement(

@@ -79,7 +79,7 @@ var VersionLog = React.createClass({
                       <td onClick={onToggle}>
                         <span id={id}>{updateDesc}</span>
                         {
-                          isFolder?<i className="f-icon expand"></i>:null
+                          isFolder?<i className="f-icon"></i>:null
                         }
                       </td>
                     </tr>)

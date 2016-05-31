@@ -42,6 +42,8 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
   var _pageletWidgetComponentsPopup2 = _interopRequireDefault(_pageletWidgetComponentsPopup);
   
+  var _staticMinxinsUtils = require("static/minxins/utils");
+  
   var _constants = require("constants");
   
   var _pageletAppdetailActionAction = require("pagelet/appdetail/action/action");
@@ -142,6 +144,11 @@ define('pagelet/myfav/components/my_fav_list.jsx', function(require, exports, mo
   
       var query = this.props.location.query || {};
       var state = this.state;
+  
+      //用户名不存在
+      if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
+        return null;
+      }
   
       return _react2["default"].createElement(
         "div",

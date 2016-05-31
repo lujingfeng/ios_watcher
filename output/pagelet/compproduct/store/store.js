@@ -33,7 +33,8 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
       var params = { loading: false };
       var categoryMap = {};
   
-      if (res.curday) {
+      var oneData = res.curday || res.yesterday;
+      if (oneData && oneData.data && oneData.data.length > 0) {
         var legend = { data: [] };
         var series = [];
         var xAxis = {
@@ -42,7 +43,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
           data: []
         };
   
-        var clist = res.curday.data || [];
+        var clist = oneData.data || [];
         for (var i = 0; i < clist.length; i++) {
           var rankData = clist[i].rankData;
           var data = [];
@@ -72,7 +73,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
         params.series = series;
         params.xAxis = xAxis;
         params.legend = legend;
-      } else if (res) {
+      } else if (res && !res.curday && !res.yesterday) {
         for (var month in res) {
           var mdataList = res[month];
           mdataList.forEach(function (item, idx) {
@@ -121,8 +122,6 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
         params.xAxis = xAxis;
         params.legend = legend;
       }
-  
-      console.log(params);
   
       this.trigger(params);
     }

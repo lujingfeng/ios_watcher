@@ -20,6 +20,9 @@ var DetailAction = Reflux.createActions([
   "detailVersion",
   "detailVersionCmp",
 
+  "keywordCover",
+  "keywordCoverCmp",
+
   "addFav",
   "addFavCmp",
 
@@ -93,6 +96,21 @@ DetailAction.detailVersion.preEmit = (query={}) => {
 
   $.ajax(params).always(function( res ){
       DetailAction.detailVersionCmp(res);
+  });
+};
+
+DetailAction.keywordCover.preEmit = (id) => {
+  var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/keywordCover',
+      data: {
+        appId: id
+      },
+      dataType: 'json'
+  }
+
+  $.ajax(params).always(function( res ){
+      DetailAction.keywordCoverCmp(res);
   });
 };
 

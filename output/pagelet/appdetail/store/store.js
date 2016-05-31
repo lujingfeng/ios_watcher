@@ -34,6 +34,9 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       this.listenTo(_actionActionJs2["default"].detailVersion, this.loading);
       this.listenTo(_actionActionJs2["default"].detailVersionCmp, this.detailVersionCmp);
   
+      this.listenTo(_actionActionJs2["default"].keywordCover, this.loading);
+      this.listenTo(_actionActionJs2["default"].keywordCoverCmp, this.keywordCoverCmp);
+  
       //this.listenTo(DetailAction.isFav, this.loading);
       this.listenTo(_actionActionJs2["default"].isFavCmp, this.isFavCmp);
   
@@ -144,6 +147,14 @@ define('pagelet/appdetail/store/store', function(require, exports, module) {
       var params = {};
       if (res.status == 200) {
         params.isFav = true;
+      }
+      this.trigger(params);
+    },
+  
+    keywordCoverCmp: function keywordCoverCmp(res) {
+      var params = { loading: false };
+      if (res && res.length > 0) {
+        params.keywords = res;
       }
       this.trigger(params);
     }

@@ -213,7 +213,13 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
   
     onCategory: function onCategory(category) {
       var curSelected = this.state.curSelected;
-      curSelected.category = category;
+      curSelected.category = _staticLibJquery2["default"].extend({}, category);
+      if (curSelected.category.value == 250) {
+        curSelected.category.name = "游戏";
+      }
+      if (curSelected.category.value == 260) {
+        curSelected.category.name = "报刊杂志";
+      }
       this.setState({ curSelected: curSelected });
     },
   
@@ -297,10 +303,10 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         background: "#fff"
       };
   
-      if (this.state.okStatus == 1) {
-        okStyle.position = "relative";
-        okStyle.bottom = "auto";
-      }
+      // if(this.state.okStatus == 1){
+      //   okStyle.position = "relative";
+      //   okStyle.bottom = "auto";
+      // }
   
       return _react2["default"].createElement(
         "div",
@@ -784,7 +790,7 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
         _react2["default"].createElement(
           "ul",
           {
-            style: { marginBottom: this.state.okStatus == 1 ? 0 : 60 },
+            style: { marginBottom: 60 },
             className: "f-type clearfix" },
           this.state.subGenres.map(function (item, idx) {
             var props = {};

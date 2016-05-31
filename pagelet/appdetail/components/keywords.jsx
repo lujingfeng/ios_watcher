@@ -4,19 +4,38 @@
 
 import React from "react";
 
+import DetailAction from "../action/action";
+import DetailStore from "../store/store";
+import Loading from "/pagelet/widget/components/loading";
+
 var Keywords = React.createClass({ 
-  componentDidMount: function(){
-    
+  getInitialState: function(){
+    return {
+      loading:false,
+      keywords:[]
+    };
   },
+  componentDidMount: function(){
+    DetailAction.keywordCover(this.props.query.id);
+    this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
+  },
+
+  componentWillUnmount: function(){
+    this.unSubscribe();
+  },
+
+  onStateChange: function(state){
+    this.setState(state);
+  },
+
   render: function(){
     
     return (
       <div className="keywords-overide">
         <h5 className="title">
           <i></i>
-          关键词覆盖数（共覆盖<a>1286</a>个词）
+          关键词覆盖数（共覆盖<a>{this.state.keywords.length}</a>个词）
         </h5>
-
         <table className="border">
           <tr>
             <th>关键词</th>
@@ -24,22 +43,29 @@ var Keywords = React.createClass({
             <th>搜索指数</th>
             <th>搜索结果数</th>
           </tr>
-
-          <tr>
-            <td className="cmain">
-              微信
-            </td>
-            <td>
-              1
-            </td>
-            <td>
-              10500
-            </td>
-            <td>
-              100
-            </td>
-          </tr>
+          {
+            this.state.keywords.map((item)=>{
+              return (<tr>
+                <td>
+                  {item.keyword}
+                </td>
+                <td>
+                  {item.rank}
+                </td>
+                <td>
+                  {item.hot}
+                </td>
+                <td>
+                  {item.count}
+                </td>
+              </tr>)
+            })
+          }
         </table>
+        {
+          this.state.loading?<Loading/>:null
+        }
+
       </div>
     );
   }

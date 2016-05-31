@@ -131,7 +131,7 @@ var AppLevel = React.createClass({
               <td className="clearfix">
                 <div className="left fl">
                   <p className="f24 score">{cur.averageScore}</p>
-                  <p><Rank value={parseInt(cur.averageScore)} width={14}/></p>
+                  <p><Rank value={parseFloat(cur.averageScore)} width={14}/></p>
                   <p className="f10">评分次数:{cur.totalCount}</p>
                 </div>
                 <div className="right fl">
@@ -192,7 +192,7 @@ var AppLevel = React.createClass({
 
                 <div className="left fl">
                   <p className="f24 score">{history.averageScore}</p>
-                  <p><Rank value={parseInt(history.averageScore)} width={14}/></p>
+                  <p><Rank value={parseFloat(history.averageScore)} width={14}/></p>
                   <p className="f10">评分次数:{history.totalCount}</p>
                 </div>
 

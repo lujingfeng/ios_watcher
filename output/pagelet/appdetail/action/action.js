@@ -16,7 +16,7 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
   var _staticLibJquery2 = _interopRequireDefault(_staticLibJquery);
   
-  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "ranklatest", "ranklatestCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "addFav", "addFavCmp", "isFav", "isFavCmp"]);
+  var DetailAction = _reflux2["default"].createActions(["appInfo", "appInfoCmp", "realRank", "realRankCmp", "ranklatest", "ranklatestCmp", "commentDetail", "commentDetailCmp", "appLevel", "appLevelCmp", "detailVersion", "detailVersionCmp", "keywordCover", "keywordCoverCmp", "addFav", "addFavCmp", "isFav", "isFavCmp"]);
   
   DetailAction.appInfo.preEmit = function (id, device, country) {
     var params = {
@@ -92,6 +92,21 @@ define('pagelet/appdetail/action/action', function(require, exports, module) {
   
     _staticLibJquery2["default"].ajax(params).always(function (res) {
       DetailAction.detailVersionCmp(res);
+    });
+  };
+  
+  DetailAction.keywordCover.preEmit = function (id) {
+    var params = {
+      type: 'GET',
+      url: SEARCH_HOST + '/keywordCover',
+      data: {
+        appId: id
+      },
+      dataType: 'json'
+    };
+  
+    _staticLibJquery2["default"].ajax(params).always(function (res) {
+      DetailAction.keywordCoverCmp(res);
     });
   };
   

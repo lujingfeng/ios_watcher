@@ -64,7 +64,6 @@ var DetailCategory = React.createClass({
               className={category == 3 ?"cur":null}
               onClick={e=>{this.onCategofy(3)}}>版本记录</div>
             <div 
-              style={{display:"none"}}
               className={category == 4 ?"cur":null}
               onClick={e=>{this.onCategofy(4)}}>关键词覆盖数</div>
             <div 

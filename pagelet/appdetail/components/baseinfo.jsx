@@ -58,7 +58,7 @@ var BaseInfo = React.createClass({
 
     var favStyle={};
     if(!getCookie("uname")){
-      favStyle.opacity = "0.5";
+      //favStyle.opacity = "0.5";
     }
 
     return (

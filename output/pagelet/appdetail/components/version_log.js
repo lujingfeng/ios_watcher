@@ -131,7 +131,7 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
                   { id: id },
                   updateDesc
                 ),
-                isFolder ? _react2["default"].createElement("i", { className: "f-icon expand" }) : null
+                isFolder ? _react2["default"].createElement("i", { className: "f-icon" }) : null
               )
             );
           })

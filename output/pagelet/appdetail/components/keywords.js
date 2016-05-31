@@ -16,10 +16,40 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _actionAction = require("pagelet/appdetail/action/action");
+  
+  var _actionAction2 = _interopRequireDefault(_actionAction);
+  
+  var _storeStore = require("pagelet/appdetail/store/store");
+  
+  var _storeStore2 = _interopRequireDefault(_storeStore);
+  
+  var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
+  
+  var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
+  
   var Keywords = _react2["default"].createClass({
     displayName: "Keywords",
   
-    componentDidMount: function componentDidMount() {},
+    getInitialState: function getInitialState() {
+      return {
+        loading: false,
+        keywords: []
+      };
+    },
+    componentDidMount: function componentDidMount() {
+      _actionAction2["default"].keywordCover(this.props.query.id);
+      this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
+    },
+  
+    componentWillUnmount: function componentWillUnmount() {
+      this.unSubscribe();
+    },
+  
+    onStateChange: function onStateChange(state) {
+      this.setState(state);
+    },
+  
     render: function render() {
   
       return _react2["default"].createElement(
@@ -33,7 +63,7 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
           _react2["default"].createElement(
             "a",
             null,
-            "1286"
+            this.state.keywords.length
           ),
           "个词）"
         ),
@@ -64,31 +94,34 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
               "搜索结果数"
             )
           ),
-          _react2["default"].createElement(
-            "tr",
-            null,
-            _react2["default"].createElement(
-              "td",
-              { className: "cmain" },
-              "微信"
-            ),
-            _react2["default"].createElement(
-              "td",
+          this.state.keywords.map(function (item) {
+            return _react2["default"].createElement(
+              "tr",
               null,
-              "1"
-            ),
-            _react2["default"].createElement(
-              "td",
-              null,
-              "10500"
-            ),
-            _react2["default"].createElement(
-              "td",
-              null,
-              "100"
-            )
-          )
-        )
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.keyword
+              ),
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.rank
+              ),
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.hot
+              ),
+              _react2["default"].createElement(
+                "td",
+                null,
+                item.count
+              )
+            );
+          })
+        ),
+        this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null
       );
     }
   });

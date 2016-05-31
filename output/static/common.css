@@ -332,6 +332,7 @@ a {
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
+  vertical-align: middle;
 }
 h1 {
   font-size: 30px;

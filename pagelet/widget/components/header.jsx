@@ -47,9 +47,7 @@ var Header = React.createClass({
   },
 
   componentDidMount: function(){
-    setTimeout(()=>{
-      $(this.refs.search).focus();
-    }, 500);
+    
   },
 
   componentWillUnmount: function(){
@@ -116,7 +114,6 @@ var Header = React.createClass({
                 <form onSubmit={this.onSubmit}>
                   <input 
                     ref="search"
-                    autoFocus="autofocus"
                     onKeyUp={this.onKeyUp}
                     placeholder={this.props.placeholder}
                     value={this.state.searchKey}

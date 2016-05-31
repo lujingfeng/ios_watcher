@@ -63,13 +63,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
       this.setState(state);
     },
   
-    componentDidMount: function componentDidMount() {
-      var _this = this;
-  
-      setTimeout(function () {
-        (0, _jquery2["default"])(_this.refs.search).focus();
-      }, 500);
-    },
+    componentDidMount: function componentDidMount() {},
   
     componentWillUnmount: function componentWillUnmount() {},
   
@@ -111,7 +105,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
     },
   
     render: function render() {
-      var _this2 = this;
+      var _this = this;
   
       var type = this.state.type;
       var filterStyle = {};
@@ -139,12 +133,11 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
               { onSubmit: this.onSubmit },
               _react2["default"].createElement("input", {
                 ref: "search",
-                autoFocus: "autofocus",
                 onKeyUp: this.onKeyUp,
                 placeholder: this.props.placeholder,
                 value: this.state.searchKey,
                 onChange: function (e) {
-                  return _this2.setState({ searchKey: e.target.value });
+                  return _this.setState({ searchKey: e.target.value });
                 },
                 type: "search" }),
               _react2["default"].createElement("i", { className: "icon-q", onClick: this.onSearch })
@@ -160,7 +153,7 @@ define('pagelet/widget/components/header.jsx', function(require, exports, module
           "div",
           { className: "normal" },
           _react2["default"].createElement("div", { className: "icon-menu", onClick: function (e) {
-              return _this2.props.showSideNav();
+              return _this.props.showSideNav();
             } }),
           _react2["default"].createElement(
             "div",

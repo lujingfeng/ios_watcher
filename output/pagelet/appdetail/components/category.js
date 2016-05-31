@@ -105,7 +105,6 @@ define('pagelet/appdetail/components/category.jsx', function(require, exports, m
           _react2["default"].createElement(
             "div",
             {
-              style: { display: "none" },
               className: category == 4 ? "cur" : null,
               onClick: function (e) {
                 _this.onCategofy(4);
