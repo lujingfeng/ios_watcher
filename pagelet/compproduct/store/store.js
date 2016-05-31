@@ -50,7 +50,7 @@ var CompareStore = Reflux.createStore({
           });
           legend.data.push({
             name: title,
-            icon: ""
+            icon: "line"
           });
         }
 
@@ -99,7 +99,7 @@ var CompareStore = Reflux.createStore({
           xAxis.data = title.sort();
           legend.data.push({
             name: c,
-            icon: ""
+            icon: "line"
           });
         }
 

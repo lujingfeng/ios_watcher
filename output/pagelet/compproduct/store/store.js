@@ -65,7 +65,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
           });
           legend.data.push({
             name: title,
-            icon: ""
+            icon: "line"
           });
         }
   
@@ -113,7 +113,7 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
           xAxis.data = title.sort();
           legend.data.push({
             name: c,
-            icon: ""
+            icon: "line"
           });
         }
   
