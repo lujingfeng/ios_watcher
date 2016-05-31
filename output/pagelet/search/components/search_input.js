@@ -337,10 +337,14 @@ define('pagelet/search/components/search_input.jsx', function(require, exports, 
             }),
             this.state.loading ? _react2["default"].createElement(_pageletWidgetComponentsLoading2["default"], null) : null,
             this.state.total == 0 && !this.state.loading ? _react2["default"].createElement(
-              "p",
-              { className: "center c999" },
-              "没有搜索到应用"
-            ) : ""
+              "div",
+              { className: "center c999 no-search-result" },
+              _react2["default"].createElement(
+                "span",
+                null,
+                "没有搜索到应用"
+              )
+            ) : null
           )
         ) : null
       );

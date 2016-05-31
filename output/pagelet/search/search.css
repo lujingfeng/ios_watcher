@@ -89,3 +89,15 @@
 .input-search .search-result .keyword-desc table td {
   font-size: 12px;
 }
+.input-search .no-search-result {
+  background: url(/static/image/no_search.png);
+  background-repeat: no-repeat;
+  height: 200px;
+  background-position: center;
+  -webkit-background-size: 140px 92px;
+          background-size: 140px 92px;
+}
+.input-search .no-search-result span {
+  display: inline-block;
+  margin-top: 160px;
+}

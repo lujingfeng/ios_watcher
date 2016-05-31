@@ -49,9 +49,9 @@
   height: 100%;
   text-align: center;
   line-height: 75px;
-  background: url(/static/image/del.png) no-repeat;
-  -webkit-background-size: 6px 6px;
-          background-size: 6px 6px;
+  background: url(/static/image/close_2.png) no-repeat;
+  -webkit-background-size: 10px 10px;
+          background-size: 10px;
   background-position: center;
 }
 .app-item .s-txt {

@@ -267,7 +267,8 @@ var Search = React.createClass({
                 this.state.loading?<Loading/>:null
               }
               {
-                this.state.total==0&&!this.state.loading?<p className="center c999">{"没有搜索到应用"}</p>:""
+                this.state.total==0&&!this.state.loading?(
+                  <div className="center c999 no-search-result"><span>没有搜索到应用</span></div>):null
               }
             </ul>
           </div>: null
