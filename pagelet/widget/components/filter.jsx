@@ -599,6 +599,7 @@ var Filter = React.createClass({
       }
 
         <ul 
+          style={{marginBottom:this.state.okStatus==1?0:60}}
           className="f-type clearfix">
           {
             this.state.subGenres.map((item, idx)=>{
