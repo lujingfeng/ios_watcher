@@ -96,6 +96,26 @@
 .c-app-detail .comment .rank {
   margin-top: 2px;
 }
+.c-app-detail .version-log tr td:last-child {
+  text-align: left;
+  padding: 10px;
+  position: relative;
+}
+.c-app-detail .version-log .f-icon {
+  position: absolute;
+  background: url(/static/image/v_unfolder.png);
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+          background-size: contain;
+  width: 6px;
+  height: 7px;
+  right: 5px;
+  bottom: 8px;
+}
+.c-app-detail .version-log .f-icon.expand {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
 .c-app-detail .app-detail-level table {
   margin-bottom: 10px;
 }

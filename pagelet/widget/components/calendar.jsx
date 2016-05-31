@@ -50,6 +50,19 @@ var Month = React.createClass({
     var curDatetime = this.props.curDatetime;
     var now = Date.now();
 
+
+    if(curDatetime.value == 7 || 
+      curDatetime.value == 15 || 
+      curDatetime.value == 30 || 
+      curDatetime.value == 60){
+      var cd = new Date();
+      curDatetime = {
+        year: cd.getFullYear(),
+        month:cd.getMonth()+1,
+        day:cd.getDate()
+      };
+    }
+
     if(curDatetime && curDatetime.value == 1){
       var curDate = new Date();
       curDatetime.year = curDate.getFullYear();
@@ -232,7 +245,10 @@ var Calendar = React.createClass({
 
   componentDidMount: function(){
     var month = document.querySelector("#curDatetime");
-    month && month.scrollIntoView();
+    if(!month){
+      month = document.querySelector(".c-month:last-child");
+    }
+    month.scrollIntoView();
   },
 
   onCancel: function(){

@@ -55,6 +55,11 @@ var BaseInfo = React.createClass({
     var query = this.props.query;
     var titleWidth = window.innerWidth - 190;
 
+    var favStyle={};
+    if(!getCookie("uname")){
+      favStyle.opacity = "0.5";
+    }
+
     return (
       <div className="c-app-base-info">
         <table>
@@ -75,7 +80,7 @@ var BaseInfo = React.createClass({
               </div>
             </td>
             <td>
-              <div className="fav" onClick={this.onFav}>
+              <div className="fav" onClick={this.onFav} style={favStyle}>
                 <div className={"icon-fav " + (this.state.isFav==0?"fav-un":"fav-added")}></div>
                 <p className="f12">{this.state.isFav?"取消关注":"添加关注"}</p>
               </div>

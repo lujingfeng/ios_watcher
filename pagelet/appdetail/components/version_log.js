@@ -5,6 +5,7 @@
 import DetailAction from "../action/action";
 import DetailStore from "../store/store";
 import React from "react";
+import $ from "jquery";
 import Loading from "/pagelet/widget/components/loading";
 
 
@@ -52,6 +53,22 @@ var VersionLog = React.createClass({
 
           {
             this.state.versions.map((item, idx)=>{
+              var isFolder = false;
+              var updateDesc = "";
+              var len = 30;
+              var id = "ver_"+idx;
+
+              if(item.updatecontent && item.updatecontent.length>len){
+                updateDesc = item.updatecontent.substring(0, len)+"...";
+                isFolder = true;
+              }else{
+                updateDesc = item.updatecontent;
+              }
+              var onToggle = (e)=>{
+                $(e.target.parentNode).find(".f-icon").toggleClass("expand");
+                isFolder = !isFolder;
+                $("#"+id).text(isFolder?updateDesc:item.updatecontent);
+              }
               return (<tr>
                       <td >
                         {item.versionName}
@@ -59,8 +76,11 @@ var VersionLog = React.createClass({
                       <td>
                         {item.begintime}
                       </td>
-                      <td>
-                        {item.updatecontent}
+                      <td onClick={onToggle}>
+                        <span id={id}>{updateDesc}</span>
+                        {
+                          isFolder?<i className="f-icon expand"></i>:null
+                        }
                       </td>
                     </tr>)
             })

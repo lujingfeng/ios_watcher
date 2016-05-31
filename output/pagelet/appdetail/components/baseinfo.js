@@ -76,6 +76,11 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
       var query = this.props.query;
       var titleWidth = window.innerWidth - 190;
   
+      var favStyle = {};
+      if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
+        favStyle.opacity = "0.5";
+      }
+  
       return _react2["default"].createElement(
         "div",
         { className: "c-app-base-info" },
@@ -125,7 +130,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
               null,
               _react2["default"].createElement(
                 "div",
-                { className: "fav", onClick: this.onFav },
+                { className: "fav", onClick: this.onFav, style: favStyle },
                 _react2["default"].createElement("div", { className: "icon-fav " + (this.state.isFav == 0 ? "fav-un" : "fav-added") }),
                 _react2["default"].createElement(
                   "p",

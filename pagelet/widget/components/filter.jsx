@@ -548,12 +548,14 @@ var Filter = React.createClass({
           {
             state.genres.map((item, idx)=>{
               var props = {style:{}};
+              var name = item.name;
 
               if(curSelected.category && curSelected.category.value == item.value){
                 props.className="selected";
               }
 
               if(item.value == 25 || item.value == 26){
+                
                 props.style.width = "50%";
 
                 props.onClick = ()=>{
@@ -569,6 +571,9 @@ var Filter = React.createClass({
                     curSelected.category && 
                     subItem.value == curSelected.category.value){
                      props.className="selected";
+                     if(curSelected.category.value != "250" && curSelected.category.value != "260"){
+                       name = curSelected.category.name;
+                     }
                   }
                 });
               }else{
@@ -578,14 +583,14 @@ var Filter = React.createClass({
               return (
                 <li {...props}>
                  <span>
-                  {item.name}
+                  {name}
+                   {
+                     item.value == 25?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 50}}></i>: null
+                   }
+                   {
+                     item.value == 26?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 39}}></i>: null
+                   }
                 </span>
-                 {
-                   item.value == 25?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 50}}></i>: null
-                 }
-                 {
-                   item.value == 26?<i className={this.state.subGenres==item.data?"unfolder":"unfolder fd"} style={{right: 39}}></i>: null
-                 }
                 </li>
               );
             })

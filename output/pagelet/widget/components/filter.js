@@ -738,12 +738,14 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
             className: "f-type clearfix" },
           state.genres.map(function (item, idx) {
             var props = { style: {} };
+            var name = item.name;
   
             if (curSelected.category && curSelected.category.value == item.value) {
               props.className = "selected";
             }
   
             if (item.value == 25 || item.value == 26) {
+  
               props.style.width = "50%";
   
               props.onClick = function () {
@@ -757,6 +759,9 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               item.data.filter(function (subItem, idx) {
                 if (_this2.state.subGenres != item.data && curSelected.category && subItem.value == curSelected.category.value) {
                   props.className = "selected";
+                  if (curSelected.category.value != "250" && curSelected.category.value != "260") {
+                    name = curSelected.category.name;
+                  }
                 }
               });
             } else {
@@ -769,10 +774,10 @@ define('pagelet/widget/components/filter.jsx', function(require, exports, module
               _react2["default"].createElement(
                 "span",
                 null,
-                item.name
-              ),
-              item.value == 25 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
-              item.value == 26 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
+                name,
+                item.value == 25 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 50 } }) : null,
+                item.value == 26 ? _react2["default"].createElement("i", { className: _this2.state.subGenres == item.data ? "unfolder" : "unfolder fd", style: { right: 39 } }) : null
+              )
             );
           })
         ) : null,

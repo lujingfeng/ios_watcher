@@ -122,6 +122,27 @@
     }
   }
 
+  .version-log{
+    tr td:last-child{
+      text-align: left;
+      padding:10px;
+      position: relative;
+    }
+    .f-icon{
+      position: absolute;
+      background: url(/static/image/v_unfolder.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width:6px;
+      height:7px;
+      right: 5px;
+      bottom: 8px;
+    }
+    .f-icon.expand{
+      transform:rotate(180deg);
+    }
+  }
+
   .app-detail-level{
     table{
       margin-bottom: 10px;

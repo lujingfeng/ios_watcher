@@ -24,6 +24,10 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _jquery = require("jquery");
+  
+  var _jquery2 = _interopRequireDefault(_jquery);
+  
   var _pageletWidgetComponentsLoading = require("pagelet/widget/components/loading.jsx");
   
   var _pageletWidgetComponentsLoading2 = _interopRequireDefault(_pageletWidgetComponentsLoading);
@@ -90,6 +94,22 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
             )
           ),
           this.state.versions.map(function (item, idx) {
+            var isFolder = false;
+            var updateDesc = "";
+            var len = 30;
+            var id = "ver_" + idx;
+  
+            if (item.updatecontent && item.updatecontent.length > len) {
+              updateDesc = item.updatecontent.substring(0, len) + "...";
+              isFolder = true;
+            } else {
+              updateDesc = item.updatecontent;
+            }
+            var onToggle = function onToggle(e) {
+              (0, _jquery2["default"])(e.target.parentNode).find(".f-icon").toggleClass("expand");
+              isFolder = !isFolder;
+              (0, _jquery2["default"])("#" + id).text(isFolder ? updateDesc : item.updatecontent);
+            };
             return _react2["default"].createElement(
               "tr",
               null,
@@ -105,8 +125,13 @@ define('pagelet/appdetail/components/version_log', function(require, exports, mo
               ),
               _react2["default"].createElement(
                 "td",
-                null,
-                item.updatecontent
+                { onClick: onToggle },
+                _react2["default"].createElement(
+                  "span",
+                  { id: id },
+                  updateDesc
+                ),
+                isFolder ? _react2["default"].createElement("i", { className: "f-icon expand" }) : null
               )
             );
           })
