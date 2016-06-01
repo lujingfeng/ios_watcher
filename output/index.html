@@ -14,13 +14,81 @@
   
   <title>酷传监控ios版本</title>  
 
-    <link rel="stylesheet" type="text/css" href="/pkg/style_9ca56eb6.css" />
+    <link rel="stylesheet" type="text/css" href="/static/common.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/main/main.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/popup.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/search/search.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/header.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/app_item.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/rank.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/appdetail/detail.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/filter.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/dialog.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/top/top.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/compproduct/comp_analysis.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/myfav/my_fav.css" />
+    <link rel="stylesheet" type="text/css" href="/pagelet/widget/about.css" />
 </head>
 <body>
   
 </body>
-<script src="/pkg/pack_ee13ef0b.js"></script>
-<script type="text/javascript" src="/pkg/pages/index.html_map_4f8a6e10.js"></script>
+<script src="/static/lib/mod.js"></script>
+<script type="text/javascript" src="/pkg/pages/index.html_map.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.js"></script>
+<script type="text/javascript" src="/static/minxins/utils.js"></script>
+<script type="text/javascript" src="/static/minxins/datetime.js"></script>
+<script type="text/javascript" src="/static/lib/react.js"></script>
+<script type="text/javascript" src="/static/lib/reactRouter.js"></script>
+<script type="text/javascript" src="/pagelet/main/components/side_nav.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/popup.js"></script>
+<script type="text/javascript" src="/pagelet/main/components/main.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/header.js"></script>
+<script type="text/javascript" src="/pagelet/search/components/index.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/loading.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/tabs.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/rank.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/appItem.js"></script>
+<script type="text/javascript" src="/static/constants.js"></script>
+<script type="text/javascript" src="/static/lib/reflux.js"></script>
+<script type="text/javascript" src="/pagelet/search/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/search/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/search/components/search_input.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/baseinfo.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/category.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/appinfo.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/realrank.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/version_log.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/keywords.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/comment.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/applevel.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/calendar.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/filter.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/dialog.js"></script>
+<script type="text/javascript" src="/pagelet/appdetail/components/detail.js"></script>
+<script type="text/javascript" src="/pagelet/top/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/top/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/top/components/topList.js"></script>
+<script type="text/javascript" src="/pagelet/top/components/top7UpList.js"></script>
+<script type="text/javascript" src="/pagelet/top/components/top7DownList.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/underapp/components/underapp.js"></script>
+<script type="text/javascript" src="/pagelet/hotkeyword/components/hotkeyword.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/my_fav_item.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/action/action.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/store/store.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/index.js"></script>
+<script type="text/javascript" src="/pagelet/compproduct/components/compare.js"></script>
+<script type="text/javascript" src="/pagelet/myfav/components/my_fav_list.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/aso_service.js"></script>
+<script type="text/javascript" src="/pagelet/widget/components/about.js"></script>
+<script type="text/javascript" src="/static/entry.js"></script>
 <script>
   /**
     * @require static/common.less 
@@ -28,7 +96,7 @@
   var _map = {
     "res": {
         "pagelet/appdetail/action/action.js": {
-            "uri": "/pagelet/appdetail/action/action_73e368a7.js",
+            "uri": "/pagelet/appdetail/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/appdetail/action/action"
@@ -36,16 +104,14 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "jquery": {
-            "uri": "/static/lib/jquery_91b72885.js",
-            "type": "js",
-            "pkg": "p0"
+            "uri": "/static/lib/jquery.js",
+            "type": "js"
         },
         "pagelet/appdetail/components/appinfo.jsx": {
-            "uri": "/pagelet/appdetail/components/appinfo_8668ce47.js",
+            "uri": "/pagelet/appdetail/components/appinfo.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
@@ -55,35 +121,31 @@
                 "static/minxins/utils.js",
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/detail.less": {
-            "uri": "/pagelet/appdetail/detail_bb3ddd7d.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/appdetail/detail.css",
+            "type": "css"
         },
         "pagelet/widget/components/loading.jsx": {
-            "uri": "/pagelet/widget/components/loading_7494918d.js",
+            "uri": "/pagelet/widget/components/loading.js",
             "type": "js",
             "deps": [
                 "react"
-            ],
-            "pkg": "p0"
+            ]
         },
         "static/minxins/utils.js": {
-            "uri": "/static/minxins/utils_4f0efd74.js",
+            "uri": "/static/minxins/utils.js",
             "type": "js",
             "extras": {
                 "moduleId": "static/minxins/utils"
             },
             "deps": [
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/store/store.js": {
-            "uri": "/pagelet/appdetail/store/store_5331d0af.js",
+            "uri": "/pagelet/appdetail/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/appdetail/store/store"
@@ -91,11 +153,10 @@
             "deps": [
                 "reflux",
                 "pagelet/appdetail/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/components/applevel.jsx": {
-            "uri": "/pagelet/appdetail/components/applevel_ed9d623a.js",
+            "uri": "/pagelet/appdetail/components/applevel.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
@@ -105,25 +166,22 @@
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js",
                 "constants"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/components/rank.jsx": {
-            "uri": "/pagelet/widget/components/rank_d183e7bd.js",
+            "uri": "/pagelet/widget/components/rank.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/rank.less",
                 "react"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/rank.less": {
-            "uri": "/pagelet/widget/rank_28b6936a.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/rank.css",
+            "type": "css"
         },
         "pagelet/appdetail/components/baseinfo.jsx": {
-            "uri": "/pagelet/appdetail/components/baseinfo_823062bc.js",
+            "uri": "/pagelet/appdetail/components/baseinfo.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
@@ -132,35 +190,31 @@
                 "static/minxins/utils.js",
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "reactRouter": {
-            "uri": "/static/lib/reactRouter_22ec387c.js",
+            "uri": "/static/lib/reactRouter.js",
             "type": "js",
             "deps": [
                 "react"
-            ],
-            "pkg": "p0"
+            ]
         },
         "react": {
-            "uri": "/static/lib/react_e5d62045.js",
-            "type": "js",
-            "pkg": "p0"
+            "uri": "/static/lib/react.js",
+            "type": "js"
         },
         "pagelet/appdetail/components/category.jsx": {
-            "uri": "/pagelet/appdetail/components/category_b66cac3c.js",
+            "uri": "/pagelet/appdetail/components/category.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
                 "react",
                 "reactRouter",
                 "static/minxins/utils.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/components/comment.jsx": {
-            "uri": "/pagelet/appdetail/components/comment_387d75a6.js",
+            "uri": "/pagelet/appdetail/components/comment.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
@@ -170,11 +224,10 @@
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js",
                 "constants"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/components/detail.jsx": {
-            "uri": "/pagelet/appdetail/components/detail_2dcf7588.js",
+            "uri": "/pagelet/appdetail/components/detail.js",
             "type": "js",
             "deps": [
                 "react",
@@ -194,27 +247,24 @@
                 "pagelet/widget/components/dialog.jsx",
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/components/header.jsx": {
-            "uri": "/pagelet/widget/components/header_5a01e165.js",
+            "uri": "/pagelet/widget/components/header.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/header.less",
                 "react",
                 "jquery",
                 "reactRouter"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/header.less": {
-            "uri": "/pagelet/widget/header_2570314b.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/header.css",
+            "type": "css"
         },
         "pagelet/appdetail/components/realrank.jsx": {
-            "uri": "/pagelet/appdetail/components/realrank_861b2e54.js",
+            "uri": "/pagelet/appdetail/components/realrank.js",
             "type": "js",
             "extras": {
                 "async": [
@@ -231,11 +281,10 @@
                 "constants",
                 "pagelet/compproduct/action/action.js",
                 "pagelet/compproduct/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/compproduct/action/action.js": {
-            "uri": "/pagelet/compproduct/action/action_057b9327.js",
+            "uri": "/pagelet/compproduct/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/compproduct/action/action"
@@ -243,11 +292,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/compproduct/store/store.js": {
-            "uri": "/pagelet/compproduct/store/store_4f3e9d4b.js",
+            "uri": "/pagelet/compproduct/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/compproduct/store/store"
@@ -255,19 +303,17 @@
             "deps": [
                 "reflux",
                 "pagelet/compproduct/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "static/lib/echarts.min.js": {
-            "uri": "/static/lib/echarts.min_09659f90.js",
+            "uri": "/static/lib/echarts.min.js",
             "type": "js",
             "extras": {
                 "moduleId": "static/lib/echarts.min"
-            },
-            "pkg": "p2"
+            }
         },
         "pagelet/appdetail/components/version_log.js": {
-            "uri": "/pagelet/appdetail/components/version_log_7d26aaef.js",
+            "uri": "/pagelet/appdetail/components/version_log.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/appdetail/components/version_log"
@@ -279,11 +325,10 @@
                 "react",
                 "jquery",
                 "pagelet/widget/components/loading.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/appdetail/components/keywords.jsx": {
-            "uri": "/pagelet/appdetail/components/keywords_5ae391d6.js",
+            "uri": "/pagelet/appdetail/components/keywords.js",
             "type": "js",
             "deps": [
                 "pagelet/appdetail/detail.less",
@@ -291,11 +336,10 @@
                 "pagelet/appdetail/action/action.js",
                 "pagelet/appdetail/store/store.js",
                 "pagelet/widget/components/loading.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/components/filter.jsx": {
-            "uri": "/pagelet/widget/components/filter_da167ebf.js",
+            "uri": "/pagelet/widget/components/filter.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/filter.less",
@@ -306,67 +350,58 @@
                 "constants",
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/filter.less": {
-            "uri": "/pagelet/widget/filter_70b77e6d.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/filter.css",
+            "type": "css"
         },
         "pagelet/widget/components/calendar.jsx": {
-            "uri": "/pagelet/widget/components/calendar_4463d4e8.js",
+            "uri": "/pagelet/widget/components/calendar.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/calendar.less",
                 "react",
                 "reactRouter"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/calendar.less": {
-            "uri": "/pagelet/widget/calendar_cd91acc4.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/calendar.css",
+            "type": "css"
         },
         "pagelet/widget/components/dialog.jsx": {
-            "uri": "/pagelet/widget/components/dialog_fcd0bca0.js",
+            "uri": "/pagelet/widget/components/dialog.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/dialog.less",
                 "react",
                 "jquery",
                 "pagelet/widget/components/popup.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/dialog.less": {
-            "uri": "/pagelet/widget/dialog_6532417f.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/dialog.css",
+            "type": "css"
         },
         "pagelet/widget/components/popup.jsx": {
-            "uri": "/pagelet/widget/components/popup_9f5c92eb.js",
+            "uri": "/pagelet/widget/components/popup.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/popup.less",
                 "react",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/popup.less": {
-            "uri": "/pagelet/widget/popup_26ea7aee.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/popup.css",
+            "type": "css"
         },
         "pagelet/compproduct/comp_analysis.less": {
-            "uri": "/pagelet/compproduct/comp_analysis_66d665df.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/compproduct/comp_analysis.css",
+            "type": "css"
         },
         "pagelet/compproduct/components/compare.jsx": {
-            "uri": "/pagelet/compproduct/components/compare_7a0535f3.js",
+            "uri": "/pagelet/compproduct/components/compare.js",
             "type": "js",
             "extras": {
                 "async": [
@@ -387,48 +422,42 @@
                 "pagelet/compproduct/components/my_fav_item.jsx",
                 "pagelet/compproduct/action/action.js",
                 "pagelet/compproduct/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/components/tabs.jsx": {
-            "uri": "/pagelet/widget/components/tabs_d883dddf.js",
+            "uri": "/pagelet/widget/components/tabs.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/tabs.less",
                 "react"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/tabs.less": {
-            "uri": "/pagelet/widget/tabs_f6784e2e.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/tabs.css",
+            "type": "css"
         },
         "pagelet/widget/components/appItem.jsx": {
-            "uri": "/pagelet/widget/components/appItem_e6636628.js",
+            "uri": "/pagelet/widget/components/appItem.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/app_item.less",
                 "react",
                 "pagelet/widget/components/rank.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/app_item.less": {
-            "uri": "/pagelet/widget/app_item_53feaf53.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/app_item.css",
+            "type": "css"
         },
         "pagelet/compproduct/components/my_fav_item.jsx": {
-            "uri": "/pagelet/compproduct/components/my_fav_item_099f52d0.js",
+            "uri": "/pagelet/compproduct/components/my_fav_item.js",
             "type": "js",
             "deps": [
                 "react"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/compproduct/components/index.jsx": {
-            "uri": "/pagelet/compproduct/components/index_fb404deb.js",
+            "uri": "/pagelet/compproduct/components/index.js",
             "type": "js",
             "deps": [
                 "pagelet/compproduct/comp_analysis.less",
@@ -445,11 +474,10 @@
                 "pagelet/search/store/store.js",
                 "pagelet/myfav/action/action.js",
                 "pagelet/myfav/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/search/action/action.js": {
-            "uri": "/pagelet/search/action/action_e9f831ce.js",
+            "uri": "/pagelet/search/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/search/action/action"
@@ -457,11 +485,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/search/store/store.js": {
-            "uri": "/pagelet/search/store/store_6eaf12df.js",
+            "uri": "/pagelet/search/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/search/store/store"
@@ -469,11 +496,10 @@
             "deps": [
                 "reflux",
                 "pagelet/search/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/myfav/action/action.js": {
-            "uri": "/pagelet/myfav/action/action_1b1146f6.js",
+            "uri": "/pagelet/myfav/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/myfav/action/action"
@@ -481,11 +507,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/myfav/store/store.js": {
-            "uri": "/pagelet/myfav/store/store_a653c753.js",
+            "uri": "/pagelet/myfav/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/myfav/store/store"
@@ -493,11 +518,10 @@
             "deps": [
                 "reflux",
                 "pagelet/myfav/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/hotkeyword/action/action.js": {
-            "uri": "/pagelet/hotkeyword/action/action_86fe710f.js",
+            "uri": "/pagelet/hotkeyword/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/hotkeyword/action/action"
@@ -505,11 +529,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/hotkeyword/components/hotkeyword.jsx": {
-            "uri": "/pagelet/hotkeyword/components/hotkeyword_5c786aad.js",
+            "uri": "/pagelet/hotkeyword/components/hotkeyword.js",
             "type": "js",
             "deps": [
                 "../top.less",
@@ -521,16 +544,14 @@
                 "pagelet/widget/components/tabs.jsx",
                 "pagelet/widget/components/appItem.jsx",
                 "pagelet/widget/components/filter.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/hotkeyword/hotkeyword.less": {
-            "uri": "/pagelet/hotkeyword/hotkeyword_d41d8cd9.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/hotkeyword/hotkeyword.css",
+            "type": "css"
         },
         "pagelet/main/components/main.jsx": {
-            "uri": "/pagelet/main/components/main_6e3bb411.js",
+            "uri": "/pagelet/main/components/main.js",
             "type": "js",
             "deps": [
                 "pagelet/main/main.less",
@@ -540,26 +561,23 @@
                 "static/minxins/utils.js",
                 "pagelet/main/components/side_nav.jsx",
                 "pagelet/widget/components/popup.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/main/main.less": {
-            "uri": "/pagelet/main/main_7ac02d03.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/main/main.css",
+            "type": "css"
         },
         "pagelet/main/components/side_nav.jsx": {
-            "uri": "/pagelet/main/components/side_nav_1516ea71.js",
+            "uri": "/pagelet/main/components/side_nav.js",
             "type": "js",
             "deps": [
                 "react",
                 "reactRouter",
                 "static/minxins/utils.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/myfav/components/my_fav_list.jsx": {
-            "uri": "/pagelet/myfav/components/my_fav_list_f89b3332.js",
+            "uri": "/pagelet/myfav/components/my_fav_list.js",
             "type": "js",
             "deps": [
                 "pagelet/myfav/my_fav.less",
@@ -577,16 +595,14 @@
                 "pagelet/appdetail/store/store.js",
                 "pagelet/myfav/action/action.js",
                 "pagelet/myfav/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/myfav/my_fav.less": {
-            "uri": "/pagelet/myfav/my_fav_fc0132b4.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/myfav/my_fav.css",
+            "type": "css"
         },
         "pagelet/search/components/index.jsx": {
-            "uri": "/pagelet/search/components/index_1b06d48e.js",
+            "uri": "/pagelet/search/components/index.js",
             "type": "js",
             "deps": [
                 "pagelet/search/search.less",
@@ -594,16 +610,14 @@
                 "reactRouter",
                 "static/minxins/utils.js",
                 "pagelet/widget/components/header.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/search/search.less": {
-            "uri": "/pagelet/search/search_201ca932.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/search/search.css",
+            "type": "css"
         },
         "pagelet/search/components/search_input.jsx": {
-            "uri": "/pagelet/search/components/search_input_4a2cda4a.js",
+            "uri": "/pagelet/search/components/search_input.js",
             "type": "js",
             "deps": [
                 "pagelet/search/search.less",
@@ -618,11 +632,10 @@
                 "constants",
                 "pagelet/search/action/action.js",
                 "pagelet/search/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/top/action/action.js": {
-            "uri": "/pagelet/top/action/action_a68d25ce.js",
+            "uri": "/pagelet/top/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/top/action/action"
@@ -630,11 +643,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/top/components/top7DownList.jsx": {
-            "uri": "/pagelet/top/components/top7DownList_06b5726e.js",
+            "uri": "/pagelet/top/components/top7DownList.js",
             "type": "js",
             "deps": [
                 "pagelet/top/top.less",
@@ -651,16 +663,14 @@
                 "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/top/top.less": {
-            "uri": "/pagelet/top/top_2ebb090d.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/top/top.css",
+            "type": "css"
         },
         "pagelet/top/store/store.js": {
-            "uri": "/pagelet/top/store/store_a209dfdf.js",
+            "uri": "/pagelet/top/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/top/store/store"
@@ -668,11 +678,10 @@
             "deps": [
                 "reflux",
                 "pagelet/top/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/top/components/top7UpList.jsx": {
-            "uri": "/pagelet/top/components/top7UpList_88bdd4b3.js",
+            "uri": "/pagelet/top/components/top7UpList.js",
             "type": "js",
             "deps": [
                 "pagelet/top/top.less",
@@ -689,11 +698,10 @@
                 "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/top/components/topList.jsx": {
-            "uri": "/pagelet/top/components/topList_1761c944.js",
+            "uri": "/pagelet/top/components/topList.js",
             "type": "js",
             "deps": [
                 "pagelet/top/top.less",
@@ -710,11 +718,10 @@
                 "constants",
                 "pagelet/top/action/action.js",
                 "pagelet/top/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/underapp/action/action.js": {
-            "uri": "/pagelet/underapp/action/action_389b0f8e.js",
+            "uri": "/pagelet/underapp/action/action.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/underapp/action/action"
@@ -722,11 +729,10 @@
             "deps": [
                 "reflux",
                 "jquery"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/underapp/components/underapp.jsx": {
-            "uri": "/pagelet/underapp/components/underapp_ab73fc94.js",
+            "uri": "/pagelet/underapp/components/underapp.js",
             "type": "js",
             "deps": [
                 "../top.less",
@@ -743,11 +749,10 @@
                 "constants",
                 "pagelet/underapp/action/action.js",
                 "pagelet/underapp/store/store.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/underapp/store/store.js": {
-            "uri": "/pagelet/underapp/store/store_0a5c18f1.js",
+            "uri": "/pagelet/underapp/store/store.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/underapp/store/store"
@@ -755,26 +760,23 @@
             "deps": [
                 "reflux",
                 "pagelet/underapp/action/action.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/about.less": {
-            "uri": "/pagelet/widget/about_8cd2e1a9.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/pagelet/widget/about.css",
+            "type": "css"
         },
         "pagelet/widget/components/about.jsx": {
-            "uri": "/pagelet/widget/components/about_f18ab9c4.js",
+            "uri": "/pagelet/widget/components/about.js",
             "type": "js",
             "deps": [
                 "pagelet/widget/about.less",
                 "react",
                 "pagelet/widget/components/header.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "pagelet/widget/components/aso_service.js": {
-            "uri": "/pagelet/widget/components/aso_service_770de3e8.js",
+            "uri": "/pagelet/widget/components/aso_service.js",
             "type": "js",
             "extras": {
                 "moduleId": "pagelet/widget/components/aso_service"
@@ -782,29 +784,25 @@
             "deps": [
                 "react",
                 "pagelet/widget/components/header.jsx"
-            ],
-            "pkg": "p0"
+            ]
         },
         "static/lib/mod.js": {
-            "uri": "/static/lib/mod_8cdad3aa.js",
-            "type": "js",
-            "pkg": "p0"
+            "uri": "/static/lib/mod.js",
+            "type": "js"
         },
         "static/common.less": {
-            "uri": "/static/common_d126158c.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/static/common.css",
+            "type": "css"
         },
         "static/minxins/datetime.js": {
-            "uri": "/static/minxins/datetime_517d498e.js",
+            "uri": "/static/minxins/datetime.js",
             "type": "js",
             "extras": {
                 "moduleId": "static/minxins/datetime"
-            },
-            "pkg": "p0"
+            }
         },
         "static/entry.jsx": {
-            "uri": "/static/entry_70ab8f19.js",
+            "uri": "/static/entry.js",
             "type": "js",
             "deps": [
                 "react",
@@ -825,147 +823,29 @@
                 "pagelet/widget/components/aso_service.js",
                 "pagelet/widget/components/about.jsx",
                 "static/minxins/utils.js"
-            ],
-            "pkg": "p0"
+            ]
         },
         "constants": {
-            "uri": "/static/constants_053b7962.js",
-            "type": "js",
-            "pkg": "p0"
+            "uri": "/static/constants.js",
+            "type": "js"
         },
         "static/font.less": {
-            "uri": "/static/font_8670f306.css",
-            "type": "css",
-            "pkg": "p1"
+            "uri": "/static/font.css",
+            "type": "css"
         },
         "lodash": {
-            "uri": "/static/lib/lodash_a078d832.js",
-            "type": "js",
-            "pkg": "p0"
+            "uri": "/static/lib/lodash.js",
+            "type": "js"
         },
         "reflux": {
-            "uri": "/static/lib/reflux_87f1f05f.js",
+            "uri": "/static/lib/reflux.js",
             "type": "js",
             "deps": [
                 "eventemitter3"
-            ],
-            "pkg": "p0"
+            ]
         }
     },
-    "pkg": {
-        "p0": {
-            "uri": "/pkg/pack_ee13ef0b.js",
-            "type": "js",
-            "has": [
-                "static/lib/mod.js",
-                "reflux",
-                "jquery",
-                "pagelet/appdetail/action/action.js",
-                "react",
-                "constants",
-                "pagelet/widget/components/loading.jsx",
-                "static/minxins/utils.js",
-                "pagelet/appdetail/store/store.js",
-                "pagelet/appdetail/components/appinfo.jsx",
-                "pagelet/widget/components/rank.jsx",
-                "pagelet/appdetail/components/applevel.jsx",
-                "reactRouter",
-                "pagelet/appdetail/components/baseinfo.jsx",
-                "pagelet/appdetail/components/category.jsx",
-                "pagelet/appdetail/components/comment.jsx",
-                "pagelet/widget/components/header.jsx",
-                "pagelet/compproduct/action/action.js",
-                "pagelet/compproduct/store/store.js",
-                "pagelet/appdetail/components/realrank.jsx",
-                "pagelet/appdetail/components/version_log.js",
-                "pagelet/appdetail/components/keywords.jsx",
-                "pagelet/widget/components/calendar.jsx",
-                "pagelet/widget/components/filter.jsx",
-                "pagelet/widget/components/popup.jsx",
-                "pagelet/widget/components/dialog.jsx",
-                "pagelet/appdetail/components/detail.jsx",
-                "pagelet/widget/components/tabs.jsx",
-                "pagelet/widget/components/appItem.jsx",
-                "pagelet/compproduct/components/my_fav_item.jsx",
-                "pagelet/compproduct/components/compare.jsx",
-                "pagelet/search/action/action.js",
-                "pagelet/search/store/store.js",
-                "pagelet/myfav/action/action.js",
-                "pagelet/myfav/store/store.js",
-                "pagelet/compproduct/components/index.jsx",
-                "pagelet/hotkeyword/action/action.js",
-                "pagelet/hotkeyword/components/hotkeyword.jsx",
-                "pagelet/main/components/side_nav.jsx",
-                "pagelet/main/components/main.jsx",
-                "pagelet/myfav/components/my_fav_list.jsx",
-                "pagelet/search/components/index.jsx",
-                "pagelet/search/components/search_input.jsx",
-                "pagelet/top/action/action.js",
-                "pagelet/top/store/store.js",
-                "pagelet/top/components/top7DownList.jsx",
-                "pagelet/top/components/top7UpList.jsx",
-                "pagelet/top/components/topList.jsx",
-                "pagelet/underapp/action/action.js",
-                "pagelet/underapp/store/store.js",
-                "pagelet/underapp/components/underapp.jsx",
-                "pagelet/widget/components/about.jsx",
-                "pagelet/widget/components/aso_service.js",
-                "static/minxins/datetime.js",
-                "static/entry.jsx",
-                "lodash"
-            ],
-            "deps": [
-                "eventemitter3",
-                "pagelet/appdetail/detail.less",
-                "pagelet/widget/rank.less",
-                "pagelet/widget/header.less",
-                "pagelet/widget/calendar.less",
-                "pagelet/widget/filter.less",
-                "pagelet/widget/popup.less",
-                "pagelet/widget/dialog.less",
-                "pagelet/widget/tabs.less",
-                "pagelet/widget/app_item.less",
-                "pagelet/compproduct/comp_analysis.less",
-                "../top.less",
-                "pagelet/main/main.less",
-                "pagelet/myfav/my_fav.less",
-                "pagelet/search/search.less",
-                "pagelet/top/top.less",
-                "pagelet/widget/about.less"
-            ]
-        },
-        "p1": {
-            "uri": "/pkg/style_9ca56eb6.css",
-            "type": "css",
-            "has": [
-                "pagelet/appdetail/detail.less",
-                "pagelet/widget/rank.less",
-                "pagelet/widget/header.less",
-                "pagelet/widget/filter.less",
-                "pagelet/widget/calendar.less",
-                "pagelet/widget/dialog.less",
-                "pagelet/widget/popup.less",
-                "pagelet/compproduct/comp_analysis.less",
-                "pagelet/widget/tabs.less",
-                "pagelet/widget/app_item.less",
-                "pagelet/hotkeyword/hotkeyword.less",
-                "pagelet/main/main.less",
-                "pagelet/myfav/my_fav.less",
-                "pagelet/search/search.less",
-                "pagelet/top/top.less",
-                "pagelet/widget/about.less",
-                "static/common.less",
-                "static/font.less"
-            ]
-        },
-        "p2": {
-            "uri": "/pkg/echart_e5f652b2.js",
-            "type": "js",
-            "has": [
-                "static/lib/echarts.min.js"
-            ]
-        }
-    }
+    "pkg": {}
 };
 
 

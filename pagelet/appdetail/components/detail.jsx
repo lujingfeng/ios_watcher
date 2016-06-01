@@ -46,7 +46,9 @@ var AppDetail = React.createClass({
             {name: "5星", value: 5}
           ],
         datetime:{name:"7日", value:7}
-      }
+      },
+      detailInfo: {},
+      appId: ""
     }
   },
 
@@ -66,6 +68,17 @@ var AppDetail = React.createClass({
   onStateChange: function(state){
     if(state.isEight){
       this.refs.favComfirm.show();
+    }
+
+    if(state.detailInfo){
+      this.setState({
+        detailInfo: state.detailInfo,
+        appId: state.detailInfo.appId
+      });
+      var pathname = this.props.location.pathname;
+      var query = this.props.location.query;
+      query.appId = state.detailInfo.appId;
+      //this.history.replaceState(null, pathname, query);
     }
   },
 
@@ -100,6 +113,7 @@ var AppDetail = React.createClass({
   render: function(){
     var query = this.props.location.query;
     var state = this.state;
+    query.appId = this.state.appId || query.appId;
 
     if(query.filter){
       var props = {

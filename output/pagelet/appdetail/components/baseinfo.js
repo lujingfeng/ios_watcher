@@ -61,7 +61,7 @@ define('pagelet/appdetail/components/baseinfo.jsx', function(require, exports, m
   
     onFav: function onFav() {
       if (!(0, _staticMinxinsUtils.getCookie)("uname")) {
-        location.replace("/check/login-page");
+        location.replace("/check/login-page?myfav=true");
         return null;
       }
       var query = this.props.query;

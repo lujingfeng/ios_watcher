@@ -96,7 +96,9 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
         commentFilter: {
           score: [{ name: "1星", value: 1 }, { name: "2星", value: 2 }, { name: "3星", value: 3 }, { name: "4星", value: 4 }, { name: "5星", value: 5 }],
           datetime: { name: "7日", value: 7 }
-        }
+        },
+        detailInfo: {},
+        appId: ""
       };
     },
   
@@ -116,6 +118,17 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     onStateChange: function onStateChange(state) {
       if (state.isEight) {
         this.refs.favComfirm.show();
+      }
+  
+      if (state.detailInfo) {
+        this.setState({
+          detailInfo: state.detailInfo,
+          appId: state.detailInfo.appId
+        });
+        var pathname = this.props.location.pathname;
+        var query = this.props.location.query;
+        query.appId = state.detailInfo.appId;
+        //this.history.replaceState(null, pathname, query);
       }
     },
   
@@ -150,6 +163,7 @@ define('pagelet/appdetail/components/detail.jsx', function(require, exports, mod
     render: function render() {
       var query = this.props.location.query;
       var state = this.state;
+      query.appId = this.state.appId || query.appId;
   
       if (query.filter) {
         var props = {

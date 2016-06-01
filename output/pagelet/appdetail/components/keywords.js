@@ -38,7 +38,7 @@ define('pagelet/appdetail/components/keywords.jsx', function(require, exports, m
       };
     },
     componentDidMount: function componentDidMount() {
-      _actionAction2["default"].keywordCover(this.props.query.id);
+      _actionAction2["default"].keywordCover(this.props.query.appId);
       this.unSubscribe = _storeStore2["default"].listen(this.onStateChange.bind(this));
     },
   

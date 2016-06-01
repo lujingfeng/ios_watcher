@@ -32,13 +32,12 @@ var CompareStore = Reflux.createStore({
         for(var i=0; i< clist.length; i++){
           var rankData = clist[i].rankData;
           var data = [];
-          for(var h=0; h< 24; h++){
+
+          for(var h=0; h < 24; h++){
             if(rankData[h]){
               data.push(rankData[h]);
-            }else{
-              data.push(0);
+              xAxis.data.push(h+"时");
             }
-            xAxis.data.push(h+"时");
           }
 
           var title = appName?(appName.substring(0, 5)+"("+clist[i].name+")"):clist[i].name;
@@ -58,6 +57,8 @@ var CompareStore = Reflux.createStore({
         params.series = series;
         params.xAxis = xAxis;
         params.legend = legend;
+
+        console.log(params);
 
       }else if(res && !res.curday && !res.yesterday){
         for(var month in res){
