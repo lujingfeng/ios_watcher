@@ -16,7 +16,7 @@ var Keywords = React.createClass({
     };
   },
   componentDidMount: function(){
-    DetailAction.keywordCover(this.props.query.id);
+    DetailAction.keywordCover(this.props.query.appId);
     this.unSubscribe = DetailStore.listen(this.onStateChange.bind(this));
   },
 

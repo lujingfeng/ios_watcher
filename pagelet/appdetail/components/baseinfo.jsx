@@ -40,7 +40,7 @@ var BaseInfo = React.createClass({
 
   onFav: function(){
     if(!getCookie("uname")){
-      location.replace("/check/login-page");
+      location.replace("/check/login-page?myfav=true");
       return null;
     }
     var query = this.props.query;
