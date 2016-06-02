@@ -55,7 +55,11 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
             }
           }
   
-          var title = appName ? appName.substring(0, 5) + "(" + clist[i].name + ")" : clist[i].name;
+          if (appName && appName.length > 5) {
+            appName = appName.substring(0, 5) + "...";
+          }
+  
+          var title = appName ? appName + "(" + clist[i].name + ")" : clist[i].name;
   
           series.push({
             name: title,
@@ -76,10 +80,10 @@ define('pagelet/compproduct/store/store', function(require, exports, module) {
         console.log(params);
       } else if (res && !res.curday && !res.yesterday) {
         for (var month in res) {
-          var mdataList = res[month];
+          var mdataList = res[month] || [];
           mdataList.forEach(function (item, idx) {
             for (var p in item) {
-              var key = appName.slice(0, 5) + "(" + p + ")";
+              var key = appName.length > 5 ? appName.slice(0, 5) + "...(" + p + ")" : appName + "(" + p + ")";
               categoryMap[key] = categoryMap[key] || { data: [], title: [] };
               var listMap = item[p];
               for (var d in listMap) {

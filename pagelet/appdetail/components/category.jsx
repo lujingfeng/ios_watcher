@@ -34,7 +34,7 @@ var DetailCategory = React.createClass({
     }else if(category == 3){
       label = "版本记录";
     }else if(category == 4){
-      label = "关键词覆盖数";
+      label = "关键词";
     }else if(category == 5){
       label = "评论详情";
     }else if(category == 6){
@@ -65,7 +65,7 @@ var DetailCategory = React.createClass({
               onClick={e=>{this.onCategofy(3)}}>版本记录</div>
             <div 
               className={category == 4 ?"cur":null}
-              onClick={e=>{this.onCategofy(4)}}>关键词覆盖数</div>
+              onClick={e=>{this.onCategofy(4)}}>关键词</div>
             <div 
               className={category == 5 ?"cur":null}
               onClick={e=>{this.onCategofy(5)}}>评论详情</div>

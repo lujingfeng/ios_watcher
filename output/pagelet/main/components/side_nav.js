@@ -190,7 +190,7 @@ define('pagelet/main/components/side_nav.jsx', function(require, exports, module
             ),
             _react2["default"].createElement(
               "li",
-              null,
+              { style: { dislay: "none" } },
               _react2["default"].createElement("i", { className: "icon callin" }),
               _react2["default"].createElement(
                 "a",

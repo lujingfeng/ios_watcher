@@ -28,6 +28,9 @@
 
 <!--SCRIPT_PLACEHOLDER-->
 <script>
+  if(!location.hash){
+    location.hash = "/search"
+  }
   var SEARCH_HOST = "";
   require("/static/minxins/utils");
   require("/static/minxins/datetime");

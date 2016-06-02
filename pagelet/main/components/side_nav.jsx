@@ -126,7 +126,7 @@ var SideNav = React.createClass({
               <i className="icon about"></i>
               关于我们
             </li>
-            <li>
+            <li style={{dislay:"none"}}>
               <i className="icon callin"></i>
               <a href="tel:4006343800">
                 400-6343-800

@@ -22,12 +22,13 @@ var ASOService = React.createClass({
           <img src={sbg} style={{width:"100%"}}></img>
           <img src={bottom_bg} style={{width:"100%"}}></img>
       
-          <button 
-            onClick={this.onGotService}
+          <a 
+            href="tel:010-56579495"
+            //onClick={this.onGotService}
             className="btn main-btn" 
             style={{marginBottom: 20}}>
             获取ASO优化方案
-          </button>
+          </a>
         </div>
       </div>
     );

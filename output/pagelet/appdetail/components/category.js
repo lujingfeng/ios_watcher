@@ -50,7 +50,7 @@ define('pagelet/appdetail/components/category.jsx', function(require, exports, m
       } else if (category == 3) {
         label = "版本记录";
       } else if (category == 4) {
-        label = "关键词覆盖数";
+        label = "关键词";
       } else if (category == 5) {
         label = "评论详情";
       } else if (category == 6) {
@@ -109,7 +109,7 @@ define('pagelet/appdetail/components/category.jsx', function(require, exports, m
               onClick: function (e) {
                 _this.onCategofy(4);
               } },
-            "关键词覆盖数"
+            "关键词"
           ),
           _react2["default"].createElement(
             "div",

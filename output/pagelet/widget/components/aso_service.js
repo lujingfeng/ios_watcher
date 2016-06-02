@@ -43,9 +43,10 @@ define('pagelet/widget/components/aso_service', function(require, exports, modul
           _react2["default"].createElement("img", { src: sbg, style: { width: "100%" } }),
           _react2["default"].createElement("img", { src: bottom_bg, style: { width: "100%" } }),
           _react2["default"].createElement(
-            "button",
+            "a",
             {
-              onClick: this.onGotService,
+              href: "tel:010-56579495",
+              //onClick={this.onGotService}
               className: "btn main-btn",
               style: { marginBottom: 20 } },
             "获取ASO优化方案"
